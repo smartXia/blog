@@ -3,18 +3,18 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Some
+title: Somes
 subtitle: ''
-description: ''
-keywords:
+description: '以地事秦，犹抱薪救火，薪不尽，火不灭'
+keywords: skr
 author: xiapeifu
-language: en
+language: zh-Hans
 timezone: ''
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://smartxia.github.io/blog/
-root: /smartxia.github.io
+root: /blog/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -41,7 +41,7 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
-post_asset_folder: flase
+post_asset_folder: false
 relative_link: false
 future: true
 highlight:
@@ -93,11 +93,29 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: yilia 
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: git 
-  branch: master 
-  repo: https://github.com/smartXia/blog.git 
+  type: git
+  repository: https://github.com/smartXia/blog.git
+  branch: master
+  jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: false
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: false
+      tags: true

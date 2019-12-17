@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Some</title>
+  <title>Somes</title>
   
   
-  <link href="/smartxia.github.io/atom.xml" rel="self"/>
+  <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://smartxia.github.io/blog/"/>
-  <updated>2019-12-17T03:24:14.827Z</updated>
+  <updated>2019-12-17T08:49:33.046Z</updated>
   <id>https://smartxia.github.io/blog/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>test</title>
+    <link href="https://smartxia.github.io/blog/2019/12/17/test/"/>
+    <id>https://smartxia.github.io/blog/2019/12/17/test/</id>
+    <published>2019-12-17T08:35:07.000Z</published>
+    <updated>2019-12-17T08:49:33.046Z</updated>
+    
+    <content type="html"><![CDATA[<p>%20/</p><p>编码空格字符的URL：+或%20？</p><p>当URL中的空格编码为+，什么时候编码到%20?</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;%20/&lt;/p&gt;
+&lt;p&gt;编码空格字符的URL：+或%20？&lt;/p&gt;
+&lt;p&gt;当URL中的空格编码为+，什么时候编码到%20?&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
