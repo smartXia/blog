@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Somes</title>
+  <title>Some</title>
   
-  
+  <subtitle>https://smartxia.github.io/blog/</subtitle>
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://smartxia.github.io/blog/"/>
-  <updated>2019-12-17T08:49:33.046Z</updated>
+  <updated>2019-12-17T08:54:50.105Z</updated>
   <id>https://smartxia.github.io/blog/</id>
   
   <author>
-    <name>xiapeifu</name>
+    <name>夏夏天</name>
     
   </author>
   
@@ -21,23 +21,23 @@
     <link href="https://smartxia.github.io/blog/2019/12/17/test/"/>
     <id>https://smartxia.github.io/blog/2019/12/17/test/</id>
     <published>2019-12-17T08:35:07.000Z</published>
-    <updated>2019-12-17T08:49:33.046Z</updated>
+    <updated>2019-12-17T08:54:50.105Z</updated>
     
-    <content type="html"><![CDATA[<p>%20/</p><p>编码空格字符的URL：+或%20？</p><p>当URL中的空格编码为+，什么时候编码到%20?</p>]]></content>
+    <content type="html"><![CDATA[<p><a href="http://www.soupan.info/tool/utf-8.php" target="_blank" rel="noopener">http://www.soupan.info/tool/utf-8.php</a><br>%20/</p><p>编码空格字符的URL：+或%20？</p><p>当URL中的空格编码为+，什么时候编码到%20?</p><p>%7C%7C%20</p><p>||</p><p>按“转换”即可将其转换为UTF-8字符。再按“还原”即可将其还原为简体中文。</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;%20/&lt;/p&gt;
-&lt;p&gt;编码空格字符的URL：+或%20？&lt;/p&gt;
-&lt;p&gt;当URL中的空格编码为+，什么时候编码到%20?&lt;/p&gt;
-
+        &lt;p&gt;&lt;a href=&quot;http://www.soupan.info/tool/utf-8.php&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://www.soupan.info/tool/utf-8.php&lt;/a&gt;&lt;br&gt;%20/&lt;/p&gt;
+&lt;p&gt;编
       
     
     </summary>
     
     
+    
+      <category term="编码" scheme="https://smartxia.github.io/blog/tags/%E7%BC%96%E7%A0%81/"/>
     
   </entry>
   

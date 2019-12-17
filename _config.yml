@@ -3,13 +3,13 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Somes
-subtitle: ''
-description: '以地事秦，犹抱薪救火，薪不尽，火不灭'
-keywords: skr
-author: xiapeifu
+title: Some
+subtitle: 'https://smartxia.github.io/blog/'
+description: '以地事秦，犹抱薪救火，</br> 薪不尽，火不灭'
+keywords: log,dayliy
+author: '夏夏天'
 language: zh-Hans
-timezone: ''
+timezone: '' 
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
