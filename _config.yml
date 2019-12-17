@@ -93,9 +93,12 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: yilia
+theme: jekyll-theme-cayman
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  
+  type: git
+  branch: master
+  repo: https://github.com/smartXia/blog.git
+# 自动压缩 CSS 文件
