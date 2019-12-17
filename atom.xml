@@ -3,11 +3,11 @@
   <title>Hexo</title>
   
   
-  <link href="/smartxia.github.io/atom.xml" rel="self"/>
+  <link href="/blog/atom.xml" rel="self"/>
   
-  <link href="https://smartxia.github.io/"/>
+  <link href="https://smartxia.github.io/blog/"/>
   <updated>2019-12-17T02:45:45.687Z</updated>
-  <id>https://smartxia.github.io/</id>
+  <id>https://smartxia.github.io/blog/</id>
   
   <author>
     <name>xiapeifu</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="https://smartxia.github.io/2019/12/17/hello-world/"/>
-    <id>https://smartxia.github.io/2019/12/17/hello-world/</id>
+    <link href="https://smartxia.github.io/blog/2019/12/17/hello-world/"/>
+    <id>https://smartxia.github.io/blog/2019/12/17/hello-world/</id>
     <published>2019-12-17T02:45:45.687Z</published>
     <updated>2019-12-17T02:45:45.687Z</updated>
     
@@ -40,8 +40,8 @@
   
   <entry>
     <title>My New Post</title>
-    <link href="https://smartxia.github.io/2019/12/16/My-New-Post-1/"/>
-    <id>https://smartxia.github.io/2019/12/16/My-New-Post-1/</id>
+    <link href="https://smartxia.github.io/blog/2019/12/16/My-New-Post-1/"/>
+    <id>https://smartxia.github.io/blog/2019/12/16/My-New-Post-1/</id>
     <published>2019-12-16T09:57:11.000Z</published>
     <updated>2019-12-17T02:45:45.686Z</updated>
     
@@ -55,8 +55,8 @@
   
   <entry>
     <title>My New Post</title>
-    <link href="https://smartxia.github.io/2019/12/16/My-New-Post/"/>
-    <id>https://smartxia.github.io/2019/12/16/My-New-Post/</id>
+    <link href="https://smartxia.github.io/blog/2019/12/16/My-New-Post/"/>
+    <id>https://smartxia.github.io/blog/2019/12/16/My-New-Post/</id>
     <published>2019-12-16T09:57:07.000Z</published>
     <updated>2019-12-17T02:45:45.686Z</updated>
     
