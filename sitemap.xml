@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://smartxia.github.io/blog/2019/12/17/hello-world/</loc>
+    
+    <lastmod>2019-12-17T02:45:45.687Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://smartxia.github.io/blog/2019/12/16/My-New-Post-1/</loc>
     
     <lastmod>2019-12-17T02:45:45.686Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>https://smartxia.github.io/blog/2019/12/16/My-New-Post/</loc>
     
     <lastmod>2019-12-17T02:45:45.686Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://smartxia.github.io/blog/2019/12/17/hello-world/</loc>
-    
-    <lastmod>2019-12-17T02:33:43.169Z</lastmod>
     
   </url>
   
