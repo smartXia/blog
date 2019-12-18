@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://smartxia.github.io/blog/"/>
-  <updated>2019-12-17T08:54:50.105Z</updated>
+  <updated>2019-12-18T01:49:40.954Z</updated>
   <id>https://smartxia.github.io/blog/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>test</title>
+    <title>出现%20 或者%%的问题</title>
     <link href="https://smartxia.github.io/blog/2019/12/17/test/"/>
     <id>https://smartxia.github.io/blog/2019/12/17/test/</id>
     <published>2019-12-17T08:35:07.000Z</published>
-    <updated>2019-12-17T08:54:50.105Z</updated>
+    <updated>2019-12-18T01:49:40.954Z</updated>
     
     <content type="html"><![CDATA[<p><a href="http://www.soupan.info/tool/utf-8.php" target="_blank" rel="noopener">http://www.soupan.info/tool/utf-8.php</a><br>%20/</p><p>编码空格字符的URL：+或%20？</p><p>当URL中的空格编码为+，什么时候编码到%20?</p><p>%7C%7C%20</p><p>||</p><p>按“转换”即可将其转换为UTF-8字符。再按“还原”即可将其还原为简体中文。</p>]]></content>
     
@@ -43,10 +43,10 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="https://smartxia.github.io/blog/2019/12/17/hello-world/"/>
-    <id>https://smartxia.github.io/blog/2019/12/17/hello-world/</id>
-    <published>2019-12-17T03:24:14.827Z</published>
-    <updated>2019-12-17T03:24:14.827Z</updated>
+    <link href="https://smartxia.github.io/blog/2019/12/16/hello-world/"/>
+    <id>https://smartxia.github.io/blog/2019/12/16/hello-world/</id>
+    <published>2019-12-16T09:57:11.000Z</published>
+    <updated>2019-12-18T01:48:22.376Z</updated>
     
     <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
     
@@ -64,17 +64,26 @@
   </entry>
   
   <entry>
-    <title>My New Post</title>
-    <link href="https://smartxia.github.io/blog/2019/12/16/My-New-Post-1/"/>
-    <id>https://smartxia.github.io/blog/2019/12/16/My-New-Post-1/</id>
+    <title>图片链接</title>
+    <link href="https://smartxia.github.io/blog/2019/12/16/%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5/"/>
+    <id>https://smartxia.github.io/blog/2019/12/16/%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5/</id>
     <published>2019-12-16T09:57:11.000Z</published>
-    <updated>2019-12-17T03:24:14.825Z</updated>
+    <updated>2019-12-18T01:50:39.441Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="github"><a href="#github" class="headerlink" title="github"></a>github</h1><p>– <a href="https://avatars0.githubusercontent.com/u/23631580?s=400&amp;u=8adfff85bef758535f26ec7c91204d21da557643&amp;v=4" target="_blank" rel="noopener">https://avatars0.githubusercontent.com/u/23631580?s=400&amp;u=8adfff85bef758535f26ec7c91204d21da557643&amp;v=4</a></p><h1 id="以下鏈接是動態壁紙，每次刷新會更換"><a href="#以下鏈接是動態壁紙，每次刷新會更換" class="headerlink" title="以下鏈接是動態壁紙，每次刷新會更換"></a>以下鏈接是動態壁紙，每次刷新會更換</h1><h1 id="https-source-unsplash-com-collection-collectionid-1600x900"><a href="#https-source-unsplash-com-collection-collectionid-1600x900" class="headerlink" title="https://source.unsplash.com/collection/collectionid/1600x900"></a><a href="https://source.unsplash.com/collection/collectionid/1600x900" target="_blank" rel="noopener">https://source.unsplash.com/collection/collectionid/1600x900</a></h1><h1 id="https-uploadbeta-com-api-pictures-random-key-BingEverydayWallpaperPicture"><a href="#https-uploadbeta-com-api-pictures-random-key-BingEverydayWallpaperPicture" class="headerlink" title="https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture"></a><a href="https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture" target="_blank" rel="noopener">https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture</a></h1><h1 id="https-api-dujin-org-bing-1920-php"><a href="#https-api-dujin-org-bing-1920-php" class="headerlink" title="https://api.dujin.org/bing/1920.php"></a><a href="https://api.dujin.org/bing/1920.php" target="_blank" rel="noopener">https://api.dujin.org/bing/1920.php</a></h1><h1 id="https-api-dujin-org-bing-1366-php"><a href="#https-api-dujin-org-bing-1366-php" class="headerlink" title="https://api.dujin.org/bing/1366.php"></a><a href="https://api.dujin.org/bing/1366.php" target="_blank" rel="noopener">https://api.dujin.org/bing/1366.php</a></h1>]]></content>
     
     <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;github&quot;&gt;&lt;a href=&quot;#github&quot; class=&quot;headerlink&quot; title=&quot;github&quot;&gt;&lt;/a&gt;github&lt;/h1&gt;&lt;p&gt;– &lt;a href=&quot;https://avatars0.githubusercontent.com/u/23
+      
     
     </summary>
     
     
+    
+      <category term="photo" scheme="https://smartxia.github.io/blog/tags/photo/"/>
     
   </entry>
   
