@@ -13,11 +13,12 @@ annrlink: dda8c81b
 desription: 描述文章内容
 top_image: http://s2-cdn.oneitfarm.com/e12ece12233b4059860acf48637d830a.jpg
 cover: https://cdn.jsdelivr.net/gh/jerryc127/CDN/img/top_img_index.jpg
+top: True
 ---
 
 ### 主题·文档
 
-https://jerryc.me/posts/21cfbf15/#%E6%96%87%E7%AB%A0%E5%B0%81%E9%9D%A2
+https://jerryc.me/
 ### 评论系统
 gittalk
 https://github.com/settings/applications/1190035
