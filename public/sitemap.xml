@@ -2,6 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://smartxia.github.io/blog/2019/12/18/HEXO-butteryly/</loc>
+    
+    <lastmod>2019-12-18T05:58:53.030Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://smartxia.github.io/blog/2019/12/16/%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5/</loc>
+    
+    <lastmod>2019-12-18T03:11:25.996Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://smartxia.github.io/blog/2019/12/17/test/</loc>
+    
+    <lastmod>2019-12-18T02:58:07.640Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://smartxia.github.io/blog/2019/12/18/%E8%AF%8D%E6%9D%A1/</loc>
+    
+    <lastmod>2019-12-18T02:51:25.088Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://smartxia.github.io/blog/2019/12/16/hello-world/</loc>
+    
+    <lastmod>2019-12-18T01:48:22.376Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://smartxia.github.io/blog/schedule/index.html</loc>
     
     <lastmod>2019-12-17T09:15:48.356Z</lastmod>
@@ -11,14 +46,7 @@
   <url>
     <loc>https://smartxia.github.io/blog/sitemap/index.html</loc>
     
-    <lastmod>2019-12-17T09:13:26.206Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://smartxia.github.io/blog/2019/12/17/test/</loc>
-    
-    <lastmod>2019-12-17T08:54:50.105Z</lastmod>
+    <lastmod>2019-12-17T09:13:26.222Z</lastmod>
     
   </url>
   
@@ -44,23 +72,9 @@
   </url>
   
   <url>
-    <loc>https://smartxia.github.io/blog/2019/12/17/hello-world/</loc>
-    
-    <lastmod>2019-12-17T03:24:14.827Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://smartxia.github.io/blog/2019/12/16/My-New-Post/</loc>
     
     <lastmod>2019-12-17T03:24:14.826Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://smartxia.github.io/blog/2019/12/16/My-New-Post-1/</loc>
-    
-    <lastmod>2019-12-17T03:24:14.825Z</lastmod>
     
   </url>
   

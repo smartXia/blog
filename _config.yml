@@ -5,7 +5,7 @@
 # Site
 title: Some
 subtitle: 'https://smartxia.github.io/blog/'
-description: '以地事秦，犹抱薪救火，</br> 薪不尽，火不灭'
+description: '以地事秦 犹抱薪救火 薪不尽 火不灭'
 keywords: log,dayliy
 author: '夏夏天'
 language: zh-Hans
@@ -93,7 +93,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next
+theme: Butterfly
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html

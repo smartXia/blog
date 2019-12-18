@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://smartxia.github.io/blog/"/>
-  <updated>2019-12-17T08:54:50.105Z</updated>
+  <updated>2019-12-18T05:58:53.030Z</updated>
   <id>https://smartxia.github.io/blog/</id>
   
   <author>
@@ -17,20 +17,71 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>test</title>
-    <link href="https://smartxia.github.io/blog/2019/12/17/test/"/>
-    <id>https://smartxia.github.io/blog/2019/12/17/test/</id>
-    <published>2019-12-17T08:35:07.000Z</published>
-    <updated>2019-12-17T08:54:50.105Z</updated>
+    <title>HEXO-butteryly</title>
+    <link href="https://smartxia.github.io/blog/2019/12/18/HEXO-butteryly/"/>
+    <id>https://smartxia.github.io/blog/2019/12/18/HEXO-butteryly/</id>
+    <published>2019-12-18T03:20:24.000Z</published>
+    <updated>2019-12-18T05:58:53.030Z</updated>
     
-    <content type="html"><![CDATA[<p><a href="http://www.soupan.info/tool/utf-8.php" target="_blank" rel="noopener">http://www.soupan.info/tool/utf-8.php</a><br>%20/</p><p>编码空格字符的URL：+或%20？</p><p>当URL中的空格编码为+，什么时候编码到%20?</p><p>%7C%7C%20</p><p>||</p><p>按“转换”即可将其转换为UTF-8字符。再按“还原”即可将其还原为简体中文。</p>]]></content>
+    <content type="html"><![CDATA[<h3 id="主题·文档"><a href="#主题·文档" class="headerlink" title="主题·文档"></a>主题·文档</h3><p><a href="https://jerryc.me/posts/21cfbf15/#%E6%96%87%E7%AB%A0%E5%B0%81%E9%9D%A2" target="_blank" rel="noopener">https://jerryc.me/posts/21cfbf15/#%E6%96%87%E7%AB%A0%E5%B0%81%E9%9D%A2</a></p><h3 id="评论系统"><a href="#评论系统" class="headerlink" title="评论系统"></a>评论系统</h3><p>gittalk<br><a href="https://github.com/settings/applications/1190035" target="_blank" rel="noopener">https://github.com/settings/applications/1190035</a><br>登录GitHub进行评论，会生成issue<br>Valine<br><a href="https://leancloud.cn/dashboard/applist.html#/apps" target="_blank" rel="noopener">https://leancloud.cn/dashboard/applist.html#/apps</a><br>特点在于可以免登陆进行评论，输入验证码评论</p><p>Laibili（来必力）<br>域名到期不稳定<br>Disqus<br>暂时未测试使用到期</p><p>还是准备用valine做第一期</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;&lt;a href=&quot;http://www.soupan.info/tool/utf-8.php&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://www.soupan.info/tool/utf-8.php&lt;/a&gt;&lt;br&gt;%20/&lt;/p&gt;
-&lt;p&gt;编
+        &lt;h3 id=&quot;主题·文档&quot;&gt;&lt;a href=&quot;#主题·文档&quot; class=&quot;headerlink&quot; title=&quot;主题·文档&quot;&gt;&lt;/a&gt;主题·文档&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://jerryc.me/posts/21cfbf15/#%E6%96%87%E7%AB
+      
+    
+    </summary>
+    
+    
+      <category term="-教程 -HEXO" scheme="https://smartxia.github.io/blog/categories/%E6%95%99%E7%A8%8B-HEXO/"/>
+    
+    
+      <category term="-HEXO -主题 -教程" scheme="https://smartxia.github.io/blog/tags/HEXO-%E4%B8%BB%E9%A2%98-%E6%95%99%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>词条</title>
+    <link href="https://smartxia.github.io/blog/2019/12/18/%E8%AF%8D%E6%9D%A1/"/>
+    <id>https://smartxia.github.io/blog/2019/12/18/%E8%AF%8D%E6%9D%A1/</id>
+    <published>2019-12-18T02:50:48.000Z</published>
+    <updated>2019-12-18T02:51:25.088Z</updated>
+    
+    <content type="html"><![CDATA[<p>rss:</p><p>简易信息聚合（也叫聚合内容）是一种RSS基于XML标准，在互联网上被广泛采用的内容包装和投递协议。RSS(Really Simple Syndication)是一种描述和同步网站内容的格式，是使用最广泛的XML应用。RSS搭建了信息迅速传播的一个技术平台，使得每个人都成为潜在的信息提供者。发布一个RSS文件后，这个RSS Feed中包含的信息就能直接被其他站点调用，而且由于这些数据都是标准的XML格式，所以也能在其他的终端和服务中使用，是一种描述和同步网站内容的格式。 [1]  RSS可以是以下三个解释的其中一个： Really Simple Syndication；RDF (Resource Description Framework) Site Summary； Rich Site Summary。但其实这三个解释都是指同一种Syndication的技术。<br>RSS广泛用于网上新闻频道，blog和wiki，主要的版本有0.91, 1.0, 2.0。使用RSS订阅能更快地获取信息，网站提供RSS输出，有利于让用户获取网站内容的最新更新。网络用户可以在客户端借助于支持RSS的聚合工具软件，在不打开网站内容页面的情况下阅读支持RSS输出的网站内容。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;rss:&lt;/p&gt;
+&lt;p&gt;简易信息聚合（也叫聚合内容）是一种RSS基于XML标准，在互联网上被广泛采用的内容包装和投递协议。RSS(Really Simple Syndication)是一种描述和同步网站内容的格式，是使用最广泛的XML应用。RSS搭建了信息迅速传播的一个技术
+      
+    
+    </summary>
+    
+    
+    
+      <category term="wiki" scheme="https://smartxia.github.io/blog/tags/wiki/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>编码</title>
+    <link href="https://smartxia.github.io/blog/2019/12/17/test/"/>
+    <id>https://smartxia.github.io/blog/2019/12/17/test/</id>
+    <published>2019-12-17T08:35:07.000Z</published>
+    <updated>2019-12-18T02:58:07.640Z</updated>
+    
+    <content type="html"><![CDATA[<p>出现%20 或者%%的问题</p><p><a href="http://www.soupan.info/tool/utf-8.php" target="_blank" rel="noopener">http://www.soupan.info/tool/utf-8.php</a><br>%20/</p><p>编码空格字符的URL：+或%20？</p><p>当URL中的空格编码为+，什么时候编码到%20?</p><p>%7C%7C%20</p><p>||</p><p>按“转换”即可将其转换为UTF-8字符。再按“还原”即可将其还原为简体中文。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;出现%20 或者%%的问题&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.soupan.info/tool/utf-8.php&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://www.soupan.info/tool/utf-8.php
       
     
     </summary>
@@ -43,10 +94,10 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="https://smartxia.github.io/blog/2019/12/17/hello-world/"/>
-    <id>https://smartxia.github.io/blog/2019/12/17/hello-world/</id>
-    <published>2019-12-17T03:24:14.827Z</published>
-    <updated>2019-12-17T03:24:14.827Z</updated>
+    <link href="https://smartxia.github.io/blog/2019/12/16/hello-world/"/>
+    <id>https://smartxia.github.io/blog/2019/12/16/hello-world/</id>
+    <published>2019-12-16T09:57:11.000Z</published>
+    <updated>2019-12-18T01:48:22.376Z</updated>
     
     <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
     
@@ -64,17 +115,26 @@
   </entry>
   
   <entry>
-    <title>My New Post</title>
-    <link href="https://smartxia.github.io/blog/2019/12/16/My-New-Post-1/"/>
-    <id>https://smartxia.github.io/blog/2019/12/16/My-New-Post-1/</id>
+    <title>图片链接</title>
+    <link href="https://smartxia.github.io/blog/2019/12/16/%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5/"/>
+    <id>https://smartxia.github.io/blog/2019/12/16/%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5/</id>
     <published>2019-12-16T09:57:11.000Z</published>
-    <updated>2019-12-17T03:24:14.825Z</updated>
+    <updated>2019-12-18T03:11:25.996Z</updated>
+    
+    <content type="html"><![CDATA[<p> github头像地址链接<br> <a href="https://avatars0.githubusercontent.com/u/23631580?s=400&amp;u=8adfff85bef758535f26ec7c91204d21da557643&amp;v=4" target="_blank" rel="noopener">https://avatars0.githubusercontent.com/u/23631580?s=400&amp;u=8adfff85bef758535f26ec7c91204d21da557643&amp;v=4</a><br> 微信头像地址<br> <a href="http://s2-cdn.oneitfarm.com/e12ece12233b4059860acf48637d830a.jpg" target="_blank" rel="noopener">http://s2-cdn.oneitfarm.com/e12ece12233b4059860acf48637d830a.jpg</a><br>动态壁纸链接：<br> <a href="https://source.unsplash.com/collection/collectionid/1600x900" target="_blank" rel="noopener">https://source.unsplash.com/collection/collectionid/1600x900</a><br> <a href="https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture" target="_blank" rel="noopener">https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture</a><br> <a href="https://api.dujin.org/bing/1920.php" target="_blank" rel="noopener">https://api.dujin.org/bing/1920.php</a><br> <a href="https://api.dujin.org/bing/1366.php" target="_blank" rel="noopener">https://api.dujin.org/bing/1366.php</a></p><p>blog背景链接：<br>wechat:<br><a href="http://s2-cdn.oneitfarm.com/ec13d36268ae41d7aaf87d5505324b6a.png" target="_blank" rel="noopener">http://s2-cdn.oneitfarm.com/ec13d36268ae41d7aaf87d5505324b6a.png</a>   (迷你版本)<br><a href="http://s2-cdn.oneitfarm.com/fc44dd8d7da4467da3831cd9e6229e19.jpg" target="_blank" rel="noopener">http://s2-cdn.oneitfarm.com/fc44dd8d7da4467da3831cd9e6229e19.jpg</a><br>alipay:<br><a href="http://s2-cdn.oneitfarm.com/2eef3a681187495aa43ff8bbe1173c09.png" target="_blank" rel="noopener">http://s2-cdn.oneitfarm.com/2eef3a681187495aa43ff8bbe1173c09.png</a>   (迷你版本)<br><a href="http://s2-cdn.oneitfarm.com/96c2b14feb774e49ae2d110bb500770c.jpg" target="_blank" rel="noopener">http://s2-cdn.oneitfarm.com/96c2b14feb774e49ae2d110bb500770c.jpg</a></p><p>网站默认背景：<br><a href="https://cdn.jsdelivr.net/gh/jerryc127/CDN/img/top_img_index.jpg" target="_blank" rel="noopener">https://cdn.jsdelivr.net/gh/jerryc127/CDN/img/top_img_index.jpg</a></p><p>文字默认图片：<br>default_cover: <a href="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png" target="_blank" rel="noopener">https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png</a></p><p>阅读背景：<br>archive_img: <a href="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/Photo/archive.jpg" target="_blank" rel="noopener">https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/Photo/archive.jpg</a></p><p>tag背景：<br>tag_img: <a href="https://cdn.jsdelivr.net/gh/jerryc127/CDN/img/tag-bg.png" target="_blank" rel="noopener">https://cdn.jsdelivr.net/gh/jerryc127/CDN/img/tag-bg.png</a></p><p>目录背景：<br>category_img: <a href="https://cdn.jsdelivr.net/gh/jerryc127/CDN/img/category-bg" target="_blank" rel="noopener">https://cdn.jsdelivr.net/gh/jerryc127/CDN/img/category-bg</a></p><p>如果你有使用hexo-douban去生成movie界面，可配置這個<br><a href="https://cdn.jsdelivr.net/gh/jerryc127/CDN/Photo/movie.jpg" target="_blank" rel="noopener">https://cdn.jsdelivr.net/gh/jerryc127/CDN/Photo/movie.jpg</a></p>]]></content>
     
     <summary type="html">
+    
+      
+      
+        &lt;p&gt; github头像地址链接&lt;br&gt; &lt;a href=&quot;https://avatars0.githubusercontent.com/u/23631580?s=400&amp;amp;u=8adfff85bef758535f26ec7c91204d21da557643&amp;amp;v=4
+      
     
     </summary>
     
     
+    
+      <category term="photo" scheme="https://smartxia.github.io/blog/tags/photo/"/>
     
   </entry>
   

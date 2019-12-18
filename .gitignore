@@ -4,4 +4,7 @@ db.json
 *.log
 node_modules/
 .deploy*/
-themes/
+themes/apollo/
+themes/next/
+themes/pure/
+themes/yiila/

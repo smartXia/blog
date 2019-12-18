@@ -1,8 +1,10 @@
 ---
-title: test
+title: 编码
 date: 2019-12-17 16:35:07
 tags: 编码
 ---
+出现%20 或者%%的问题
+
 http://www.soupan.info/tool/utf-8.php
 %20/
 
