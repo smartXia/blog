@@ -5,7 +5,7 @@
 # xxx || icon:
 #   xxx || 連結 || icon
 menu:
-  Home: / || fa fa-home
+  Home: /|| fa fa-home
   Archives: /archives/ || fa fa-archive
   Tags: /tags/ || fa fa-tags
   Categories: /categories/ || fa fa-folder-open
@@ -17,8 +17,8 @@ menu:
 
 # Favicon
 # ---------------
-#favicon: /img/favicon.ico
-favicon: https://avatars0.githubusercontent.com/u/23631580?s=400&u=8adfff85bef758535f26ec7c91204d21da557643&v=4
+favicon: /img/favicon.ico
+#favicon: https://avatars0.githubusercontent.com/u/23631580?s=400&u=8adfff85bef758535f26ec7c91204d21da557643&v=4
 
 # PWA
 # See https://github.com/JLHwung/hexo-offline

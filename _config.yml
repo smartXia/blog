@@ -9,12 +9,13 @@ description: '以地事秦 犹抱薪救火 薪不尽 火不灭'
 keywords: log,dayliy
 author: '夏夏天'
 language: zh-Hans
-timezone: '' 
+timezone: Asia/Hong_Kong
+email: xiapeifu@gmail.com
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://smartxia.github.io/blog/
-root: /blog/
+root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -30,7 +31,10 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
-
+  - 404.html
+  - README.md
+  - image/pwa/manifest.json
+  - js2/jerry.js
 # Writing
 new_post_name: :title.md # File name of new posts
 default_layout: post

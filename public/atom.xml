@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Some</title>
-  
+  <icon>https://www.gravatar.com/avatar/df6fc96953fb3fc0fe9399149caa86b8</icon>
   <subtitle>https://smartxia.github.io/blog/</subtitle>
-  <link href="/blog/atom.xml" rel="self"/>
+  <link href="/atom.xml" rel="self"/>
   
   <link href="https://smartxia.github.io/blog/"/>
   <updated>2019-12-18T07:26:03.831Z</updated>
@@ -11,7 +11,7 @@
   
   <author>
     <name>夏夏天</name>
-    
+    <email>xiapeifu@gmail.com</email>
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
