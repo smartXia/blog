@@ -9,11 +9,15 @@ menu:
   Archives: /archives/ || fa fa-archive
   Tags: /tags/ || fa fa-tags
   Categories: /categories/ || fa fa-folder-open
-  Link: /link/ || fa fa-link
-  About: /about/ || fa fa-heart
   List||fa fa-list:
     - Music || /music/ || fa fa-music
     - Movie || /movies/ || fa fa-film
+    - Photo || /photos/ || fa fa-picture-o
+    - Game || /games/ || fa fa-gamepad
+    - Book || /books/ || fa fa-book
+  About: /about/ || fa fa-heart
+  Link: /link/ || fa fa-link
+  Messageboard: /messageboard/ || fa fa-coffee
 
 # Favicon
 # ---------------
@@ -74,7 +78,7 @@ algolia_search:
 # Please see doc for more details: https://jerryc.me/posts/21cfbf15/#本地搜索
 # ---------------
 local_search:
-  enable: false
+  enable: true
   labels:
     input_placeholder: Search for Posts
     hits_empty: "We didn't find any results for the search: ${query}" # if there are no result
@@ -93,10 +97,10 @@ katex:
 
 ####   Analysis    ####
 # ---------------
-# baidu_analytics:
+baidu_analytics: UA-155001168-1
 
 #Google Analytics
-google_analytics:
+#google_analytics:
 
 
 # Post info settings
@@ -114,10 +118,11 @@ top_imag: http://s2-cdn.oneitfarm.com/92b19077218b48d8b6c1f8726d736c9f.jpg
 # https://api.dujin.org/bing/1366.php
 
 # if the banner of page not setting,it will show the top_img
-default_top_img: https://cdn.jsdelivr.net/gh/jerryc127/CDN/img/top_img_index.jpg
+default_top_img: http://s2-cdn.oneitfarm.com/cac574f332b3413f89164d966759be51.jpg
 # default_top_img: https://cdn.jsdelivr.net/gh/jerryc127/CDN/img/top_img_index.jpg
 # the default cover of the post
-default_cover: https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png
+# default_cover: https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png
+default_cover: https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture
 
 # the banner image of archive page
 archive_img: https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/Photo/archive.jpg
@@ -206,7 +211,7 @@ disqus:
 ####   Using this js for redirect to gitalk container after login
 ####   See https://github.com/gitalk/gitalk/issues/125
 #   js: https://cdn.jsdelivr.net/gh/upupming/gitalk@36368e5dffd049e956cdbbd751ff96c28d8255cf/dist/gitalk.min.js
-
+language: en # en , zh-CN , zh-TW
 # valine comment system. https://valine.js.org
 valine:
   enable: true # if you want use valine,please set this value is true
@@ -260,8 +265,8 @@ Flink:
   name: Blog 名字： some
   address: Blog 地址： https://smartxia.github.io/blog/
   avatar: Blog 頭像： http://s2-cdn.oneitfarm.com/e12ece12233b4059860acf48637d830a.jpg
-  info: Blog 簡介： 今日事,今日畢
-  comment: 如果需要交換友鏈,請留言
+  info: Blog 簡介： 以地事秦 犹抱薪救火 薪不尽 火不灭
+  comment: 如果需要交换友链,请留言
 
 # 打賞按鈕
 reward:
@@ -458,7 +463,7 @@ busuanzi:
 # 也可以寫成 年/月/日 時間
 runtimeshow:
   enable: true
-  start_date: 6/7/2018 00:00:00
+  start_date: 6/12/2019 00:00:00
 
 ####   右下角按鈕  ####
 #----------------------------------------------

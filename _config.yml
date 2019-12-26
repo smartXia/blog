@@ -15,7 +15,7 @@ email: xiapeifu@gmail.com
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://smartxia.github.io/blog/
-root: /
+root: /blog/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -98,7 +98,23 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: Butterfly
-
+## 开启音乐播放插件
+aplayer:
+  meting: true
+## 开启电影插件
+douban:
+  user: 122865573
+  builtin: false
+  book:
+    title: '平凡的世界'
+    quote: 'simple world'
+  movie:
+    title: '霸王别姬'
+    quote: '虞姬、不灭'
+  game:
+    title: '游戏人生'
+    quote: 'rou dan chong ji'
+  timeout: 10000 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
