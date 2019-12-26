@@ -2,12 +2,12 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Some</title>
   <icon>https://www.gravatar.com/avatar/df6fc96953fb3fc0fe9399149caa86b8</icon>
-  <subtitle>https://smartxia.github.io/blog/</subtitle>
+  <subtitle>https://smartxia.github.io/blog</subtitle>
   <link href="/blog/atom.xml" rel="self"/>
   
-  <link href="https://smartxia.github.io/blog/"/>
+  <link href="https://smartxia.github.io/"/>
   <updated>2019-12-18T07:26:03.831Z</updated>
-  <id>https://smartxia.github.io/blog/</id>
+  <id>https://smartxia.github.io/</id>
   
   <author>
     <name>夏夏天</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>HEXO-butteryly</title>
-    <link href="https://smartxia.github.io/blog/2019/12/18/HEXO-butteryly/"/>
-    <id>https://smartxia.github.io/blog/2019/12/18/HEXO-butteryly/</id>
+    <link href="https://smartxia.github.io/2019/12/18/HEXO-butteryly/"/>
+    <id>https://smartxia.github.io/2019/12/18/HEXO-butteryly/</id>
     <published>2019-12-18T03:20:24.000Z</published>
     <updated>2019-12-18T07:26:03.831Z</updated>
     
@@ -35,17 +35,17 @@
     </summary>
     
     
-      <category term="-教程 -HEXO" scheme="https://smartxia.github.io/blog/categories/%E6%95%99%E7%A8%8B-HEXO/"/>
+      <category term="-教程 -HEXO" scheme="https://smartxia.github.io/categories/%E6%95%99%E7%A8%8B-HEXO/"/>
     
     
-      <category term="-HEXO -主题 -教程" scheme="https://smartxia.github.io/blog/tags/HEXO-%E4%B8%BB%E9%A2%98-%E6%95%99%E7%A8%8B/"/>
+      <category term="-HEXO -主题 -教程" scheme="https://smartxia.github.io/tags/HEXO-%E4%B8%BB%E9%A2%98-%E6%95%99%E7%A8%8B/"/>
     
   </entry>
   
   <entry>
     <title>词条</title>
-    <link href="https://smartxia.github.io/blog/2019/12/18/%E8%AF%8D%E6%9D%A1/"/>
-    <id>https://smartxia.github.io/blog/2019/12/18/%E8%AF%8D%E6%9D%A1/</id>
+    <link href="https://smartxia.github.io/2019/12/18/%E8%AF%8D%E6%9D%A1/"/>
+    <id>https://smartxia.github.io/2019/12/18/%E8%AF%8D%E6%9D%A1/</id>
     <published>2019-12-18T02:50:48.000Z</published>
     <updated>2019-12-18T06:11:56.699Z</updated>
     
@@ -62,14 +62,14 @@
     
     
     
-      <category term="wiki" scheme="https://smartxia.github.io/blog/tags/wiki/"/>
+      <category term="wiki" scheme="https://smartxia.github.io/tags/wiki/"/>
     
   </entry>
   
   <entry>
     <title>编码</title>
-    <link href="https://smartxia.github.io/blog/2019/12/17/test/"/>
-    <id>https://smartxia.github.io/blog/2019/12/17/test/</id>
+    <link href="https://smartxia.github.io/2019/12/17/test/"/>
+    <id>https://smartxia.github.io/2019/12/17/test/</id>
     <published>2019-12-17T08:35:07.000Z</published>
     <updated>2019-12-18T06:11:56.695Z</updated>
     
@@ -86,14 +86,14 @@
     
     
     
-      <category term="编码" scheme="https://smartxia.github.io/blog/tags/%E7%BC%96%E7%A0%81/"/>
+      <category term="编码" scheme="https://smartxia.github.io/tags/%E7%BC%96%E7%A0%81/"/>
     
   </entry>
   
   <entry>
     <title>Hello World</title>
-    <link href="https://smartxia.github.io/blog/2019/12/16/hello-world/"/>
-    <id>https://smartxia.github.io/blog/2019/12/16/hello-world/</id>
+    <link href="https://smartxia.github.io/2019/12/16/hello-world/"/>
+    <id>https://smartxia.github.io/2019/12/16/hello-world/</id>
     <published>2019-12-16T09:57:11.000Z</published>
     <updated>2019-12-18T06:11:56.693Z</updated>
     
@@ -114,8 +114,8 @@
   
   <entry>
     <title>图片链接</title>
-    <link href="https://smartxia.github.io/blog/2019/12/16/%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5/"/>
-    <id>https://smartxia.github.io/blog/2019/12/16/%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5/</id>
+    <link href="https://smartxia.github.io/2019/12/16/%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5/"/>
+    <id>https://smartxia.github.io/2019/12/16/%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5/</id>
     <published>2019-12-16T09:57:11.000Z</published>
     <updated>2019-12-18T07:20:34.172Z</updated>
     
@@ -132,14 +132,14 @@
     
     
     
-      <category term="photo" scheme="https://smartxia.github.io/blog/tags/photo/"/>
+      <category term="photo" scheme="https://smartxia.github.io/tags/photo/"/>
     
   </entry>
   
   <entry>
     <title>PV,UV</title>
-    <link href="https://smartxia.github.io/blog/2019/12/16/My-New-Post/"/>
-    <id>https://smartxia.github.io/blog/2019/12/16/My-New-Post/</id>
+    <link href="https://smartxia.github.io/2019/12/16/My-New-Post/"/>
+    <id>https://smartxia.github.io/2019/12/16/My-New-Post/</id>
     <published>2019-12-16T09:57:07.000Z</published>
     <updated>2019-12-18T07:22:37.508Z</updated>
     
