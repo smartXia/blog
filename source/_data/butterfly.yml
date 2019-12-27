@@ -463,7 +463,7 @@ busuanzi:
 # 也可以寫成 年/月/日 時間
 runtimeshow:
   enable: true
-  start_date: 6/12/2019 00:00:00
+  start_date: 12/6/2019 00:00:00
 
 ####   右下角按鈕  ####
 #----------------------------------------------
@@ -471,7 +471,7 @@ runtimeshow:
 translate:
   enable: true
   # 默認按鈕顯示文字
-  default: 繁
+  default: 简
   #网站默认语言，1: 繁體中文, 2: 简体中文
   defaultEncoding: 2
   #延迟时间,若不在前, 要设定延迟翻译时间, 如100表示100ms,默认为0

@@ -4,7 +4,7 @@
 
 # Site
 title: Some
-subtitle: 'https://smartxia.github.io/blog/'
+subtitle: 'https://smartxia.github.io/blog'
 description: '以地事秦 犹抱薪救火 薪不尽 火不灭'
 keywords: log,dayliy
 author: '夏夏天'
@@ -14,8 +14,9 @@ email: xiapeifu@gmail.com
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://smartxia.github.io/blog/
+url: https://smartxia.github.io/blog
 root: /blog/
+
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
