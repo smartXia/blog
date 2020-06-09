@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>GOLANG笔记</title>
+      <link href="/blog/2020/06/09/GOLANG%E7%AC%94%E8%AE%B0/"/>
+      <url>/blog/2020/06/09/GOLANG%E7%AC%94%E8%AE%B0/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><h3 id="int-和-uint"><a href="#int-和-uint" class="headerlink" title="int  和 uint"></a>int  和 uint</h3><p>uint类型长度取决于 CPU，如果是32位CPU就是4个字节，如果是64位就是8个字节。我的电脑是64位的，而 playground 是32位的</p><blockquote><p>int是带符号的，表示范围是：-2147483648到2147483648，即-2^31到2^31次方。</p></blockquote><blockquote><p>uint则是不带符号的，表示范围是：2^32即0到4294967295。</p></blockquote><blockquote><p>uint可以使用十进制，二进制，十六进制。和long,ulong,float,double,decimal等预定义可以进行隐式转换。但是需要注意值是否在可转换的范围内，不然会出现异常。</p></blockquote><p>The Uint keyword signifies an integral type that stores calues according to the size and ranges shown in the following table.</p><blockquote><p>关键字表示一种整型类型，该类型根据下表显示的大小和范围存储值。<br>————————————————</p></blockquote><p>原文链接：<a href="https://blog.csdn.net/janny_flower/article/details/81082424" target="_blank" rel="noopener">https://blog.csdn.net/janny_flower/article/details/81082424</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> golang学习 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>HEXO快捷方式</title>
       <link href="/blog/2020/06/09/HEXO%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/"/>
       <url>/blog/2020/06/09/HEXO%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/</url>
