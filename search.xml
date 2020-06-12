@@ -78,7 +78,7 @@
       <link href="/blog/2019/12/27/redis%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
       <url>/blog/2019/12/27/redis%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
       
-        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script>]]></content>
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><h3 id="redis-pubsub-发布和订阅"><a href="#redis-pubsub-发布和订阅" class="headerlink" title="redis pubsub 发布和订阅"></a>redis pubsub 发布和订阅</h3><p>常用命令：</p><blockquote><p>查看发布的频道：PUBSUB CHANNELS</p></blockquote><blockquote><p>新建频道： PUBLISH mychannel “hello world”</p></blockquote><blockquote><p>订阅频道：SUBSCRIBE mychannel |   Psubscribe 多个channel |支持 channel* 格式</p></blockquote><blockquote><p>退订频道：UNSUBSCRIBE mychannel | Punsubscribe  多个channel  |支持 channel* 格式</p></blockquote>]]></content>
       
       
       <categories>
