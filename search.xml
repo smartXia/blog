@@ -30,6 +30,12 @@
         <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script>]]></content>
       
       
+      <categories>
+          
+          <category> 设计模式 </category>
+          
+      </categories>
+      
       
     </entry>
     
@@ -140,7 +146,9 @@
       
         <tags>
             
-            <tag> 日志 工具 </tag>
+            <tag> 日志 </tag>
+            
+            <tag> 工具 </tag>
             
         </tags>
       
@@ -240,7 +248,11 @@
       
         <tags>
             
-            <tag> -HEXO -主题 -教程 </tag>
+            <tag> HEXO </tag>
+            
+            <tag> 主题 </tag>
+            
+            <tag> 教程 </tag>
             
         </tags>
       
@@ -255,6 +267,12 @@
       
         <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><p>rss:</p><p>简易信息聚合（也叫聚合内容）是一种RSS基于XML标准，在互联网上被广泛采用的内容包装和投递协议。RSS(Really Simple Syndication)是一种描述和同步网站内容的格式，是使用最广泛的XML应用。RSS搭建了信息迅速传播的一个技术平台，使得每个人都成为潜在的信息提供者。发布一个RSS文件后，这个RSS Feed中包含的信息就能直接被其他站点调用，而且由于这些数据都是标准的XML格式，所以也能在其他的终端和服务中使用，是一种描述和同步网站内容的格式。 [1]  RSS可以是以下三个解释的其中一个： Really Simple Syndication；RDF (Resource Description Framework) Site Summary； Rich Site Summary。但其实这三个解释都是指同一种Syndication的技术。<br>RSS广泛用于网上新闻频道，blog和wiki，主要的版本有0.91, 1.0, 2.0。使用RSS订阅能更快地获取信息，网站提供RSS输出，有利于让用户获取网站内容的最新更新。网络用户可以在客户端借助于支持RSS的聚合工具软件，在不打开网站内容页面的情况下阅读支持RSS输出的网站内容。</p>]]></content>
       
+      
+      <categories>
+          
+          <category> 基础知识 </category>
+          
+      </categories>
       
       
         <tags>
@@ -275,10 +293,18 @@
         <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><p>出现%20 或者%%的问题</p><p><a href="http://www.soupan.info/tool/utf-8.php" target="_blank" rel="noopener">http://www.soupan.info/tool/utf-8.php</a><br>%20/</p><p>编码空格字符的URL：+或%20？</p><p>当URL中的空格编码为+，什么时候编码到%20?</p><p>%7C%7C%20</p><p>||</p><p>按“转换”即可将其转换为UTF-8字符。再按“还原”即可将其还原为简体中文。</p>]]></content>
       
       
+      <categories>
+          
+          <category> 基础知识 </category>
+          
+      </categories>
+      
       
         <tags>
             
             <tag> 编码 </tag>
+            
+            <tag> wiki </tag>
             
         </tags>
       
@@ -325,25 +351,6 @@
             <tag> photo </tag>
             
         </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>PV,UV</title>
-      <link href="/blog/2019/12/16/%E5%BB%BA%E7%AB%99-My-New-Post/"/>
-      <url>/blog/2019/12/16/%E5%BB%BA%E7%AB%99-My-New-Post/</url>
-      
-        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><p>PV：页面访问量，即PageView，用户每次对网站的访问均被记录，用户对同一页面的多次访问，访问量累计。 UV：独立访问用户数：即UniqueVisitor，访问网站的一台电脑客户端为一个访客。00:00-24:00内相同的客户端只被计算一次。</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 建站 </category>
-          
-      </categories>
-      
       
     </entry>
     
