@@ -355,6 +355,31 @@
     </entry>
     
     
+    
+    <entry>
+      <title>PV,UV</title>
+      <link href="/blog/2019/12/16/%E5%BB%BA%E7%AB%99-My-New-Post/"/>
+      <url>/blog/2019/12/16/%E5%BB%BA%E7%AB%99-My-New-Post/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><p>PV：页面访问量，即PageView，用户每次对网站的访问均被记录，用户对同一页面的多次访问，访问量累计。 UV：独立访问用户数：即UniqueVisitor，访问网站的一台电脑客户端为一个访客。00:00-24:00内相同的客户端只被计算一次。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Diary </category>
+          
+          <category> PlayStation </category>
+          
+          <category> Games </category>
+          
+          <category> Life </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
   
   
 </search>

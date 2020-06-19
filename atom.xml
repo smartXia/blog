@@ -404,4 +404,34 @@
     
   </entry>
   
+  <entry>
+    <title>PV,UV</title>
+    <link href="https://smartxia.github.io/blog/2019/12/16/%E5%BB%BA%E7%AB%99-My-New-Post/"/>
+    <id>https://smartxia.github.io/blog/2019/12/16/%E5%BB%BA%E7%AB%99-My-New-Post/</id>
+    <published>2019-12-16T09:57:07.000Z</published>
+    <updated>2020-06-19T03:26:19.080Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><p>PV：页面访问量，即PageView，用户每次对网站的访问均被记录，用户对同一页面的多次访问，访问量累计。 UV：独立访问用户数：即UniqueVisitor，访问网站的一台电脑客户端为一个访客。00:00-24:00内相同的客户端只被计算一次。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
+      
+    
+    </summary>
+    
+    
+      <category term="Diary" scheme="https://smartxia.github.io/blog/categories/Diary/"/>
+    
+      <category term="PlayStation" scheme="https://smartxia.github.io/blog/categories/Diary/PlayStation/"/>
+    
+      <category term="Games" scheme="https://smartxia.github.io/blog/categories/Diary/Games/"/>
+    
+      <category term="Life" scheme="https://smartxia.github.io/blog/categories/Life/"/>
+    
+    
+  </entry>
+  
 </feed>
