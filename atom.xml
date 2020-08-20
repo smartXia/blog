@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://smartxia.github.io/blog/"/>
-  <updated>2020-08-20T09:14:36.786Z</updated>
+  <updated>2020-08-20T09:48:17.424Z</updated>
   <id>https://smartxia.github.io/blog/</id>
   
   <author>
@@ -15,6 +15,58 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Docker-info</title>
+    <link href="https://smartxia.github.io/blog/2020/08/20/Docker-%E5%88%B6%E4%BD%9C-1/"/>
+    <id>https://smartxia.github.io/blog/2020/08/20/Docker-%E5%88%B6%E4%BD%9C-1/</id>
+    <published>2020-08-20T09:18:43.000Z</published>
+    <updated>2020-08-20T09:48:17.424Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><h4 id="注册登录"><a href="#注册登录" class="headerlink" title="注册登录"></a>注册登录</h4><p><a href="https://hub.docker.com/" target="_blank" rel="noopener">https://hub.docker.com/</a></p><h4 id="Docker快捷键"><a href="#Docker快捷键" class="headerlink" title="Docker快捷键"></a>Docker快捷键</h4><blockquote><p>常用： start restart stop  images ps-a</p></blockquote><h5 id="带有参数的使用"><a href="#带有参数的使用" class="headerlink" title="带有参数的使用"></a>带有参数的使用</h5><p>docker ps -a ：查看最近使用的容器id</p><p>docker rm 容器id:删除某个容器</p><p>docker images</p><p>docker rmi 镜像id:删除某个镜像</p><p>docker run :</p><p>docker run -d -p 9200:9200 -p 5601:5601 nshou/elasticsearch-kibana</p><blockquote><p>-d 后台运行，-p 内部端口/宿主机端口 容器id</p></blockquote><p>docker exec -it /bash :进入容器</p><p>docker login -u xx -p xxx：登录</p><h4 id="配置加速源"><a href="#配置加速源" class="headerlink" title="配置加速源"></a>配置加速源</h4><p>1.阿里云：百度如何通过阿里云加速docker拉取和推送速度</p><p>2.DaoCloud ：大公司，国内的。网站：<a href="https://www.daocloud.io/mirror" target="_blank" rel="noopener">https://www.daocloud.io/mirror</a></p><blockquote><p>加速url</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Linux:curl -sSL https:&#x2F;&#x2F;get.daocloud.io&#x2F;daotools&#x2F;set_mirror.sh | sh -s http:&#x2F;&#x2F;f1361db2.m.daocloud.io</span><br></pre></td></tr></table></figure><p>原理：编辑   /etc/docker/daemon.json  这个文件夹</p>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;registry-mirrors&quot;: [&quot;http:&#x2F;&#x2F;f1361db2.m.daocloud.io&quot;,&quot;https:&#x2F;&#x2F;vbw6t0eb.mirror.aliyuncs.com&quot;]&#125;</span><br></pre></td></tr></table></figure><h4 id="查看当前docker配置文件"><a href="#查看当前docker配置文件" class="headerlink" title="查看当前docker配置文件"></a>查看当前docker配置文件</h4><p>docker info :可以查看是否配置成功加速 版本信息等各种信息</p><h4 id="打包镜像源和推送到docker-io"><a href="#打包镜像源和推送到docker-io" class="headerlink" title="打包镜像源和推送到docker.io"></a>打包镜像源和推送到docker.io</h4><p>1.docker pull xxx镜像:tag</p><p>2.docker images 查看镜像</p><p>3.docker run -d -p 8080:8081 xxx镜像:version</p><p>4.docker ps -a 查看是不是启动了，然后stop start restart 找找感觉</p><p>5.docker exec -it 镜像id bash :进入镜像进行修改：拉代码，查bug ,增加mysql实例等</p><p>6.docker commit -m “php71-daemon:xhprof-graphviz” -a “some” f69187b4375e “18260356308/php71-daemon:xhprof”</p><p>​    docker commit -m “提交log” -a “作者”  容器id “docker账户名/自定义镜像名：tag” 就会制作成一个新的image了</p><p>7.执行docker push xxx镜像的id：</p><blockquote><p>tips:</p><p>前提是得登录，还有  注意一个问题,给自己镜像命名的时候格式应该是: docker注册用户名/镜像名,比如我的docker用户名为 test123,那么我的镜像tag就为 test123/whalesay,不然是push不上去的</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
+      
+    
+    </summary>
+    
+    
+      <category term="DOCKER" scheme="https://smartxia.github.io/blog/categories/DOCKER/"/>
+    
+    
+      <category term="docekr images" scheme="https://smartxia.github.io/blog/tags/docekr-images/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PHP-xhprof-性能优化</title>
+    <link href="https://smartxia.github.io/blog/2020/08/20/PHP-xhprof-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+    <id>https://smartxia.github.io/blog/2020/08/20/PHP-xhprof-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</id>
+    <published>2020-08-20T09:16:14.000Z</published>
+    <updated>2020-08-20T09:49:20.855Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
+      
+    
+    </summary>
+    
+    
+      <category term="PHP" scheme="https://smartxia.github.io/blog/categories/PHP/"/>
+    
+    
+      <category term="xhprof docker push" scheme="https://smartxia.github.io/blog/tags/xhprof-docker-push/"/>
+    
+  </entry>
   
   <entry>
     <title>GOLANG-笔记-ArrayMapSlice</title>
@@ -483,60 +535,6 @@
       <category term="主题" scheme="https://smartxia.github.io/blog/tags/%E4%B8%BB%E9%A2%98/"/>
     
       <category term="教程" scheme="https://smartxia.github.io/blog/tags/%E6%95%99%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>词条</title>
-    <link href="https://smartxia.github.io/blog/2019/12/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-%E8%AF%8D%E6%9D%A1/"/>
-    <id>https://smartxia.github.io/blog/2019/12/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-%E8%AF%8D%E6%9D%A1/</id>
-    <published>2019-12-18T02:50:48.000Z</published>
-    <updated>2020-06-24T06:49:09.035Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><p>rss:</p><p>简易信息聚合（也叫聚合内容）是一种RSS基于XML标准，在互联网上被广泛采用的内容包装和投递协议。RSS(Really Simple Syndication)是一种描述和同步网站内容的格式，是使用最广泛的XML应用。RSS搭建了信息迅速传播的一个技术平台，使得每个人都成为潜在的信息提供者。发布一个RSS文件后，这个RSS Feed中包含的信息就能直接被其他站点调用，而且由于这些数据都是标准的XML格式，所以也能在其他的终端和服务中使用，是一种描述和同步网站内容的格式。 [1]  RSS可以是以下三个解释的其中一个： Really Simple Syndication；RDF (Resource Description Framework) Site Summary； Rich Site Summary。但其实这三个解释都是指同一种Syndication的技术。<br>RSS广泛用于网上新闻频道，blog和wiki，主要的版本有0.91, 1.0, 2.0。使用RSS订阅能更快地获取信息，网站提供RSS输出，有利于让用户获取网站内容的最新更新。网络用户可以在客户端借助于支持RSS的聚合工具软件，在不打开网站内容页面的情况下阅读支持RSS输出的网站内容。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
-      
-    
-    </summary>
-    
-    
-      <category term="基础知识" scheme="https://smartxia.github.io/blog/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
-    
-    
-      <category term="wiki" scheme="https://smartxia.github.io/blog/tags/wiki/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>编码</title>
-    <link href="https://smartxia.github.io/blog/2019/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-%E7%BC%96%E7%A0%81/"/>
-    <id>https://smartxia.github.io/blog/2019/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-%E7%BC%96%E7%A0%81/</id>
-    <published>2019-12-17T08:35:07.000Z</published>
-    <updated>2020-06-24T06:48:42.007Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><p>出现%20 或者%%的问题</p><p><a href="http://www.soupan.info/tool/utf-8.php" target="_blank" rel="noopener">http://www.soupan.info/tool/utf-8.php</a><br>%20/</p><p>编码空格字符的URL：+或%20？</p><p>当URL中的空格编码为+，什么时候编码到%20?</p><p>%7C%7C%20</p><p>||</p><p>按“转换”即可将其转换为UTF-8字符。再按“还原”即可将其还原为简体中文。</p><blockquote><p>【转】utf-8的中文是一个汉字占三个字节长度<br>英文字母和中文汉字在不同字符集编码下的字节数<br>英文字母：</p></blockquote><p>字节数 : 1;编码：GB2312</p><p>字节数 : 1;编码：GBK</p><p>字节数 : 1;编码：GB18030</p><p>字节数 : 1;编码：ISO-8859-1</p><p>字节数 : 1;编码：UTF-8</p><p>字节数 : 4;编码：UTF-16</p><p>字节数 : 2;编码：UTF-16BE</p><p>字节数 : 2;编码：UTF-16LE</p><p>中文汉字：</p><p>字节数 : 2;编码：GB2312</p><p>字节数 : 2;编码：GBK</p><p>字节数 : 2;编码：GB18030</p><p>字节数 : 1;编码：ISO-8859-1</p><p>字节数 : 3;编码：UTF-8</p><p>字节数 : 4;编码：UTF-16</p><p>字节数 : 2;编码：UTF-16BE</p><p>字节数 : 2;编码：UTF-16LE</p><p>1、美国人首先对其英文字符进行了编码，也就是最早的ascii码，用一个字节的低7位来表示英文的128个字符，高1位统一为0；</p><p>2、后来欧洲人发现尼玛你这128位哪够用，比如我高贵的法国人字母上面的还有注音符，这个怎么区分，得，把高1位编进来吧，这样欧洲普遍使用一个全字节进行编码，最多可表示256位。欧美人就是喜欢直来直去，字符少，编码用得位数少；</p><p>3、但是即使位数少，不同国家地区用不同的字符编码，虽然0–127表示的符号是一样的，但是128–255这一段的解释完全乱套了，即使2进制完全一样，表示的字符完全不一样，比如135在法语，希伯来语，俄语编码中完全是不同的符号；</p><p>4、更麻烦的是，尼玛这电脑高科技传到中国后，中国人发现我们有10万多个汉字，你们欧美这256字塞牙缝都不够。于是就发明了GB2312这些汉字编码，典型的用2个字节来表示绝大部分的常用汉字，最多可以表示65536个汉字字符，这样就不难理解有些汉字你在新华字典里查得到，但是电脑上如果不处理一下你是显示不出来的了吧。</p><p>5、这下各用各的字符集编码，这世界咋统一？俄国人发封email给中国人，两边字符集编码不同，尼玛显示都是乱码啊。为了统一，于是就发明了unicode，将世界上所有的符号都纳入其中，每一个符号都给予一个独一无二的编码，现在unicode可以容纳100多万个符号，每个符号的编码都不一样，这下可统一了，所有语言都可以互通，一个网页页面里可以同时显示各国文字。</p><p>6、然而，unicode虽然统一了全世界字符的二进制编码，但没有规定如何存储啊，亲。x86和amd体系结构的电脑小端序和大端序都分不清，别提计算机如何识别到底是unicode还是acsii了。如果Unicode统一规定，每个符号用三个或四个字节表示，那么每个英文字母前都必然有二到三个字节是0，文本文件的大小会因此大出二三倍，这对于存储来说是极大的浪费。这样导致一个后果：出现了Unicode的多种存储方式。</p><p>7、互联网的兴起，网页上要显示各种字符，必须统一啊，亲。utf-8就是Unicode最重要的实现方式之一。另外还有utf-16、utf-32等。UTF-8不是固定字长编码的，而是一种变长的编码方式。它可以使用1~4个字节表示一个符号，根据不同的符号而变化字节长度。这是种比较巧妙的设计，如果一个字节的第一位是0，则这个字节单独就是一个字符；如果第一位是1，则连续有多少个1，就表示当前字符占用多少个字节。</p><p>8、注意unicode的字符编码和utf-8的存储编码表示是不同的，例如”严”字的Unicode码是4E25，UTF-8编码是E4B8A5，这个7里面解释了的，UTF-8编码不仅考虑了编码，还考虑了存储，E4B8A5是在存储识别编码的基础上塞进了4E25。</p><p>9、UTF-8 使用一至四个字节为每个字符编码。128 个 ASCII 字符（Unicode 范围由 U+0000 至 U+007F）只需一个字节，带有变音符号的拉丁文、希腊文、西里尔字母、亚美尼亚语、希伯来文、阿拉伯文、叙利亚文及马尔代夫语（Unicode 范围由 U+0080 至 U+07FF）需要二个字节，其他基本多文种平面（BMP）中的字符（CJK属于此类-Qieqie注）使用三个字节，其他 Unicode 辅助平面的字符使用四字节编码。</p><p>10、最后，要回答你的问题，常规来看，中文汉字在utf-8中到底占几个字节，一般是3个字节，最常见的编码方式是1110xxxx 10xxxxxx 10xxxxxx。</p><hr><blockquote><p>知乎解答 <a href="https://www.zhihu.com/question/23374078" target="_blank" rel="noopener">https://www.zhihu.com/question/23374078</a><br>Unicode 是「字符集」<br>UTF-8 是「编码规则」<br>其中：<br>字符集：为每一个「字符」分配一个唯一的 ID（学名为码位 / 码点 / Code Point）<br>编码规则：将「码位」转换为字节序列的规则（编码/解码 可以理解为 加密/解密 的过程）<br>广义的 Unicode 是一个标准，定义了一个字符集以及一系列的编码规则，即 Unicode 字符集和UTF-8、UTF-16、UTF-32 等等编码……<br>Unicode 字符集为每一个字符分配一个码位，例如「知」的码位是 30693，记作 U+77E5（30693的十六进制为 0x77E5）。</p></blockquote><p>UTF-8 顾名思义，是一套以 8 位为一个编码单位的可变长编码。会将一个码位编码为 1 到 4 个字节：</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
-      
-    
-    </summary>
-    
-    
-      <category term="基础知识" scheme="https://smartxia.github.io/blog/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
-    
-    
-      <category term="编码" scheme="https://smartxia.github.io/blog/tags/%E7%BC%96%E7%A0%81/"/>
-    
-      <category term="wiki" scheme="https://smartxia.github.io/blog/tags/wiki/"/>
     
   </entry>
   
