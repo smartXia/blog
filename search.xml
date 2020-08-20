@@ -8,6 +8,33 @@
       <link href="/blog/2020/06/23/PHP-SPL-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-1/"/>
       <url>/blog/2020/06/23/PHP-SPL-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-1/</url>
       
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><p>php use用法</p><h4 id="1、user-namespace"><a href="#1、user-namespace" class="headerlink" title="1、user namespace"></a>1、user namespace</h4><h4 id="2、use-一个trait"><a href="#2、use-一个trait" class="headerlink" title="2、use 一个trait"></a>2、use 一个trait</h4><p>针对于trait的即多继承</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">trait</span> A&#123; eat()&#125; <span class="keyword">trait</span> B&#123; drink()&#125;  </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;</span><br><span class="line"><span class="keyword">use</span> <span class="title">A</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">B</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">Class</span> <span class="title">D</span></span>&#123;</span><br><span class="line">d=new Class C()</span><br><span class="line">d-&gt;eat();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p> 当不同的trait中，却有着同名的方法或属性，会产生冲突，可以使用insteadof或 as进行解决，insteadof 是进行替代，而as是给它取别名</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">use trait1,trait2&#123;</span><br><span class="line">        trait1::eat insteadof trait2;</span><br><span class="line">        trait1::drive insteadof trait2;</span><br><span class="line">        trait2::eat as eaten;</span><br><span class="line">        trait2::drive as driven;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><h4 id="3-闭包-gt-匿名函数"><a href="#3-闭包-gt-匿名函数" class="headerlink" title="3.闭包-&gt;匿名函数"></a>3.闭包-&gt;匿名函数</h4><p>好处：节省内存  适合做回调函数</p><p>匿名函数：定义时未定义函数的名称<br>闭包： 创建时封装周围状态的函数，及时周围的环境不存在了，闭包中的状态还会存在</p><p>使用法则：</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> PHP </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> PHP </tag>
+            
+            <tag> USE </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>PHP-SPL(数据结构)</title>
+      <link href="/blog/2020/06/23/PHP-Use-%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/"/>
+      <url>/blog/2020/06/23/PHP-Use-%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/</url>
+      
         <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><blockquote><p>php SPL四种常用的数据结构<br>1.栈【先进后出】</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;span style&#x3D;&quot;font-size:18px;&quot;&gt;$stack &#x3D; new SplStack();</span><br><span class="line">$stack-&gt;push(&#39;data1&#39;);</span><br><span class="line">$stack-&gt;push(&#39;data2&#39;);</span><br><span class="line">$stack-&gt;push(&#39;data3&#39;);</span><br><span class="line">echo $stack-&gt;pop();</span><br><span class="line"> </span><br><span class="line">&#x2F;&#x2F;输出结果为</span><br><span class="line">&#x2F;&#x2F;data3&lt;&#x2F;span&gt;&lt;span style&#x3D;&quot;font-size:24px;font-weight: bold;&quot;&gt;</span><br><span class="line">&lt;&#x2F;span&gt;</span><br></pre></td></tr></table></figure><p>2.队列【先进先出 后进后出】</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;span style&#x3D;&quot;font-size:18px;&quot;&gt;$queue &#x3D; new SplQueue();</span><br><span class="line">$queue-&gt;enqueue(&quot;data1&quot;);</span><br><span class="line">$queue-&gt;enqueue(&quot;data2&quot;);</span><br><span class="line">$queue-&gt;enqueue(&quot;data3&quot;);</span><br><span class="line">echo $queue-&gt;dequeue();</span><br><span class="line">&#x2F;&#x2F;输出结果为</span><br><span class="line">&#x2F;&#x2F;data1&lt;&#x2F;span&gt;</span><br></pre></td></tr></table></figure><p>3.堆</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;span style&#x3D;&quot;font-size:18px;&quot;&gt;$heap &#x3D; new SplMinHeap();</span><br><span class="line">$heap-&gt;insert(&quot;data1&quot;);</span><br><span class="line">$heap-&gt;insert(&quot;data2&quot;);</span><br><span class="line">echo $heap-&gt;extract();</span><br><span class="line">&#x2F;&#x2F;输出结果为</span><br><span class="line">&#x2F;&#x2F;data1&lt;&#x2F;span&gt;</span><br></pre></td></tr></table></figure><p>4.固定尺寸数组</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;span style&#x3D;&quot;font-size:18px;&quot;&gt;$array &#x3D; new SplFixedArray(5);</span><br><span class="line">$array[0]&#x3D;1;</span><br><span class="line">$array[3]&#x3D;3;</span><br><span class="line">$array[2]&#x3D;2;</span><br><span class="line">var_dump($array);</span><br><span class="line">&#x2F;&#x2F;输出结果为</span><br><span class="line">&#x2F;&#x2F; object(SplFixedArray)[1]</span><br><span class="line">&#x2F;&#x2F; public 0 &#x3D;&gt; int 1</span><br><span class="line">&#x2F;&#x2F; public 1 &#x3D;&gt; null</span><br><span class="line">&#x2F;&#x2F; public 2 &#x3D;&gt; int 2</span><br><span class="line">&#x2F;&#x2F; public 3 &#x3D;&gt; int 3</span><br></pre></td></tr></table></figure><p>————————————————<br>推荐学习：<a href="http://www.imooc.com/video/4849" target="_blank" rel="noopener">http://www.imooc.com/video/4849</a><br>原文链接：<a href="https://blog.csdn.net/zhengwish/article/details/51742264" target="_blank" rel="noopener">https://blog.csdn.net/zhengwish/article/details/51742264</a></p>]]></content>
       
       
@@ -403,25 +430,6 @@
     
     
     <entry>
-      <title>Hello World</title>
-      <link href="/blog/2019/12/16/%E5%BB%BA%E7%AB%99-HEXO-hello-world/"/>
-      <url>/blog/2019/12/16/%E5%BB%BA%E7%AB%99-HEXO-hello-world/</url>
-      
-        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 建站 </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>图片链接</title>
       <link href="/blog/2019/12/16/%E5%BB%BA%E7%AB%99-%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5/"/>
       <url>/blog/2019/12/16/%E5%BB%BA%E7%AB%99-%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5/</url>
@@ -441,6 +449,25 @@
             <tag> photo </tag>
             
         </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/blog/2019/12/16/%E5%BB%BA%E7%AB%99-HEXO-hello-world/"/>
+      <url>/blog/2019/12/16/%E5%BB%BA%E7%AB%99-HEXO-hello-world/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 建站 </category>
+          
+      </categories>
+      
       
     </entry>
     

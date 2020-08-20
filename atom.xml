@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://smartxia.github.io/blog/"/>
-  <updated>2020-06-23T10:06:56.235Z</updated>
+  <updated>2020-08-12T03:47:50.414Z</updated>
   <id>https://smartxia.github.io/blog/</id>
   
   <author>
@@ -20,6 +20,34 @@
     <title>PHP-SPL(数据结构)</title>
     <link href="https://smartxia.github.io/blog/2020/06/23/PHP-SPL-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-1/"/>
     <id>https://smartxia.github.io/blog/2020/06/23/PHP-SPL-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-1/</id>
+    <published>2020-06-23T10:04:39.000Z</published>
+    <updated>2020-08-12T03:47:50.414Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><p>php use用法</p><h4 id="1、user-namespace"><a href="#1、user-namespace" class="headerlink" title="1、user namespace"></a>1、user namespace</h4><h4 id="2、use-一个trait"><a href="#2、use-一个trait" class="headerlink" title="2、use 一个trait"></a>2、use 一个trait</h4><p>针对于trait的即多继承</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">trait</span> A&#123; eat()&#125; <span class="keyword">trait</span> B&#123; drink()&#125;  </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;</span><br><span class="line"><span class="keyword">use</span> <span class="title">A</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">B</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">Class</span> <span class="title">D</span></span>&#123;</span><br><span class="line">d=new Class C()</span><br><span class="line">d-&gt;eat();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p> 当不同的trait中，却有着同名的方法或属性，会产生冲突，可以使用insteadof或 as进行解决，insteadof 是进行替代，而as是给它取别名</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">use trait1,trait2&#123;</span><br><span class="line">        trait1::eat insteadof trait2;</span><br><span class="line">        trait1::drive insteadof trait2;</span><br><span class="line">        trait2::eat as eaten;</span><br><span class="line">        trait2::drive as driven;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><h4 id="3-闭包-gt-匿名函数"><a href="#3-闭包-gt-匿名函数" class="headerlink" title="3.闭包-&gt;匿名函数"></a>3.闭包-&gt;匿名函数</h4><p>好处：节省内存  适合做回调函数</p><p>匿名函数：定义时未定义函数的名称<br>闭包： 创建时封装周围状态的函数，及时周围的环境不存在了，闭包中的状态还会存在</p><p>使用法则：</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
+      
+    
+    </summary>
+    
+    
+      <category term="PHP" scheme="https://smartxia.github.io/blog/categories/PHP/"/>
+    
+    
+      <category term="PHP" scheme="https://smartxia.github.io/blog/tags/PHP/"/>
+    
+      <category term="USE" scheme="https://smartxia.github.io/blog/tags/USE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PHP-SPL(数据结构)</title>
+    <link href="https://smartxia.github.io/blog/2020/06/23/PHP-Use-%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/"/>
+    <id>https://smartxia.github.io/blog/2020/06/23/PHP-Use-%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/</id>
     <published>2020-06-23T10:04:39.000Z</published>
     <updated>2020-06-23T10:06:56.235Z</updated>
     
@@ -457,30 +485,6 @@
   </entry>
   
   <entry>
-    <title>Hello World</title>
-    <link href="https://smartxia.github.io/blog/2019/12/16/%E5%BB%BA%E7%AB%99-HEXO-hello-world/"/>
-    <id>https://smartxia.github.io/blog/2019/12/16/%E5%BB%BA%E7%AB%99-HEXO-hello-world/</id>
-    <published>2019-12-16T09:57:11.000Z</published>
-    <updated>2020-06-24T06:49:56.831Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
-      
-    
-    </summary>
-    
-    
-      <category term="建站" scheme="https://smartxia.github.io/blog/categories/%E5%BB%BA%E7%AB%99/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>图片链接</title>
     <link href="https://smartxia.github.io/blog/2019/12/16/%E5%BB%BA%E7%AB%99-%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5/"/>
     <id>https://smartxia.github.io/blog/2019/12/16/%E5%BB%BA%E7%AB%99-%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5/</id>
@@ -507,13 +511,13 @@
   </entry>
   
   <entry>
-    <title>PV,UV</title>
-    <link href="https://smartxia.github.io/blog/2019/12/16/%E5%BB%BA%E7%AB%99-My-New-Post/"/>
-    <id>https://smartxia.github.io/blog/2019/12/16/%E5%BB%BA%E7%AB%99-My-New-Post/</id>
-    <published>2019-12-16T09:57:07.000Z</published>
-    <updated>2020-06-19T03:44:29.033Z</updated>
+    <title>Hello World</title>
+    <link href="https://smartxia.github.io/blog/2019/12/16/%E5%BB%BA%E7%AB%99-HEXO-hello-world/"/>
+    <id>https://smartxia.github.io/blog/2019/12/16/%E5%BB%BA%E7%AB%99-HEXO-hello-world/</id>
+    <published>2019-12-16T09:57:11.000Z</published>
+    <updated>2020-06-24T06:49:56.831Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><p>PV：页面访问量，即PageView，用户每次对网站的访问均被记录，用户对同一页面的多次访问，访问量累计。 UV：独立访问用户数：即UniqueVisitor，访问网站的一台电脑客户端为一个访客。00:00-24:00内相同的客户端只被计算一次。</p>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
     
     <summary type="html">
     
@@ -525,13 +529,7 @@
     </summary>
     
     
-      <category term="Diary" scheme="https://smartxia.github.io/blog/categories/Diary/"/>
-    
-      <category term="PlayStation" scheme="https://smartxia.github.io/blog/categories/Diary/PlayStation/"/>
-    
-      <category term="Games" scheme="https://smartxia.github.io/blog/categories/Diary/Games/"/>
-    
-      <category term="Life" scheme="https://smartxia.github.io/blog/categories/Life/"/>
+      <category term="建站" scheme="https://smartxia.github.io/blog/categories/%E5%BB%BA%E7%AB%99/"/>
     
     
   </entry>
