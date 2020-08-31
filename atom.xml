@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://smartxia.github.io/blog/"/>
-  <updated>2020-08-26T02:26:57.563Z</updated>
+  <updated>2020-08-28T05:33:20.021Z</updated>
   <id>https://smartxia.github.io/blog/</id>
   
   <author>
@@ -15,6 +15,88 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PHP-辅助函数</title>
+    <link href="https://smartxia.github.io/blog/2020/08/28/PHP-%E8%BE%85%E5%8A%A9%E5%87%BD%E6%95%B0/"/>
+    <id>https://smartxia.github.io/blog/2020/08/28/PHP-%E8%BE%85%E5%8A%A9%E5%87%BD%E6%95%B0/</id>
+    <published>2020-08-28T05:33:20.000Z</published>
+    <updated>2020-08-28T05:33:20.021Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>PHP-匿名类匿名函数（闭包）</title>
+    <link href="https://smartxia.github.io/blog/2020/08/28/PHP-%E5%8C%BF%E5%90%8D%E7%B1%BB%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0%EF%BC%88%E9%97%AD%E5%8C%85%EF%BC%89/"/>
+    <id>https://smartxia.github.io/blog/2020/08/28/PHP-%E5%8C%BF%E5%90%8D%E7%B1%BB%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0%EF%BC%88%E9%97%AD%E5%8C%85%EF%BC%89/</id>
+    <published>2020-08-28T03:31:08.000Z</published>
+    <updated>2020-08-28T06:16:32.172Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><h4 id="1-写一个匿名函数"><a href="#1-写一个匿名函数" class="headerlink" title="1.写一个匿名函数"></a>1.写一个匿名函数</h4><blockquote><p>类中 的写法</p></blockquote><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//第一种写法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">qq</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $result = array_reduce([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">1</span>], <span class="function"><span class="keyword">function</span> <span class="params">($result, $value)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> array_merge($result, array_values($value));</span><br><span class="line">        &#125;, <span class="keyword">array</span>());</span><br><span class="line">        <span class="keyword">return</span> $result;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//第二种写法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">qq2</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//将匿名函数交个一个变量</span></span><br><span class="line">        $a = <span class="function"><span class="keyword">function</span> <span class="params">($result, $value)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> array_merge($result, array_values($value));</span><br><span class="line">        &#125;;</span><br><span class="line">        $result = array_reduce([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">1</span>], $a, <span class="keyword">array</span>());</span><br><span class="line">        <span class="keyword">return</span> $result;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><h4 id="2-理解一个闭包（匿名函数）"><a href="#2-理解一个闭包（匿名函数）" class="headerlink" title="2.理解一个闭包（匿名函数）"></a>2.理解一个闭包（匿名函数）</h4><p>目前php用到闭包的数组函数包括：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">array_map — 为数组的每个元素应用回调函数</span><br><span class="line">array_walk — 使用用户自定义函数对数组中的每个元素做回调处理</span><br><span class="line">array_reduce — 用回调函数迭代地将数组简化为单一的值</span><br><span class="line">array_filter — 用回调函数过滤数组中的单元</span><br><span class="line">array_intersect_uassoc — 带索引检查计算数组的交集，用回调函数比较索引</span><br><span class="line">array_intersect_ukey — 用回调函数比较键名来计算数组的交集</span><br><span class="line">array_reduce — 用回调函数迭代地将数组简化为单一的值</span><br><span class="line">array_walk_recursive — 对数组中的每个成员递归地应用用户函数</span><br><span class="line">----等等</span><br><span class="line">常用的就是: array_map array_walk</span><br></pre></td></tr></table></figure><h4 id="3-临时总结"><a href="#3-临时总结" class="headerlink" title="3.临时总结"></a>3.临时总结</h4><p><strong>异同点</strong><br> array_filter() 重点在于过滤（而不是新增）某个元素，当你处理到一个元素时，返回过滤后的数组<br> array_map() 重点在于遍历一个数组或多个数组的元素，返回一个新的数组<br> array_walk() 重点在于遍历数组进行某种操作</p><p> array_filter() 和 array_walk()对一个数组进行操作，数组参数在前，函数参数在后<br> array_map() 可以处理多个数组，因此函数参数在前，数组参数在后，可以根据实际情况放入多个数组参数</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
+      
+    
+    </summary>
+    
+    
+      <category term="PHP" scheme="https://smartxia.github.io/blog/categories/PHP/"/>
+    
+    
+      <category term="Closure" scheme="https://smartxia.github.io/blog/tags/Closure/"/>
+    
+      <category term="匿名函数" scheme="https://smartxia.github.io/blog/tags/%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0/"/>
+    
+      <category term="匿名类" scheme="https://smartxia.github.io/blog/tags/%E5%8C%BF%E5%90%8D%E7%B1%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PHP-理解php的Generator,yield,Iterator接口</title>
+    <link href="https://smartxia.github.io/blog/2020/08/28/PHP-%E7%90%86%E8%A7%A3php%E7%9A%84Generator,yield,Iterator%E6%8E%A5%E5%8F%A3/"/>
+    <id>https://smartxia.github.io/blog/2020/08/28/PHP-%E7%90%86%E8%A7%A3php%E7%9A%84Generator,yield,Iterator%E6%8E%A5%E5%8F%A3/</id>
+    <published>2020-08-28T03:21:32.000Z</published>
+    <updated>2020-08-28T03:26:17.044Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><blockquote><p>等待更新</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
+      
+    
+    </summary>
+    
+    
+      <category term="PHP" scheme="https://smartxia.github.io/blog/categories/PHP/"/>
+    
+    
+      <category term="Generator" scheme="https://smartxia.github.io/blog/tags/Generator/"/>
+    
+      <category term="yield" scheme="https://smartxia.github.io/blog/tags/yield/"/>
+    
+      <category term="Iterator - 等待更新" scheme="https://smartxia.github.io/blog/tags/Iterator-%E7%AD%89%E5%BE%85%E6%9B%B4%E6%96%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>其他-server酱打卡网易云</title>
@@ -122,12 +204,12 @@
   
   <entry>
     <title>PHP-SPL(数据结构)</title>
-    <link href="https://smartxia.github.io/blog/2020/06/23/PHP-SPL-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-1/"/>
-    <id>https://smartxia.github.io/blog/2020/06/23/PHP-SPL-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-1/</id>
+    <link href="https://smartxia.github.io/blog/2020/06/23/PHP-Use-%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/"/>
+    <id>https://smartxia.github.io/blog/2020/06/23/PHP-Use-%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/</id>
     <published>2020-06-23T10:04:39.000Z</published>
-    <updated>2020-08-21T02:19:36.132Z</updated>
+    <updated>2020-08-28T03:28:46.763Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><p>php use用法</p><h4 id="1、user-namespace"><a href="#1、user-namespace" class="headerlink" title="1、user namespace"></a>1、user namespace</h4><h4 id="2、use-一个trait"><a href="#2、use-一个trait" class="headerlink" title="2、use 一个trait"></a>2、use 一个trait</h4><p>针对于trait的即多继承</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">trait</span> A&#123; eat()&#125; <span class="keyword">trait</span> B&#123; drink()&#125;  </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;</span><br><span class="line"><span class="keyword">use</span> <span class="title">A</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">B</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">Class</span> <span class="title">D</span></span>&#123;</span><br><span class="line">d=new Class C()</span><br><span class="line">d-&gt;eat();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p> 当不同的trait中，却有着同名的方法或属性，会产生冲突，可以使用insteadof或 as进行解决，insteadof 是进行替代，而as是给它取别名</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">use trait1,trait2&#123;</span><br><span class="line">        trait1::eat insteadof trait2;</span><br><span class="line">        trait1::drive insteadof trait2;</span><br><span class="line">        trait2::eat as eaten;</span><br><span class="line">        trait2::drive as driven;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><h4 id="3-闭包-gt-匿名函数"><a href="#3-闭包-gt-匿名函数" class="headerlink" title="3.闭包-&gt;匿名函数"></a>3.闭包-&gt;匿名函数</h4><p>好处：节省内存  适合做回调函数</p><p>匿名函数：定义时未定义函数的名称<br>闭包： 创建时封装周围状态的函数，及时周围的环境不存在了，闭包中的状态还会存在</p><p>使用法则：</p>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><blockquote><p>php SPL四种常用的数据结构<br>1.栈【先进后出】PHP-Use-使用场景</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;span style&#x3D;&quot;font-size:18px;&quot;&gt;$stack &#x3D; new SplStack();</span><br><span class="line">$stack-&gt;push(&#39;data1&#39;);</span><br><span class="line">$stack-&gt;push(&#39;data2&#39;);</span><br><span class="line">$stack-&gt;push(&#39;data3&#39;);</span><br><span class="line">echo $stack-&gt;pop();</span><br><span class="line"> </span><br><span class="line">&#x2F;&#x2F;输出结果为</span><br><span class="line">&#x2F;&#x2F;data3&lt;&#x2F;span&gt;&lt;span style&#x3D;&quot;font-size:24px;font-weight: bold;&quot;&gt;</span><br><span class="line">&lt;&#x2F;span&gt;</span><br></pre></td></tr></table></figure><p>2.队列【先进先出 后进后出】</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;span style&#x3D;&quot;font-size:18px;&quot;&gt;$queue &#x3D; new SplQueue();</span><br><span class="line">$queue-&gt;enqueue(&quot;data1&quot;);</span><br><span class="line">$queue-&gt;enqueue(&quot;data2&quot;);</span><br><span class="line">$queue-&gt;enqueue(&quot;data3&quot;);</span><br><span class="line">echo $queue-&gt;dequeue();</span><br><span class="line">&#x2F;&#x2F;输出结果为</span><br><span class="line">&#x2F;&#x2F;data1&lt;&#x2F;span&gt;</span><br></pre></td></tr></table></figure><p>3.堆</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;span style&#x3D;&quot;font-size:18px;&quot;&gt;$heap &#x3D; new SplMinHeap();</span><br><span class="line">$heap-&gt;insert(&quot;data1&quot;);</span><br><span class="line">$heap-&gt;insert(&quot;data2&quot;);</span><br><span class="line">echo $heap-&gt;extract();</span><br><span class="line">&#x2F;&#x2F;输出结果为</span><br><span class="line">&#x2F;&#x2F;data1&lt;&#x2F;span&gt;</span><br></pre></td></tr></table></figure><p>4.固定尺寸数组</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;span style&#x3D;&quot;font-size:18px;&quot;&gt;$array &#x3D; new SplFixedArray(5);</span><br><span class="line">$array[0]&#x3D;1;</span><br><span class="line">$array[3]&#x3D;3;</span><br><span class="line">$array[2]&#x3D;2;</span><br><span class="line">var_dump($array);</span><br><span class="line">&#x2F;&#x2F;输出结果为</span><br><span class="line">&#x2F;&#x2F; object(SplFixedArray)[1]</span><br><span class="line">&#x2F;&#x2F; public 0 &#x3D;&gt; int 1</span><br><span class="line">&#x2F;&#x2F; public 1 &#x3D;&gt; null</span><br><span class="line">&#x2F;&#x2F; public 2 &#x3D;&gt; int 2</span><br><span class="line">&#x2F;&#x2F; public 3 &#x3D;&gt; int 3</span><br></pre></td></tr></table></figure><p>————————————————<br>推荐学习：<a href="http://www.imooc.com/video/4849" target="_blank" rel="noopener">http://www.imooc.com/video/4849</a><br>原文链接：<a href="https://blog.csdn.net/zhengwish/article/details/51742264" target="_blank" rel="noopener">https://blog.csdn.net/zhengwish/article/details/51742264</a></p>]]></content>
     
     <summary type="html">
     
@@ -144,16 +226,16 @@
     
       <category term="PHP" scheme="https://smartxia.github.io/blog/tags/PHP/"/>
     
-      <category term="USE" scheme="https://smartxia.github.io/blog/tags/USE/"/>
+      <category term="数据结构" scheme="https://smartxia.github.io/blog/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
   <entry>
     <title>PHP-SPL(数据结构)</title>
-    <link href="https://smartxia.github.io/blog/2020/06/23/PHP-Use-%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/"/>
-    <id>https://smartxia.github.io/blog/2020/06/23/PHP-Use-%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/</id>
+    <link href="https://smartxia.github.io/blog/2020/06/23/PHP-SPL(%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84)/"/>
+    <id>https://smartxia.github.io/blog/2020/06/23/PHP-SPL(%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84)/</id>
     <published>2020-06-23T10:04:39.000Z</published>
-    <updated>2020-08-21T02:19:31.860Z</updated>
+    <updated>2020-08-28T03:29:29.980Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><blockquote><p>php SPL四种常用的数据结构<br>1.栈【先进后出】</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;span style&#x3D;&quot;font-size:18px;&quot;&gt;$stack &#x3D; new SplStack();</span><br><span class="line">$stack-&gt;push(&#39;data1&#39;);</span><br><span class="line">$stack-&gt;push(&#39;data2&#39;);</span><br><span class="line">$stack-&gt;push(&#39;data3&#39;);</span><br><span class="line">echo $stack-&gt;pop();</span><br><span class="line"> </span><br><span class="line">&#x2F;&#x2F;输出结果为</span><br><span class="line">&#x2F;&#x2F;data3&lt;&#x2F;span&gt;&lt;span style&#x3D;&quot;font-size:24px;font-weight: bold;&quot;&gt;</span><br><span class="line">&lt;&#x2F;span&gt;</span><br></pre></td></tr></table></figure><p>2.队列【先进先出 后进后出】</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;span style&#x3D;&quot;font-size:18px;&quot;&gt;$queue &#x3D; new SplQueue();</span><br><span class="line">$queue-&gt;enqueue(&quot;data1&quot;);</span><br><span class="line">$queue-&gt;enqueue(&quot;data2&quot;);</span><br><span class="line">$queue-&gt;enqueue(&quot;data3&quot;);</span><br><span class="line">echo $queue-&gt;dequeue();</span><br><span class="line">&#x2F;&#x2F;输出结果为</span><br><span class="line">&#x2F;&#x2F;data1&lt;&#x2F;span&gt;</span><br></pre></td></tr></table></figure><p>3.堆</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;span style&#x3D;&quot;font-size:18px;&quot;&gt;$heap &#x3D; new SplMinHeap();</span><br><span class="line">$heap-&gt;insert(&quot;data1&quot;);</span><br><span class="line">$heap-&gt;insert(&quot;data2&quot;);</span><br><span class="line">echo $heap-&gt;extract();</span><br><span class="line">&#x2F;&#x2F;输出结果为</span><br><span class="line">&#x2F;&#x2F;data1&lt;&#x2F;span&gt;</span><br></pre></td></tr></table></figure><p>4.固定尺寸数组</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;span style&#x3D;&quot;font-size:18px;&quot;&gt;$array &#x3D; new SplFixedArray(5);</span><br><span class="line">$array[0]&#x3D;1;</span><br><span class="line">$array[3]&#x3D;3;</span><br><span class="line">$array[2]&#x3D;2;</span><br><span class="line">var_dump($array);</span><br><span class="line">&#x2F;&#x2F;输出结果为</span><br><span class="line">&#x2F;&#x2F; object(SplFixedArray)[1]</span><br><span class="line">&#x2F;&#x2F; public 0 &#x3D;&gt; int 1</span><br><span class="line">&#x2F;&#x2F; public 1 &#x3D;&gt; null</span><br><span class="line">&#x2F;&#x2F; public 2 &#x3D;&gt; int 2</span><br><span class="line">&#x2F;&#x2F; public 3 &#x3D;&gt; int 3</span><br></pre></td></tr></table></figure><p>————————————————<br>推荐学习：<a href="http://www.imooc.com/video/4849" target="_blank" rel="noopener">http://www.imooc.com/video/4849</a><br>原文链接：<a href="https://blog.csdn.net/zhengwish/article/details/51742264" target="_blank" rel="noopener">https://blog.csdn.net/zhengwish/article/details/51742264</a></p>]]></content>
     
@@ -173,6 +255,34 @@
       <category term="PHP" scheme="https://smartxia.github.io/blog/tags/PHP/"/>
     
       <category term="数据结构" scheme="https://smartxia.github.io/blog/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PHP-use</title>
+    <link href="https://smartxia.github.io/blog/2020/06/23/PHP-use/"/>
+    <id>https://smartxia.github.io/blog/2020/06/23/PHP-use/</id>
+    <published>2020-06-23T10:04:39.000Z</published>
+    <updated>2020-08-28T03:24:41.919Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><p>php use用法</p><h4 id="1、user-namespace"><a href="#1、user-namespace" class="headerlink" title="1、user namespace"></a>1、user namespace</h4><h4 id="2、use-一个trait"><a href="#2、use-一个trait" class="headerlink" title="2、use 一个trait"></a>2、use 一个trait</h4><p>针对于trait的即多继承</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">trait</span> A&#123; eat()&#125; <span class="keyword">trait</span> B&#123; drink()&#125;  </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;</span><br><span class="line"><span class="keyword">use</span> <span class="title">A</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">B</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">Class</span> <span class="title">D</span></span>&#123;</span><br><span class="line">d=new Class C()</span><br><span class="line">d-&gt;eat();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p> 当不同的trait中，却有着同名的方法或属性，会产生冲突，可以使用insteadof或 as进行解决，insteadof 是进行替代，而as是给它取别名</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">use trait1,trait2&#123;</span><br><span class="line">        trait1::eat insteadof trait2;</span><br><span class="line">        trait1::drive insteadof trait2;</span><br><span class="line">        trait2::eat as eaten;</span><br><span class="line">        trait2::drive as driven;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><h4 id="3-闭包-gt-匿名函数"><a href="#3-闭包-gt-匿名函数" class="headerlink" title="3.闭包-&gt;匿名函数"></a>3.闭包-&gt;匿名函数</h4><p>好处：节省内存  适合做回调函数</p><p>匿名函数：定义时未定义函数的名称<br>闭包： 创建时封装周围状态的函数，及时周围的环境不存在了，闭包中的状态还会存在</p><p>使用法则：</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
+      
+    
+    </summary>
+    
+    
+      <category term="PHP" scheme="https://smartxia.github.io/blog/categories/PHP/"/>
+    
+    
+      <category term="PHP" scheme="https://smartxia.github.io/blog/tags/PHP/"/>
+    
+      <category term="USE" scheme="https://smartxia.github.io/blog/tags/USE/"/>
     
   </entry>
   
@@ -232,8 +342,8 @@
   
   <entry>
     <title>PHP-异常类</title>
-    <link href="https://smartxia.github.io/blog/2020/06/22/PHP-%E5%BC%82%E5%B8%B8%E7%B1%BB-1/"/>
-    <id>https://smartxia.github.io/blog/2020/06/22/PHP-%E5%BC%82%E5%B8%B8%E7%B1%BB-1/</id>
+    <link href="https://smartxia.github.io/blog/2020/06/22/PHP-%E5%BC%82%E5%B8%B8%E7%B1%BB/"/>
+    <id>https://smartxia.github.io/blog/2020/06/22/PHP-%E5%BC%82%E5%B8%B8%E7%B1%BB/</id>
     <published>2020-06-22T03:27:10.000Z</published>
     <updated>2020-08-21T02:19:40.618Z</updated>
     
@@ -435,114 +545,6 @@
       <category term="日志" scheme="https://smartxia.github.io/blog/tags/%E6%97%A5%E5%BF%97/"/>
     
       <category term="工具" scheme="https://smartxia.github.io/blog/tags/%E5%B7%A5%E5%85%B7/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>redis基础知识</title>
-    <link href="https://smartxia.github.io/blog/2019/12/27/REDIS-redis%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
-    <id>https://smartxia.github.io/blog/2019/12/27/REDIS-redis%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</id>
-    <published>2019-12-27T03:48:42.000Z</published>
-    <updated>2020-08-21T02:33:38.927Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><h3 id="redis-pubsub-发布和订阅"><a href="#redis-pubsub-发布和订阅" class="headerlink" title="redis pubsub 发布和订阅"></a>redis pubsub 发布和订阅</h3><p>常用命令：</p><blockquote><p>查看发布的频道：PUBSUB CHANNELS</p></blockquote><blockquote><p>新建频道： PUBLISH mychannel “hello world”</p></blockquote><blockquote><p>订阅频道：SUBSCRIBE mychannel |   Psubscribe 多个channel |支持 channel* 格式</p></blockquote><blockquote><p>退订频道：UNSUBSCRIBE mychannel | Punsubscribe  多个channel  |支持 channel* 格式</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
-      
-    
-    </summary>
-    
-    
-      <category term="redis学习" scheme="https://smartxia.github.io/blog/categories/redis%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="pubsub" scheme="https://smartxia.github.io/blog/tags/pubsub/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>redis进阶知识</title>
-    <link href="https://smartxia.github.io/blog/2019/12/27/REDIS-redis%E7%9F%A5%E8%AF%86%E7%82%B9/"/>
-    <id>https://smartxia.github.io/blog/2019/12/27/REDIS-redis%E7%9F%A5%E8%AF%86%E7%82%B9/</id>
-    <published>2019-12-27T03:01:49.000Z</published>
-    <updated>2020-08-21T02:33:25.088Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><h3 id="关于redis-一些基本知识点"><a href="#关于redis-一些基本知识点" class="headerlink" title="关于redis 一些基本知识点"></a>关于redis 一些基本知识点</h3><h4 id="redis基本介绍"><a href="#redis基本介绍" class="headerlink" title="redis基本介绍"></a>redis基本介绍</h4><p>remote Dictionary Serer (远程字典服务) ANSI C 编写 支持网络 基于内存可持久化的日志型 key=&gt;value 数据库</p><p>官网 redis.io   作者：Salvatore Sanfilippo 意大利人 网名 antirez</p><h4 id="redis被使用的原因"><a href="#redis被使用的原因" class="headerlink" title="redis被使用的原因"></a>redis被使用的原因</h4><p>  传统型关系型数据库如mysql 已经不能适用所有场景，秒杀库存 app首页流量访问高峰  所以考虑缓存中间件，目前市面上比较常用的就是redis 和memcached </p><h4 id="redis-基本的数据结构"><a href="#redis-基本的数据结构" class="headerlink" title="redis 基本的数据结构"></a>redis 基本的数据结构</h4><p>String 、字典Hash、列表List、集合Set、有序集合 SortedSet、 HyperLogLog、Geo、Pub/Sub</p><h5 id="BloomFilter-布隆过滤器"><a href="#BloomFilter-布隆过滤器" class="headerlink" title="BloomFilter 布隆过滤器"></a>BloomFilter 布隆过滤器</h5><p><a href="https://link.zhihu.com/?target=https%3A//juejin.im/post/5db69365518825645656c0de">避免缓存击穿的利器之BloomFilter</a></p><h4 id="redis分布式锁"><a href="#redis分布式锁" class="headerlink" title="redis分布式锁"></a>redis分布式锁</h4><p>-先拿setnx来争抢锁，抢到之后，再用expire给锁加一个过期时间防止锁忘记了释放</p><h4 id="redis关键的一个特性："><a href="#redis关键的一个特性：" class="headerlink" title="redis关键的一个特性："></a>redis关键的一个特性：</h4><p>redis的单线程的。keys指令会导致线程阻塞一段时间，线上服务会停顿，直到指令执行完毕，服务才能恢复。这个时候可以使用<code>scan</code>指令，<code>scan</code>指令可以无阻塞的提取出指定模式的key列表，但是会有一定的重复概率，在客户端做一次去重就可以了，但是整体所花费的时间会比直接用keys指令长</p><h4 id="使用Redis做异步队列"><a href="#使用Redis做异步队列" class="headerlink" title="使用Redis做异步队列"></a>使用Redis做异步队列</h4><p>一般使用list结构作为队列，<code>rpush</code>生产消息，<code>lpop</code>消费消息。当lpop没有消息的时候，要适当sleep一会再重试。</p><p>list还有个指令叫<code>blpop</code>，在没有消息的时候，它会阻塞住直到消息到来。</p><h4 id="实现延时队列"><a href="#实现延时队列" class="headerlink" title="实现延时队列"></a>实现延时队列</h4><p>使用sortedset，拿时间戳作为score，消息内容作为key调用zadd来生产消息，消费者用<code>zrangebyscore</code>指令获取N秒之前的数据轮询进行处理。</p><h4 id="生产一次消费多次"><a href="#生产一次消费多次" class="headerlink" title="生产一次消费多次"></a>生产一次消费多次</h4><p>使用pub/sub主题订阅者模式，可以实现 1:N 的消息队列</p><p>缺点：消费者下线的话 生产者会消失，使用MQ</p><h4 id="Redis是怎么持久化"><a href="#Redis是怎么持久化" class="headerlink" title="Redis是怎么持久化"></a>Redis是怎么持久化</h4><p>RDB做镜像全量持久化，AOF做增量持久化。因为RDB会耗费较长时间，不够实时，在停机的时候会导致大量丢失数据，所以需要AOF来配合使用。在redis实例重启时，会使用RDB持久化文件重新构建内存，再使用AOF重放近期的操作指令来实现完整恢复重启之前的状态。</p><p>RDB的原理: fork和cow。fork是指redis通过创建子进程来进行RDB操作，cow指的是copy on write，子进程创建后，父子进程共享数据段，父进程继续提供读写服务，写脏的页面数据会逐渐和子进程分离开来。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这里很好理解，把RDB理解为一整个表全量的数据，AOF理解为每次操作的日志就好了，服务器重启的时候先把表的数据全部搞进去，但是他可能不完整，你再回放一下日志，数据不就完整了嘛。不过Redis本身的机制是 AOF持久化开启且存在AOF文件时，优先加载AOF文件；AOF关闭或者AOF文件不存在时，加载RDB文件；加载AOF&#x2F;RDB文件城后，Redis启动成功； AOF&#x2F;RDB文件存在错误时，Redis启动失败并打印错误信息</span><br></pre></td></tr></table></figure><h4 id="Pipeline有什么好处"><a href="#Pipeline有什么好处" class="headerlink" title="Pipeline有什么好处"></a>Pipeline有什么好处</h4><p>可以将多次IO往返的时间缩减为一次，前提是pipeline执行的指令之间没有因果相关性。使用redis-benchmark进行压测的时候可以发现影响redis的QPS峰值的一个重要因素是pipeline批次指令的数目。</p><h4 id="Redis的同步机制"><a href="#Redis的同步机制" class="headerlink" title="Redis的同步机制"></a>Redis的同步机制</h4><p>Redis可以使用主从同步，从从同步。第一次同步时，主节点做一次bgsave，并同时将后续修改操作记录到内存buffer，待完成后将RDB文件全量同步到复制节点，复制节点接受完成后将RDB镜像加载到内存。加载完成后，再通知主节点将期间修改的操作记录同步到复制节点进行重放就完成了同步过程。后续的增量数据通过AOF日志同步即可，有点类似数据库的binlog。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
-      
-    
-    </summary>
-    
-    
-      <category term="redis学习" scheme="https://smartxia.github.io/blog/categories/redis%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="redis" scheme="https://smartxia.github.io/blog/tags/redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>redis进阶知识</title>
-    <link href="https://smartxia.github.io/blog/2019/12/27/REDIS-redis%E8%BF%9B%E9%98%B6%E7%9F%A5%E8%AF%86/"/>
-    <id>https://smartxia.github.io/blog/2019/12/27/REDIS-redis%E8%BF%9B%E9%98%B6%E7%9F%A5%E8%AF%86/</id>
-    <published>2019-12-27T03:01:49.000Z</published>
-    <updated>2020-08-21T02:33:35.062Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><h3 id="关于redis-一些基本知识点"><a href="#关于redis-一些基本知识点" class="headerlink" title="关于redis 一些基本知识点"></a>关于redis 一些基本知识点</h3><h4 id="redis基本介绍"><a href="#redis基本介绍" class="headerlink" title="redis基本介绍"></a>redis基本介绍</h4><p>remote Dictionary Serer (远程字典服务) ANSI C 编写 支持网络 基于内存可持久化的日志型 key=&gt;value 数据库</p><p>官网 redis.io   作者：Salvatore Sanfilippo 意大利人 网名 antirez</p><h4 id="redis被使用的原因"><a href="#redis被使用的原因" class="headerlink" title="redis被使用的原因"></a>redis被使用的原因</h4><p>  传统型关系型数据库如mysql 已经不能适用所有场景，秒杀库存 app首页流量访问高峰  所以考虑缓存中间件，目前市面上比较常用的就是redis 和memcached </p><h4 id="redis-基本的数据结构"><a href="#redis-基本的数据结构" class="headerlink" title="redis 基本的数据结构"></a>redis 基本的数据结构</h4><p>String 、字典Hash、列表List、集合Set、有序集合 SortedSet、 HyperLogLog、Geo、Pub/Sub</p><h5 id="BloomFilter-布隆过滤器"><a href="#BloomFilter-布隆过滤器" class="headerlink" title="BloomFilter 布隆过滤器"></a>BloomFilter 布隆过滤器</h5><p><a href="https://link.zhihu.com/?target=https%3A//juejin.im/post/5db69365518825645656c0de">避免缓存击穿的利器之BloomFilter</a></p><h4 id="redis分布式锁"><a href="#redis分布式锁" class="headerlink" title="redis分布式锁"></a>redis分布式锁</h4><p>-先拿setnx来争抢锁，抢到之后，再用expire给锁加一个过期时间防止锁忘记了释放</p><h4 id="redis关键的一个特性："><a href="#redis关键的一个特性：" class="headerlink" title="redis关键的一个特性："></a>redis关键的一个特性：</h4><p>redis的单线程的。keys指令会导致线程阻塞一段时间，线上服务会停顿，直到指令执行完毕，服务才能恢复。这个时候可以使用<code>scan</code>指令，<code>scan</code>指令可以无阻塞的提取出指定模式的key列表，但是会有一定的重复概率，在客户端做一次去重就可以了，但是整体所花费的时间会比直接用keys指令长</p><h4 id="使用Redis做异步队列"><a href="#使用Redis做异步队列" class="headerlink" title="使用Redis做异步队列"></a>使用Redis做异步队列</h4><p>一般使用list结构作为队列，<code>rpush</code>生产消息，<code>lpop</code>消费消息。当lpop没有消息的时候，要适当sleep一会再重试。</p><p>list还有个指令叫<code>blpop</code>，在没有消息的时候，它会阻塞住直到消息到来。</p><h4 id="实现延时队列"><a href="#实现延时队列" class="headerlink" title="实现延时队列"></a>实现延时队列</h4><p>使用sortedset，拿时间戳作为score，消息内容作为key调用zadd来生产消息，消费者用<code>zrangebyscore</code>指令获取N秒之前的数据轮询进行处理。</p><h4 id="生产一次消费多次"><a href="#生产一次消费多次" class="headerlink" title="生产一次消费多次"></a>生产一次消费多次</h4><p>使用pub/sub主题订阅者模式，可以实现 1:N 的消息队列</p><p>缺点：消费者下线的话 生产者会消失，使用MQ</p><h4 id="Redis是怎么持久化"><a href="#Redis是怎么持久化" class="headerlink" title="Redis是怎么持久化"></a>Redis是怎么持久化</h4><p>RDB做镜像全量持久化，AOF做增量持久化。因为RDB会耗费较长时间，不够实时，在停机的时候会导致大量丢失数据，所以需要AOF来配合使用。在redis实例重启时，会使用RDB持久化文件重新构建内存，再使用AOF重放近期的操作指令来实现完整恢复重启之前的状态。</p><p>RDB的原理: fork和cow。fork是指redis通过创建子进程来进行RDB操作，cow指的是copy on write，子进程创建后，父子进程共享数据段，父进程继续提供读写服务，写脏的页面数据会逐渐和子进程分离开来。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这里很好理解，把RDB理解为一整个表全量的数据，AOF理解为每次操作的日志就好了，服务器重启的时候先把表的数据全部搞进去，但是他可能不完整，你再回放一下日志，数据不就完整了嘛。不过Redis本身的机制是 AOF持久化开启且存在AOF文件时，优先加载AOF文件；AOF关闭或者AOF文件不存在时，加载RDB文件；加载AOF&#x2F;RDB文件城后，Redis启动成功； AOF&#x2F;RDB文件存在错误时，Redis启动失败并打印错误信息</span><br></pre></td></tr></table></figure><h4 id="Pipeline有什么好处"><a href="#Pipeline有什么好处" class="headerlink" title="Pipeline有什么好处"></a>Pipeline有什么好处</h4><p>可以将多次IO往返的时间缩减为一次，前提是pipeline执行的指令之间没有因果相关性。使用redis-benchmark进行压测的时候可以发现影响redis的QPS峰值的一个重要因素是pipeline批次指令的数目。</p><h4 id="Redis的同步机制"><a href="#Redis的同步机制" class="headerlink" title="Redis的同步机制"></a>Redis的同步机制</h4><p>Redis可以使用主从同步，从从同步。第一次同步时，主节点做一次bgsave，并同时将后续修改操作记录到内存buffer，待完成后将RDB文件全量同步到复制节点，复制节点接受完成后将RDB镜像加载到内存。加载完成后，再通知主节点将期间修改的操作记录同步到复制节点进行重放就完成了同步过程。后续的增量数据通过AOF日志同步即可，有点类似数据库的binlog。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
-      
-    
-    </summary>
-    
-    
-      <category term="redis学习" scheme="https://smartxia.github.io/blog/categories/redis%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="redis" scheme="https://smartxia.github.io/blog/tags/redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>HEXO-butteryly</title>
-    <link href="https://smartxia.github.io/blog/2019/12/18/%E5%BB%BA%E7%AB%99-HEXO-butteryly/"/>
-    <id>https://smartxia.github.io/blog/2019/12/18/%E5%BB%BA%E7%AB%99-HEXO-butteryly/</id>
-    <published>2019-12-18T03:20:24.000Z</published>
-    <updated>2020-08-20T09:06:12.600Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><h3 id="主题·文档"><a href="#主题·文档" class="headerlink" title="主题·文档"></a>主题·文档</h3><p><a href="https://jerryc.me/" target="_blank" rel="noopener">https://jerryc.me/</a></p><h3 id="评论系统"><a href="#评论系统" class="headerlink" title="评论系统"></a>评论系统</h3><p>gittalk<br><a href="https://github.com/settings/applications/1190035" target="_blank" rel="noopener">https://github.com/settings/applications/1190035</a><br>登录GitHub进行评论，会生成issue<br>Valine<br><a href="https://leancloud.cn/dashboard/applist.html#/apps" target="_blank" rel="noopener">https://leancloud.cn/dashboard/applist.html#/apps</a><br>特点在于可以免登陆进行评论，输入验证码评论</p><p>Laibili（来必力）<br>域名到期不稳定<br>Disqus<br>暂时未测试使用到期</p><p>还是准备用valine做第一期</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
-      
-    
-    </summary>
-    
-    
-      <category term="建站" scheme="https://smartxia.github.io/blog/categories/%E5%BB%BA%E7%AB%99/"/>
-    
-    
-      <category term="HEXO" scheme="https://smartxia.github.io/blog/tags/HEXO/"/>
-    
-      <category term="主题" scheme="https://smartxia.github.io/blog/tags/%E4%B8%BB%E9%A2%98/"/>
-    
-      <category term="教程" scheme="https://smartxia.github.io/blog/tags/%E6%95%99%E7%A8%8B/"/>
     
   </entry>
   
