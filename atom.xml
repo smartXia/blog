@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://smartxia.github.io/blog/"/>
-  <updated>2020-09-01T06:47:37.168Z</updated>
+  <updated>2020-09-01T09:55:52.339Z</updated>
   <id>https://smartxia.github.io/blog/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>前端-npm私有源加载平台</title>
+    <link href="https://smartxia.github.io/blog/2020/09/01/%E5%89%8D%E7%AB%AF-npm%E7%A7%81%E6%9C%89%E6%BA%90%E5%8A%A0%E8%BD%BD%E5%B9%B3%E5%8F%B0/"/>
+    <id>https://smartxia.github.io/blog/2020/09/01/%E5%89%8D%E7%AB%AF-npm%E7%A7%81%E6%9C%89%E6%BA%90%E5%8A%A0%E8%BD%BD%E5%B9%B3%E5%8F%B0/</id>
+    <published>2020-09-01T09:30:06.000Z</published>
+    <updated>2020-09-01T09:55:52.339Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><h3 id="调研平台：sinopia，Verdaccio"><a href="#调研平台：sinopia，Verdaccio" class="headerlink" title="调研平台：sinopia，Verdaccio"></a>调研平台：sinopia，Verdaccio</h3><h4 id="Verdaccio"><a href="#Verdaccio" class="headerlink" title="Verdaccio"></a>Verdaccio</h4><h5 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h5><p><a href="https://verdaccio.org/docs/en/configuration">https://verdaccio.org/docs/en/configuration</a></p><p>搭建：</p><h5 id="认证方式"><a href="#认证方式" class="headerlink" title="认证方式"></a>认证方式</h5><p>身份验证与您正在使用的auth <a href="https://verdaccio.org/docs/en/plugins">插件相关</a>。软件包限制也由<a href="https://verdaccio.org/docs/en/packages">Package Access</a>处理。</p><p>客户端：基于npm客户端登录后会生成一个配置令牌，在.npmrc中</p><p><a href="https://docs.npmjs.com/files/npmrc">https://docs.npmjs.com/files/npmrc</a></p><p>且允许匿名发布包</p><p>包发布的时候允许阻止访问和下载</p><p>服务端关于组的验证:</p><p>​    access: $all<br>​    publish: $all<br>​    proxy: npmjs</p><p><img src= "/blog/img/loading.gif" data-lazy-src="//s2-cdn.oneitfarm.com/186bdf368bd54a57b12eb71ba2e10636.png" alt="image-20200901175328057"></p><p> 不同的包读取权限限制：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">packages:</span><br><span class="line">  <span class="string">&#x27;jquery&#x27;</span>:</span><br><span class="line">    access: $all</span><br><span class="line">    publish: $all</span><br><span class="line">  <span class="string">&#x27;my-company-*&#x27;</span>:</span><br><span class="line">    access: $all</span><br><span class="line">    publish: $authenticated</span><br><span class="line">  <span class="string">&#x27;@my-local-scope/*&#x27;</span>:</span><br><span class="line">    access: $all</span><br><span class="line">    publish: $authenticated</span><br><span class="line">  <span class="string">&#x27;**&#x27;</span>:</span><br><span class="line">    access: $all</span><br><span class="line">    publish: $authenticated</span><br><span class="line">    proxy: npmjs</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>其他-CRLF、CR、LF详解</title>
@@ -510,30 +532,6 @@
     
     
       <category term="golang" scheme="https://smartxia.github.io/blog/categories/golang/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>HEXO快捷方式</title>
-    <link href="https://smartxia.github.io/blog/2020/06/09/%E5%BB%BA%E7%AB%99-HEXO-%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/"/>
-    <id>https://smartxia.github.io/blog/2020/06/09/%E5%BB%BA%E7%AB%99-HEXO-%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/</id>
-    <published>2020-06-09T06:23:15.000Z</published>
-    <updated>2020-06-19T03:23:24.737Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><p><a href="https://www.jianshu.com/p/1c888a6b8297?utm_source=oschina-app">https://www.jianshu.com/p/1c888a6b8297?utm_source=oschina-app</a></p><h3 id="新编写BLOG"><a href="#新编写BLOG" class="headerlink" title="新编写BLOG"></a>新编写BLOG</h3><p>hexo new [layout] <title></p><h3 id="push到github："><a href="#push到github：" class="headerlink" title="push到github："></a>push到github：</h3><p>hexo deploy</p><p>hexo clean</p><p>hexo deploy</p><h3 id="每次都要执行-hexo-clean-和-hexo-deploy，不如写个新的脚本"><a href="#每次都要执行-hexo-clean-和-hexo-deploy，不如写个新的脚本" class="headerlink" title="每次都要执行 hexo clean 和 hexo deploy，不如写个新的脚本"></a>每次都要执行 hexo clean 和 hexo deploy，不如写个新的脚本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; package.json</span><br><span class="line">&quot;dev&quot;: &quot;hexo s&quot;,</span><br><span class="line">&quot;build&quot;: &quot;hexo clean &amp; hexo deploy&quot;</span><br></pre></td></tr></table></figure><p>npm run build</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
-      
-    
-    </summary>
-    
-    
-      <category term="建站" scheme="https://smartxia.github.io/blog/categories/%E5%BB%BA%E7%AB%99/"/>
     
     
   </entry>
