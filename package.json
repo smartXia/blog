@@ -1,18 +1,19 @@
 {
   "name": "hexo-site",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "dev": "hexo s",
   "private": true,
   "scripts": {
-    "build": "hexo generate",
+    "build": "hexo generate& hexo deploy",
     "clean": "hexo clean",
-    "deploy": "hexo deploy",
+    "deploy": "hexo clean&hexo generate&hexo deploy",
     "server": "hexo server"
   },
   "hexo": {
-    "version": "4.1.1"
+    "version": "5.1.1"
   },
   "dependencies": {
-    "hexo": "^4.0.0",
+    "hexo": "^5.1.1",
     "hexo-browsersync": "^0.3.0",
     "hexo-deployer-git": "^2.1.0",
     "hexo-douban": "^1.1.3",

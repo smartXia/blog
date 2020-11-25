@@ -1,0 +1,11 @@
+---
+title: PV,UV
+date: 2019-12-16 17:57:07
+tags:
+cover: /blog/img/wiki.jpg
+categories:
+  - [Diary, PlayStation]
+  - [Diary, Games]
+  - [Life] 
+---
+PV：页面访问量，即PageView，用户每次对网站的访问均被记录，用户对同一页面的多次访问，访问量累计。 UV：独立访问用户数：即UniqueVisitor，访问网站的一台电脑客户端为一个访客。00:00-24:00内相同的客户端只被计算一次。

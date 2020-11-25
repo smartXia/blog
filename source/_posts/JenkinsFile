@@ -1,0 +1,88 @@
+import groovy.json.JsonSlurperClassic
+node('npm_v1') {
+   // env.ORIGIN_PATH = env.WORKSPACE + "/origin_" + UUID.randomUUID().toString()
+    env.ORIGIN_PATH = env.WORKSPACE + "/itfarm_" +  UUID.randomUUID().toString()
+    stage('Preparation') {
+        echo 'create dirs'
+        if(!env.ORIGIN_PATH ){
+            handleError(new Exception("error happened"))
+        }
+        sh 'mkdir ${ORIGIN_PATH}'
+    }
+
+    stage('Clone') {
+        echo 'clone origin repository:'
+        dir(env.ORIGIN_PATH)
+        {
+            try{
+           sh 'npm init -y'
+           sh 'npm i ${ORGAIN_PACKAGE}'
+          
+            }catch(Exception ex){
+                handleError(ex)
+            }
+
+        }
+        echo 'clone target repository:'
+    }
+
+  
+	stage('Publish'){
+		dir(env.ORIGIN_PATH){
+			try{
+             sh '''
+                ls
+                npm set registry ${TARGET_URL}
+				npm version ${TARGET_TAG}  --allow-same-version
+				npm publish
+				'''
+			}catch(Exception ex){
+				handleError(ex)
+			}
+		}
+	}
+
+
+    stage('Results') {
+        echo 'finish'
+        callback('success', '')
+        echo 'clear file'
+        try{
+          sh 'rm -rf ${ORIGIN_PATH}'
+          //  sh 'git clone ${TARGET_GIT} .'
+        }catch(Exception ex){
+            handleError(ex)
+        }
+         
+    }
+
+}
+
+@NonCPS
+def jsonDecode(str){
+   def jsonSlurper = new groovy.json.JsonSlurperClassic()
+   return jsonSlurper.parseText(str)
+}
+@NonCPS
+def jsonEncode(data){
+    def jsonOutput = new groovy.json.JsonOutput()
+    String json = jsonOutput.toJson(data)
+    return jsonOutput.prettyPrint(json)
+}
+def  packagename(name){
+    return name
+}
+
+def callback(result, exStr){
+    if(params.BACK_URL){
+        echo 'callback'
+        sh "curl -d 'res=${result}&job_name=${JOB_NAME}&build_id=${BUILD_ID}&ex=${exStr}' ${BACK_URL}"
+    }
+}
+
+def handleError(Exception ex){
+	print(ex.toString())
+    String exStr = ex.toString().replace("'"," ")
+    callback('fail', exStr)
+    throw new Exception("error happened")
+}

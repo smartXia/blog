@@ -14,6 +14,7 @@ email: xiapeifu@gmail.com
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
+# url: https://smartxia.github.io/blog
 url: https://smartxia.github.io/blog
 root: /blog/
 
@@ -82,7 +83,7 @@ meta_generator: true
 date_format: YYYY-MM-DD
 time_format: HH:mm:ss
 ## Use post's date for updated date unless set in front-matter
-use_date_for_updated: false
+updated_option: false
 
 # Pagination
 ## Set per_page to 0 to disable pagination
@@ -122,6 +123,7 @@ deploy:
   type: git
   repository: https://github.com/smartXia/blog.git
   branch: master
+  message: "change route"
   jsonContent:
     meta: false
     pages: false
