@@ -5,19 +5,19 @@
 # xxx || icon:
 #   xxx || 連結 || icon
 menu:
-  Home: /blog/|| fa fa-home
-  Archives: /blog/archives/ || fa fa-archive
-  Tags: /blog/tags/ || fa fa-tags
+  Home: /|| fa fa-home
+  Archives: /archives/ || fa fa-archive
+  Tags: //tags/ || fa fa-tags
   Categories: /categories/ || fa fa-folder-open
   List||fa fa-list:
-    - Music || /blog/music/ || fa fa-music
-    - Movie || /blog/movies/ || fa fa-film
-    - Photo || /blog/photos/ || fa fa-picture-o
-    - Game || /blog/games/ || fa fa-gamepad
-    - Book || /blog/books/ || fa fa-book
-  About: /blog/about/ || fa fa-heart
-  Link: /blog/link/ || fa fa-link
-  Messageboard: /blog/messageboard/ || fa fa-coffee
+    - Music || /music/ || fa fa-music
+    - Movie || /movies/ || fa fa-film
+    - Photo || /photos/ || fa fa-picture-o
+    - Game || /games/ || fa fa-gamepad
+    - Book || /books/ || fa fa-book
+  About: /about/ || fa fa-heart
+  Link: /link/ || fa fa-link
+  Messageboard: /messageboard/ || fa fa-coffee
 
 # Favicon
 # ---------------
