@@ -2,7 +2,7 @@
 title: PHP-xhprof-性能优化
 date: 2020-08-20 17:16:14
 tags: xhprof docker push
-cover: /blog/img/php.jpg
+cover: /img/php.jpg
 categories:
   - PHP
 ---

@@ -2,7 +2,7 @@
 title: GOLANG笔记1
 date: 2020-06-09 17:36:01
 tags:
-cover: /blog/img/golang.png
+cover: /img/golang.png
 categories:
   - golang
 ---

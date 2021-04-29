@@ -1,7 +1,7 @@
 ---
 title: PHP-SPL(数据结构)
 date: 2020-06-23 18:04:39
-cover: /blog/img/php.jpg
+cover: /img/php.jpg
 tags:
   - PHP
   - 数据结构

@@ -4,7 +4,7 @@ date: 2019-12-27 11:48:42
 tags: 
   - pubsub
 keywords: "发布和订阅"
-cover: /blog/img/redis.jpg
+cover: /img/redis.jpg
 top_image: https://pic4.zhimg.com/v2-ca6f0a9731c98901ec1e3869a7a1df4e_1200x500.jpg
 categories:
   - redis学习

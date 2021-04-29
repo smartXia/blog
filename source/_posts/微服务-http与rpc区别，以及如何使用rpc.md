@@ -2,7 +2,7 @@
 title: http与rpc区别，以及如何使用rpc
 date: 2020-06-19 10:55:30
 tags: rpc()
-cover: /blog/img/cloud.jfif
+cover: /img/cloud.jfif
 
 categories:
   - 微服务

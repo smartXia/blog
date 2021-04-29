@@ -7,7 +7,7 @@ tags:
 - 匿名类
 categories:
   - PHP
-cover: /blog/img/php.jpg
+cover: /img/php.jpg
 ---
 
 #### 1.写一个匿名函数

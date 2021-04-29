@@ -4,7 +4,7 @@ date: 2019-12-27 16:27:05
 tags: 
   - 日志
   - 工具
-cover: /blog/img/elk.jpg  
+cover: /img/elk.jpg  
 categories:
   - MYSQL
 ---

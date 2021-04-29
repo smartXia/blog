@@ -1,7 +1,7 @@
 ---
 title: Hello World
 date: 2019-12-16 17:57:11
-cover: /blog/img/wiki.jpg
+cover: /img/wiki.jpg
 categories:
   - 建站
 ---

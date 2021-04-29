@@ -1,7 +1,7 @@
 ---
 title: PHP-异常类
 date: 2020-06-22 11:27:10
-cover: /blog/img/php.jpg
+cover: /img/php.jpg
 tags:
   - PHP
   - 异常

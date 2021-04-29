@@ -1,7 +1,7 @@
 ---
 title: PHP-理解php的Generator,yield,Iterator接口
 date: 2020-08-28 11:21:32
-cover: /blog/img/php.jpg
+cover: /img/php.jpg
 tags: 
 	- Generator
 	- yield

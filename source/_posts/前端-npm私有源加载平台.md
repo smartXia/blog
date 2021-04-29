@@ -2,7 +2,7 @@
 title: 前端-npm私有源加载平台
 date: 2020-09-01 17:30:06
 tags:
-cover: /blog/img/npm.jpg
+cover: /img/npm.jpg
 ---
 
 ### 调研平台：sinopia，Verdaccio 

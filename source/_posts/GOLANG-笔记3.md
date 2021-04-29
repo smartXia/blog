@@ -2,7 +2,7 @@
 layout: golang3-笔记-array
 title: GOLANG-笔记-ArrayMapSlice
 date: 2021年4月26日
-cover: /blog/img/golang.png
+cover: /img/golang.png
 categories:
   - golang
 tags: 
