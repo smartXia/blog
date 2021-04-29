@@ -2,6 +2,7 @@
 title: Git-代码提交规范
 date: 2020-09-02 14:13:27
 tags:
+cover: img/php.jpeg
 ---
 Git commit message 是Git提交的必要信息，message的信息完整度也反映了工程师对于代码提交的重视程度，不清晰的git message信息甚至会让工程师完全回忆不起自己当初做了什么调整，导致后续代码维护成本特别大。因此为了提高线上代码库的管理程度，特此制定GIT commit message规范。
 
