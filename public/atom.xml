@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://smartxia.github.io/blog/"/>
-  <updated>2021-04-29T06:33:17.919Z</updated>
+  <updated>2021-04-29T09:39:43.570Z</updated>
   <id>https://smartxia.github.io/blog/</id>
   
   <author>
@@ -17,11 +17,97 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>GOLANG-笔记5-gin开发规范</title>
+    <link href="https://smartxia.github.io/blog/2021/04/29/GOLANG-%E7%AC%94%E8%AE%B05-gin%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/"/>
+    <id>https://smartxia.github.io/blog/2021/04/29/GOLANG-%E7%AC%94%E8%AE%B05-gin%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/</id>
+    <published>2021-04-29T09:32:51.000Z</published>
+    <updated>2021-04-29T09:39:43.570Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><h2 id="Go语言Web框架基线版本"><a href="#Go语言Web框架基线版本" class="headerlink" title="Go语言Web框架基线版本"></a>Go语言Web框架基线版本</h2><h3 id="一-框架简介"><a href="#一-框架简介" class="headerlink" title="一.框架简介"></a>一.框架简介</h3><p>此web框架已gin为核心，包含了mysq、redis、rabbitmq、log、es等基础组件。<br>此框架内dockerfile和makefile已适配中台的打镜像流程，一般情况下不需要对这两个文件进行修改。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">├── controller &#x2F;&#x2F;控制器</span><br><span class="line">│   └── v1</span><br><span class="line">├── dao &#x2F;&#x2F;dao层</span><br><span class="line">│   ├── mysql</span><br><span class="line">│   └── redis</span><br><span class="line">├── db &#x2F;&#x2F;mysql文件初始化</span><br><span class="line">├── docs &#x2F;&#x2F;swagger 接口文档</span><br><span class="line">├── middleware &#x2F;&#x2F;中间件</span><br><span class="line">├── model &#x2F;&#x2F;model层</span><br><span class="line">│   ├── mapi</span><br><span class="line">│   ├── mdb</span><br><span class="line">│   ├── mmysql</span><br><span class="line">│   └── mparam</span><br><span class="line">├── pconst &#x2F;&#x2F;常量定义</span><br><span class="line">├── route &#x2F;&#x2F;路由层</span><br><span class="line">│   └── v1</span><br><span class="line">├── script &#x2F;&#x2F;脚本层</span><br><span class="line">│   └── logic</span><br><span class="line">├── server &#x2F;&#x2F;服务启动</span><br><span class="line">├── service &#x2F;&#x2F;业务层</span><br><span class="line">├── tgo &#x2F;&#x2F;基础组件</span><br><span class="line">└── util &#x2F;&#x2F;工具包</span><br><span class="line">    ├── curl</span><br><span class="line">    └── ip</span><br></pre></td></tr></table></figure><h3 id="二-框架分层"><a href="#二-框架分层" class="headerlink" title="二.框架分层"></a>二.框架分层</h3><h4 id="2-1-路由层"><a href="#2-1-路由层" class="headerlink" title="2.1.路由层"></a>2.1.路由层</h4><p>框架采用强路由模式，支持路由群组、中间件模式，自带跨域组件并默认开启，路由文件存放在 route 目录下</p><h4 id="2-2-控制器层"><a href="#2-2-控制器层" class="headerlink" title="2.2.控制器层"></a>2.2.控制器层</h4><p>控制器存放在controller目录下，并区分版本，此层仅针对参数进行过滤处理，不处理相关业务。已集成swagger自动生成接口文档</p><h4 id="2-3-业务层"><a href="#2-3-业务层" class="headerlink" title="2.3.业务层"></a>2.3.业务层</h4><p>业务层存放在service目录下，用来处理业务相关的逻辑</p><h4 id="2-4-数据处理层"><a href="#2-4-数据处理层" class="headerlink" title="2.4.数据处理层"></a>2.4.数据处理层</h4><p>业务层存放在dao目录下，并根据下游不同服务放入不同目录下，此层仅处理数据，不处理业务相关逻辑</p><h4 id="2-5-对象层"><a href="#2-5-对象层" class="headerlink" title="2.5.对象层"></a>2.5.对象层</h4><p>对象层存放在mode目录下，并根据对象的不同类型存放下级不同目录</p><h4 id="2-6-中间件层"><a href="#2-6-中间件层" class="headerlink" title="2.6.中间件层"></a>2.6.中间件层</h4><p>中间件层存放在middleware目录下，用以对同一分组或具有相同特征的路由进行全局业务处理</p><h4 id="2-7-脚本层"><a href="#2-7-脚本层" class="headerlink" title="2.7.脚本层"></a>2.7.脚本层</h4><p>脚本层存放在script目录下，用以处理非http类型的业务类型</p><h4 id="2-8-常量层"><a href="#2-8-常量层" class="headerlink" title="2.8.常量层"></a>2.8.常量层</h4><p>常量定义存放在pconst目录下</p><h3 id="三-整体流程"><a href="#三-整体流程" class="headerlink" title="三.整体流程"></a>三.整体流程</h3><p>框架整体请求请求流程为route - middleware - controller - service - dao，控制器、业务、数据处理禁止逆向调用</p><h3 id="四-请求示例"><a href="#四-请求示例" class="headerlink" title="四.请求示例"></a>四.请求示例</h3><p>参考控制器下 log_platform.go 文件</p><h3 id="五-中台服务间调用"><a href="#五-中台服务间调用" class="headerlink" title="五.中台服务间调用"></a>五.中台服务间调用</h3><blockquote><p>gosdk使用和服务间调用有问题和建议可以联系联系基础架构部：张超</p></blockquote><p>中台服务间调用通过<a href="https://gitlab.oneitfarm.com/bifrost/gosdk">gosdk</a>进行调用，gosdk如何使用可以参考服务内的readme文档。 </p><p>为了降低使用成本，我们对gosdk进行了一次封装<a href="https://gitlab.oneitfarm.com/ci123sdk/requester">requester</a>包，并提供了一个案例<a href="https://gitlab.oneitfarm.com/ci123sdk/account">account</a>服务的接口封装。</p><p>【强烈建议】：对子服务（比如A）的调用封装成单独的包，并在gitlab.oneitfarm.com/ci123sdk group下创建项目A，将服务A的接口调用封装。这样其他项目（人）在接入A项目时，不需要再重复封装此部分内容。<br>简单来说就是每个服务在ci123sdk的group下创建项目，后续所有对此服务调用的封装都在此项目中，所有引用此服务的服务或应用，只需要引用此包进行开发，如果支持接口不全就在此项目中完善并打新的tag增加版本。</p><h3 id="六-关于PR"><a href="#六-关于PR" class="headerlink" title="六.关于PR"></a>六.关于PR</h3><p>有任何疑问或者建议，欢迎随时联系基础架构部：陶圣，也欢迎各位提交有价值的PR，也将纳入年终绩效考核一部分</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
+      
+    
+    </summary>
+    
+    
+      <category term="golang" scheme="https://smartxia.github.io/blog/categories/golang/"/>
+    
+    
+      <category term="golang" scheme="https://smartxia.github.io/blog/tags/golang/"/>
+    
+      <category term="farmworker" scheme="https://smartxia.github.io/blog/tags/farmworker/"/>
+    
+      <category term="gin" scheme="https://smartxia.github.io/blog/tags/gin/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>高性能库zap gox</title>
+    <link href="https://smartxia.github.io/blog/2021/04/29/GOLANG-%E7%AC%94%E8%AE%B04-%E9%AB%98%E6%80%A7%E8%83%BD%E5%BA%93zap/"/>
+    <id>https://smartxia.github.io/blog/2021/04/29/GOLANG-%E7%AC%94%E8%AE%B04-%E9%AB%98%E6%80%A7%E8%83%BD%E5%BA%93zap/</id>
+    <published>2021-04-29T09:31:41.000Z</published>
+    <updated>2021-04-29T09:39:32.991Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><h2 id="zap"><a href="#zap" class="headerlink" title="zap"></a>zap</h2><p>高性能日志库分析</p><h4 id="参数配置"><a href="#参数配置" class="headerlink" title="参数配置"></a>参数配置</h4><p>##GOX<br>交叉编译工具可以编译各种的环境<br>go get github.com/mitchellh/gox<br>gox -build-toolchain</p><p>直接运行gox。程序会一口气生成17个文件<br>横跨windows,linux,mac,freebsd,netbsd五大操作系统<br>#####固定平台<br>gox -osarch “windows/amd64 linux/amd64” 或<br>        gox -os “windows linux” -arch amd64</p><h4 id="go-mod-init-命令"><a href="#go-mod-init-命令" class="headerlink" title="go mod init 命令"></a>go mod init 命令</h4><p>go.sum是一个模块版本内容的校验值，用来验证当前缓存的模块。go.sum包含了直接依赖和间接依赖的包的信息，比go.mod要多一些。</p><h4 id="查看依赖包"><a href="#查看依赖包" class="headerlink" title="查看依赖包"></a>查看依赖包</h4><p>go list -m all</p><h4 id="模块配置文本格式化"><a href="#模块配置文本格式化" class="headerlink" title="模块配置文本格式化"></a>模块配置文本格式化</h4><p>go mod edit -fmt</p><h4 id="Windows-下开启-GO111MODULE-的命令为："><a href="#Windows-下开启-GO111MODULE-的命令为：" class="headerlink" title="Windows 下开启 GO111MODULE 的命令为："></a>Windows 下开启 GO111MODULE 的命令为：</h4><p>set GO111MODULE=on 或者 set GO111MODULE=auto</p><h4 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h4><p>GOPROXY=<a href="https://goproxy.cn,direct">https://goproxy.cn,direct</a></p><h4 id="以索引整个-GOPATH"><a href="#以索引整个-GOPATH" class="headerlink" title="以索引整个 GOPATH"></a>以索引整个 GOPATH</h4><p>.Preferences -&gt; Go -&gt; GOPATH，勾选上 Index entire GOPATH</p><hr><h4 id="基础命令关于module的"><a href="#基础命令关于module的" class="headerlink" title="基础命令关于module的"></a>基础命令关于module的</h4><p>go mod download<br>go mod download -json 参数会以JSON的格式打印下载的模块对象<br /><br>go mod tidy<br>go mod tidy -v  可以将执行的信息<br>可以使用go mod tidy命令来清除它<br /><br>go mod vendor<br>go mod vendor -v会将添加到vendor中的模块打印到标准输出。<br>go mod graph<br /><br>打印模块依赖图</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
+      
+    
+    </summary>
+    
+    
+      <category term="golang" scheme="https://smartxia.github.io/blog/categories/golang/"/>
+    
+    
+      <category term="golang" scheme="https://smartxia.github.io/blog/tags/golang/"/>
+    
+      <category term="zap" scheme="https://smartxia.github.io/blog/tags/zap/"/>
+    
+      <category term="gox" scheme="https://smartxia.github.io/blog/tags/gox/"/>
+    
+      <category term="module" scheme="https://smartxia.github.io/blog/tags/module/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>其他-最近太懒了</title>
+    <link href="https://smartxia.github.io/blog/2021/04/29/%E5%85%B6%E4%BB%96-%E6%9C%80%E8%BF%91%E5%A4%AA%E6%87%92%E4%BA%86/"/>
+    <id>https://smartxia.github.io/blog/2021/04/29/%E5%85%B6%E4%BB%96-%E6%9C%80%E8%BF%91%E5%A4%AA%E6%87%92%E4%BA%86/</id>
+    <published>2021-04-29T09:22:49.000Z</published>
+    <updated>2021-04-29T09:28:49.923Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><p> 自定义支持markdown只会让我的VsCode越来越卡</p><p>#<br>技术性不强但是打字还慢无语了，这个打字的东西</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(a)</span><br></pre></td></tr></table></figure> <hr><p><br>强行换行</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
+      
+    
+    </summary>
+    
+    
+    
+      <category term="diary" scheme="https://smartxia.github.io/blog/tags/diary/"/>
+    
+  </entry>
+  
+  <entry>
     <title>GOLANG-笔记-ArrayMapSlice</title>
-    <link href="https://smartxia.github.io/blog/2021/04/26/GOLANG-%E7%AC%94%E8%AE%B03/"/>
-    <id>https://smartxia.github.io/blog/2021/04/26/GOLANG-%E7%AC%94%E8%AE%B03/</id>
-    <published>2021-04-26T03:47:04.546Z</published>
-    <updated>2021-04-29T06:33:17.919Z</updated>
+    <link href="https://smartxia.github.io/blog/2021/04/29/GOLANG-%E7%AC%94%E8%AE%B03-nil-slice-map/"/>
+    <id>https://smartxia.github.io/blog/2021/04/29/GOLANG-%E7%AC%94%E8%AE%B03-nil-slice-map/</id>
+    <published>2021-04-29T09:21:21.301Z</published>
+    <updated>2021-04-29T09:37:05.144Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">### 1. :&#x3D; &#x3D; &#x3D;&#x3D;</span><br><span class="line"></span><br><span class="line">:&#x3D; 给某变量的第一次赋值，初始化</span><br><span class="line"></span><br><span class="line">&#x3D; 变量的非第一次赋值</span><br><span class="line"></span><br><span class="line">&#x3D;&#x3D; 等于操作符</span><br><span class="line"></span><br><span class="line">### 2. go中nil的使用</span><br><span class="line"></span><br><span class="line">指针、切片、映射、通道、函数和接口的零值则是 nil。</span><br><span class="line"></span><br><span class="line">- nil 标识符是不能比较的</span><br><span class="line">- nil 不是关键字或保留字</span><br><span class="line">- nil 没有默认类型</span><br><span class="line">- 不同类型 nil 的指针是一样的</span><br><span class="line">- 不同类型的 nil 是不能比较的</span><br><span class="line">- 两个相同类型的 nil 值也可能无法比较</span><br><span class="line">- nil 是 map、slice、pointer、channel、func、interface 的零值</span><br><span class="line">- 不同类型的 nil 值占用的内存大小可能是不一样的</span><br><span class="line"></span><br><span class="line">### 3.切片 slice</span><br><span class="line"></span><br><span class="line">类似于py或Java的list ,是数组的抽象,支持数组扩容 定义:</span><br><span class="line">slice1 :&#x3D; make([]type, len)</span><br><span class="line"></span><br><span class="line">len 获取长度 cap 获取容量 append(slice1 ,v1,...) copy(new_slice,slice1)</span><br><span class="line"></span><br><span class="line">### 4.集合 map</span><br><span class="line"></span><br><span class="line">map 无序k-v ,快速根据k 找到v,类似于索引,在做循环打印的时候，无法固定返回顺序，因为map 用hash表来实现的</span><br><span class="line"></span><br><span class="line">- 声明变量，默认 map 是 nil var map_val map[key_data_type]value_data_type</span><br><span class="line"></span><br><span class="line">- 使用 make 函数 map_val :&#x3D; make(map[key_data_type]value_data_type)</span><br><span class="line"></span><br><span class="line">### 并发</span><br><span class="line">goroutine </span><br><span class="line">go sync()</span><br><span class="line">### 通道 channel</span><br><span class="line">既然已经有了线程的概念，那么就会存在线程间的同步和通讯问题，Go 使用通道（channel）来实现。</span><br><span class="line"></span><br><span class="line">通道可用于两个 goroutine 之间通过传递一个指定类型的值来同步运行和通讯。使用操作符 &lt;-，符号左边是接收者，右边是发送者。</span><br><span class="line"></span><br><span class="line">使用 make 创建 channel，如下：</span><br><span class="line"></span><br><span class="line">​&#96;&#96;&#96;</span><br><span class="line">ch :&#x3D; make(chan int, 100) &#x2F;&#x2F; make 第二个参数 100 是该通道的缓冲区，是一个可选参数，如果不指定，那么就是无缓冲的通道</span><br><span class="line">ch &lt;- v    &#x2F;&#x2F; 把 v 发送到通道 ch</span><br><span class="line">v :&#x3D; &lt;-ch  &#x2F;&#x2F; 从 ch 接收数据</span><br><span class="line">&#x2F;&#x2F; 并把值赋给 v</span><br><span class="line">​&#96;&#96;&#96;</span><br><span class="line">通道与消息队列是等效的，如果通道缓冲区满，那么再往通道里塞数据，就会阻塞该 goroutine；同样，如果通道缓冲区没有数据了，再次接收通道数据，也会阻塞该 goroutine。</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -47,7 +133,7 @@
     <link href="https://smartxia.github.io/blog/2020/09/02/PHP-%E8%A7%A3%E5%86%B3%E5%BE%AA%E7%8E%AF%E5%86%85%E5%AD%98%E5%8D%A0%E7%94%A8%E6%BA%A2%E5%87%BA-%E7%BC%93%E5%86%B2%E6%9F%A5%E8%AF%A2/"/>
     <id>https://smartxia.github.io/blog/2020/09/02/PHP-%E8%A7%A3%E5%86%B3%E5%BE%AA%E7%8E%AF%E5%86%85%E5%AD%98%E5%8D%A0%E7%94%A8%E6%BA%A2%E5%87%BA-%E7%BC%93%E5%86%B2%E6%9F%A5%E8%AF%A2/</id>
     <published>2020-09-02T06:50:51.000Z</published>
-    <updated>2021-04-29T09:15:32.152Z</updated>
+    <updated>2021-04-29T09:21:21.388Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script>]]></content>
     
@@ -69,7 +155,7 @@
     <link href="https://smartxia.github.io/blog/2020/09/02/PHP-%E6%B7%B1%E6%8B%B7%E8%B4%9D%E6%B5%85%E6%8B%B7%E8%B4%9D/"/>
     <id>https://smartxia.github.io/blog/2020/09/02/PHP-%E6%B7%B1%E6%8B%B7%E8%B4%9D%E6%B5%85%E6%8B%B7%E8%B4%9D/</id>
     <published>2020-09-02T06:50:07.000Z</published>
-    <updated>2021-04-29T09:15:32.152Z</updated>
+    <updated>2021-04-29T09:21:21.375Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script>]]></content>
     
@@ -91,7 +177,7 @@
     <link href="https://smartxia.github.io/blog/2020/09/02/Git-%E4%BB%A3%E7%A0%81%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83/"/>
     <id>https://smartxia.github.io/blog/2020/09/02/Git-%E4%BB%A3%E7%A0%81%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83/</id>
     <published>2020-09-02T06:13:27.000Z</published>
-    <updated>2021-04-29T09:15:35.782Z</updated>
+    <updated>2021-04-29T09:21:21.303Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><p>Git commit message 是Git提交的必要信息，message的信息完整度也反映了工程师对于代码提交的重视程度，不清晰的git message信息甚至会让工程师完全回忆不起自己当初做了什么调整，导致后续代码维护成本特别大。因此为了提高线上代码库的管理程度，特此制定GIT commit message规范。</p><p>一、commit message格式<br>1、Type(必须)<br>用于说明 git commit 的类别，只允许使用下面的标识。<br>feat：新功能（feature）。<br>fix/to：修复bug，可以是QA发现的BUG，也可以是研发自己发现的BUG。<br>fix：产⽣diff并自动修复此问题。适合于一次提交直接修复问题<br>to：只产⽣diff不自动修复此问题。适合于多次提交。最终修复问题提交时使用fix<br>docs：文档（documentation）。<br>style：格式（不影响代码运行的变动）。<br>refactor：重构（即不是新增功能，也不是修改bug的代码变动）。<br>perf：优化相关，比如提升性能、体验。<br>test：增加测试。<br>chore：构建过程或辅助工具的变动。<br>revert：回滚到上一个版本。<br>merge：代码合并。<br>sync：同步主线或分⽀的Bug</p><p>2、scope(可选)<br>scope用于说明 commit 影响的范围，比如数据层、控制层、视图层等等，视项目不同而不同。<br>例如在Angular，可以是location，browser，compile，compile，rootScope， ngHref，ngClick，ngView等。<br>如果你的修改影响了不止一个scope，你可以使用*代替。</p><p>3、subject(必须)<br>subject是commit目的的简短描述，不超过50个字符。<br>1.建议使用中文。<br>2.结尾不加句号或其他标点符号。<br>根据以上规范 git commit message 将是如下的格式：<br>fix(DAO): 用户查询缺少username属性<br>feat(Controller): 用户查询接口开发</p><p>二、规范的好处<br>我们这样规范git commit到底有哪些好处呢？<br>1.便于程序员对提交历史进行追溯，了解发⽣了什么情况。<br>2.一旦约束了commit message，意味着我们将慎重的进行每一次提交，不能再一股脑的把各种各样的改动都放在一个git commit里面，这样一来整个代码改动的历史也将更加清晰。<br>3.格式化的commit message才可以用于自动化输出Change log。</p><p>三、标准执行监管<br>为了更好的执行标准，公司针对git提交会进行相关监管功能的研发，当工程师提了不合规的commit，会收到相关的邮件警告。</p>]]></content>
     
@@ -113,7 +199,7 @@
     <link href="https://smartxia.github.io/blog/2020/09/01/%E5%89%8D%E7%AB%AF-npm%E7%A7%81%E6%9C%89%E6%BA%90%E5%8A%A0%E8%BD%BD%E5%B9%B3%E5%8F%B0/"/>
     <id>https://smartxia.github.io/blog/2020/09/01/%E5%89%8D%E7%AB%AF-npm%E7%A7%81%E6%9C%89%E6%BA%90%E5%8A%A0%E8%BD%BD%E5%B9%B3%E5%8F%B0/</id>
     <published>2020-09-01T09:30:06.000Z</published>
-    <updated>2021-04-29T06:32:47.989Z</updated>
+    <updated>2021-04-29T09:21:21.422Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><h3 id="调研平台：sinopia，Verdaccio"><a href="#调研平台：sinopia，Verdaccio" class="headerlink" title="调研平台：sinopia，Verdaccio"></a>调研平台：sinopia，Verdaccio</h3><h4 id="Verdaccio"><a href="#Verdaccio" class="headerlink" title="Verdaccio"></a>Verdaccio</h4><h5 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h5><p><a href="https://verdaccio.org/docs/en/configuration">https://verdaccio.org/docs/en/configuration</a></p><p>搭建：</p><h5 id="认证方式"><a href="#认证方式" class="headerlink" title="认证方式"></a>认证方式</h5><p>身份验证与您正在使用的auth <a href="https://verdaccio.org/docs/en/plugins">插件相关</a>。软件包限制也由<a href="https://verdaccio.org/docs/en/packages">Package Access</a>处理。</p><p>客户端：基于npm客户端登录后会生成一个配置令牌，在.npmrc中</p><p><a href="https://docs.npmjs.com/files/npmrc">https://docs.npmjs.com/files/npmrc</a></p><p>且允许匿名发布包</p><p>包发布的时候允许阻止访问和下载</p><p>服务端关于组的验证:</p><p>​    access: $all-&gt;<br>​    publish: $all<br>​    proxy: npmjs</p><p><img src= "/blog/img/loading.gif" data-lazy-src="//s2-cdn.oneitfarm.com/186bdf368bd54a57b12eb71ba2e10636.png" alt="image-20200901175328057"></p><p> 不同的包读取权限限制：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">packages:</span><br><span class="line">  <span class="string">&#x27;jquery&#x27;</span>:</span><br><span class="line">    access: $all</span><br><span class="line">    publish: $all</span><br><span class="line">  <span class="string">&#x27;my-company-*&#x27;</span>:</span><br><span class="line">    access: $all</span><br><span class="line">    publish: $authenticated</span><br><span class="line">  <span class="string">&#x27;@my-local-scope/*&#x27;</span>:</span><br><span class="line">    access: $all</span><br><span class="line">    publish: $authenticated</span><br><span class="line">  <span class="string">&#x27;**&#x27;</span>:</span><br><span class="line">    access: $all</span><br><span class="line">    publish: $authenticated</span><br><span class="line">    proxy: npmjs</span><br></pre></td></tr></table></figure><p>组 定义：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#39;company-*&#39;:</span><br><span class="line">  access: admin internal</span><br><span class="line">  publish: admin</span><br><span class="line">  proxy: server1</span><br><span class="line">&#39;supersecret-*&#39;:</span><br><span class="line">  access: secret super-secret-area ultra-secret-area</span><br><span class="line">  publish: secret ultra-secret-area</span><br><span class="line">  proxy: server1</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -135,7 +221,7 @@
     <link href="https://smartxia.github.io/blog/2020/09/01/%E5%85%B6%E4%BB%96-CRLF%E3%80%81CR%E3%80%81LF%E8%AF%A6%E8%A7%A3/"/>
     <id>https://smartxia.github.io/blog/2020/09/01/%E5%85%B6%E4%BB%96-CRLF%E3%80%81CR%E3%80%81LF%E8%AF%A6%E8%A7%A3/</id>
     <published>2020-09-01T06:42:31.000Z</published>
-    <updated>2021-04-26T03:47:04.586Z</updated>
+    <updated>2021-04-29T09:21:21.410Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><p>很长一段时间里，对于CRLF、CR、LF的理解仅限于不同操作系统下对换行符的定义。所谓知其然需知其所以然，从学习中找到乐趣，对知识的记忆才会更加深刻。</p><p>名词解释<br>CR：Carriage Return，对应ASCII中转义字符\r，表示回车<br>LF：Linefeed，对应ASCII中转义字符\n，表示换行<br>CRLF：Carriage Return &amp; Linefeed，\r\n，表示回车并换行<br>众所周知，Windows操作系统采用两个字符来进行换行，即CRLF；Unix/Linux/Mac OS X操作系统采用单个字符LF来进行换行；另外，MacIntosh操作系统（即早期的Mac操作系统）采用单个字符CR来进行换行。</p><p>野史<br>老式机械打字机（来源：视觉中国）<br>据野史记载，在很久以前的机械打字机时代，CR和LF分别具有不同的作用：LF会将打印纸张上移一行位置，但是保持当前打字的水平位置不变；CR则会将“Carriage”（打字机上的滚动托架）滚回到打印纸张的最左侧，但是保持当前打字的垂直位置不变，即还是在同一行。</p><p>当CR和LF组合使用时，则会将打印纸张上移一行，且下一个打字位置将回到该行的最左侧，也就是我们今天所理解的换行操作。</p><p>随着时间的推移，机械打字机渐渐地退出了历史舞台，当初的纸张变成了今天的显示器，打字机的按键也演变为了如今的键盘。在操作系统出现的年代，受限于内存和软盘空间的不足，一些操作系统的设计者决定采用单个字符来表示换行符，如Unix的LF、MacIntosh的CR。他们的意图都是为了进行换行操作，只是当初并没有一个国际标准（或者其他原因，鬼知道），所以才有这样字符上的不同。</p><p>结论<br>许多现代的文本编辑器和命令行工具都提供了可选择的换行符配置，方便用户按照自己的意愿来改变换行符的表现形式，所以我们只需要知道CRLF、CR、LF的作用即可。</p><p>参考文献<br><a href="http://en.wikipedia.org/wiki/Newline">http://en.wikipedia.org/wiki/Newline</a><br><a href="https://en.wikipedia.org/wiki/Control_character">https://en.wikipedia.org/wiki/Control_character</a><br><a href="https://stackoverflow.com/questions/1552749/difference-between-cr-lf-lf-and-cr-line-break-types">https://stackoverflow.com/questions/1552749/difference-between-cr-lf-lf-and-cr-line-break-types</a></p><p>作者：JSoon<br>链接：<a href="https://www.jianshu.com/p/b03ad01acd69">https://www.jianshu.com/p/b03ad01acd69</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>]]></content>
     
@@ -157,7 +243,7 @@
     <link href="https://smartxia.github.io/blog/2020/08/31/%E5%85%B3%E4%BA%8Eblog%E6%9B%B4%E6%96%B0%E5%91%A8%E6%9C%9F/"/>
     <id>https://smartxia.github.io/blog/2020/08/31/%E5%85%B3%E4%BA%8Eblog%E6%9B%B4%E6%96%B0%E5%91%A8%E6%9C%9F/</id>
     <published>2020-08-31T02:22:54.000Z</published>
-    <updated>2021-04-26T03:47:04.583Z</updated>
+    <updated>2021-04-29T09:21:21.407Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><p>每周 三篇基础知识文档编写</p><p>每两周一次总结工作情况</p><p>每月一次的软件使用教程记录</p>]]></content>
     
@@ -179,7 +265,7 @@
     <link href="https://smartxia.github.io/blog/2020/08/28/PHP-%E8%BE%85%E5%8A%A9%E5%87%BD%E6%95%B0/"/>
     <id>https://smartxia.github.io/blog/2020/08/28/PHP-%E8%BE%85%E5%8A%A9%E5%87%BD%E6%95%B0/</id>
     <published>2020-08-28T05:33:20.000Z</published>
-    <updated>2021-04-29T09:15:32.134Z</updated>
+    <updated>2021-04-29T09:21:21.390Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script>]]></content>
     
@@ -201,7 +287,7 @@
     <link href="https://smartxia.github.io/blog/2020/08/28/PHP-%E5%8C%BF%E5%90%8D%E7%B1%BB%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0%EF%BC%88%E9%97%AD%E5%8C%85%EF%BC%89/"/>
     <id>https://smartxia.github.io/blog/2020/08/28/PHP-%E5%8C%BF%E5%90%8D%E7%B1%BB%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0%EF%BC%88%E9%97%AD%E5%8C%85%EF%BC%89/</id>
     <published>2020-08-28T03:31:08.000Z</published>
-    <updated>2021-04-29T09:15:32.134Z</updated>
+    <updated>2021-04-29T09:21:21.366Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><h4 id="1-写一个匿名函数"><a href="#1-写一个匿名函数" class="headerlink" title="1.写一个匿名函数"></a>1.写一个匿名函数</h4><blockquote><p>类中 的写法</p></blockquote><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//第一种写法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">qq</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$result</span> = array_reduce([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">1</span>], <span class="function"><span class="keyword">function</span> (<span class="params"><span class="variable">$result</span>, <span class="variable">$value</span></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> array_merge(<span class="variable">$result</span>, array_values(<span class="variable">$value</span>));</span><br><span class="line">        &#125;, <span class="keyword">array</span>());</span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$result</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//第二种写法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">qq2</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//将匿名函数交个一个变量</span></span><br><span class="line">        <span class="variable">$a</span> = <span class="function"><span class="keyword">function</span> (<span class="params"><span class="variable">$result</span>, <span class="variable">$value</span></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> array_merge(<span class="variable">$result</span>, array_values(<span class="variable">$value</span>));</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="variable">$result</span> = array_reduce([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">1</span>], <span class="variable">$a</span>, <span class="keyword">array</span>());</span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$result</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><h4 id="2-理解一个闭包（匿名函数）"><a href="#2-理解一个闭包（匿名函数）" class="headerlink" title="2.理解一个闭包（匿名函数）"></a>2.理解一个闭包（匿名函数）</h4><p>目前php用到闭包的数组函数包括：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">array_map — 为数组的每个元素应用回调函数</span><br><span class="line">array_walk — 使用用户自定义函数对数组中的每个元素做回调处理</span><br><span class="line">array_reduce — 用回调函数迭代地将数组简化为单一的值</span><br><span class="line">array_filter — 用回调函数过滤数组中的单元</span><br><span class="line">该函数把输入数组中的每个键值传给回调函数。如果回调函数返回 true，则把输入数组中的当前键值返回结果数组中。数组键名保持不变。</span><br><span class="line">array_intersect_uassoc — 带索引检查计算数组的交集，用回调函数比较索引</span><br><span class="line">array_intersect_ukey — 用回调函数比较键名来计算数组的交集</span><br><span class="line">array_reduce — 用回调函数迭代地将数组简化为单一的值</span><br><span class="line">拼接成类似 (1,2,3,4,5) </span><br><span class="line"></span><br><span class="line">array_walk_recursive — 对数组中的每个成员递归地应用用户函数</span><br><span class="line">----等等</span><br><span class="line">常用的就是: array_map array_walk</span><br><span class="line"></span><br></pre></td></tr></table></figure><h4 id="3-临时总结"><a href="#3-临时总结" class="headerlink" title="3.临时总结"></a>3.临时总结</h4><p><strong>异同点</strong><br> array_filter() 重点在于过滤（而不是新增）某个元素，当你处理到一个元素时，返回过滤后的数组<br> array_map() 重点在于遍历一个数组或多个数组的元素，返回一个新的数组<br> array_walk() 重点在于遍历数组进行某种操作</p><p> array_filter() 和 array_walk()对一个数组进行操作，数组参数在前，函数参数在后<br> array_map() 可以处理多个数组，因此函数参数在前，数组参数在后，可以根据实际情况放入多个数组参数</p>]]></content>
     
@@ -231,7 +317,7 @@
     <link href="https://smartxia.github.io/blog/2020/08/28/PHP-%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%BC%8F/"/>
     <id>https://smartxia.github.io/blog/2020/08/28/PHP-%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%BC%8F/</id>
     <published>2020-08-28T03:31:08.000Z</published>
-    <updated>2021-04-29T06:35:10.368Z</updated>
+    <updated>2021-04-29T09:21:21.394Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><p>　　<strong>1.cgi全称“通用网关接口”(Common Gateway Interface)， 它可以让一个客户端，从浏览器向Web服务器上的程序请求数据，是客户端和程序之间传输数据的一种标准，另外CGI独立于任何语言，所以可以用任何一种语言编写，只要这种语言具有标准输入、输出和环境变量。如php,perl,tcl等。CGI针对每个用户请求都要开单独的子进程去维护，执行结束处理掉这个进程。典型的fork-and-execute方式</strong></p><p>　　<strong>2.fastcgi，根据1中cgi的特性，可以知道消耗很大，如果很多用户请求，则会申请很多个子进程。。这时候出现了FastCGI。FastCGI 像是一个常驻 (long-live) 型的 CGI，它可以一直执行着，只要激活后，不会每次都要花费时间去 fork 一次 (这是 CGI 最为人诟病的 fork-and-execute 模式)。这个是当下用的最多的了。。linux+nginx+php+mysql</strong></p><p>　FastCGI的工作原理是：</p><p><em>(1)、Web Server启动时载入FastCGI进程管理器【PHP的FastCGI进程管理器是PHP-FPM(php-FastCGI Process Manager)】（nginx);</em><br><em>(2)、FastCGI进程管理器自身初始化，启动多个CGI解释器进程 (在任务管理器中可见多个php-cgi.exe)并等待来自WebServer的连接。</em><br><em>(3)、当客户端请求到达Web Server时，FastCGI进程管理器选择并连接到一个CGI解释器。Web server将CGI环境变量和标准输入发送到FastCGI子进程php-cgi。</em><br><em>(4)、FastCGI子进程完成处理后将标准输出和错误信息从同一连接返回Web Server。当FastCGI子进程关闭连接时，请求便告处理完成。FastCGI子进程接着等待并处理来自FastCGI进程管理器（运行在 WebServer中）的下一个连接。在正常的CGI模式中，php-cgi或 .exe在此便退出了。</em><br><em>在CGI模式中，你可以想象 CGI通常有多慢。每一个Web请求PHP都必须重新解析php.ini、重新载入全部dll扩展并重初始化全部数据结构。使用FastCGI，所有这些都只在进程启动时发生一次。一个额外的好处是，持续数据库连接(Persistent database connection)可以工作。</em><br>　　<em>3.module形式一般用于apache，模块模式是以mod_php5模块的形式集成，此时mod_php5模块的作用是接收Apache传递过来的PHP文件请求，并处理这些请求，然后将处理后的结果返回给Apache。</em><br>　　<em>4.cli模式。命令行执行php，一般不用。我们在linux下经常使用 “php -m”查找PHP安装了那些扩展就是PHP命令行运行模式；也可以直接命令行执行php xxx.php</em></p><h4 id="1-php一共分为五大运行模式：包括ducgi-、fast-cgi、cli、isapi、apache-模块的-DLLCGI"><a href="#1-php一共分为五大运行模式：包括ducgi-、fast-cgi、cli、isapi、apache-模块的-DLLCGI" class="headerlink" title="1.php一共分为五大运行模式：包括ducgi 、fast-cgi、cli、isapi、apache 模块的 DLLCGI"></a>1.php一共分为五大运行模式：包括ducgi 、fast-cgi、cli、isapi、apache 模块的 DLLCGI</h4><p>  关于PHP目前比较常见的五大运行模式：</p><p>1）CGI（通用网关接口/ Common Gateway Interface）<br>2）FastCGI（常驻型CGI / Long-Live CGI）<br>3）CLI（命令行运行 / Command Line Interface）<br>4）LoadModule（Apache独有）：<br>在Apache配置文件httpd.conf里，通常加的LoadModule php7_module “D:/…/php71/php7apache2_4.dll”起到的作用就是这个<br>5）ISAPI（Internet Server Application Program Interface）<br>IIS独有：<br>备注：在PHP5.3以后，PHP不再有ISAPI模式，安装后也不再有php5isapi.dll这个文件。要在IIS6上使用高版本PHP，必须安装FastCGI 扩展，然后使IIS6支持FastCGI。  </p><h3 id="2、php-cli-与php-fpm（fastcgi-process-manager）"><a href="#2、php-cli-与php-fpm（fastcgi-process-manager）" class="headerlink" title="2、php-cli 与php-fpm（fastcgi process manager）"></a>2、php-cli 与php-fpm（fastcgi process manager）</h3><p><img src= "/blog/img/loading.gif" data-lazy-src="https://img-blog.csdnimg.cn/20190420173441325.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lpbnFpYW45OTk=,size_16,color_FFFFFF,t_70" alt="[**CGI、FastCGI和PHP-FPM关系图解**](https://www.awaimai.com/371.html)"></p><p>cli 模式就是常见的命令使用的php命令，其实他也可以提供http请求服务，内置了http服务器<br>fpm 是一个多进程架构的FastCgi 服务，内置PHP解释器进程常驻后台，自带进程管理支持进程池配置和配置Nginx使用</p><p>cli 和fpm 是两个运行方式 </p>]]></content>
     
@@ -261,7 +347,7 @@
     <link href="https://smartxia.github.io/blog/2020/08/28/PHP-%E7%90%86%E8%A7%A3php%E7%9A%84Generator,yield,Iterator%E6%8E%A5%E5%8F%A3/"/>
     <id>https://smartxia.github.io/blog/2020/08/28/PHP-%E7%90%86%E8%A7%A3php%E7%9A%84Generator,yield,Iterator%E6%8E%A5%E5%8F%A3/</id>
     <published>2020-08-28T03:21:32.000Z</published>
-    <updated>2021-04-29T09:15:32.134Z</updated>
+    <updated>2021-04-29T09:21:21.382Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><blockquote><p>等待更新<br>yield<br>解决读取大文</p></blockquote>]]></content>
     
@@ -291,7 +377,7 @@
     <link href="https://smartxia.github.io/blog/2020/08/26/%E5%85%B6%E4%BB%96-Server%E9%85%B1%E6%89%93%E5%8D%A1%E7%BD%91%E6%98%93%E4%BA%91%20%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
     <id>https://smartxia.github.io/blog/2020/08/26/%E5%85%B6%E4%BB%96-Server%E9%85%B1%E6%89%93%E5%8D%A1%E7%BD%91%E6%98%93%E4%BA%91%20%E5%B0%8F%E6%8A%80%E5%B7%A7/</id>
     <published>2020-08-26T01:57:49.000Z</published>
-    <updated>2021-04-29T06:32:44.168Z</updated>
+    <updated>2021-04-29T09:21:21.414Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><blockquote><p>等待更新</p></blockquote>]]></content>
     
@@ -317,7 +403,7 @@
     <link href="https://smartxia.github.io/blog/2020/08/20/Docker-%E5%88%B6%E4%BD%9C-1/"/>
     <id>https://smartxia.github.io/blog/2020/08/20/Docker-%E5%88%B6%E4%BD%9C-1/</id>
     <published>2020-08-20T09:18:43.000Z</published>
-    <updated>2021-04-26T03:47:04.541Z</updated>
+    <updated>2021-04-29T09:21:21.252Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><h4 id="注册登录"><a href="#注册登录" class="headerlink" title="注册登录"></a>注册登录</h4><p><a href="https://hub.docker.com/">https://hub.docker.com/</a></p><h4 id="Docker快捷键"><a href="#Docker快捷键" class="headerlink" title="Docker快捷键"></a>Docker快捷键</h4><blockquote><p>常用： start restart stop  images ps-a</p></blockquote><h5 id="带有参数的使用"><a href="#带有参数的使用" class="headerlink" title="带有参数的使用"></a>带有参数的使用</h5><p>docker ps -a ：查看最近使用的容器id</p><p>docker rm 容器id:删除某个容器</p><p>docker images</p><p>docker rmi 镜像id:删除某个镜像</p><p>docker run :</p><p>docker run -d -p 9200:9200 -p 5601:5601 nshou/elasticsearch-kibana</p><blockquote><p>-d 后台运行，-p 内部端口/宿主机端口 容器id</p></blockquote><p>docker exec -it /bash :进入容器</p><p>docker login -u xx -p xxx：登录</p><h4 id="配置加速源"><a href="#配置加速源" class="headerlink" title="配置加速源"></a>配置加速源</h4><p>1.阿里云：百度如何通过阿里云加速docker拉取和推送速度</p><p>2.DaoCloud ：大公司，国内的。网站：<a href="https://www.daocloud.io/mirror">https://www.daocloud.io/mirror</a></p><blockquote><p>加速url</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Linux:curl -sSL https:&#x2F;&#x2F;get.daocloud.io&#x2F;daotools&#x2F;set_mirror.sh | sh -s http:&#x2F;&#x2F;f1361db2.m.daocloud.io</span><br></pre></td></tr></table></figure><p>原理：编辑   /etc/docker/daemon.json  这个文件夹</p>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;registry-mirrors&quot;: [&quot;http:&#x2F;&#x2F;f1361db2.m.daocloud.io&quot;,&quot;https:&#x2F;&#x2F;vbw6t0eb.mirror.aliyuncs.com&quot;]&#125;</span><br></pre></td></tr></table></figure><h4 id="查看当前docker配置文件"><a href="#查看当前docker配置文件" class="headerlink" title="查看当前docker配置文件"></a>查看当前docker配置文件</h4><p>docker info :可以查看是否配置成功加速 版本信息等各种信息</p><h4 id="打包镜像源和推送到docker-io"><a href="#打包镜像源和推送到docker-io" class="headerlink" title="打包镜像源和推送到docker.io"></a>打包镜像源和推送到docker.io</h4><p>1.docker pull xxx镜像:tag</p><p>2.docker images 查看镜像</p><p>3.docker run -d -p 8080:8081 xxx镜像:version</p><p>4.docker ps -a 查看是不是启动了，然后stop start restart 找找感觉</p><p>5.docker exec -it 镜像id bash :进入镜像进行修改：拉代码，查bug ,增加mysql实例等</p><p>6.docker commit -m “php71-daemon:xhprof-graphviz” -a “some” f69187b4375e “18260356308/php71-daemon:xhprof”</p><p>​    docker commit -m “提交log” -a “作者”  容器id “docker账户名/自定义镜像名：tag” 就会制作成一个新的image了</p><p>7.执行docker push xxx镜像的id：</p><blockquote><p>tips:</p><p>前提是得登录，还有  注意一个问题,给自己镜像命名的时候格式应该是: docker注册用户名/镜像名,比如我的docker用户名为 test123,那么我的镜像tag就为 test123/whalesay,不然是push不上去的</p></blockquote>]]></content>
     
@@ -343,7 +429,7 @@
     <link href="https://smartxia.github.io/blog/2020/08/20/PHP-xhprof-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
     <id>https://smartxia.github.io/blog/2020/08/20/PHP-xhprof-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</id>
     <published>2020-08-20T09:16:14.000Z</published>
-    <updated>2021-04-29T06:35:33.831Z</updated>
+    <updated>2021-04-29T09:21:21.363Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><hr><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><hr><h3 id="嵌入代码"><a href="#嵌入代码" class="headerlink" title="嵌入代码"></a>嵌入代码</h3><hr><h3 id="查看分析报告"><a href="#查看分析报告" class="headerlink" title="查看分析报告"></a>查看分析报告</h3><hr><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><hr><h3 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h3><p>Function Name：方法名称。</p><p>Calls：方法被调用的次数。</p><p>Calls%：方法调用次数在同级方法总数调用次数中所占的百分比。</p><p>Incl.Wall Time(microsec)：方法执行花费的时间，包括子方法的执行时间。（单位：微秒）</p><p>IWall%：方法执行花费的时间百分比。</p><p>Excl. Wall Time(microsec)：方法本身执行花费的时间，不包括子方法的执行时间。（单位：微秒）</p><p>EWall%：方法本身执行花费的时间百分比。</p><p>Incl. CPU(microsecs)：方法执行花费的CPU时间，包括子方法的执行时间。（单位：微秒）</p><p>ICpu%：方法执行花费的CPU时间百分比。</p><p>Excl. CPU(microsec)：方法本身执行花费的CPU时间，不包括子方法的执行时间。（单位：微秒）</p><p>ECPU%：方法本身执行花费的CPU时间百分比。</p><p>Incl.MemUse(bytes)：方法执行占用的内存，包括子方法执行占用的内存。（单位：字节）</p><p>IMemUse%：方法执行占用的内存百分比。</p><p>Excl.MemUse(bytes)：方法本身执行占用的内存，不包括子方法执行占用的内存。（单位：字节）</p><p>EMemUse%：方法本身执行占用的内存百分比。</p><p>Incl.PeakMemUse(bytes)：Incl.MemUse峰值。（单位：字节）</p><p>IPeakMemUse%：Incl.MemUse峰值百分比。</p><p>Excl.PeakMemUse(bytes)：Excl.MemUse峰值。单位：（字节）</p><p>EPeakMemUse%：Excl.MemUse峰值百分比。</p>]]></content>
     
@@ -369,7 +455,7 @@
     <link href="https://smartxia.github.io/blog/2020/06/29/GOLANG-%E7%AC%94%E8%AE%B02-ArrayMapSlice/"/>
     <id>https://smartxia.github.io/blog/2020/06/29/GOLANG-%E7%AC%94%E8%AE%B02-ArrayMapSlice/</id>
     <published>2020-06-29T11:17:32.000Z</published>
-    <updated>2021-04-29T06:33:14.220Z</updated>
+    <updated>2021-04-29T09:21:21.286Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><p>Array(数组)<br>内部机制<br>在 Go 语言中数组是固定长度的数据类型，它包含相同类型的连续的元素，这些元素可以是内建类型，像数字和字符串，也可以是结构类型，元素可以通过唯一的索引值访问，从 0 开始。</p><p>数组是很有价值的数据结构，因为它的内存分配是连续的，内存连续意味着可是让它在 CPU 缓存中待更久，所以迭代数组和移动元素都会非常迅速。</p><p>总结<br>数组是 slice 和 map 的底层结构。<br>slice 是 Go 里面惯用的集合数据的方法，map 则是用来存储键值对。<br>内建函数 make 用来创建 slice 和 map，并且为它们指定长度和容量等等。slice 和 map 字面值也可以做同样的事。<br>slice 有容量的约束，不过可以通过内建函数 append 来增加元素。<br>map 没有容量一说，所以也没有任何增长限制。<br>内建函数 len 可以用来获得 slice 和 map 的长度。<br>内建函数 cap 只能作用在 slice 上。<br>可以通过组合方式来创建多维数组和 slice。map 的值可以是 slice 或者另一个 map。slice 不能作为 map 的键。<br>在函数之间传递 slice 和 map 是相当廉价的，因为他们不会传递底层数组的拷贝。</p>]]></content>
     
@@ -395,7 +481,7 @@
     <link href="https://smartxia.github.io/blog/2020/06/23/PHP-SPL(%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84)/"/>
     <id>https://smartxia.github.io/blog/2020/06/23/PHP-SPL(%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84)/</id>
     <published>2020-06-23T10:04:39.000Z</published>
-    <updated>2021-04-29T06:35:14.462Z</updated>
+    <updated>2021-04-29T09:21:21.332Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><blockquote><p>php SPL四种常用的数据结构<br>1.栈【先进后出】</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;span style&#x3D;&quot;font-size:18px;&quot;&gt;$stack &#x3D; new SplStack();</span><br><span class="line">$stack-&gt;push(&#39;data1&#39;);</span><br><span class="line">$stack-&gt;push(&#39;data2&#39;);</span><br><span class="line">$stack-&gt;push(&#39;data3&#39;);</span><br><span class="line">echo $stack-&gt;pop();</span><br><span class="line"> </span><br><span class="line">&#x2F;&#x2F;输出结果为</span><br><span class="line">&#x2F;&#x2F;data3&lt;&#x2F;span&gt;&lt;span style&#x3D;&quot;font-size:24px;font-weight: bold;&quot;&gt;</span><br><span class="line">&lt;&#x2F;span&gt;</span><br></pre></td></tr></table></figure><p>2.队列【先进先出 后进后出】</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;span style&#x3D;&quot;font-size:18px;&quot;&gt;$queue &#x3D; new SplQueue();</span><br><span class="line">$queue-&gt;enqueue(&quot;data1&quot;);</span><br><span class="line">$queue-&gt;enqueue(&quot;data2&quot;);</span><br><span class="line">$queue-&gt;enqueue(&quot;data3&quot;);</span><br><span class="line">echo $queue-&gt;dequeue();</span><br><span class="line">&#x2F;&#x2F;输出结果为</span><br><span class="line">&#x2F;&#x2F;data1&lt;&#x2F;span&gt;</span><br></pre></td></tr></table></figure><p>3.堆</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;span style&#x3D;&quot;font-size:18px;&quot;&gt;$heap &#x3D; new SplMinHeap();</span><br><span class="line">$heap-&gt;insert(&quot;data1&quot;);</span><br><span class="line">$heap-&gt;insert(&quot;data2&quot;);</span><br><span class="line">echo $heap-&gt;extract();</span><br><span class="line">&#x2F;&#x2F;输出结果为</span><br><span class="line">&#x2F;&#x2F;data1&lt;&#x2F;span&gt;</span><br></pre></td></tr></table></figure><p>4.固定尺寸数组</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;span style&#x3D;&quot;font-size:18px;&quot;&gt;$array &#x3D; new SplFixedArray(5);</span><br><span class="line">$array[0]&#x3D;1;</span><br><span class="line">$array[3]&#x3D;3;</span><br><span class="line">$array[2]&#x3D;2;</span><br><span class="line">var_dump($array);</span><br><span class="line">&#x2F;&#x2F;输出结果为</span><br><span class="line">&#x2F;&#x2F; object(SplFixedArray)[1]</span><br><span class="line">&#x2F;&#x2F; public 0 &#x3D;&gt; int 1</span><br><span class="line">&#x2F;&#x2F; public 1 &#x3D;&gt; null</span><br><span class="line">&#x2F;&#x2F; public 2 &#x3D;&gt; int 2</span><br><span class="line">&#x2F;&#x2F; public 3 &#x3D;&gt; int 3</span><br></pre></td></tr></table></figure><p>————————————————<br>推荐学习：<a href="http://www.imooc.com/video/4849">http://www.imooc.com/video/4849</a><br>原文链接：<a href="https://blog.csdn.net/zhengwish/article/details/51742264">https://blog.csdn.net/zhengwish/article/details/51742264</a></p>]]></content>
     
@@ -423,7 +509,7 @@
     <link href="https://smartxia.github.io/blog/2020/06/23/PHP-Use-%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/"/>
     <id>https://smartxia.github.io/blog/2020/06/23/PHP-Use-%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/</id>
     <published>2020-06-23T10:04:39.000Z</published>
-    <updated>2021-04-29T06:35:21.691Z</updated>
+    <updated>2021-04-29T09:21:21.336Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><blockquote><p>php SPL四种常用的数据结构<br>1.栈【先进后出】PHP-Use-使用场景</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;span style&#x3D;&quot;font-size:18px;&quot;&gt;$stack &#x3D; new SplStack();</span><br><span class="line">$stack-&gt;push(&#39;data1&#39;);</span><br><span class="line">$stack-&gt;push(&#39;data2&#39;);</span><br><span class="line">$stack-&gt;push(&#39;data3&#39;);</span><br><span class="line">echo $stack-&gt;pop();</span><br><span class="line"> </span><br><span class="line">&#x2F;&#x2F;输出结果为</span><br><span class="line">&#x2F;&#x2F;data3&lt;&#x2F;span&gt;&lt;span style&#x3D;&quot;font-size:24px;font-weight: bold;&quot;&gt;</span><br><span class="line">&lt;&#x2F;span&gt;</span><br></pre></td></tr></table></figure><p>2.队列【先进先出 后进后出】</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;span style&#x3D;&quot;font-size:18px;&quot;&gt;$queue &#x3D; new SplQueue();</span><br><span class="line">$queue-&gt;enqueue(&quot;data1&quot;);</span><br><span class="line">$queue-&gt;enqueue(&quot;data2&quot;);</span><br><span class="line">$queue-&gt;enqueue(&quot;data3&quot;);</span><br><span class="line">echo $queue-&gt;dequeue();</span><br><span class="line">&#x2F;&#x2F;输出结果为</span><br><span class="line">&#x2F;&#x2F;data1&lt;&#x2F;span&gt;</span><br></pre></td></tr></table></figure><p>3.堆</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;span style&#x3D;&quot;font-size:18px;&quot;&gt;$heap &#x3D; new SplMinHeap();</span><br><span class="line">$heap-&gt;insert(&quot;data1&quot;);</span><br><span class="line">$heap-&gt;insert(&quot;data2&quot;);</span><br><span class="line">echo $heap-&gt;extract();</span><br><span class="line">&#x2F;&#x2F;输出结果为</span><br><span class="line">&#x2F;&#x2F;data1&lt;&#x2F;span&gt;</span><br></pre></td></tr></table></figure><p>4.固定尺寸数组</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;span style&#x3D;&quot;font-size:18px;&quot;&gt;$array &#x3D; new SplFixedArray(5);</span><br><span class="line">$array[0]&#x3D;1;</span><br><span class="line">$array[3]&#x3D;3;</span><br><span class="line">$array[2]&#x3D;2;</span><br><span class="line">var_dump($array);</span><br><span class="line">&#x2F;&#x2F;输出结果为</span><br><span class="line">&#x2F;&#x2F; object(SplFixedArray)[1]</span><br><span class="line">&#x2F;&#x2F; public 0 &#x3D;&gt; int 1</span><br><span class="line">&#x2F;&#x2F; public 1 &#x3D;&gt; null</span><br><span class="line">&#x2F;&#x2F; public 2 &#x3D;&gt; int 2</span><br><span class="line">&#x2F;&#x2F; public 3 &#x3D;&gt; int 3</span><br></pre></td></tr></table></figure><p>————————————————<br>推荐学习：<a href="http://www.imooc.com/video/4849">http://www.imooc.com/video/4849</a><br>原文链接：<a href="https://blog.csdn.net/zhengwish/article/details/51742264">https://blog.csdn.net/zhengwish/article/details/51742264</a></p>]]></content>
     
@@ -443,88 +529,6 @@
       <category term="PHP" scheme="https://smartxia.github.io/blog/tags/PHP/"/>
     
       <category term="数据结构" scheme="https://smartxia.github.io/blog/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PHP-use</title>
-    <link href="https://smartxia.github.io/blog/2020/06/23/PHP-use/"/>
-    <id>https://smartxia.github.io/blog/2020/06/23/PHP-use/</id>
-    <published>2020-06-23T10:04:39.000Z</published>
-    <updated>2021-04-29T06:35:28.661Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><p>php use用法</p><h4 id="1、user-namespace"><a href="#1、user-namespace" class="headerlink" title="1、user namespace"></a>1、user namespace</h4><h4 id="2、use-一个trait"><a href="#2、use-一个trait" class="headerlink" title="2、use 一个trait"></a>2、use 一个trait</h4><p>针对于trait的即多继承</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">trait</span> <span class="title">A</span></span>&#123; eat()&#125; <span class="class"><span class="keyword">trait</span> <span class="title">B</span></span>&#123; drink()&#125;  </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;</span><br><span class="line"><span class="keyword">use</span> <span class="title">A</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">B</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">Class</span> <span class="title">D</span></span>&#123;</span><br><span class="line">d=new Class C()</span><br><span class="line">d-&gt;eat();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p> 当不同的trait中，却有着同名的方法或属性，会产生冲突，可以使用insteadof或 as进行解决，insteadof 是进行替代，而as是给它取别名</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">use trait1,trait2&#123;</span><br><span class="line">        trait1::eat insteadof trait2;</span><br><span class="line">        trait1::drive insteadof trait2;</span><br><span class="line">        trait2::eat as eaten;</span><br><span class="line">        trait2::drive as driven;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><h4 id="3-闭包-gt-匿名函数"><a href="#3-闭包-gt-匿名函数" class="headerlink" title="3.闭包-&gt;匿名函数"></a>3.闭包-&gt;匿名函数</h4><p>好处：节省内存  适合做回调函数</p><p>匿名函数：定义时未定义函数的名称<br>闭包： 创建时封装周围状态的函数，及时周围的环境不存在了，闭包中的状态还会存在</p><p>使用法则：</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
-      
-    
-    </summary>
-    
-    
-      <category term="PHP" scheme="https://smartxia.github.io/blog/categories/PHP/"/>
-    
-    
-      <category term="PHP" scheme="https://smartxia.github.io/blog/tags/PHP/"/>
-    
-      <category term="USE" scheme="https://smartxia.github.io/blog/tags/USE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PHP-strlen与mb_strlen</title>
-    <link href="https://smartxia.github.io/blog/2020/06/22/PHP-strlen%E4%B8%8Emb-strlen/"/>
-    <id>https://smartxia.github.io/blog/2020/06/22/PHP-strlen%E4%B8%8Emb-strlen/</id>
-    <published>2020-06-22T11:11:39.000Z</published>
-    <updated>2021-04-29T06:35:17.919Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><p>在PHP中，strlen与mb_strlen是求字符串长度的函数<br>PHP内置的字符串长度函数strlen无法正确处理中文字符串，它得到的只是字符串所占的字节数。对于GB2312的中文编码，strlen得到的值是汉字个数的2倍，而对于UTF-8编码的中文，就是3倍（在 UTF-8编码下，一个汉字占3个字节）。</p><p>采用mb_strlen函数可以较好地解决这个问题。mb_strlen的用法和strlen类似，只不过它有第二个可选参数用于指定字符编码。例如得到UTF-8的字符串str长度，可以用mbstrlen(str长度，可以用mbstrlen(str,‘UTF-8’)。如果省略第二个参数，则会使用PHP的内部编码。内部编码可以通过 mb_internal_encoding()函数得到。</p><p>需要注意的是，mb_strlen并不是PHP核心函数，使用前需要确保在php.ini中加载了php_mbstring.dll，即确保“extension=php_mbstring.dll”这一行存在并且没有被注释掉，否则会出现未定义函 数的问题。</p><hr><p>在strlen计算中，对待一个UTF8的中文字符，处理为3个字节长度，所以为3+1+2+1+9=16个</p><p>当mb_strlen的内码选择为UTF-8的时候，则会将中文字符当成一个字符,所以为3+1+2+1+3=10;</p><p>当mb_strlen的内码选择为gbk的时候，一个中文字符当成1.5个字符来处理来处理,最后就是:3+1+2+1+4.5=11.5</p><p>函数：mb_internal_encoding()会得到当前PHP使用的内部编码</p><p>strlen,得到的是字符串所占的字节数，所以在查看一个字符串的长度的时候，strlen并不能得到我们需要的真实值</p><p>mb_strlen 函数可以很好的处理这一点</p><p>注意：mb_strlen函数并不是php的核心函数，只是PHP的一个扩展函数，使用之前要判断是否加在的mbstring扩展模块，在Php.ini文件中可以查看相关配置</p><blockquote><p>strlen结果为什么是4<br>strlen在遇到第一个\0时结束，后面的字符无视。</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
-      
-    
-    </summary>
-    
-    
-      <category term="PHP" scheme="https://smartxia.github.io/blog/categories/PHP/"/>
-    
-    
-      <category term="PHP" scheme="https://smartxia.github.io/blog/tags/PHP/"/>
-    
-      <category term="strlen" scheme="https://smartxia.github.io/blog/tags/strlen/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>其他-科学上网</title>
-    <link href="https://smartxia.github.io/blog/2020/06/22/%E5%85%B6%E4%BB%96-%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
-    <id>https://smartxia.github.io/blog/2020/06/22/%E5%85%B6%E4%BB%96-%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</id>
-    <published>2020-06-22T07:57:49.000Z</published>
-    <updated>2021-04-29T06:32:34.454Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><h1 id="解决System-Reflection-TargetInvocationException-调用的目标发生了异常。"><a href="#解决System-Reflection-TargetInvocationException-调用的目标发生了异常。" class="headerlink" title="解决System.Reflection.TargetInvocationException: 调用的目标发生了异常。"></a>解决System.Reflection.TargetInvocationException: 调用的目标发生了异常。</h1><blockquote><p>windows7系统运行没有问题，但是放到Windows10 上面就出现连接不上的问题，试了很多种方法还是这种解决了。</p></blockquote><p>问题：</p><p>System.Reflection.TargetInvocationException: 调用的目标发生了异常。</p><p>—&gt; System.Reflection.TargetInvocationException: 调用的目标发生了异常。</p><p>—&gt; System.InvalidOperationException: 此实现不是 Windows 平台 FIPS 验证的加密算法的一部分</p><p>解决办法：需要修改注册表,cmd命令，输入regedit打开注册表然后找到以下路径</p><p>KEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\FipsAlgorithmPolicy</p><p>修改此路径下的Enable值为1，然后重新打开shadowsocks，大功告成！记得重启ssr</p><p>（如果1不行那就切换成0）</p><p>————————————————<br>原文链接：<a href="https://blog.csdn.net/qq_27536941/article/details/103300646">https://blog.csdn.net/qq_27536941/article/details/103300646</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
-      
-    
-    </summary>
-    
-    
-      <category term="其他" scheme="https://smartxia.github.io/blog/categories/%E5%85%B6%E4%BB%96/"/>
-    
-    
-      <category term="ssr" scheme="https://smartxia.github.io/blog/tags/ssr/"/>
     
   </entry>
   
