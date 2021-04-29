@@ -2,13 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://smartxia.github.io/blog/photos/index.html</loc>
-    
-    <lastmod>2021-04-26</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://smartxia.github.io/blog/tags/index.html</loc>
     
     <lastmod>2021-04-26</lastmod>
@@ -24,6 +17,13 @@
   
   <url>
     <loc>https://smartxia.github.io/blog/schedule/index.html</loc>
+    
+    <lastmod>2021-04-26</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://smartxia.github.io/blog/photos/index.html</loc>
     
     <lastmod>2021-04-26</lastmod>
     

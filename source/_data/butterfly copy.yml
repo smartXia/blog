@@ -106,7 +106,10 @@ baidu_analytics: UA-155001168-1
 # Post info settings
 # ---------------
 # avatar: /img/avatar.png
-avatar:  http://s2-cdn.oneitfarm.com/e12ece12233b4059860acf48637d830a.jpg
+# avatar:  http://s2-cdn.oneitfarm.com/e12ece12233b4059860acf48637d830a.jpg
+avatar:
+  img: http://s2-cdn.oneitfarm.com/e12ece12233b4059860acf48637d830a.jpg
+  effect: false
 
 # the banner image of index
 # top_img: https://i.loli.net/2019/05/22/5ce53eb6dc82757840.jpg

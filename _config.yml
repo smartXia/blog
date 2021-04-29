@@ -123,7 +123,7 @@ deploy:
   type: git
   repository: https://github.com/smartXia/blog.git
   branch: master
-  message: "fix update"
+  message: "升级package"
   jsonContent:
     meta: false
     pages: false
