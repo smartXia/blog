@@ -2,7 +2,7 @@
 title: GOLANG笔记1-基础数据类型
 date: 2020-06-09 17:36:01
 tags:
-cover: /img/golang.png
+cover: /img/golang.jpeg
 categories:
   - golang
 ---

@@ -1,7 +1,7 @@
 ---
 title: PHP-strlen与mb_strlen
 date: 2020-06-22 19:11:39
-cover: /img/php.jpg
+cover: /img/php.jpeg
 tags:
   - PHP
   - strlen

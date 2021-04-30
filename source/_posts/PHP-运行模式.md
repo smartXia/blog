@@ -7,7 +7,7 @@ tags:
 - cli
 categories:
   - PHP
-cover: /img/php.jpg
+cover: /img/php.jpeg
 ---
 
 　　**1.cgi全称“通用网关接口”(Common Gateway Interface)， 它可以让一个客户端，从浏览器向Web服务器上的程序请求数据，是客户端和程序之间传输数据的一种标准，另外CGI独立于任何语言，所以可以用任何一种语言编写，只要这种语言具有标准输入、输出和环境变量。如php,perl,tcl等。CGI针对每个用户请求都要开单独的子进程去维护，执行结束处理掉这个进程。典型的fork-and-execute方式**

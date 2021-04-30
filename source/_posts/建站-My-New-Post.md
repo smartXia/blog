@@ -2,7 +2,7 @@
 title: PV,UV
 date: 2019-12-16 17:57:07
 tags:
-cover: /img/wiki.jpg
+cover: /img/wiki.jpeg
 categories:
   - [Diary, PlayStation]
   - [Diary, Games]

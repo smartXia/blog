@@ -5,7 +5,7 @@ tags:
   - golang
   - farmworker
   - gin
-cover: /img/golang.png
+cover: /img/golang.jpeg
 categories:
   - golang
 ---

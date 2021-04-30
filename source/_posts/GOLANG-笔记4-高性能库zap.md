@@ -7,7 +7,7 @@ tags:
   - zap
   - gox
   - module
-cover: /img/golang.png
+cover: /img/golang.jpeg
 categories:
   - golang
 ---
