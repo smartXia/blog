@@ -2,7 +2,7 @@
 title: git 使用 connot stat
 date: 2021-05-17 14:12:35
 tags:
-cover:
+cover: img/git.jpeg
 categories:
   - git
 ---

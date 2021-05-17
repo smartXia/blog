@@ -11,7 +11,6 @@ annrlink: dda8c81b
 desription: 描述文章内容
 top_image: http://s2-cdn.oneitfarm.com/e12ece12233b4059860acf48637d830a.jpg
 cover: https://cdn.jsdelivr.net/gh/jerryc127/CDN/img/top_img_index.jpg
-top: True
 categories:
   - 建站
 ---
