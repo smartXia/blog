@@ -1,0 +1,519 @@
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Some | Some</title><meta name="keywords" content="log,dayliy"><meta name="author" content="夏夏天,xiapeifu@gmail.com"><meta name="copyright" content="夏夏天"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="05 Go 语言的设计哲学之四：面向工程-慕课专栏">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Some">
+<meta property="og:url" content="https://smartxia.github.io/blog/book/05Go%E8%AF%AD%E8%A8%80%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%93%B2%E5%AD%A6%E4%B9%8B%E5%9B%9B%E9%9D%A2%E5%90%91%E5%B7%A5%E7%A8%8B%E6%85%95%E8%AF%BE%E4%B8%93%E6%A0%8F.html">
+<meta property="og:site_name" content="Some">
+<meta property="og:description" content="05 Go 语言的设计哲学之四：面向工程-慕课专栏">
+<meta property="og:locale">
+<meta property="og:image" content="https://smartxia.github.io/blog/img/404.jpg">
+<meta property="article:published_time" content="2021-05-14T06:24:15.295Z">
+<meta property="article:modified_time" content="2021-05-14T06:24:15.295Z">
+<meta property="article:author" content="夏夏天">
+<meta property="article:tag" content="log,dayliy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://smartxia.github.io/blog/img/404.jpg"><link rel="shortcut icon" href="/blog/img/favicon.png"><link rel="canonical" href="https://smartxia.github.io/blog/book/05Go%E8%AF%AD%E8%A8%80%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%93%B2%E5%AD%A6%E4%B9%8B%E5%9B%9B%E9%9D%A2%E5%90%91%E5%B7%A5%E7%A8%8B%E6%85%95%E8%AF%BE%E4%B8%93%E6%A0%8F"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/blog/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/blog/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: 夏夏天","link":"Link: ","source":"Source: Some","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: false,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2021-05-14 14:24:15'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/blog/atom.xml" title="Some" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="http://s2-cdn.oneitfarm.com/e12ece12233b4059860acf48637d830a.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/blog/archives/"><div class="headline">Articles</div><div class="length-num">47</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/blog/tags/"><div class="headline">Tags</div><div class="length-num">45</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/blog/categories/"><div class="headline">Categories</div><div class="length-num">14</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/blog/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/blog/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="//tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/blog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/blog/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/blog/movies/"><i class="fa-fw fas fa-film"></i><span> Movie</span></a></li><li><a class="site-page child" href="/blog/photos/"><i class="fa-fw fas fa-picture"></i><span> Photo</span></a></li><li><a class="site-page child" href="/blog/games/"><i class="fa-fw fas fa-gamepad"></i><span> Game</span></a></li><li><a class="site-page child" href="/blog/books/"><i class="fa-fw fas fa-book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/blog/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/blog/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/blog/messageboard/"><i class="fa-fw fas fa-coffee"></i><span> Messageboard</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header" style="background-image: url('http://s2-cdn.oneitfarm.com/cac574f332b3413f89164d966759be51.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/blog/">Some</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/blog/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/blog/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="//tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/blog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/blog/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/blog/movies/"><i class="fa-fw fas fa-film"></i><span> Movie</span></a></li><li><a class="site-page child" href="/blog/photos/"><i class="fa-fw fas fa-picture"></i><span> Photo</span></a></li><li><a class="site-page child" href="/blog/games/"><i class="fa-fw fas fa-gamepad"></i><span> Game</span></a></li><li><a class="site-page child" href="/blog/books/"><i class="fa-fw fas fa-book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/blog/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/blog/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/blog/messageboard/"><i class="fa-fw fas fa-coffee"></i><span> Messageboard</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="page-site-info"><h1 id="site-title">Some</h1></div></header><main class="layout" id="content-inner"><div id="page"><div id="article-container"><html><head><meta charset="utf-8"><title>05 Go 语言的设计哲学之四：面向工程-慕课专栏</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+			<meta name="renderer" content="webkit">
+			<meta property="qc:admins" content="77103107776157736375">
+			<meta property="wb:webmaster" content="c4f857219bfae3cb">
+			<meta http-equiv="Access-Control-Allow-Origin" content="*">
+			<meta http-equiv="Cache-Control" content="no-transform ">
+			<meta http-equiv="Cache-Control" content="no-siteapp">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://www.imooc.com/static/img/common/touch-icon-ipad.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://www.imooc.com/static/img/common/touch-icon-iphone-retina.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://www.imooc.com/static/img/common/touch-icon-ipad-retina.png">
+			<link href="https://moco.imooc.com/captcha/style/captcha.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201907021539" type="text/css">
+			<link rel="stylesheet" href="https://www.imooc.com/static/lib/swiper/swiper-3.4.2.min.css?t=201907021539">
+			<link rel="stylesheet" href="https://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,column/zhuanlanChapter-less.css?t=2.5,course/inc/course_tipoff-less.css?t=2.5?v=201907051055" type="text/css">
+			<link charset="utf-8" rel="stylesheet" href="https://www.imooc.com/static/lib/ueditor/themes/imooc/css/ueditor.css?v=201907021539"><link rel="stylesheet" href="https://www.imooc.com/static/lib/baiduShare/api/css/share_style0_16.css?v=6aba13f0.css"></head>
+			<body><div id="main">
+
+
+<div class="main-con hide-menu">
+    <!-- 左侧菜单 & 索引 -->
+    
+    <div class="right-content" style="padding-left: 0px;">
+        <div class="container clearfix" id="top" style="width: 1134px; display: block;">
+            
+            
+            <div class="center_con js-center_con l" style="width: 1134px;">
+                <div class="article-con">
+                                            <!-- 买过的阅读 -->
+                        
+
+                    
+                    <div class="art-title" style="margin-top: 0px;">
+                        05 Go 语言的设计哲学之四：面向工程
+                    </div>
+                    <div class="art-info clearfix">
+                        
+                        <span class="l">
+                            更新时间：2020-09-16 09:48:21
+                        </span>
+                    </div>
+                    <div class="art-top">
+                                                <img src= "/blog/img/loading.gif" data-lazy-src="https://img2.sycdn.imooc.com/5f5ee83500015dc406400434.jpg" alt="">
+                                                                        <div class="famous-word-box">
+                            <img src= "/blog/img/loading.gif" data-lazy-src="https://www.imooc.com/static/img/column/bg-l.png" alt="" class="bg1 bg">
+                            <img src= "/blog/img/loading.gif" data-lazy-src="https://www.imooc.com/static/img/column/bg-r.png" alt="" class="bg2 bg">
+                            <div class="famous-word">机遇只偏爱那些有准备的头脑。——巴斯德<p></p></div>
+                        </div>
+                                            </div>
+                    <div class="art-content js-lookimg">
+                        <div id="article_content">
+                            <div class="cl-preview-section"><h2 id="第四条原则-面向工程，“自带电池”" style="font-size: 30px;">第四条原则: 面向工程，“自带电池”</h2>
+</div><div class="cl-preview-section"><blockquote>
+<p style="font-size: 20px; line-height: 38px;">软件工程指引着 Go 语言的设计。- Rob Pike(2012)</p>
+</blockquote>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">要想理解这条设计哲学，我们依然需要回到三位 Go 语言之父在设计 Go 语言时的初衷：**面向解决真实世界中 Google 内部大规模软件开发存在的各种问题，为这些问题提供答案。**主要的问题包括：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">程序构建慢</li>
+<li style="font-size: 20px; line-height: 38px;">失控的依赖管理</li>
+<li style="font-size: 20px; line-height: 38px;">开发人员使用编程语言的不同子集（比如 C++支持多范式，这样有些人用 OO，有些人用泛型）</li>
+<li style="font-size: 20px; line-height: 38px;">代码可理解性差（代码可读性差，文档差等)</li>
+<li style="font-size: 20px; line-height: 38px;">功能重复实现</li>
+<li style="font-size: 20px; line-height: 38px;">升级更新消耗大</li>
+<li style="font-size: 20px; line-height: 38px;">实现自动化工具难度高</li>
+<li style="font-size: 20px; line-height: 38px;">版本问题</li>
+<li style="font-size: 20px; line-height: 38px;">跨语言构建问题</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">很多编程语言设计者或其拥趸认为这些问题并不是一门编程语言应该去解决的，但 Go 语言的设计者并不这么看，他们以更高更广阔的视角去审视软件开发领域尤其是大规模软件开发过程中遇到的各种问题，并在 Go 语言最初设计阶段就将解决工程问题作为 Go 的设计原则之一去考虑 Go 语法、工具与标准库的设计，这也是 Go 与其他偏学院派、偏研究性编程语言在设计思路上的一个重大差异。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 语言取得阶段性成功后，这种思路也在开始影响着后续新编程语言的设计，并且一些现有的主流编程语言也在借鉴 Go 的一些设计，比如：越来越多的语言认可统一代码风格的优越之处，并开始提供官方统一的 fmt 工具（例如：rust 的 rustfmt）；又比如：Go 创新提出的最小版本选择（minimal version selection，缩写为 mvs）也在被其他语言的包依赖工具所支持（比如：rust 的 cargo 支持 mvs）。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 设计者将所有工程问题浓缩为一个词"scale"，总觉得将 scale 这个词翻译为任何中文词汇都无法传神地表达其含义，暂译为“规模”吧。这里的规模化有两层含义：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">用 Go 构建的软件系统的并发规模，比如：这类系统并发关注点的数量、处理数据的量级、同时与之交互的服务的数量等；</li>
+<li style="font-size: 20px; line-height: 38px;">开发过程的规模，包括代码库大小、参与开发、相互协作的工程师的数量等。</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">从 Go1 开始，Go 的目标就是为了让开发者能够更容易、更高效地构建规模化（scale）的软件。Go 设计者期望 Go 可以游刃有余地应对产品规模和过程规模变大后带来的各种复杂性问题。Go 语言的演进方向也是继续优化和消除 Go 语言自身面对规模化问题时应对不好的地方，比如：Go 1.9 引入的 type alias 以应对大型代码仓库代码重构、Go 1.11 引入的 go module 机制解决不完善的包依赖问题等。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">这种设计哲学的落地让 Go 语言具有广泛的规模适应性：既可以被仅有 5 人的初创团队用于开发终端工具，也能够满足像 Google 这样的超巨型公司大规模团队开发大规模网络服务程序的需要。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">那么 Go 是如何解决工程领域规模化所带来的问题的呢？我们从语言、标准库和工具三个方面来看一下。</p>
+</div><div class="cl-preview-section"><h3 id="语言">1) 语言</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">语法是编程语言的用户接口，它直接影响开发人员对于这门语言的使用体验。Go 语言首先是一门简单的语言，简单意味着可读性好，容易理解，容易上手工作，容易修复错误，节省开发者时间，提升开发者间的沟通效率。但作为面向工程的编程语言，光有简单的设计哲学还不够，每个语言设计细节还都要经过“工程规模化”的考验和打磨，需要在细节上做好充分的思考和讨论。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">比如 Rob Pike 就曾谈到过 Go 当初为何没有使用 Python 那样的代码缩进来表示程序结构，而是选择了与 C 语言相同的大括号，就是因为他们经过调查发现 Python 的缩进结构在构建小规模程序时的确很方便，但是当代码库变得更大的时候，缩进式的结构非常容易出错。从工程的安全性和可靠性角度考虑，Go 团队最终选择了大括号代码块结构。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">类似的面向工程的语音设计细节考量还包括：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">重新设计编译单元和目标文件格式，实现 Go 源码快速构建，让大工程的构建时间缩短到类似 Python 的交互式编译的编译速度；</li>
+<li style="font-size: 20px; line-height: 38px;">如果源文件导入它不使用的包，则程序将无法编译。这可以充分保证任何 Go 程序的依赖树是精确的。这也可以保证在构建程序时不会编译额外的代码，从而最大限度地缩短编译时间；</li>
+<li style="font-size: 20px; line-height: 38px;">去除包的循环依赖，循环依赖会在大规模的代码中引发问题，因为它们要求编译器同时处理更大的源文件集，这会减慢增量构建；</li>
+<li style="font-size: 20px; line-height: 38px;">在处理依赖关系时，有时会通过允许一部分重复代码来避免引入较多依赖关系。比如：net 包具有其自己的整数到十进制转换实现，以避免依赖于较大且依赖性较大的格式化 io 包；</li>
+<li style="font-size: 20px; line-height: 38px;">包路径是唯一的，而包名不必唯一的。导入路径必须唯一标识要导入的包，而名称只是包的使用者如何引用其内容的约定。包名称不必是唯一的约定大大降低了开发人员给包起唯一名字的心智负担；</li>
+<li style="font-size: 20px; line-height: 38px;">故意不支持默认函数参数。因为在规模工程中，很多开发者利用默认函数参数机制，向函数添加过多的参数以弥补函数 API 的设计缺陷，这会导致函数拥有太多的参数，降低清晰度和可读性；</li>
+<li style="font-size: 20px; line-height: 38px;">首字母大小写定义标识符可见性，这是 Go 的一个创新。它让开发人员通过名称即可知晓其可见性，而无需回到标识符定义的位置查找并确定其可见性，这提升了开发人员阅读代码的效率；</li>
+<li style="font-size: 20px; line-height: 38px;">在语义层面，相对于 C，Go 做了很多改动，提升了语言的健壮性，比如：去除指针算术、去除隐式的数字转型等；</li>
+<li style="font-size: 20px; line-height: 38px;">内置垃圾收集，这对于大型工程项目来说，大大降低了程序员在内存管理方面的负担，程序员使用 GC 感受到的好处超过了付出的成本，并且这些成本主要由语言实现者来承担；</li>
+<li style="font-size: 20px; line-height: 38px;">内置并发支持，为网络软件带来了简单性，简单又带来了健壮，这是大型工程软件开发所需要的；</li>
+<li style="font-size: 20px; line-height: 38px;">增加 type alias，支持大规模代码库的重构。</li>
+</ul>
+</div><div class="cl-preview-section"><h3 id="标准库">2) 标准库</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 被称为“内置电池（battery-included）”的编程语言。“内置电池”原指购买了电子设备后，在包装盒中包含了电池，电子设备可以开箱即用，无需再次出去购买电池。如果说一门编程语言是“自带电池”，则说明这门语言标准库功能丰富，多数功能无需依赖外部的第三方包或库，Go 语言恰是这类编程语言。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">由于诞生年代较晚，且目标较为明确，Go 在标准库中提供了各类高质量且性能优良的功能包，其中的 net/http、crypto/xx、encoding/xx 等包充分迎合了云原生时代的关于 API/RPC Web 服务的构建需求，Go 开发者可以直接基于标准库提供的这些包实现一个满足生产要求的 API 服务，从而减少对外部第三方包或库的依赖，降低工程代码依赖管理的复杂性，也降低了开发人员学习第三方库的心智负担。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">仅使用标准库来构建系统，这对于开发人员还是蛮有吸引力的。在很多关于选用何种 Go Web 开发框架的调查中，选择标准库的依然占大多数，这也是 Go 社区显著区别于其他编程语言社区的一点。Go 团队还在 <a target="_blank" rel="noopener" href="http://golang.org/x">golang.org/x</a> 路径下面提供了暂未放入标准库的扩展库/补充库供广大 Gopher 使用，包括：text、net、crypto 等，这些库的质量也是非常高的，标准库中部分包也将 <a target="_blank" rel="noopener" href="http://golang.org/x">golang.org/x</a> 下的 text、net 和 crypto 包作为依赖包 vendor 到 Go 标准库中。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 语言目前在 GUI、mobile 开发领域占有的份额较低，这很可能与 Go 标准库没有内置这类包不无关系。在 2016 年的 Gopher 用户调查中，Gopher 们最希望标准库增加的功能中，GUI 和 mobile 包就排名靠前。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src= "/blog/img/loading.gif" data-lazy-src="https://img1.sycdn.imooc.com/5f5ee8fc00018e3d08000249.png" data-original="//img1.sycdn.imooc.com/5f5ee8fc00018e3d08000249.png" alt="图片描述"></p>
+</div><div class="cl-preview-section"><center><font size="2">图1-5-1 Go语言2016年调查结果节选</font></center>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">这也或多或少从反向证明了“内置电池”对于工程领域问题解决的重要性。</p>
+</div><div class="cl-preview-section"><h3 id="工具">3) 工具</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">开发人员在工程过程中需要使用工具。而 Go 语言提供了这个星球上最全面、最贴心的编程语言官方工具链，涵盖了编译、编辑、依赖获取、调试、测试、文档、性能剖析等方方面面。</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">构建和运行：go build/go run</li>
+<li style="font-size: 20px; line-height: 38px;">依赖包查看与获取：go list/go get/go mod xx</li>
+<li style="font-size: 20px; line-height: 38px;">编辑辅助格式化：go fmt/gofmt</li>
+<li style="font-size: 20px; line-height: 38px;">文档查看：go doc/godoc</li>
+<li style="font-size: 20px; line-height: 38px;">单元测试/基准测试/测试覆盖率：go test</li>
+<li style="font-size: 20px; line-height: 38px;">代码静态分析：go vet</li>
+<li style="font-size: 20px; line-height: 38px;">性能剖析与跟踪结果查看：go tool pprof/go tool trace</li>
+<li style="font-size: 20px; line-height: 38px;">升级到新 Go 版本 API 的辅助工具：go tool fix</li>
+<li style="font-size: 20px; line-height: 38px;">报告 Go 语言 bug：go bug</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">值得重点提及的是 gofmt 统一了 Go 语言的编码风格，在其他语言开发者还在为代码风格争论不休的时候，Go 开发者可以更加专注于领域业务中。同时，相同的代码风格让以往困扰开发者的代码阅读、理解和评审工作变得容易了很多，至少 Go 开发者再也不会有那种因代码风格的不同而产生的陌生感。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在提供丰富的工具链的同时，Go 语言的语法、package 系统以及命名惯例的设计也让针对 Go 的工具更容易编写，并且 Go 在标准库中提供了官方的词法分析器、语法解析器和类型检查器相关 package，开发者可以基于这些包快速构建 Go 工具。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们可以说 Go 构建了一个开放的工具链生态系统，它鼓励社区和开发人员为 Go 添加更多、更实用的工具，而更多、更好的工具反过来又帮助 Go 更好地解决工程上的“规模化”问题，这是一个良性的生态循环。</p>
+</div>}
+                        </div>
+                    </div>
+                                            <!-- 买过的阅读 -->
+                        <div class="art-next-prev clearfix">
+                                                                                                <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/87/article/2340">
+                                                                    <div class="prev l clearfix">
+                                        <div class="icon l">
+                                            <i class="imv2-arrow3_l"></i>
+                                        </div>
+                                        <p>
+                                            04 Go语言的设计哲学之三：并发
+                                        </p>
+                                    </div>
+                                </a>
+                                                                                                                            <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/87/article/2342">
+                                                                    <div class="next r clearfix">
+                                        <p>
+                                            06 参考 Go 项目布局设计你的项目结构
+                                        </p>
+                                        <div class="icon r">
+                                            <i class="imv2-arrow3_r"></i>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                                    </div>
+                                    </div>
+                <div class="comments-con js-comments-con" id="coments_con">
+                </div>
+
+                
+            </div>
+            
+            
+            
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-jiaQun-new hide" id="modal-jiaQun">
+    <div class="inner" style="">
+        <div class="modal-close js-close-jiaQun">
+            <i class="imv2-close"></i>
+        </div>
+        <div class="content">
+            <img src= "/blog/img/loading.gif" data-lazy-src="https://img1.sycdn.imooc.com/5f51ecec0001392b05330597.jpg">
+            <div class="right-info">
+                <div class="title">
+                    扫码加入慕课前沿技术核心用户群
+                </div>
+                <div class="desc">
+                                            <p class="mb6">验证信息：<span id="joincode">2010312025386365</span><span class="copy js-copy-joincode">复制</span></p>
+                                        <p class="mb6">QQ讨论群号：729941811</p>
+                                            <p>QQ群URL：<a href="https://jq.qq.com/?_wv=1027&amp;k=5WJLMxV" target="_blank">点击访问</a></p>
+                                    </div>
+            </div>
+            <p class="tip">若遇到搜索不到QQ群或加群失败，请联系客服邮箱:kf@imooc.com</p>
+        </div>
+    </div>
+</div>
+ 
+<!-- 专栏介绍页专栏评价 -->
+
+<!-- 专栏介绍页底部三条评价 -->
+
+<!-- 专栏阅读页弹层目录和介绍页页面目录 -->
+
+<!-- 专栏阅读页发布回复 -->
+
+<!-- 专栏阅读页发布评论 -->
+
+<!-- 专栏阅读页底部评论 -->
+
+<!-- 专栏阅读 单个 评论 -->
+
+<!-- 新增回复和展开三条以外回复 -->
+
+<!-- 立即订阅的弹窗 -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div></body></html></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="http://s2-cdn.oneitfarm.com/e12ece12233b4059860acf48637d830a.jpg" onerror="this.onerror=null;this.src='/blog/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">夏夏天</div><div class="author-info__description">以地事秦 犹抱薪救火 薪不尽 火不灭</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/blog/archives/"><div class="headline">Articles</div><div class="length-num">47</div></a></div><div class="card-info-data-item is-center"><a href="/blog/tags/"><div class="headline">Tags</div><div class="length-num">45</div></a></div><div class="card-info-data-item is-center"><a href="/blog/categories/"><div class="headline">Categories</div><div class="length-num">14</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/blog/atom.xml" target="_blank" title=""><i class="fa fa-rss"></i></a><a class="social-icon" href="https://github.com/smartXia" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:xiapeifu@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://gitee.com/xiapeifu" target="_blank" title="Gitee"><i class="iconfont gitee"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/blog/2021/05/14/GOLANG-%E6%94%B9%E5%96%84golang50%E4%B8%AA%E6%9C%89%E6%95%88%E5%AE%9E%E8%B7%B5/" title="GOLANG-改善golang50个有效实践"><img data-lazy-src="/blog/img/golang.jpeg" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="GOLANG-改善golang50个有效实践"/></a><div class="content"><a class="title" href="/blog/2021/05/14/GOLANG-%E6%94%B9%E5%96%84golang50%E4%B8%AA%E6%9C%89%E6%95%88%E5%AE%9E%E8%B7%B5/" title="GOLANG-改善golang50个有效实践">GOLANG-改善golang50个有效实践</a><time datetime="2021-05-14T05:24:11.000Z" title="Created 2021-05-14 13:24:11">2021-05-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2021/05/14/%E5%85%B6%E4%BB%96-%E8%BD%AF%E4%BB%B6%E8%A1%8C%E4%B8%9A%E9%AB%98%E9%A2%91%E5%8D%95%E8%AF%8D/" title="其他-软件行业高频单词"><img data-lazy-src="/blog/img/%E5%85%B6%E4%BB%96.jfif" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="其他-软件行业高频单词"/></a><div class="content"><a class="title" href="/blog/2021/05/14/%E5%85%B6%E4%BB%96-%E8%BD%AF%E4%BB%B6%E8%A1%8C%E4%B8%9A%E9%AB%98%E9%A2%91%E5%8D%95%E8%AF%8D/" title="其他-软件行业高频单词">其他-软件行业高频单词</a><time datetime="2021-05-14T02:20:48.000Z" title="Created 2021-05-14 10:20:48">2021-05-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2021/05/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E6%A6%82%E8%BF%B0%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="设计模式-概述，为什么要使用设计模式"><img data-lazy-src="/blog/img/shejimoshi.jpeg" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="设计模式-概述，为什么要使用设计模式"/></a><div class="content"><a class="title" href="/blog/2021/05/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E6%A6%82%E8%BF%B0%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="设计模式-概述，为什么要使用设计模式">设计模式-概述，为什么要使用设计模式</a><time datetime="2021-05-13T05:39:46.000Z" title="Created 2021-05-13 13:39:46">2021-05-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2021/05/10/PHP-Phpfpm%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F/" title="PHP-Phpfpm进程管理的三种模式"><img data-lazy-src="/blog/img/404.jpg" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="PHP-Phpfpm进程管理的三种模式"/></a><div class="content"><a class="title" href="/blog/2021/05/10/PHP-Phpfpm%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F/" title="PHP-Phpfpm进程管理的三种模式">PHP-Phpfpm进程管理的三种模式</a><time datetime="2021-05-10T03:44:49.000Z" title="Created 2021-05-10 11:44:49">2021-05-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2021/05/10/PHP-Phpfmp-%E5%A6%82%E4%BD%95%E5%88%86%E9%85%8D%E4%BB%BB%E5%8A%A1%E5%88%B0%E5%AD%90%E8%BF%9B%E7%A8%8B%E7%9A%84/" title="PHP-Phpfmp-如何分配任务到子进程的"><img data-lazy-src="/blog/img/404.jpg" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="PHP-Phpfmp-如何分配任务到子进程的"/></a><div class="content"><a class="title" href="/blog/2021/05/10/PHP-Phpfmp-%E5%A6%82%E4%BD%95%E5%88%86%E9%85%8D%E4%BB%BB%E5%8A%A1%E5%88%B0%E5%AD%90%E8%BF%9B%E7%A8%8B%E7%9A%84/" title="PHP-Phpfmp-如何分配任务到子进程的">PHP-Phpfmp-如何分配任务到子进程的</a><time datetime="2021-05-10T03:43:54.000Z" title="Created 2021-05-10 11:43:54">2021-05-10</time></div></div></div></div><div class="card-widget" id="card-newest-comments"><div class="item-headline"><i class="fas fa-bolt"></i><span>Newest Comments</span></div><div class="aside-list"><span>loading...</span></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
+            <a class="card-more-btn" href="/blog/categories/" title="More">
+    <i class="fas fa-angle-right"></i></a>
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/DOCKER/"><span class="card-category-list-name">DOCKER</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/Diary/"><span class="card-category-list-name">Diary</span><span class="card-category-list-count">1</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/Diary/Games/"><span class="card-category-list-name">Games</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/Diary/PlayStation/"><span class="card-category-list-name">PlayStation</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/Life/"><span class="card-category-list-name">Life</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/MYSQL/"><span class="card-category-list-name">MYSQL</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/PHP/"><span class="card-category-list-name">PHP</span><span class="card-category-list-count">9</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/golang/"><span class="card-category-list-name">golang</span><span class="card-category-list-count">5</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/blog/tags/Closure/" style="font-size: 1.1em; color: #999">Closure</a> <a href="/blog/tags/Generator/" style="font-size: 1.1em; color: #999">Generator</a> <a href="/blog/tags/HEXO/" style="font-size: 1.1em; color: #999">HEXO</a> <a href="/blog/tags/Iterator-%E7%AD%89%E5%BE%85%E6%9B%B4%E6%96%B0/" style="font-size: 1.1em; color: #999">Iterator - 等待更新</a> <a href="/blog/tags/MSYQL/" style="font-size: 1.1em; color: #999">MSYQL</a> <a href="/blog/tags/PHP/" style="font-size: 1.5em; color: #99a9bf">PHP</a> <a href="/blog/tags/Slice/" style="font-size: 1.23em; color: #999ea6">Slice</a> <a href="/blog/tags/USE/" style="font-size: 1.1em; color: #999">USE</a> <a href="/blog/tags/cgi/" style="font-size: 1.1em; color: #999">cgi</a> <a href="/blog/tags/cli/" style="font-size: 1.1em; color: #999">cli</a> <a href="/blog/tags/diary/" style="font-size: 1.1em; color: #999">diary</a> <a href="/blog/tags/docekr-images/" style="font-size: 1.1em; color: #999">docekr images</a> <a href="/blog/tags/farmworker/" style="font-size: 1.1em; color: #999">farmworker</a> <a href="/blog/tags/fastcgi/" style="font-size: 1.1em; color: #999">fastcgi</a> <a href="/blog/tags/gin/" style="font-size: 1.1em; color: #999">gin</a> <a href="/blog/tags/golang/" style="font-size: 1.37em; color: #99a4b2">golang</a> <a href="/blog/tags/gox/" style="font-size: 1.1em; color: #999">gox</a> <a href="/blog/tags/module/" style="font-size: 1.1em; color: #999">module</a> <a href="/blog/tags/photo/" style="font-size: 1.1em; color: #999">photo</a> <a href="/blog/tags/php/" style="font-size: 1.1em; color: #999">php</a> <a href="/blog/tags/pubsub/" style="font-size: 1.1em; color: #999">pubsub</a> <a href="/blog/tags/redis/" style="font-size: 1.23em; color: #999ea6">redis</a> <a href="/blog/tags/rpc/" style="font-size: 1.1em; color: #999">rpc()</a> <a href="/blog/tags/ssr/" style="font-size: 1.1em; color: #999">ssr</a> <a href="/blog/tags/strlen/" style="font-size: 1.1em; color: #999">strlen</a> <a href="/blog/tags/wiki/" style="font-size: 1.23em; color: #999ea6">wiki</a> <a href="/blog/tags/xhprof-docker-push/" style="font-size: 1.1em; color: #999">xhprof docker push</a> <a href="/blog/tags/yield/" style="font-size: 1.1em; color: #999">yield</a> <a href="/blog/tags/zap/" style="font-size: 1.1em; color: #999">zap</a> <a href="/blog/tags/%E4%B8%BB%E9%A2%98/" style="font-size: 1.1em; color: #999">主题</a> <a href="/blog/tags/%E4%B9%A6%E7%B1%8D/" style="font-size: 1.1em; color: #999">书籍</a> <a href="/blog/tags/%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0/" style="font-size: 1.1em; color: #999">匿名函数</a> <a href="/blog/tags/%E5%8C%BF%E5%90%8D%E7%B1%BB/" style="font-size: 1.1em; color: #999">匿名类</a> <a href="/blog/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 1.1em; color: #999">工具</a> <a href="/blog/tags/%E5%BC%82%E5%B8%B8/" style="font-size: 1.1em; color: #999">异常</a> <a href="/blog/tags/%E5%BE%85%E6%9B%B4%E6%96%B0/" style="font-size: 1.23em; color: #999ea6">待更新</a> <a href="/blog/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 1.1em; color: #999">排序</a> <a href="/blog/tags/%E6%8E%A8%E8%8D%90/" style="font-size: 1.1em; color: #999">推荐</a> <a href="/blog/tags/%E6%95%99%E7%A8%8B/" style="font-size: 1.1em; color: #999">教程</a> <a href="/blog/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 1.23em; color: #999ea6">数据结构</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2021/05/"><span class="card-archive-list-date">May 2021</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2021/04/"><span class="card-archive-list-date">April 2021</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2020/09/"><span class="card-archive-list-date">September 2020</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2020/08/"><span class="card-archive-list-date">August 2020</span><span class="card-archive-list-count">8</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2020/06/"><span class="card-archive-list-date">June 2020</span><span class="card-archive-list-count">13</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2020/01/"><span class="card-archive-list-date">January 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2019/12/"><span class="card-archive-list-date">December 2019</span><span class="card-archive-list-count">10</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">47</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2021-05-14T09:54:09.784Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 夏夏天</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">简</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/blog/js/utils.js"></script><script src="/blog/js/main.js"></script><script src="/blog/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/blog/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'b5KjzAk69Lg3yBaVPeEiuljv-gzGzoHsz',
+      appKey: 'Yb0PJ1jscpDdBIvDLO6MEYUy',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: true,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.17.0/js/md5.min.js"></script><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[image]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[link]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[code]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getIcon = (icon, mail) => {
+    if (icon) return icon
+    let defaultIcon = '?d=monsterid'
+    let iconUrl = `https://gravatar.loli.net/avatar/${md5(mail.toLowerCase()) + defaultIcon}`
+    return iconUrl
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += 'No Comment'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const getComment = () => {
+    const serverURL = 'https://b5KjzAk6.api.lncldglobal.com'
+
+    var settings = {
+      "method": "GET",
+      "headers": {
+        "X-LC-Id": 'b5KjzAk69Lg3yBaVPeEiuljv-gzGzoHsz',
+        "X-LC-Key": 'Yb0PJ1jscpDdBIvDLO6MEYUy',
+        "Content-Type": "application/json"
+      },
+    }
+
+    fetch(`${serverURL}/1.1/classes/Comment?limit=6&order=-createdAt`,settings)
+      .then(response => response.json())
+      .then(data => {
+        const valineArray = data.results.map(function (e) {
+          return {
+            'avatar': getIcon(e.QQAvatar, e.mail),
+            'content': changeContent(e.comment),
+            'nick': e.nick,
+            'url': e.url + '#' + e.objectId,
+            'date': e.updatedAt,
+          }
+        })
+        saveToLocal.set('valine-newest-comments', JSON.stringify(valineArray), 10/(60*24))
+        generateHtml(valineArray)
+      }).catch(e => {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.innerHTML= "Unable to get the data, please make sure the settings are correct."
+      }) 
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('valine-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

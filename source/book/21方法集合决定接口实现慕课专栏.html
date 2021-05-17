@@ -1,0 +1,758 @@
+<html><head><meta charset="utf-8"><title>21 方法集合决定接口实现-慕课专栏</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+			<meta name="renderer" content="webkit">
+			<meta property="qc:admins" content="77103107776157736375">
+			<meta property="wb:webmaster" content="c4f857219bfae3cb">
+			<meta http-equiv="Access-Control-Allow-Origin" content="*">
+			<meta http-equiv="Cache-Control" content="no-transform ">
+			<meta http-equiv="Cache-Control" content="no-siteapp">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://www.imooc.com/static/img/common/touch-icon-ipad.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://www.imooc.com/static/img/common/touch-icon-iphone-retina.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://www.imooc.com/static/img/common/touch-icon-ipad-retina.png">
+			<link href="https://moco.imooc.com/captcha/style/captcha.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201907021539" type="text/css">
+			<link rel="stylesheet" href="https://www.imooc.com/static/lib/swiper/swiper-3.4.2.min.css?t=201907021539">
+			<link rel="stylesheet" href="https://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,column/zhuanlanChapter-less.css?t=2.5,course/inc/course_tipoff-less.css?t=2.5?v=201907051055" type="text/css">
+			<link charset="utf-8" rel="stylesheet" href="https://www.imooc.com/static/lib/ueditor/themes/imooc/css/ueditor.css?v=201907021539"><link rel="stylesheet" href="https://www.imooc.com/static/lib/baiduShare/api/css/share_style0_16.css?v=6aba13f0.css"></head>
+			<body><div id="main">
+
+
+<div class="main-con hide-menu">
+    <!-- 左侧菜单 & 索引 -->
+    
+    <div class="right-content" style="padding-left: 0px;">
+        <div class="container clearfix" id="top" style="width: 1134px; display: block;">
+            
+            
+            <div class="center_con js-center_con l" style="width: 1134px;">
+                <div class="article-con">
+                                            <!-- 买过的阅读 -->
+                        
+
+                    
+                    <div class="art-title" style="margin-top: 0px;">
+                        21 方法集合决定接口实现
+                    </div>
+                    <div class="art-info clearfix">
+                        
+                        <span class="l">
+                            更新时间：2020-10-29 10:58:01
+                        </span>
+                    </div>
+                    <div class="art-top">
+                                                <img src="https://img1.sycdn.imooc.com/5f924dce000143a606400351.jpg" alt="">
+                                                                        <div class="famous-word-box">
+                            <img src="https://www.imooc.com/static/img/column/bg-l.png" alt="" class="bg1 bg">
+                            <img src="https://www.imooc.com/static/img/column/bg-r.png" alt="" class="bg2 bg">
+                            <div class="famous-word">机遇只偏爱那些有准备的头脑。——巴斯德<p></p></div>
+                        </div>
+                                            </div>
+                    <div class="art-content js-lookimg">
+                        <div id="article_content">
+                            <div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">自定义类型的方法和接口（interface）都是 Go 语言中的重要概念，并且它们之间存在千丝万缕的联系。我们来看一个例子：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// method_set_1.go</span>
+<span class="token keyword">package</span> main
+
+<span class="token keyword">type</span> Interface <span class="token keyword">interface</span> <span class="token punctuation">{</span>
+	<span class="token function">M1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token function">M2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> T <span class="token keyword">struct</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>t T<span class="token punctuation">)</span> <span class="token function">M1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>t <span class="token operator">*</span>T<span class="token punctuation">)</span> <span class="token function">M2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">var</span> t T
+	<span class="token keyword">var</span> pt <span class="token operator">*</span>T
+	<span class="token keyword">var</span> i Interface
+
+	i <span class="token operator">=</span> t
+	i <span class="token operator">=</span> pt
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们运行一下该示例程序：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go">$ <span class="token keyword">go</span> run method_set_1<span class="token punctuation">.</span><span class="token keyword">go</span> 
+# command<span class="token operator">-</span>line<span class="token operator">-</span>arguments
+<span class="token punctuation">.</span><span class="token operator">/</span>method_set_1<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">18</span><span class="token punctuation">:</span><span class="token number">4</span><span class="token punctuation">:</span> cannot use <span class="token function">t</span> <span class="token punctuation">(</span><span class="token keyword">type</span> T<span class="token punctuation">)</span> as <span class="token keyword">type</span> Interface in assignment<span class="token punctuation">:</span>
+	T does not implement <span class="token function">Interface</span> <span class="token punctuation">(</span>M2 method has pointer receiver<span class="token punctuation">)</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到示例程序没有通过编译器的检查，编译器给出的错误信息是：不能使用变量 t 给接口类型变量 i 赋值，因为 t 没有实现 Interface 接口方法集合中的 M2 方法。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">如果你是 Go 语言初学者，那么遇到这样的编译器错误提示信息后你一定很疑惑：我们明明为自定义类型 T 定义了 M1 和 M2 方法，为何说尚未实现 M2 方法？为何 *T 类型的 pt 就可以被正常赋值给 Interface 类型变量 i，而 T 类型的 t 就不行？</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">带着这些问题，我们开启本节的内容。</p>
+</div><div class="cl-preview-section"><h2 id="方法集合method-set" style="font-size: 30px;">1. 方法集合(Method Set)</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在”理解方法本质以正确选择 receiver 类型“一节中我们曾提到过选择 receiver 类型除了考量是否需要对类型实例进行修改、类型实例值拷贝导致的性能损耗之外，还有一个重要考量因素，那就是类型是否要实现某个接口（interface）类型。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 语言的一个创新就是自定义类型与接口之间的实现关系是松耦合的：如果某个自定义类型 T 的方法集合是某个 interface 类型的方法集合的超集，那么就说类型 T 实现了该接口，并且类型 T 的变量可以被赋值给该接口类型的变量了，即我们说的<strong>方法集合决定接口实现</strong>。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">方法集合（Method Set）是 Go 语言中一个重要的概念，在为接口类型变量赋值、使用结构体嵌入/接口嵌入、类型别名（type alias）和 method expression 等时都会用到方法集合，它像**”胶水“<strong>一样将自定义类型与接口</strong>隐式地**粘结在一起。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">要判断一个自定义类型是否实现了某接口类型，我们首先要识别出自定义类型的方法集合以及接口类型的方法集合。但有些时候它们并非那么明显（比如：若存在结构体嵌入、接口嵌入、类型别名时）。这里我们实现了一个工具函数可以方便输出一个自定义类型或接口类型的方法集合。</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token keyword">package</span> main
+  
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+        <span class="token string">"fmt"</span>
+        <span class="token string">"reflect"</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment">// method_set_utils.go</span>
+<span class="token keyword">func</span> <span class="token function">DumpMethodSet</span><span class="token punctuation">(</span>i <span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        v <span class="token operator">:=</span> reflect<span class="token punctuation">.</span><span class="token function">TypeOf</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+        elemTyp <span class="token operator">:=</span> v<span class="token punctuation">.</span><span class="token function">Elem</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        n <span class="token operator">:=</span> elemTyp<span class="token punctuation">.</span><span class="token function">NumMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> n <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">{</span>
+                fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%s's method set is empty!\n"</span><span class="token punctuation">,</span> elemTyp<span class="token punctuation">)</span>
+                <span class="token keyword">return</span>
+        <span class="token punctuation">}</span>
+
+        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%s's method set:\n"</span><span class="token punctuation">,</span> elemTyp<span class="token punctuation">)</span>
+        <span class="token keyword">for</span> j <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> j<span class="token operator">++</span> <span class="token punctuation">{</span>
+                fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"-"</span><span class="token punctuation">,</span> elemTyp<span class="token punctuation">.</span><span class="token function">Method</span><span class="token punctuation">(</span>j<span class="token punctuation">)</span><span class="token punctuation">.</span>Name<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">接下来，我们就用该工具函数输出一下本节开头那个示例中的接口类型和自定义类型的方法集合：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// method_set_2.go</span>
+<span class="token keyword">package</span> main
+
+<span class="token keyword">type</span> Interface <span class="token keyword">interface</span> <span class="token punctuation">{</span>
+	<span class="token function">M1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token function">M2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> T <span class="token keyword">struct</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>t T<span class="token punctuation">)</span> <span class="token function">M1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>t <span class="token operator">*</span>T<span class="token punctuation">)</span> <span class="token function">M2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">var</span> t T
+	<span class="token keyword">var</span> pt <span class="token operator">*</span>T
+	<span class="token function">DumpMethodSet</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>t<span class="token punctuation">)</span>
+	<span class="token function">DumpMethodSet</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>pt<span class="token punctuation">)</span>
+	<span class="token function">DumpMethodSet</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">*</span>Interface<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token boolean">nil</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">运行上述代码：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">$ go run method_set_2.go method_set_utils.go
+main.T's method set:
+- M1
+
+*main.T's method set:
+- M1
+- M2
+
+main.Interface's method set:
+- M1
+- M2
+
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">通过上述输出结果，我们可以一目了然地看到 T、*T 和 Interface 各自的方法集合。我们看到 T 类型的方法集合中只包含 M1，无法成为与 Interface 类型的方法集合的超集，因此这就是开篇例子中编译器认为变量 t 不能赋值给 Interface 类型变量的原因。在输出的结果中，我们还看到*T 类型的方法集合为[M1, M2]。*T 类型没有直接实现 M1，但 M1 仍出现在*T 类型的方法集合中了。这符合 Go 语言规范中的说法：对于非接口类型的自定义类型 T，其方法集合为所有 receiver 为 T 类型的方法组成；而类型*T 的方法集合则包含所有 receiver 为 T 和*T 类型的方法。也正因为如此，pt 才能成功赋值给 Interface 类型变量。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">到这里，我们完全明确了为 receiver 选择类型时需要考虑的第三点因素：是否支持将 T 类型实例赋值给某个接口类型变量。如果需要支持，我们就要实现 receiver 为 T 类型的接口类型方法集合中的所有方法。</p>
+</div><div class="cl-preview-section"><h2 id="类型嵌入与方法集合" style="font-size: 30px;">2. 类型嵌入与方法集合</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 的设计哲学之一就是<strong>偏好组合</strong>，Go 支持用组合的思想来实现一些面向对象领域经典的机制，比如：继承。而具体的方式就是利用类型嵌入（type embeding）。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 支持三种类型嵌入：接口类型中嵌入接口类型、结构体类型中嵌入接口类型以及结构体类型中嵌入结构体类型，下面我们分别看一下经过类型嵌入后的类型的方法集合是什么样子的。</p>
+</div><div class="cl-preview-section"><h3 id="接口类型中嵌入接口类型">1) 接口类型中嵌入接口类型</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">按 Go 语言惯例，Go 中的接口类型中仅包含少量方法，并且常常仅是一个方法。通过在接口类型中嵌入其他接口类型可以实现接口的组合，这也是 Go 语言中基于已有接口类型构建新接口类型的惯用法，比如 io 包中的 ReadWriter、ReadWriteCloser 等接口类型就是通过嵌入 Reader、Writer 或 Closer 三个基本的接口类型组合而成的：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// $GOROOT/src/io/io.go</span>
+
+<span class="token keyword">type</span> Reader <span class="token keyword">interface</span> <span class="token punctuation">{</span>
+        <span class="token function">Read</span><span class="token punctuation">(</span>p <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">,</span> err <span class="token builtin">error</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> Writer <span class="token keyword">interface</span> <span class="token punctuation">{</span>
+        <span class="token function">Write</span><span class="token punctuation">(</span>p <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">,</span> err <span class="token builtin">error</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> Closer <span class="token keyword">interface</span> <span class="token punctuation">{</span>
+        <span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">error</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 以上为三个基本接口类型</span>
+<span class="token comment">// 下面的接口类型通过嵌入上面基本接口类型而形成</span>
+
+<span class="token keyword">type</span> ReadWriter <span class="token keyword">interface</span> <span class="token punctuation">{</span>
+        Reader
+        Writer
+<span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> ReadCloser <span class="token keyword">interface</span> <span class="token punctuation">{</span>
+        Reader
+        Closer
+<span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> WriteCloser <span class="token keyword">interface</span> <span class="token punctuation">{</span>
+        Writer
+        Closer
+<span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> ReadWriteCloser <span class="token keyword">interface</span> <span class="token punctuation">{</span>
+        Reader
+        Writer
+        Closer
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们再来看看通过嵌入接口类型后的新接口类型的方法集合是什么样的，我们就以 Go 标准库中 io 包中的几个接口类型为例：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// method_set_3.go </span>
+<span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"io"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token function">DumpMethodSet</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">*</span>io<span class="token punctuation">.</span>Writer<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token boolean">nil</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token function">DumpMethodSet</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">*</span>io<span class="token punctuation">.</span>Reader<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token boolean">nil</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token function">DumpMethodSet</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">*</span>io<span class="token punctuation">.</span>Closer<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token boolean">nil</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token function">DumpMethodSet</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">*</span>io<span class="token punctuation">.</span>ReadWriter<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token boolean">nil</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token function">DumpMethodSet</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">*</span>io<span class="token punctuation">.</span>ReadWriteCloser<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token boolean">nil</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">运行该示例得到以下结果：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go">$ <span class="token keyword">go</span> run method_set_3<span class="token punctuation">.</span><span class="token keyword">go</span> method_set_utils<span class="token punctuation">.</span><span class="token keyword">go</span>
+io<span class="token punctuation">.</span>Writer<span class="token string">'s method set:
+- Write
+
+io.Reader'</span>s method set<span class="token punctuation">:</span>
+<span class="token operator">-</span> Read
+
+io<span class="token punctuation">.</span>Closer<span class="token string">'s method set:
+- Close
+
+io.ReadWriter'</span>s method set<span class="token punctuation">:</span>
+<span class="token operator">-</span> Read
+<span class="token operator">-</span> Write
+
+io<span class="token punctuation">.</span>ReadWriteCloser's method set<span class="token punctuation">:</span>
+<span class="token operator">-</span> Close
+<span class="token operator">-</span> Read
+<span class="token operator">-</span> Write
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">通过输出结果我们可以看出：通过嵌入其他接口类型而创建的新接口类型（比如：io.ReadWriteCloser）的方法集合包含了被嵌入接口类型（比如：io.Reader）的方法集合。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">不过这种通过嵌入其他接口类型创建新接口类型的方式有一个<strong>约束</strong>，那就是被嵌入的接口类型的方法集合不能有交集(如下面例子中的 Interface1 和 Interface2 的方法集合有交集，交集是方法 M1)，同时被嵌入的接口类型的方法集合中的方法名字不能与新接口中其他方法名同名（如下面例子中的 Interface2 的 M2 与 Interface4 的 M2 重名）：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// method_set_4.go</span>
+<span class="token keyword">package</span> main
+
+<span class="token keyword">type</span> Interface1 <span class="token keyword">interface</span> <span class="token punctuation">{</span>
+	<span class="token function">M1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> Interface2 <span class="token keyword">interface</span> <span class="token punctuation">{</span>
+	<span class="token function">M1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token function">M2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> Interface3 <span class="token keyword">interface</span> <span class="token punctuation">{</span>
+	Interface1
+	Interface2 <span class="token comment">// Error: duplicate method M1</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> Interface4 <span class="token keyword">interface</span> <span class="token punctuation">{</span>
+	Interface2
+	<span class="token function">M2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// Error: duplicate method M2</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token function">DumpMethodSet</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">*</span>Interface3<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token boolean">nil</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><h3 id="结构体类型中嵌入接口类型">2) 结构体类型中嵌入接口类型</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在结构体类型中嵌入接口类型后，该结构体类型的方法集合中将包含被嵌入的接口类型的方法集合。比如下面这个例子：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// method_set_5.go</span>
+<span class="token keyword">package</span> main
+
+<span class="token keyword">type</span> Interface <span class="token keyword">interface</span> <span class="token punctuation">{</span>
+	<span class="token function">M1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token function">M2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> T <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+	Interface
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token function">M3</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token function">DumpMethodSet</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">*</span>Interface<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token boolean">nil</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token keyword">var</span> t T
+	<span class="token keyword">var</span> pt <span class="token operator">*</span>T
+	<span class="token function">DumpMethodSet</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>t<span class="token punctuation">)</span>
+	<span class="token function">DumpMethodSet</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>pt<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">运行该示例得到以下结果：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">$ go run method_set_5.go method_set_utils.go
+main.Interface's method set:
+- M1
+- M2
+
+main.T's method set:
+- M1
+- M2
+- M3
+
+*main.T's method set:
+- M1
+- M2
+- M3
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">输出的结果与预期一致。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">但有些时候结果并非总是这样，比如：当结果体嵌入多个接口类型且这些接口类型的方法集合存在交集时。为了方便后续说明，这里不得不提一下嵌入了其他接口类型的结构体类型的实例在调用方法时，Go 选择方法的次序：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">优先选择结构体自身实现的方法;</li>
+<li style="font-size: 20px; line-height: 38px;">如果结构体自身并未实现，那么将查找结构体中的嵌入接口类型的方法集中是否有该方法，如果有，则提升（promoted）为结构体的方法；</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">比如下面例子：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// method_set_6.go </span>
+<span class="token keyword">package</span> main
+
+<span class="token keyword">type</span> Interface <span class="token keyword">interface</span> <span class="token punctuation">{</span>
+	<span class="token function">M1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token function">M2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> T <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+	Interface
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token function">M1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"T's M1"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> S <span class="token keyword">struct</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>S<span class="token punctuation">)</span> <span class="token function">M1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"S's M1"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>S<span class="token punctuation">)</span> <span class="token function">M2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"S's M2"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">var</span> t <span class="token operator">=</span> T<span class="token punctuation">{</span>
+		Interface<span class="token punctuation">:</span> S<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+	<span class="token punctuation">}</span>
+
+	t<span class="token punctuation">.</span><span class="token function">M1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	t<span class="token punctuation">.</span><span class="token function">M2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">当通过结构体 T 的实例变量 t 调用方法 M1 时，由于 T 自身实现了 M1 方法，因此调用的是 T.M1()；当通过变量 t 调用方法 M2 时，由于 T 自身未实现 M2 方法，于是找到结构体 T 的嵌入接口类型 Interface，发现 Interface 类型的方法集合中包含 M2 方法，于是将 Interface 类型的 M2 方法提升为结构体 T 的方法。而此时 T 类型中的匿名字段 Interface 已经赋值为 S 类型的实例，因此通过 Interface 这个嵌入字段调用的 M2 方法实质上是 S.M2()。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">下面是上面程序的输出结果，与我们的分析一致：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">$ go run method_set_6.go 
+T's M1
+S's M2
+</code></pre>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">如果结构体嵌入了多个接口类型且这些接口类型的方法集合存在交集，那么编译器将报错，除非结构体自己实现了交集中的所有方法。</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看一下下面的例子：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// method_set_7.go </span>
+<span class="token keyword">package</span> main
+
+<span class="token keyword">type</span> Interface <span class="token keyword">interface</span> <span class="token punctuation">{</span>
+	<span class="token function">M1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token function">M2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token function">M3</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> Interface1 <span class="token keyword">interface</span> <span class="token punctuation">{</span>
+	<span class="token function">M1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token function">M2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token function">M4</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> T <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+	Interface
+	Interface1
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	t <span class="token operator">:=</span> T<span class="token punctuation">{</span><span class="token punctuation">}</span>
+	t<span class="token punctuation">.</span><span class="token function">M1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	t<span class="token punctuation">.</span><span class="token function">M2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">运行该例子：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">$ go run method_set_7.go
+# command-line-arguments
+./method_set_7.go:22:3: ambiguous selector t.M1
+./method_set_7.go:23:3: ambiguous selector t.M2
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到编译器给出错误提示：编译器在选择 t.M1 和 t.M2 时出现分歧，编译器不知道该选择哪一个。在这个例子中结构体类型 T 嵌入的两个接口类型 Interface 和 Interface1 的方法集合存在交集，都包含 M1 和 M2，而结构体类型 T 自身又没有实现 M1 和 M2，因此编译器在结构体类型内部的嵌入接口类型中寻找 M1/M2 方法时发现两个接口类型 Interface 和 Interface1 都包含 M1/M2，于是编译器因无法做出选择而报错。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">为了让编译器能找到 M1/M2，我们可以为 T 增加 M1 和 M2 的实现，这样编译器便会直接选择 T 自己实现的 M1 和 M2，程序也就能顺利通过编译并运行了：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// method_set_8.go</span>
+
+<span class="token operator">...</span> <span class="token operator">...</span>
+
+<span class="token keyword">type</span> T <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+        Interface
+        Interface1
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token function">M1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"T's M1"</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token function">M2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"T's M2"</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        t <span class="token operator">:=</span> T<span class="token punctuation">{</span><span class="token punctuation">}</span>
+        t<span class="token punctuation">.</span><span class="token function">M1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        t<span class="token punctuation">.</span><span class="token function">M2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+$ <span class="token keyword">go</span> run method_set_8<span class="token punctuation">.</span><span class="token keyword">go</span>            
+T<span class="token string">'s M1
+T'</span>s M2
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">不过，我们还是要尽量避免在结构体类型中嵌入方法集合有交集的多个接口类型。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><strong>结构体类型在嵌入某接口类型的同时，它也实现了这个接口</strong>。这一特性在单元测试时尤为有用，尤其是应对在下面的场景中：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// method_set_9.go </span>
+<span class="token keyword">package</span> employee
+
+<span class="token keyword">type</span> Result <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+	Count <span class="token builtin">int</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>r Result<span class="token punctuation">)</span> <span class="token function">Int</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> r<span class="token punctuation">.</span>Count <span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> Rows <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token keyword">struct</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> Stmt <span class="token keyword">interface</span> <span class="token punctuation">{</span>
+	<span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">error</span>
+	<span class="token function">NumInput</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int</span>
+	<span class="token function">Exec</span><span class="token punctuation">(</span>stmt <span class="token builtin">string</span><span class="token punctuation">,</span> args <span class="token operator">...</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>Result<span class="token punctuation">,</span> <span class="token builtin">error</span><span class="token punctuation">)</span>
+	<span class="token function">Query</span><span class="token punctuation">(</span>args <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>Rows<span class="token punctuation">,</span> <span class="token builtin">error</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 返回男性员工总数</span>
+<span class="token keyword">func</span> <span class="token function">MaleCount</span><span class="token punctuation">(</span>s Stmt<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token builtin">error</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	result<span class="token punctuation">,</span> err <span class="token operator">:=</span> s<span class="token punctuation">.</span><span class="token function">Exec</span><span class="token punctuation">(</span><span class="token string">"select count(*) from employee_tab where gender=?"</span><span class="token punctuation">,</span> <span class="token string">"1"</span><span class="token punctuation">)</span>
+	<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+		<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">,</span> err
+	<span class="token punctuation">}</span>
+
+	<span class="token keyword">return</span> result<span class="token punctuation">.</span><span class="token function">Int</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token boolean">nil</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在这个例子中，我们有一个 employee 包，该包中的方法 MaleCount 方法通过传入的 Stmt 接口的实现从数据库获取男性员工的数量。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">现在我们要对 MaleCount 方法编写单元测试代码。对于这种依赖外部数据库操作的方法，我们的惯例是使用“伪对象(fake object)”来冒充真实的 Stmt 接口实现。不过现在有一个问题，那就是 Stmt 接口类型的方法集合中有四个方法，如果我们针对每个测试用例所用的伪对象都实现这四个方法，那么这个工作量有些大，我们需要的仅仅是 Exec 这一个方法。如何快速建立伪对象呢？结构体类型嵌入接口类型便可以帮助我们：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// method_set_9_test.go </span>
+<span class="token keyword">package</span> employee
+
+<span class="token keyword">import</span> <span class="token string">"testing"</span>
+
+<span class="token keyword">type</span> fakeStmtForMaleCount <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+	Stmt
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>fakeStmtForMaleCount<span class="token punctuation">)</span> <span class="token function">Exec</span><span class="token punctuation">(</span>stmt <span class="token builtin">string</span><span class="token punctuation">,</span> args <span class="token operator">...</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>Result<span class="token punctuation">,</span> <span class="token builtin">error</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">return</span> Result<span class="token punctuation">{</span>Count<span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token boolean">nil</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">TestEmployeeMaleCount</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	f <span class="token operator">:=</span> fakeStmtForMaleCount<span class="token punctuation">{</span><span class="token punctuation">}</span>
+	c<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> <span class="token function">MaleCount</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span>
+	<span class="token keyword">if</span> c <span class="token operator">!=</span> <span class="token number">5</span> <span class="token punctuation">{</span>
+		t<span class="token punctuation">.</span><span class="token function">Errorf</span><span class="token punctuation">(</span><span class="token string">"want: %d, actual: %d"</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> c<span class="token punctuation">)</span>
+		<span class="token keyword">return</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们为 TestEmployeeMaleCount 测试用例建立了一个 fakeStmtForMaleCount 的伪对象，在该结构体类型时嵌入 Stmt 接口类型，这样 fakeStmtForMaleCount 就实现了 Stmt 接口，我们实现了快速建立伪对象的目的。然后我们仅需为 fakeStmtForMaleCount 实现 MaleCount 所需的 Exec 方法即可。</p>
+</div><div class="cl-preview-section"><h3 id="结构体类型中嵌入结构体类型">3) 结构体类型中嵌入结构体类型</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在结构体类型中嵌入结构体类型为 Gopher 提供了一种“实现继承”的手段，外部的结构体类型 T 可以“继承”嵌入的结构体类型的所有方法的实现，并且无论是 T 类型的变量实例还是*T 类型变量实例，都可以调用所有“继承”的方法。</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// method_set_10.go </span>
+<span class="token keyword">package</span> main
+
+<span class="token keyword">type</span> T1 <span class="token keyword">struct</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>T1<span class="token punctuation">)</span> <span class="token function">T1M1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>   <span class="token punctuation">{</span> <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"T1's M1"</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>T1<span class="token punctuation">)</span> <span class="token function">T1M2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>   <span class="token punctuation">{</span> <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"T1's M2"</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span><span class="token operator">*</span>T1<span class="token punctuation">)</span> <span class="token function">PT1M3</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"PT1's M3"</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> T2 <span class="token keyword">struct</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>T2<span class="token punctuation">)</span> <span class="token function">T2M1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>   <span class="token punctuation">{</span> <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"T2's M1"</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>T2<span class="token punctuation">)</span> <span class="token function">T2M2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>   <span class="token punctuation">{</span> <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"T2's M2"</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span><span class="token operator">*</span>T2<span class="token punctuation">)</span> <span class="token function">PT2M3</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"PT2's M3"</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> T <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+	T1
+	<span class="token operator">*</span>T2
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	t <span class="token operator">:=</span> T<span class="token punctuation">{</span>
+		T1<span class="token punctuation">:</span> T1<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+		T2<span class="token punctuation">:</span> <span class="token operator">&amp;</span>T2<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"call method through t:"</span><span class="token punctuation">)</span>
+	t<span class="token punctuation">.</span><span class="token function">T1M1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	t<span class="token punctuation">.</span><span class="token function">T1M2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	t<span class="token punctuation">.</span><span class="token function">PT1M3</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	t<span class="token punctuation">.</span><span class="token function">T2M1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	t<span class="token punctuation">.</span><span class="token function">T2M2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	t<span class="token punctuation">.</span><span class="token function">PT2M3</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+	<span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"\ncall method through pt:"</span><span class="token punctuation">)</span>
+	pt <span class="token operator">:=</span> <span class="token operator">&amp;</span>t
+	pt<span class="token punctuation">.</span><span class="token function">T1M1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	pt<span class="token punctuation">.</span><span class="token function">T1M2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	pt<span class="token punctuation">.</span><span class="token function">PT1M3</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	pt<span class="token punctuation">.</span><span class="token function">T2M1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	pt<span class="token punctuation">.</span><span class="token function">T2M2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	pt<span class="token punctuation">.</span><span class="token function">PT2M3</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token function">println</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span>
+
+	<span class="token keyword">var</span> t1 T1
+	<span class="token keyword">var</span> pt1 <span class="token operator">*</span>T1
+	<span class="token function">DumpMethodSet</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>t1<span class="token punctuation">)</span>
+	<span class="token function">DumpMethodSet</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>pt1<span class="token punctuation">)</span>
+
+	<span class="token keyword">var</span> t2 T2
+	<span class="token keyword">var</span> pt2 <span class="token operator">*</span>T2
+	<span class="token function">DumpMethodSet</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>t2<span class="token punctuation">)</span>
+	<span class="token function">DumpMethodSet</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>pt2<span class="token punctuation">)</span>
+
+	<span class="token function">DumpMethodSet</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>t<span class="token punctuation">)</span>
+	<span class="token function">DumpMethodSet</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>pt<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">示例运行结果如下：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">$ go run method_set_10.go method_set_utils.go
+call method through t:
+T1's M1
+T1's M2
+PT1's M3
+T2's M1
+T2's M2
+PT2's M3
+
+call method through pt:
+T1's M1
+T1's M2
+PT1's M3
+T2's M1
+T2's M2
+PT2's M3
+
+main.T1's method set:
+- T1M1
+- T1M2
+
+*main.T1's method set:
+- PT1M3
+- T1M1
+- T1M2
+
+main.T2's method set:
+- T2M1
+- T2M2
+
+*main.T2's method set:
+- PT2M3
+- T2M1
+- T2M2
+
+main.T's method set:
+- PT2M3
+- T1M1
+- T1M2
+- T2M1
+- T2M2
+
+*main.T's method set:
+- PT1M3
+- PT2M3
+- T1M1
+- T1M2
+- T2M1
+- T2M2
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">通过输出结果可以看出：虽然通过 T 还是*T 变量实例，都可以调用所有“继承”的方法(这也是 Go 语法甜头)，但是 T 和*T 类型的方法集合是有差别的：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">类型 T 的方法集合 = T1 的方法集合 + *T2 的方法集合；</li>
+<li style="font-size: 20px; line-height: 38px;">类型*T 的方法集合 = *T1 的方法集合 + *T2 的方法集合；</li>
+</ul>
+</div><div class="cl-preview-section"><h2 id="类型别名的方法集合" style="font-size: 30px;">3. 类型别名的方法集合</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 在 1.9 版本中引入了类型别名（type alias），支持为已有类型定义别名，如：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">type MyInterface I
+type Mystruct T
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">类型别名与原类型几乎可以理解为是完全等价的。Go 预定义标识符 rune、byte 就是通过 type alias 语法定义的：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// $GOROOT/src/builtin/builtin.go</span>
+
+<span class="token comment">// byte is an alias for uint8 and is equivalent to uint8 in all ways. It is</span>
+<span class="token comment">// used, by convention, to distinguish byte values from 8-bit unsigned</span>
+<span class="token comment">// integer values.</span>
+<span class="token keyword">type</span> <span class="token builtin">byte</span> <span class="token operator">=</span> <span class="token builtin">uint8</span>
+
+<span class="token comment">// rune is an alias for int32 and is equivalent to int32 in all ways. It is</span>
+<span class="token comment">// used, by convention, to distinguish character values from integer values.</span>
+<span class="token keyword">type</span> <span class="token builtin">rune</span> <span class="token operator">=</span> <span class="token builtin">int32</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">但是在方法集合上面，类型别名与原类型是有差别的。我们看一个例子：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// method_set_11.go</span>
+<span class="token keyword">package</span> main
+
+<span class="token keyword">type</span> T <span class="token keyword">struct</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token function">M1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span><span class="token operator">*</span>T<span class="token punctuation">)</span> <span class="token function">M2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> Interface <span class="token keyword">interface</span> <span class="token punctuation">{</span>
+	<span class="token function">M1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token function">M2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> T1 T
+<span class="token keyword">type</span> Interface1 Interface
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">var</span> t T
+	<span class="token keyword">var</span> pt <span class="token operator">*</span>T
+	<span class="token keyword">var</span> t1 T1
+	<span class="token keyword">var</span> pt1 <span class="token operator">*</span>T1
+
+	<span class="token function">DumpMethodSet</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>t<span class="token punctuation">)</span>
+	<span class="token function">DumpMethodSet</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>t1<span class="token punctuation">)</span>
+
+	<span class="token function">DumpMethodSet</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>pt<span class="token punctuation">)</span>
+	<span class="token function">DumpMethodSet</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>pt1<span class="token punctuation">)</span>
+
+	<span class="token function">DumpMethodSet</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">*</span>Interface<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token boolean">nil</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token function">DumpMethodSet</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">*</span>Interface1<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token boolean">nil</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">运行该示例程序得到如下结果：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">$ go run method_set_11.go method_set_utils.go 
+main.T's method set:
+- M1
+
+main.T1's method set is empty!
+
+*main.T's method set:
+- M1
+- M2
+
+*main.T1's method set is empty!
+
+main.Interface's method set:
+- M1
+- M2
+
+main.Interface1's method set:
+- M1
+- M2
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">从例子的输出结果上来看，Go 对于接口类型和自定义类型的类型别名给出了“不一致”的结果：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">接口类型的别名类型与原接口类型的方法集合是一致的，如上面的 Interface 和 Interface1；</li>
+<li style="font-size: 20px; line-height: 38px;">自定义类型的别名类型则并没有“继承”原类型的方法集合，<strong>别名类型的方法集合是空的</strong>。</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><strong>方法集合决定接口实现</strong>：自定义类型的别名类型的方法集合为空的事实也决定了即便原类型实现了某些接口，其别名类型也没有“继承”这一隐式关联。别名类型要想实现那些接口，仍需重新实现接口的所有方法。</p>
+</div><div class="cl-preview-section"><h2 id="小结" style="font-size: 30px;">4. 小结</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">本节要点：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">方法集合是类型与接口间“隐式”关系的纽带，只有类型的方法集合是某接口类型的超集时，我们才说该类型实现了某接口；</li>
+<li style="font-size: 20px; line-height: 38px;">类型 T 的方法集合为以 T 为 receiver 类型的所有方法的集合；类型*T 的方法集合为以*T 为 receiver 类型的所有方法的集合与类型 T 的方法集合的并集；</li>
+<li style="font-size: 20px; line-height: 38px;">了解类型嵌入对接口类型和自定义结构体类型的方法集合的影响；</li>
+<li style="font-size: 20px; line-height: 38px;">接口类型的别名类型与原类型具有相同的方法集合；自定义类型的别名类型的方法集合为空。</li>
+</ul>
+</div>}
+                        </div>
+                    </div>
+                                            <!-- 买过的阅读 -->
+                        <div class="art-next-prev clearfix">
+                                                                                                <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/87/article/2422">
+                                                                    <div class="prev l clearfix">
+                                        <div class="icon l">
+                                            <i class="imv2-arrow3_l"></i>
+                                        </div>
+                                        <p>
+                                            20 Go 方法的本质
+                                        </p>
+                                    </div>
+                                </a>
+                                                                                                                            <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/87/article/2424">
+                                                                    <div class="next r clearfix">
+                                        <p>
+                                            22 变长参数函数的妙用
+                                        </p>
+                                        <div class="icon r">
+                                            <i class="imv2-arrow3_r"></i>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                                    </div>
+                                    </div>
+                <div class="comments-con js-comments-con" id="coments_con">
+                </div>
+
+                
+            </div>
+            
+            
+            
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-jiaQun-new hide" id="modal-jiaQun">
+    <div class="inner" style="">
+        <div class="modal-close js-close-jiaQun">
+            <i class="imv2-close"></i>
+        </div>
+        <div class="content">
+            <img src="https://img4.sycdn.imooc.com/5f51ecec0001392b05330597.jpg">
+            <div class="right-info">
+                <div class="title">
+                    扫码加入慕课前沿技术核心用户群
+                </div>
+                <div class="desc">
+                                            <p class="mb6">验证信息：<span id="joincode">2010312025386365</span><span class="copy js-copy-joincode">复制</span></p>
+                                        <p class="mb6">QQ讨论群号：729941811</p>
+                                            <p>QQ群URL：<a href="https://jq.qq.com/?_wv=1027&amp;k=5WJLMxV" target="_blank">点击访问</a></p>
+                                    </div>
+            </div>
+            <p class="tip">若遇到搜索不到QQ群或加群失败，请联系客服邮箱:kf@imooc.com</p>
+        </div>
+    </div>
+</div>
+ 
+<!-- 专栏介绍页专栏评价 -->
+
+<!-- 专栏介绍页底部三条评价 -->
+
+<!-- 专栏阅读页弹层目录和介绍页页面目录 -->
+
+<!-- 专栏阅读页发布回复 -->
+
+<!-- 专栏阅读页发布评论 -->
+
+<!-- 专栏阅读页底部评论 -->
+
+<!-- 专栏阅读 单个 评论 -->
+
+<!-- 新增回复和展开三条以外回复 -->
+
+<!-- 立即订阅的弹窗 -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div></body></html>

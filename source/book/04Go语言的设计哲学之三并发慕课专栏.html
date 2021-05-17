@@ -1,0 +1,235 @@
+<html><head><meta charset="utf-8"><title>04 Go语言的设计哲学之三：并发-慕课专栏</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+			<meta name="renderer" content="webkit">
+			<meta property="qc:admins" content="77103107776157736375">
+			<meta property="wb:webmaster" content="c4f857219bfae3cb">
+			<meta http-equiv="Access-Control-Allow-Origin" content="*">
+			<meta http-equiv="Cache-Control" content="no-transform ">
+			<meta http-equiv="Cache-Control" content="no-siteapp">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://www.imooc.com/static/img/common/touch-icon-ipad.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://www.imooc.com/static/img/common/touch-icon-iphone-retina.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://www.imooc.com/static/img/common/touch-icon-ipad-retina.png">
+			<link href="https://moco.imooc.com/captcha/style/captcha.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201907021539" type="text/css">
+			<link rel="stylesheet" href="https://www.imooc.com/static/lib/swiper/swiper-3.4.2.min.css?t=201907021539">
+			<link rel="stylesheet" href="https://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,column/zhuanlanChapter-less.css?t=2.5,course/inc/course_tipoff-less.css?t=2.5?v=201907051055" type="text/css">
+			<link charset="utf-8" rel="stylesheet" href="https://www.imooc.com/static/lib/ueditor/themes/imooc/css/ueditor.css?v=201907021539"><link rel="stylesheet" href="https://www.imooc.com/static/lib/baiduShare/api/css/share_style0_16.css?v=6aba13f0.css"></head>
+			<body><div id="main">
+
+
+<div class="main-con hide-menu">
+    <!-- 左侧菜单 & 索引 -->
+    
+    <div class="right-content" style="padding-left: 0px;">
+        <div class="container clearfix" id="top" style="width: 1134px; display: block;">
+            
+            
+            <div class="center_con js-center_con l" style="width: 1134px;">
+                <div class="article-con">
+                                            <!-- 买过的阅读 -->
+                        
+
+                    
+                    <div class="art-title" style="margin-top: 0px;">
+                        04 Go语言的设计哲学之三：并发
+                    </div>
+                    <div class="art-info clearfix">
+                        
+                        <span class="l">
+                            更新时间：2020-09-16 10:09:30
+                        </span>
+                    </div>
+                    <div class="art-top">
+                                                <img src="https://img4.sycdn.imooc.com/5f5ee80300011ef906400427.jpg" alt="">
+                                                                        <div class="famous-word-box">
+                            <img src="https://www.imooc.com/static/img/column/bg-l.png" alt="" class="bg1 bg">
+                            <img src="https://www.imooc.com/static/img/column/bg-r.png" alt="" class="bg2 bg">
+                            <div class="famous-word">知识是一种快乐，而好奇则是知识的萌芽。——培根<p></p></div>
+                        </div>
+                                            </div>
+                    <div class="art-content js-lookimg">
+                        <div id="article_content">
+                            <div class="cl-preview-section"><h2 id="第三条原则-原生并发，轻量高效" style="font-size: 30px;">第三条原则: 原生并发，轻量高效</h2>
+</div><div class="cl-preview-section"><blockquote>
+<p style="font-size: 20px; line-height: 38px;">并发(Concurrency)是有关结构的，而并行(Parallelism)是有关执行的 - Rob Pike(2012)</p>
+</blockquote>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">将时钟指针回拨到 2007 年，那时 Go 语言三位设计者 Rob Pike、Robert Griesemer 和 Ken Thompson 都在 Google 使用 C++语言编写服务端代码。当时 C++ 标准委员会正在讨论下一个 C++ 标准（C++0x，也就是后来的 C++11 标准），委员会在标准草案中继续增加大量语言特性的行为让 Go 的三位设计者十分不满，尤其是带有原子类型的新 C++ 内存模型，给本已负担过重的 C++类型系统又增加了额外负担。三位设计者认为 C++ 标准委员会在思路上是短视的，因为硬件很可能在未来十年内发生重大变化，将语言与当时的硬件紧密耦合起来是十分不明智的，是没法给开发人员在编写大规模并发程序时带去太多帮助的。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">多年来，处理器生产厂商一直在摩尔定律的指导下，在提高时钟频率这条跑道上竞争，各行业对计算能力的需求推动了处理器处理能力的提高。CPU 的功耗和节能问题，愈来愈成为人们关注的一个焦点，CPU 仅靠提高主频来改进性能的做法遇到了瓶颈，由于主频提高导致 CPU 的功耗和发热量剧增，反过来制约了 CPU 性能的进一步提高。依靠主频的提高带来性能的提升已无法实现，人们开始把研究重点转向通过把多个执行内核放进一个处理器，每个内核在较低的频率下工作来降低功耗同时提高性能。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">2007 年处理器领域已开始进入一个全新的多核时代，处理器厂商的竞争焦点从主频转向了多核，多核设计也为摩尔定律带去了新的生命力。与传统的单核 CPU 相比，多核 CPU 带来了更强的并行处理能力、更高的计算密度和更低的时钟频率，并大大减少了散热和功耗。Go 的设计者敏锐地把握了 CPU 向多核方向发展的这一趋势，在决定不再使用 C++ 而去创建一门新语言的时候，果断将面向多核、原生内置并发支持作为了新语言的设计原则之一。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 语言原生并发原则的落地是映射到几个层面上的。</p>
+</div><div class="cl-preview-section"><h3 id="go-语言自身实现层面支持面向多核硬件的并发执行和调度">1) Go 语言自身实现层面支持面向多核硬件的并发执行和调度</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">提到并发执行与调度，我们首先想到的就是操作系统对进程、线程的调度。操作系统调度器会将系统中的多个线程按照一定算法调度到物理 CPU 上去运行。传统的编程语言比如 C、C++ 等的并发实现实际上就是基于操作系统调度的，即程序负责创建线程（一般通过 pthread 等函数库调用实现），操作系统负责调度。这种传统支持并发的方式有诸多不足：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;">复杂</p>
+<ul>
+<li style="font-size: 20px; line-height: 38px;">创建容易，退出难：使用 C 语言的开发人员都知道，创建一个 thread（比如利用 pthread）虽然参数也不少，但好歹可以接受。但一旦涉及到 thread 的退出，就要考虑 thread 是 detached，还是需要 parent thread 去 join？是否需要在 thread 中设置 cancel point，以保证 join 时能顺利退出？</li>
+<li style="font-size: 20px; line-height: 38px;">并发单元间通信困难，易错：多个 thread 之间的通信虽然有多种机制可选，但用起来是相当复杂；并且一旦涉及到 shared memory，就会用到各种 lock，死锁便成为家常便饭；</li>
+<li style="font-size: 20px; line-height: 38px;">thread stack size 的设定：是使用默认的，还是设置的大一些，或者小一些呢？</li>
+</ul>
+</li>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;">难于扩展</p>
+<ul>
+<li style="font-size: 20px; line-height: 38px;">一个 thread 的代价已经比进程小了很多了，但我们依然不能大量创建 thread，因为除了每个 thread 占用的资源不小之外，操作系统调度切换 thread 的代价也不小；</li>
+<li style="font-size: 20px; line-height: 38px;">对于很多网络服务程序，由于不能大量创建 thread，就要在少量 thread 里做网络多路复用，即：使用 epoll/kqueue/IoCompletionPort 这套机制，即便有 libevent、libev 这样的第三方库帮忙，写起这样的程序也是很不易的，存在大量 callback，给程序员带来不小的心智负担。</li>
+</ul>
+</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">为此，Go 采用了<strong>用户层轻量级 thread</strong>或者说是<strong>类 coroutine</strong>的概念来解决这些问题，Go 将之称为"<strong>goroutine</strong>"。goroutine 占用的资源非常小，每个 goroutine stack 的 size 默认设置是 2k，goroutine 调度的切换也不用陷入（trap）操作系统内核层完成，代价很低。因此，一个 Go 程序中可以创建成千上万个并发的 goroutine。所有的 Go 代码都在 goroutine 中执行，哪怕是 go 的 runtime 也不例外。将这些 goroutines 按照一定算法放到“<em>CPU</em>”上执行的程序就称为<strong>goroutine 调度器</strong>或<strong>goroutine scheduler</strong>。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">不过，一个 Go 程序对于操作系统来说只是一个<strong>用户层程序</strong>，对于操作系统而言，它的眼中只有 thread，它甚至不知道有什么叫 Goroutine 的东西的存在。goroutine 的调度全要靠 Go 自己完成，实现 Go 程序内 goroutine 之间“公平”的竞争“CPU”资源，这个任务就落到了 Go runtime 头上。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 语言实现了<strong>G-P-M 调度模型</strong>和 work stealing 算法，这个模型一直沿用至今，如下图所示：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="https://img1.sycdn.imooc.com/5f5ee3c900011b0d08000746.png" data-original="//img1.sycdn.imooc.com/5f5ee3c900011b0d08000746.png" alt="图片描述"></p>
+</div><div class="cl-preview-section"><center><font size="2">图1-4-1 Goroutine调度原理模型</font></center>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">G：表示 goroutine，存储了 goroutine 的执行 stack 信息、goroutine 状态以及 goroutine 的任务函数等；另外 G 对象是可以重用的。</li>
+<li style="font-size: 20px; line-height: 38px;">P：表示逻辑 processor，P 的数量决定了系统内最大可并行的 G 的数量（前提：系统的物理 cpu 核数&gt;=P 的数量）；P 的最大作用还是其拥有的各种 G 对象队列、链表、一些 cache 和状态。每个 G 要想真正运行起来，首先需要被分配一个 P（进入到 P 的 local runq 中）。对于 G 来说，P 就是运行它的“CPU”，可以说：<strong>G 的眼里只有 P</strong>。</li>
+<li style="font-size: 20px; line-height: 38px;">M：M 代表着真正的执行计算资源，一般对应的是操作系统的线程。从 Goroutine 调度器的视角来看，真正的“CPU”是 M，只有将 P 和 M 绑定才能让 P 的 runq 中 G 得以真实运行起来。这样的 P 与 M 的关系，就好比 Linux 操作系统调度层面用户线程（user thread）与核心线程（kernel thread）的对应关系那样（N x M）。M 在绑定有效的 P 后，进入 schedule 循环；而 schedule 循环的机制大致是从各种队列、p 的本地队列中获取 G，切换到 G 的执行栈上并执行 G 的函数，调用 goexit 做清理工作并回到 m，如此反复。M 并不保留 G 状态，这是 G 可以跨 M 调度的基础。</li>
+</ul>
+</div><div class="cl-preview-section"><h3 id="go-语言为开发者提供的支持并发的语法元素和机制">2) Go 语言为开发者提供的支持并发的语法元素和机制</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们先来看看那些设计并诞生于单核年代的编程语言，诸如：C、C++、Java 在语法元素和机制层面是如何支持并发的。</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">执行单元：线程；</li>
+<li style="font-size: 20px; line-height: 38px;">创建和销毁的方式：调用库函数或调用对象方法；</li>
+<li style="font-size: 20px; line-height: 38px;">并发线程间的通信：多基于操作系统提供的 IPC 机制，比如：共享内存、Socket、Pipe 等，当然也会使用有并发保护的全局变量。</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">和上述传统语言相比，Go 为开发人员提供了语言层面内置的并发语法元素和机制：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">执行单元：goroutine；</li>
+<li style="font-size: 20px; line-height: 38px;">创建和销毁方式：go+函数调用；函数退出即 goroutine 退出；</li>
+<li style="font-size: 20px; line-height: 38px;">并发 goroutine 的通信：通过语言内置的 channel 传递消息或实现同步，并通过 select 实现多路 channel 的并发控制。</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">对比来看，Go 对并发的原生支持将大大降低开发人员在开发并发程序时的心智负担。</p>
+</div><div class="cl-preview-section"><h3 id="并发原则对-go-开发者在程序结构设计层面的影响">3) 并发原则对 Go 开发者在程序结构设计层面的影响</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">由于 goroutine 的开销很小（相对线程），Go 官方是鼓励大家使用 goroutine 来充分利用多核资源的。但并不是有了 goroutine 就一定能充分的利用多核资源，或者说即便使用 Go 也不一定能设计编写出一个好的并发程序。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">为此 Rob Pike 曾有过一次关于“并发不是并行”<sup class="footnote-ref"><a href="#fn1" id="fnref1">1</a></sup>的主题分享，在那次分享中，这位 Go 语言之父图文并茂地讲解了并发（Concurrency）和并行（Parallelism）的区别。Rob Pike 认为：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">并发是有关结构的，它是一种将一个程序分解成小片段并且每个小片段都可以独立执行的程序设计方法; 并发程序的小片段之间一般存在通信联系并且通过通信相互协作；</li>
+<li style="font-size: 20px; line-height: 38px;">并行是有关执行的，它表示同时进行一些计算任务 。</li>
+</ul>
+</div><div class="cl-preview-section"><blockquote>
+<p style="font-size: 20px; line-height: 38px;">划重点：并发是一种程序结构设计的方法，它使得并行成为可能。不过这依然很抽象，我们这里也借用 Rob Pike 分享中的那个“搬运书问题”来重新诠释一下并发的含义。搬运书问题要求设计一个方案，使得 gopher 能更快地将一堆废弃的语言手册搬到垃圾回收场烧掉。</p>
+</blockquote>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">最简单的方案莫过于下图：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="https://img1.sycdn.imooc.com/5f5ee47e0001776e08000289.jpg" data-original="//img1.sycdn.imooc.com/5f5ee47e0001776e08000289.jpg" alt="图片描述"></p>
+</div><div class="cl-preview-section"><center><font size="2">图1-4-2 搬书问题初始方案</font></center>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">这个方案显然不是并发设计方案，它没有对问题进行任何分解，所有事情都是由一个 gopher 从头到尾按顺序完成的。但即便这样一个并非并发的方案，我们也可以将其放到多核的硬件上并行的执行，只是需要多建立几个 gopher 例程（procedure）的实例罢了：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="https://img1.sycdn.imooc.com/5f5ee50800012d7908000388.jpg" data-original="//img1.sycdn.imooc.com/5f5ee50800012d7908000388.jpg" alt="图片描述"></p>
+</div><div class="cl-preview-section"><center><font size="2">图1-4-3 搬书问题初始方案的并行化</font></center>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">但和并发方案相比，这种方案是缺乏自动扩展为并行的能力的。Rob Pike 在分享中给出了两种并发方案，也就是该问题的两种分解方案，两种方案都是正确的，只是分解粒度的细致程度不同。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="https://img1.sycdn.imooc.com/5f5ee51600019fb108000267.jpg" data-original="//img1.sycdn.imooc.com/5f5ee51600019fb108000267.jpg" alt="图片描述"></p>
+</div><div class="cl-preview-section"><center><font size="2">图1-4-4 搬书问题并发方案1</font></center>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="https://img1.sycdn.imooc.com/5f5ee522000112db08000212.jpg" data-original="//img1.sycdn.imooc.com/5f5ee522000112db08000212.jpg" alt="图片描述"></p>
+</div><div class="cl-preview-section"><center><font size="2">图1-4-5 搬书问题并发方案2</font></center>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">并发方案 1 将原来单一的 gopher 例程执行拆分为 4 个执行不同任务的 gopher 例程，每个例程更简单：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">将书搬运到车上（loadBooksToCart）；</li>
+<li style="font-size: 20px; line-height: 38px;">推车到垃圾焚化地点（moveCartToIncinerator）；</li>
+<li style="font-size: 20px; line-height: 38px;">将书从车上搬下送入焚化炉（unloadBookIntoIncinerator）；</li>
+<li style="font-size: 20px; line-height: 38px;">将空车送返（returnEmptyCart）。</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">理论上并发方案 1 的处理性能能达到初始方案的四倍，并且不同 gopher 例程可以在不同的处理器核上并行执行，而无需像最初方案那样需要建立新实例实现并行。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">和并发方案 1 相比，并发方案 2 增加了“暂存区域”，分解的粒度更细，每个部分的 gopher 例程各司其责，这样的程序在单核处理器上也是正常运行的（在单核上可能处理能力不如非并发方案）。但随着处理器核数的增多，并发方案可以自然地提高处理性能，提升吞吐。而非并发方案在处理器核数提升后，也仅仅能使用其中的一个核，无法自然扩展，这一切都是程序的结构所决定的。这也告诉我们：并发程序的结构设计不要局限于在单核情况下处理能力的高低，而是以在多核情况下能够充分提升多核利用率、获得性能的自然提升为最终目的。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">除此之外，并发与组合的哲学是一脉相承的，并发是一个更大的组合的概念，它在程序设计的层面对程序进行拆解组合，再映射到程序执行层面上：goroutines 各自执行特定的工作，通过 channel+select 将 goroutines 组合连接起来。并发的存在鼓励程序员在程序设计时进行独立计算的分解，而对并发的原生支持让 Go 语言更适应现代计算环境。</p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item" style="font-size: 20px; line-height: 38px;"><p style="font-size: 20px; line-height: 38px;">并发不是并行 <a href="https://talks.golang.org/2012/waza.slide">https://talks.golang.org/2012/waza.slide</a> <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+</div>}
+                        </div>
+                    </div>
+                                            <!-- 买过的阅读 -->
+                        <div class="art-next-prev clearfix">
+                                                                                                <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/87/article/2322">
+                                                                    <div class="prev l clearfix">
+                                        <div class="icon l">
+                                            <i class="imv2-arrow3_l"></i>
+                                        </div>
+                                        <p>
+                                            03 Go 语言的设计哲学之二：组合
+                                        </p>
+                                    </div>
+                                </a>
+                                                                                                                            <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/87/article/2341">
+                                                                    <div class="next r clearfix">
+                                        <p>
+                                            05 Go 语言的设计哲学之四：面向工程
+                                        </p>
+                                        <div class="icon r">
+                                            <i class="imv2-arrow3_r"></i>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                                    </div>
+                                    </div>
+                <div class="comments-con js-comments-con" id="coments_con">
+                </div>
+
+                
+            </div>
+            
+            
+            
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-jiaQun-new hide" id="modal-jiaQun">
+    <div class="inner" style="">
+        <div class="modal-close js-close-jiaQun">
+            <i class="imv2-close"></i>
+        </div>
+        <div class="content">
+            <img src="https://img4.sycdn.imooc.com/5f51ecec0001392b05330597.jpg">
+            <div class="right-info">
+                <div class="title">
+                    扫码加入慕课前沿技术核心用户群
+                </div>
+                <div class="desc">
+                                            <p class="mb6">验证信息：<span id="joincode">2010312025386365</span><span class="copy js-copy-joincode">复制</span></p>
+                                        <p class="mb6">QQ讨论群号：729941811</p>
+                                            <p>QQ群URL：<a href="https://jq.qq.com/?_wv=1027&amp;k=5WJLMxV" target="_blank">点击访问</a></p>
+                                    </div>
+            </div>
+            <p class="tip">若遇到搜索不到QQ群或加群失败，请联系客服邮箱:kf@imooc.com</p>
+        </div>
+    </div>
+</div>
+ 
+<!-- 专栏介绍页专栏评价 -->
+
+<!-- 专栏介绍页底部三条评价 -->
+
+<!-- 专栏阅读页弹层目录和介绍页页面目录 -->
+
+<!-- 专栏阅读页发布回复 -->
+
+<!-- 专栏阅读页发布评论 -->
+
+<!-- 专栏阅读页底部评论 -->
+
+<!-- 专栏阅读 单个 评论 -->
+
+<!-- 新增回复和展开三条以外回复 -->
+
+<!-- 立即订阅的弹窗 -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div></body></html>

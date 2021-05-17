@@ -1,0 +1,186 @@
+<html><head><meta charset="utf-8"><title>03 Go 语言的设计哲学之二：组合-慕课专栏</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+			<meta name="renderer" content="webkit">
+			<meta property="qc:admins" content="77103107776157736375">
+			<meta property="wb:webmaster" content="c4f857219bfae3cb">
+			<meta http-equiv="Access-Control-Allow-Origin" content="*">
+			<meta http-equiv="Cache-Control" content="no-transform ">
+			<meta http-equiv="Cache-Control" content="no-siteapp">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://www.imooc.com/static/img/common/touch-icon-ipad.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://www.imooc.com/static/img/common/touch-icon-iphone-retina.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://www.imooc.com/static/img/common/touch-icon-ipad-retina.png">
+			<link href="https://moco.imooc.com/captcha/style/captcha.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201907021539" type="text/css">
+			<link rel="stylesheet" href="https://www.imooc.com/static/lib/swiper/swiper-3.4.2.min.css?t=201907021539">
+			<link rel="stylesheet" href="https://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,column/zhuanlanChapter-less.css?t=2.5,course/inc/course_tipoff-less.css?t=2.5?v=201907051055" type="text/css">
+			<link charset="utf-8" rel="stylesheet" href="https://www.imooc.com/static/lib/ueditor/themes/imooc/css/ueditor.css?v=201907021539"><link rel="stylesheet" href="https://www.imooc.com/static/lib/baiduShare/api/css/share_style0_16.css?v=6aba13f0.css"></head>
+			<body><div id="main">
+
+
+<div class="main-con hide-menu">
+    <!-- 左侧菜单 & 索引 -->
+    
+    <div class="right-content" style="padding-left: 0px;">
+        <div class="container clearfix" id="top" style="width: 1134px; display: block;">
+            
+            
+            <div class="center_con js-center_con l" style="width: 1134px;">
+                <div class="article-con">
+                                            <!-- 买过的阅读 -->
+                        
+
+                    
+                    <div class="art-title" style="margin-top: 0px;">
+                        03 Go 语言的设计哲学之二：组合
+                    </div>
+                    <div class="art-info clearfix">
+                        
+                        <span class="l">
+                            更新时间：2020-09-08 09:34:57
+                        </span>
+                    </div>
+                    <div class="art-top">
+                                                <img src="https://img3.sycdn.imooc.com/5f51f96600013a8d06400359.jpg" alt="">
+                                                                        <div class="famous-word-box">
+                            <img src="https://www.imooc.com/static/img/column/bg-l.png" alt="" class="bg1 bg">
+                            <img src="https://www.imooc.com/static/img/column/bg-r.png" alt="" class="bg2 bg">
+                            <div class="famous-word">没有引发任何行动的思想都不是思想，而是梦想。 —— 马丁<p></p></div>
+                        </div>
+                                            </div>
+                    <div class="art-content js-lookimg">
+                        <div id="article_content">
+                            <div class="cl-preview-section"><h2 id="第二条原则-偏好组合，正交解耦" style="font-size: 30px;">第二条原则: 偏好组合，正交解耦</h2>
+</div><div class="cl-preview-section"><blockquote>
+<p style="font-size: 20px; line-height: 38px;">当我们有必要采用另外一种方式处理数据时，我们应该有一些耦合程序的方式，就像花园里将浇水的软管通过预置的螺丝扣拧入另一段那样，这也是 Unix IO 采用的方式。- 道格·麦克罗伊，Unix 管道的发明者(1964)</p>
+</blockquote>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">C++、Java 等主流面向对象（以下简称 OO）语言通过庞大的、自上而下的类型体系、继承、显式接口实现等机制将程序的各个部分耦合起来，但在 Go 语言中我们找不到经典 OO 的语法元素、类型体系和继承机制，或者说 Go 语言本质上就不属于经典 OO 语言范畴。针对这种情况，很多人会问：那 Go 语言是如何将程序的各个部分有机地耦合在一起的呢？就像上面引述的道格.麦克罗伊的那句话中的浇水软管那样，Go 语言遵从的设计哲学也是组合。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在诠释组合之前，我们可以先来了解一下 Go 在语法元素设计时是如何为组合哲学的应用奠定基础的。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在 Go 语言设计层面，Go 设计者为 gopher 们提供了正交的语法元素供后续组合使用，包括：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">Go 语言无类型体系(type hierarchy)，类型之间是独立的，没有子类型的概念；</li>
+<li style="font-size: 20px; line-height: 38px;">每个类型都可以有自己的方法集合，类型定义与方法实现是正交独立的；</li>
+<li style="font-size: 20px; line-height: 38px;">接口(interface)与其实现之间"隐式关联"；</li>
+<li style="font-size: 20px; line-height: 38px;">包(package)之间是相对独立的，没有子包的概念。</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到无论是包、接口还是一个个具体的类型定义(包括类型的方法集合)，Go 语言为我们呈现了这样的一幅图景：一座座没有关联的“孤岛”，但每个岛内又都很精彩。现在摆在面前的工作就是在这些孤岛之间以最适当的方式建立关联（耦合），形成一个"整体"。Go 采用了组合的方式，也是唯一的方式。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 语言提供了的最为直观的组合的语法元素就是<code>type embedding</code>，即类型嵌入。通过类型嵌入，我们可以将已经实现的功能嵌入到新类型中，以快速满足新类型的功能需求，这种方式有些类似经典 OO 的“继承”，但在原理上与经典 OO 的继承完全不同。这是一种 Go 精心设计的“语法糖”，被嵌入的类型和新类型两者之间没有任何关系，甚至相互完全不知道对方的存在，更没有经典 OO 那种父类、子类的关系以及向上、向下转型(type casting)。通过新类型实例调用方法时，方法的匹配取决于方法名字，而不是类型。这种组合方式，我称之为“垂直组合”，即通过类型嵌入，快速让一个新类型“复用”其他类型已经实现的能力，实现功能的垂直扩展。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">下面是一个类型嵌入的例子：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">  // Go标准库：sync/pool.go
+  type poolLocal struct {
+      private interface{}   // Can be used only by the respective P.
+      shared  []interface{} // Can be used by any P.
+      Mutex                 // Protects shared.
+      pad     [128]byte     // Prevents false sharing.
+  }
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们在 poolLocal 这个 struct 中嵌入类型 Mutex，被嵌入的 Mutex 类型的方法集合会被提升到外面的类型中。比如，这里的 poolLocal 将拥有 Mutex 类型的 Lock 和 Unlock 方法。实际调用时，方法调用实际会被传给 poolLocal 中的 Mutex 实例。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们在标准库中还经常看到类似如下的 interface 类型嵌入的代码：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">  type ReadWriter interface {
+      Reader
+      Writer
+  }
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">通过在 interface 中嵌入 interface type，实现接口行为的聚合，组成大接口，这种方式在标准库中尤为常用，并且已经成为了 Go 语言的一种常见的惯用法。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">interface 是 Go 语言中真正的魔法，是 Go 语言的一个创新设计，它只是方法集合，并且它与实现者之间的关系是隐式的，它让程序内部各部分之间的耦合降至最低，同时它也是连接程序各个部分之间“纽带”。隐式的 interface 实现会不经意间满足：依赖抽象、里氏替换、接口隔离等原则，这在其他语言中是需要很"刻意"的设计谋划才能实现的，但在 Go interface 来看，一切却是自然而然的。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">通过 interface 将程序内部各个部分组合在一起的方法，我这里称之为水平组合。水平组合的“模式”很多，比如：一种常见方法就是：通过接受 interface 类型参数的普通函数进行组合，例如下面代码。</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">  func ReadAll(r io.Reader) ([]byte, error)
+  func Copy(dst Writer, src Reader) (written int64, err error)
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">ReadAll 通过 io.Reader 这个接口将 io.Reader 的实现与 ReadAll 所在的包低耦合的水平组合在一起了。类似的水平组合“模式”还有 wrapper、middleware 等，这里就不展开了，在后面讲到 interface 时再详细叙述。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">此外，Go 语言内置的并发能力也可以通过组合的方式实现“对计算能力的串联”，比如：通过 goroutine+channel 的组合实现类似 Unix Pipe 的能力。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">综上，组合原则的应用塑造了 Go 程序的骨架结构。类型嵌入为类型提供的垂直扩展能力，interface 是水平组合的关键，它好比程序肌体上的“关节”，给予连接“关节”的两个部分各自“自由活动”的能力，而整体上又实现了某种功能。组合也让遵循“简单”原则的 Go 语言的表现力丝毫不逊色于其他复杂的主流编程语言。</p>
+</div>}
+                        </div>
+                    </div>
+                                            <!-- 买过的阅读 -->
+                        <div class="art-next-prev clearfix">
+                                                                                                <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/87/article/2321">
+                                                                    <div class="prev l clearfix">
+                                        <div class="icon l">
+                                            <i class="imv2-arrow3_l"></i>
+                                        </div>
+                                        <p>
+                                            02 Go语言的设计哲学之一：简单
+                                        </p>
+                                    </div>
+                                </a>
+                                                                                                                            <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/87/article/2340">
+                                                                    <div class="next r clearfix">
+                                        <p>
+                                            04 Go语言的设计哲学之三：并发
+                                        </p>
+                                        <div class="icon r">
+                                            <i class="imv2-arrow3_r"></i>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                                    </div>
+                                    </div>
+                <div class="comments-con js-comments-con" id="coments_con">
+                </div>
+
+                
+            </div>
+            
+            
+            
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-jiaQun-new hide" id="modal-jiaQun">
+    <div class="inner" style="">
+        <div class="modal-close js-close-jiaQun">
+            <i class="imv2-close"></i>
+        </div>
+        <div class="content">
+            <img src="https://img2.sycdn.imooc.com/5f51ecec0001392b05330597.jpg">
+            <div class="right-info">
+                <div class="title">
+                    扫码加入慕课前沿技术核心用户群
+                </div>
+                <div class="desc">
+                                            <p class="mb6">验证信息：<span id="joincode">2010312025386365</span><span class="copy js-copy-joincode">复制</span></p>
+                                        <p class="mb6">QQ讨论群号：729941811</p>
+                                            <p>QQ群URL：<a href="https://jq.qq.com/?_wv=1027&amp;k=5WJLMxV" target="_blank">点击访问</a></p>
+                                    </div>
+            </div>
+            <p class="tip">若遇到搜索不到QQ群或加群失败，请联系客服邮箱:kf@imooc.com</p>
+        </div>
+    </div>
+</div>
+ 
+<!-- 专栏介绍页专栏评价 -->
+
+<!-- 专栏介绍页底部三条评价 -->
+
+<!-- 专栏阅读页弹层目录和介绍页页面目录 -->
+
+<!-- 专栏阅读页发布回复 -->
+
+<!-- 专栏阅读页发布评论 -->
+
+<!-- 专栏阅读页底部评论 -->
+
+<!-- 专栏阅读 单个 评论 -->
+
+<!-- 新增回复和展开三条以外回复 -->
+
+<!-- 立即订阅的弹窗 -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div></body></html>

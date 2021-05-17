@@ -1,0 +1,567 @@
+<html><head><meta charset="utf-8"><title>16 理解包导入路径的含义-慕课专栏</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+			<meta name="renderer" content="webkit">
+			<meta property="qc:admins" content="77103107776157736375">
+			<meta property="wb:webmaster" content="c4f857219bfae3cb">
+			<meta http-equiv="Access-Control-Allow-Origin" content="*">
+			<meta http-equiv="Cache-Control" content="no-transform ">
+			<meta http-equiv="Cache-Control" content="no-siteapp">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://www.imooc.com/static/img/common/touch-icon-ipad.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://www.imooc.com/static/img/common/touch-icon-iphone-retina.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://www.imooc.com/static/img/common/touch-icon-ipad-retina.png">
+			<link href="https://moco.imooc.com/captcha/style/captcha.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201907021539" type="text/css">
+			<link rel="stylesheet" href="https://www.imooc.com/static/lib/swiper/swiper-3.4.2.min.css?t=201907021539">
+			<link rel="stylesheet" href="https://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,column/zhuanlanChapter-less.css?t=2.5,course/inc/course_tipoff-less.css?t=2.5?v=201907051055" type="text/css">
+			<link charset="utf-8" rel="stylesheet" href="https://www.imooc.com/static/lib/ueditor/themes/imooc/css/ueditor.css?v=201907021539"><link rel="stylesheet" href="https://www.imooc.com/static/lib/baiduShare/api/css/share_style0_16.css?v=6aba13f0.css"></head>
+			<body><div id="main">
+
+
+<div class="main-con hide-menu">
+    <!-- 左侧菜单 & 索引 -->
+    
+    <div class="right-content" style="padding-left: 0px;">
+        <div class="container clearfix" id="top" style="width: 1134px; display: block;">
+            
+            
+            <div class="center_con js-center_con l" style="width: 1134px;">
+                <div class="article-con">
+                                            <!-- 买过的阅读 -->
+                        
+
+                    
+                    <div class="art-title" style="margin-top: 0px;">
+                        16 理解包导入路径的含义
+                    </div>
+                    <div class="art-info clearfix">
+                        
+                        <span class="l">
+                            更新时间：2020-10-21 10:33:30
+                        </span>
+                    </div>
+                    <div class="art-top">
+                                                <img src="https://img2.sycdn.imooc.com/5f6846700001aea106400359.jpg" alt="">
+                                                                        <div class="famous-word-box">
+                            <img src="https://www.imooc.com/static/img/column/bg-l.png" alt="" class="bg1 bg">
+                            <img src="https://www.imooc.com/static/img/column/bg-r.png" alt="" class="bg2 bg">
+                            <div class="famous-word">才能一旦让懒惰支配，它就一无可为。——克雷洛夫<p></p></div>
+                        </div>
+                                            </div>
+                    <div class="art-content js-lookimg">
+                        <div id="article_content">
+                            <div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 语言是使用包（package）作为基本单元来组织源码的，可以说一个 Go 程序就是由一些包链接在一起构建而成的。虽然与 Java、Python 等语言相比这算不上什么创新，但与祖辈 C 语言的头文件包含机制相比则是“先进”了许多。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">编译速度快是这种”先进性“的一个突出表现，即便是每次编译都是从零开始。Go 语言的这种以包为基本构建单元的构建模型使得依赖分析变得十分简单，避免了 C 语言那种通过头文件分析依赖的巨大开销。Go 编译速度快的原因具体体现在三个方面：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">Go 要求每个源文件在开头处显式地列出所有依赖的包导入，这样 Go 编译器不必读取和处理整个文件就可以确定其依赖的包列表；</li>
+<li style="font-size: 20px; line-height: 38px;">Go 要求包之间不能存在循环依赖，这样一个包的依赖关系便形成了一张有向无环图。由于无环，包可以被单独编译，也可以并行编译；</li>
+<li style="font-size: 20px; line-height: 38px;">已编译的 Go 包对应的目标文件(file_name.o 或 package_name.a)中不仅记录了该包本身的导出符号信息，还记录了其所依赖包的导出符号信息。这样，Go 编译器在编译某包 P 时，针对 P 依赖的每个包导入(比如：导入包 Q)，只需读取一个目标文件即可（比如：Q 包编译成的目标文件，该目标文件中已经包含了 Q 包的依赖包的导出信息），而无需再读取其他文件中的信息了。</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 语言中包的定义和使用十分简单。</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">通过 package 关键字声明 Go 源文件所属的包：</li>
+</ul>
+</div><div class="cl-preview-section"><pre class=" language-go"><code class="prism  language-go"><span class="token comment">// xx.go</span>
+<span class="token keyword">package</span> a
+<span class="token operator">...</span> <span class="token operator">...</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">上述源码表示：文件 xx.go 是包 a 的一部分。</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">使用 import 关键字导入依赖的标准库包或第三方包：</li>
+</ul>
+</div><div class="cl-preview-section"><pre class=" language-go"><code class="prism  language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"fmt"</span>	 <span class="token comment">// 标准库包导入</span>
+	<span class="token string">"a/b/c"</span>  <span class="token comment">// 第三方包导入</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	c<span class="token punctuation">.</span><span class="token function">Func1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Hello, Go!"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">很多 Gopher 看到上面代码都会想当然地将 import 后面的 “c”、“fmt” 与 c.Func1()和 fmt.Println() 中的 c 和 fmt 认作为同一个语法元素：包名。但在深入学习 Go 语言后，大家会发现事实并非如此。比如在使用实时分布式消息框架 <a href="https://github.com/nsqio/nsq">nsq</a> 提供的官方 client 包时，我们包导入这样来写：</p>
+</div><div class="cl-preview-section"><pre class=" language-go"><code class="prism  language-go"><span class="token keyword">import</span> <span class="token string">"github.com/nsqio/go-nsq"</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">但在使用该包提供的导出函数时，我们使用的不是 go-nsq.xx 而是 <a href="http://nsq.xxx">nsq.xxx</a>：</p>
+</div><div class="cl-preview-section"><pre class=" language-go"><code class="prism  language-go">q<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> nsq<span class="token punctuation">.</span><span class="token function">NewConsumer</span><span class="token punctuation">(</span><span class="token string">"write_test"</span><span class="token punctuation">,</span> <span class="token string">"ch"</span><span class="token punctuation">,</span> config<span class="token punctuation">)</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">很多 Gopher 在学习 Go 包导入时都或多或少有些疑惑： import 后面路径中的最后一个分段到底代表的是什么? 是包名还是一个路径？本节我就和大家一起来深入探究和理解一下 Go 语言的包导入。</p>
+</div><div class="cl-preview-section"><h3 id="go-程序构建过程">1. Go 程序构建过程</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们先来简单了解一下 Go 程序的构建过程，来作为后续理解 Go 包导入的前导知识。和主流静态编译型语言一样，Go 程序的构建简单来讲也是由编译（compile）和链接（link）两个阶段组成的。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">一个非 main 包在编译后会对应生成一个.a 文件，该文件可以理解为是 Go 包的目标文件（实则是通过 pack 工具（$GOROOT/pkg/tool/darwin_amd64/pack）对 .o 文件打包后形成的 .a）。默认情况下在编译过程中 .a 文件生成在临时目录下，除非使用 go install 安装到 $GOPATH/pkg 下（Go 1.11 版本之前），否则你看不到 .a 文件。如果是构建可执行程序，那么 .a 文件会在构建可执行程序的链接阶段起使用。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">标准库包的源码文件在$GOROOT/src 下面，而对应的 .a 文件存放在$GOROOT/pkg/darwin_amd64 下（以 MacOS 上为例;如果是 linux，则是 linux_amd64）：</p>
+</div><div class="cl-preview-section"><pre class=" language-plain"><code class="prism  language-plain">// Go 1.13
+$tree -FL 1 $GOROOT/pkg/darwin_amd64 
+├── archive/
+├── bufio.a
+├── bytes.a
+├── compress/
+├── container/
+├── context.a
+├── crypto/
+├── crypto.a
+├── database/
+├── debug/
+├── encoding/
+├── encoding.a
+├── errors.a
+├── expvar.a
+├── flag.a
+├── fmt.a
+├── go/
+├── hash/
+├── hash.a
+... ...
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">“求甚解”的读者可能会提出这样的一个问题：构建 Go 程序时，编译器会重新编译依赖包的源文件还是直接链接包的.a 文件呢？我们通过一个实验来给大家答案。<a href="https://tip.golang.org/doc/go1.10">Go 1.10 版本</a>引入了 build cache，为了避免 build cache 给实验过程和分析带来的复杂性，我们使用 Go 1.9.7 版本(Go 1.10 之前的版本均可）来进行这个实验。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们建立如下实验环境的目录结构：</p>
+</div><div class="cl-preview-section"><pre><code>$GOPATH/src/github.com/bigwhite/effective-go-book $tree -F chapter3-demo1
+chapter3-demo1
+├── cmd/
+│   └── app1/
+│       └── main.go
+└── pkg/
+    └── pkg1/
+        └── pkg1.go
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">由于仅是演示目的，pkg1.go 和 main.go 的源码都很简单：</p>
+</div><div class="cl-preview-section"><pre class=" language-go"><code class="prism  language-go">
+<span class="token comment">// cmd/app1/main.go</span>
+<span class="token keyword">package</span> main
+  
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+        <span class="token string">"github.com/bigwhite/effective-go-book/chapter3-demo1/pkg/pkg1"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        pkg1<span class="token punctuation">.</span><span class="token function">Func1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// pkg/pkg1/pkg1.go</span>
+<span class="token keyword">package</span> pkg1
+  
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">Func1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"pkg1.Func1 invoked"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">进入 chapter3-demo1，执行下面命令：</p>
+</div><div class="cl-preview-section"><pre><code>$go install github.com/bigwhite/effective-go-book/chapter3-demo1/pkg/pkg1
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">之后，我们就可以在$GOPATH/pkg/darwin_amd64/github.com/bigwhite/effective-go-book/chapter3-demo1/pkg 下面看到 pkg1 包对应的目标文件 pkg1.a：</p>
+</div><div class="cl-preview-section"><pre><code>$ls $GOPATH/pkg/darwin_amd64/github.com/bigwhite/effective-go-book/chapter3-demo1/pkg
+pkg1.a
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们继续在 chapter3-demo1 路径下编译可执行程序 app1：</p>
+</div><div class="cl-preview-section"><pre class=" language-plain"><code class="prism  language-plain">$go build github.com/bigwhite/effective-go-book/chapter3-demo1/cmd/app1
+
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">执行完上述命令后，我们会在 chapter3-demo1 下面看到一个可执行文件 app1，执行该文件：</p>
+</div><div class="cl-preview-section"><pre class=" language-plain"><code class="prism  language-plain">$GOPATH/src/github.com/bigwhite/effective-go-book/chapter3-demo1 $ls
+app1*	cmd/	pkg/
+
+$./app1
+pkg1.Func1 invoked
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">这符合我们的预期。但现在我们仍无法知道编译 app1 是到底使用的是 pkg1 包的源码还是目标文件 pkg1.a，因为目前它们的输出都是一致的。我们修改一下 pkg1.go 的代码：</p>
+</div><div class="cl-preview-section"><pre class=" language-go"><code class="prism  language-go"><span class="token comment">// pkg/pkg1/pkg1.go</span>
+<span class="token keyword">package</span> pkg1
+  
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">Func1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"pkg1.Func1 invoked - Again"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">重新编译执行 app1，我们得到结果如下：</p>
+</div><div class="cl-preview-section"><pre class=" language-plain"><code class="prism  language-plain">$go build github.com/bigwhite/effective-go-book/chapter3-demo1/cmd/app1
+$./app1 
+pkg1.Func1 invoked - Again
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">这样的实验结果告诉我们：<strong>在使用第三方包的时候，当第三方包源码存在且对应的 .a 已安装的情况下，编译器链接的仍是根据第三方包最新源码编译出的 .a 文件，而不是之前已经安装到$GOPATH/pkg/darwin_amd64 下面的目标文件。</strong></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">那么是否可以只链接依赖包的已安装的 .a 文件，而不用第三方包源码呢？我们临时删除掉 pkg1 目录，但保留之前已经 install 到 $GOPATH/pkg/darwin_amd64 下面的 pkg1.a 文件。我们再来编译一下 app1：</p>
+</div><div class="cl-preview-section"><pre class=" language-plain"><code class="prism  language-plain">$go build github.com/bigwhite/effective-go-book/chapter3-demo1/cmd/app1
+cmd/app1/main.go:4:2: cannot find package "github.com/bigwhite/effective-go-book/chapter3-demo1/pkg/pkg1" in any of:
+	/Users/tonybai/.bin/go1.9.7/src/github.com/bigwhite/effective-go-book/chapter3-demo1/pkg/pkg1 (from $GOROOT)
+	/Users/tonybai/Go/src/github.com/bigwhite/effective-go-book/chapter3-demo1/pkg/pkg1 (from $GOPATH)
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到 Go 编译器报错！ Go 编译器还是尝试去找 pkg1 包的源码，而不是直接链接已经安装了的 pkg1.a。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">下面我们让 Go 编译器输出详细信息，我们来看看为什么 Go 编译器会选择链接根据第三方包最新源码编译出的.a 文件，而不是之前已经安装到 $GOPATH/pkg/darwin_amd64 下面的目标文件。我们在编译 app1 时给 go build 命令传入 -x -v 命令行选项：</p>
+</div><div class="cl-preview-section"><pre><code>$go build -x -v github.com/bigwhite/effective-go-book/chapter3-demo1/cmd/app1
+WORK=/var/folders/cz/sbj5kg2d3m3c6j650z0qfm800000gn/T/go-build878870664
+github.com/bigwhite/effective-go-book/chapter3-demo1/pkg/pkg1
+mkdir -p $WORK/github.com/bigwhite/effective-go-book/chapter3-demo1/pkg/pkg1/_obj/
+mkdir -p $WORK/github.com/bigwhite/effective-go-book/chapter3-demo1/pkg/
+cd /Users/tonybai/Go/src/github.com/bigwhite/effective-go-book/chapter3-demo1/pkg/pkg1
+/Users/tonybai/.bin/go1.9.7/pkg/tool/darwin_amd64/compile -o $WORK/github.com/bigwhite/effective-go-book/chapter3-demo1/pkg/pkg1.a -trimpath $WORK -goversion go1.9.7 -p github.com/bigwhite/effective-go-book/chapter3-demo1/pkg/pkg1 -complete -buildid 5508f4ff15d0000af68a19c84d5200be6b52aac0 -D _/Users/tonybai/Go/src/github.com/bigwhite/effective-go-book/chapter3-demo1/pkg/pkg1 -I $WORK -pack ./pkg1.go
+github.com/bigwhite/effective-go-book/chapter3-demo1/cmd/app1
+mkdir -p $WORK/github.com/bigwhite/effective-go-book/chapter3-demo1/cmd/app1/_obj/
+mkdir -p $WORK/github.com/bigwhite/effective-go-book/chapter3-demo1/cmd/app1/_obj/exe/
+cd /Users/tonybai/Go/src/github.com/bigwhite/effective-go-book/chapter3-demo1/cmd/app1
+/Users/tonybai/.bin/go1.9.7/pkg/tool/darwin_amd64/compile -o $WORK/github.com/bigwhite/effective-go-book/chapter3-demo1/cmd/app1.a -trimpath $WORK -goversion go1.9.7 -p main -complete -buildid d116bd4b4731d2f7eac18df2368f87eee7bc7977 -D _/Users/tonybai/Go/src/github.com/bigwhite/effective-go-book/chapter3-demo1/cmd/app1 -I $WORK -I /Users/tonybai/Go/pkg/darwin_amd64 -pack ./main.go
+cd .
+/Users/tonybai/.bin/go1.9.7/pkg/tool/darwin_amd64/link -o $WORK/github.com/bigwhite/effective-go-book/chapter3-demo1/cmd/app1/_obj/exe/a.out -L $WORK -L /Users/tonybai/Go/pkg/darwin_amd64 -extld=clang -buildmode=exe -buildid=d116bd4b4731d2f7eac18df2368f87eee7bc7977 $WORK/github.com/bigwhite/effective-go-book/chapter3-demo1/cmd/app1.a
+mv $WORK/github.com/bigwhite/effective-go-book/chapter3-demo1/cmd/app1/_obj/exe/a.out app1
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到 app1 的构建过程大致分为几步：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">建立临时工作路径，命名为 WORK，以后的编译、链接均以$WORK 为当前工作目录；</li>
+<li style="font-size: 20px; line-height: 38px;">编译 app1 的依赖包 pkg1，将目标文件打包后放入 $WORK/github.com/bigwhite/effective-go-book/chapter3-demo1/pkg/pkg1.a;</li>
+<li style="font-size: 20px; line-height: 38px;">编译 app1 的 main 包，将目标文件打包后放入 $WORK/github.com/bigwhite/effective-go-book/chapter3-demo1/cmd/app1.a ;</li>
+<li style="font-size: 20px; line-height: 38px;">链接器将 app1.a、pkg1.a 链接成 $WORK/github.com/bigwhite/effective-go-book/chapter3-demo1/cmd/app1/_obj/exe/a.out ;</li>
+<li style="font-size: 20px; line-height: 38px;">最后，将 a.out 改名为 app1。这个 app1 是在执行 go build 命令的目录中。</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们细致看看链接器进行目标文件链接所执行的命令：</p>
+</div><div class="cl-preview-section"><pre class=" language-plain"><code class="prism  language-plain">/Users/tonybai/.bin/go1.9.7/pkg/tool/darwin_amd64/link -o $WORK/github.com/bigwhite/effective-go-book/chapter3-demo1/cmd/app1/_obj/exe/a.out -L $WORK -L /Users/tonybai/Go/pkg/darwin_amd64 -extld=clang -buildmode=exe -buildid=d116bd4b4731d2f7eac18df2368f87eee7bc7977 $WORK/github.com/bigwhite/effective-go-book/chapter3-demo1/cmd/app1.a
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">为了方便查看，我将这行命令中的一些不必要的信息去掉，命令简化后是这样的：</p>
+</div><div class="cl-preview-section"><pre class=" language-plain"><code class="prism  language-plain">link -o a.out -L $WORK -L $GOPATH/pkg/darwin_amd64 -buildmode=exe app1.a
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们在链接器的执行语句中并未显式看到 app1 链接的是 $WORK/github.com/bigwhite/effective-go-book/chapter3-demo1/pkg 下 pkg1.a。但是从传给链接器的-L 参数来看：$WORK 这个路径排在了$GOPATH/pkg/darwin_amd64 的前面。这样链接器会优先使用 $WORK 下面的 <a href="http://github.com/bigwhite/effective-go-book/chapter3-demo1/pkg/pkg1.a%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF">github.com/bigwhite/effective-go-book/chapter3-demo1/pkg/pkg1.a，而不是</a> $GOPATH/pkg/darwin_amd64/github.com/bigwhite/effective-go-book/chapter3-demo1/pkg/pkg1.a。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">为了验证我们的推论，我们可按照编译器输出，按顺序手工执行了一遍上述命令序列，但在最后执行链接命令时，去掉 -L $WORK 或将 -L $WORK 放到 -L $GOPATH/pkg/darwin_amd64 的后面。考虑到篇幅原因，下面省略了中间的执行过程：</p>
+</div><div class="cl-preview-section"><pre class=" language-plain"><code class="prism  language-plain">$export WORK=/Users/tonybai/temp
+... ...
+$/Users/tonybai/.bin/go1.9.7/pkg/tool/darwin_amd64/link -o $WORK/github.com/bigwhite/effective-go-book/chapter3-demo1/cmd/app1/_obj/exe/a.out  -L /Users/tonybai/Go/pkg/darwin_amd64 -extld=clang -buildmode=exe -buildid=d116bd4b4731d2f7eac18df2368f87eee7bc7977 $WORK/github.com/bigwhite/effective-go-book/chapter3-demo1/cmd/app1.a 
+... ...
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">再执行这次手动执行命令序列的成果物：</p>
+</div><div class="cl-preview-section"><pre class=" language-plain"><code class="prism  language-plain">$./app1
+pkg1.Func1 invoked
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到这回链接器链接的是 /Users/tonybai/Go/pkg/darwin_amd64 下面的 pkg1.a，输出的是 pkg1 包修改之前的打印信息。到这里我们明白了所谓的使用第三方包源码，实际上是<strong>链接了以该最新包源码编译的存放在临时目录下的包的.a 文件而已</strong>。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">到这里肯定又会有读者会问题：Go 标准库中的包也是这样么？编译时 Go 编译器到底使用的是根据$GOROOT/src 下源码编译出的.a 目标文件，还是 $GOROOT/pkg 下已经随 Go 安装包编译好的.a 文件呢？我们再来做个实验！我们编写一个简单的 Go 文件：</p>
+</div><div class="cl-preview-section"><pre class=" language-go"><code class="prism  language-go"><span class="token comment">// main.go</span>
+<span class="token keyword">package</span> main
+  
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        b <span class="token operator">:=</span> <span class="token boolean">true</span>
+        s <span class="token operator">:=</span> fmt<span class="token punctuation">.</span><span class="token function">Sprintf</span><span class="token punctuation">(</span><span class="token string">"%t"</span><span class="token punctuation">,</span> b<span class="token punctuation">)</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">有了前面的经验，我们这次直接将 $GOROOT/src 下面的 fmt 目录改名为 fmtbak，然后编译上面的 main.go 文件：</p>
+</div><div class="cl-preview-section"><pre class=" language-plain"><code class="prism  language-plain">$go build -x -v main.go
+WORK=/var/folders/cz/sbj5kg2d3m3c6j650z0qfm800000gn/T/go-build682636466
+main.go:3:8: cannot find package "fmt" in any of:
+	/Users/tonybai/.bin/go1.9.7/src/fmt (from $GOROOT)
+	/Users/tonybai/Go/src/fmt (from $GOPATH)
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到 Go 编译器找不到标准库的 fmt 包了，显然和依赖第三方包一样，依赖标准库包在编译时也是需要所依赖的标准库包的源码的。那如果我们修改了标准库的源码，是否会向上面实验中那样，源码更新直接会体现在最终的可执行文件的输出中呢？这里我们将 fmt 包的部分源码做一下修改(修改前，先把 fmtbak 改回 fmt)。我们对 fmt 目录下面的 format.go 文件做些微调：</p>
+</div><div class="cl-preview-section"><pre class=" language-go"><code class="prism  language-go"><span class="token comment">// $GOROOT/src/fmt/format.go</span>
+
+<span class="token comment">// fmt_boolean formats a boolean.</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>f <span class="token operator">*</span>fmt<span class="token punctuation">)</span> <span class="token function">fmt_boolean</span><span class="token punctuation">(</span>v <span class="token builtin">bool</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> v <span class="token punctuation">{</span>
+                f<span class="token punctuation">.</span><span class="token function">padString</span><span class="token punctuation">(</span><span class="token string">"true1"</span><span class="token punctuation">)</span> <span class="token comment">// 我们修改这一行，原代码为：f.padString("true")</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                f<span class="token punctuation">.</span><span class="token function">padString</span><span class="token punctuation">(</span><span class="token string">"false"</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们构建一下main.go：</p>
+</div><div class="cl-preview-section"><pre><code> $go build -x -v main.go
+WORK=/var/folders/cz/sbj5kg2d3m3c6j650z0qfm800000gn/T/go-build972107899
+command-line-arguments
+mkdir -p $WORK/command-line-arguments/_obj/
+mkdir -p $WORK/command-line-arguments/_obj/exe/
+cd /Users/tonybai/temp
+/Users/tonybai/.bin/go1.9.7/pkg/tool/darwin_amd64/compile -o $WORK/command-line-arguments.a -trimpath $WORK -goversion go1.9.7 -p main -complete -buildid 374bfe52ceb5beb2748735a34836d6348e6c1e21 -D _/Users/tonybai/temp -I $WORK -pack ./main.go
+cd .
+/Users/tonybai/.bin/go1.9.7/pkg/tool/darwin_amd64/link -o $WORK/command-line-arguments/_obj/exe/a.out -L $WORK -extld=clang -buildmode=exe -buildid=374bfe52ceb5beb2748735a34836d6348e6c1e21 $WORK/command-line-arguments.a
+mv $WORK/command-line-arguments/_obj/exe/a.out main
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">从输出的详细构建日志来看，编译器并没有去重新编译 format.go，因此编译出来的可执行文件的输出为：</p>
+</div><div class="cl-preview-section"><pre class=" language-plain"><code class="prism  language-plain">$./main
+true
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">而不是我们期望的"true1"。这说明默认情况下对于标准库中的包，编译器直接链接的是$GOROOT/pkg/darwin_amd64 下的.a 文件。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">那么如何让编译器能去”感知“到标准库中的最新更新呢？以 fmt.a 为例，有两种方法：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">方法 1：删除$GOROOT/pkg/darwin_amd64 下面的 fmt.a，然后重新执行 go install fmt ：</li>
+</ul>
+</div><div class="cl-preview-section"><pre class=" language-plain"><code class="prism  language-plain">$go install -x -v fmt
+WORK=/var/folders/cz/sbj5kg2d3m3c6j650z0qfm800000gn/T/go-build519257256
+fmt
+mkdir -p $WORK/fmt/_obj/
+mkdir -p $WORK/
+cd /Users/tonybai/.bin/go1.9.7/src/fmt
+/Users/tonybai/.bin/go1.9.7/pkg/tool/darwin_amd64/compile -o $WORK/fmt.a -trimpath $WORK -goversion go1.9.7 -p fmt -std -complete -buildid 784aa2fc38b910a35f11bcd11372fa344f46ebed -D _/Users/tonybai/.bin/go1.9.7/src/fmt -I $WORK -pack ./doc.go ./format.go ./print.go ./scan.go
+mkdir -p /Users/tonybai/.bin/go1.9.7/pkg/darwin_amd64/
+mv $WORK/fmt.a /Users/tonybai/.bin/go1.9.7/pkg/darwin_amd64/fmt.a
+
+</code></pre>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">方法 2：使用 go build 的-a 命令行选项：</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">go build -a 可以让编译器将 Go 源文件（比如例子中的 main.go）的所有直接和间接的依赖包（包括标准库）都重新编译一遍，并将最新的 .a 作为链接器的输入。因此，采用 -a 选项进行构建的时间较长，这里仅摘录与 fmt 包相关的日志供参考：</p>
+</div><div class="cl-preview-section"><pre><code>$go build -x -v -a main.go
+WORK=/var/folders/cz/sbj5kg2d3m3c6j650z0qfm800000gn/T/go-build094236425
+... ...
+mkdir -p $WORK/fmt/_obj/
+cd /Users/tonybai/.bin/go1.9.7/src/fmt
+/Users/tonybai/.bin/go1.9.7/pkg/tool/darwin_amd64/compile -o $WORK/fmt.a -trimpath $WORK -goversion go1.9.7 -p fmt -std -complete -buildid 784aa2fc38b910a35f11bcd11372fa344f46ebed -D _/Users/tonybai/.bin/go1.9.7/src/fmt -I $WORK -pack ./doc.go ./format.go ./print.go ./scan.go
+... ...
+/Users/tonybai/.bin/go1.9.7/pkg/tool/darwin_amd64/link -o $WORK/command-line-arguments/_obj/exe/a.out -L $WORK -extld=clang -buildmode=exe -buildid=374bfe52ceb5beb2748735a34836d6348e6c1e21 $WORK/command-line-arguments.a
+mv $WORK/command-line-arguments/_obj/exe/a.out main
+</code></pre>
+</div><div class="cl-preview-section"><h2 id="究竟是路径名还是包名" style="font-size: 30px;">2. 究竟是路径名还是包名</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">通过前面的实验，我们了解到<strong>编译器在编译过程中必然要使用的是编译单元（一个包）所依赖的包的源码</strong>。而编译器要找到依赖包的源码文件就需要知道依赖包的源码路径。这个路径由两部分组成：<strong>基础搜索路径</strong>和<strong>包导入路径</strong>。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">基础搜索路径是一个全局的设置，下面是关于基础搜索路径的规则描述：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">所有包（无论标准库包还是第三方包）的源码基础搜索路径都包括 $GOROOT/src；</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在上述基础搜索路径的基础上，不同版本的 Go 包含的其他基础搜索路径有不同：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">Go 1.11版本之前，包的源码基础搜索路径还包括 $GOPATH/src；</li>
+<li style="font-size: 20px; line-height: 38px;">Go 1.11-Go 1.12 版本，包的源码基础搜索路径有三种模式：
+<ul>
+<li style="font-size: 20px; line-height: 38px;">经典 gopath 模式下(GO111MODULE=off)：$GOPATH/src ；</li>
+<li style="font-size: 20px; line-height: 38px;">module-aware 模式下(GO111MODULE=on)：$GOPATH/pkg/mod ；</li>
+<li style="font-size: 20px; line-height: 38px;">auto 模式下(GO111MODULE=auto)：在$GOPATH/src 路径下，与 gopath 模式相同；在$GOPATH/src 路径外且包含 go.mod，与 module-aware 模式相同。</li>
+</ul>
+</li>
+<li style="font-size: 20px; line-height: 38px;">Go 1.13 版本，包的源码基础搜索路径有两种模式：
+<ul>
+<li style="font-size: 20px; line-height: 38px;">经典 gopath 模式下(GO111MODULE=off)：$GOPATH/src；</li>
+<li style="font-size: 20px; line-height: 38px;">module-aware 模式下(GO111MODULE=on/auto)：$GOPATH/pkg/mod；</li>
+</ul>
+</li>
+<li style="font-size: 20px; line-height: 38px;">未来的 Go 版本将只有 module-aware 模式，即只在 module 缓存的目录下搜索包的源码。</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">而搜索路径的第二部分就是位于每个包源码文件头部的<strong>包导入路径</strong>。基础搜索路径与包导入路径结合在一起，Go 编译器便可确定一个包的所有依赖包的源码路径的集合，这个集合构成了 Go 编译器的<strong>源码搜索路径空间</strong>。我们举个例子：</p>
+</div><div class="cl-preview-section"><pre class=" language-go"><code class="prism  language-go"><span class="token comment">// p1.go</span>
+
+<span class="token keyword">package</span> p1
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"fmt"</span>
+	<span class="token string">"time"</span>
+	<span class="token string">"github.com/bigwhite/effective-go-book"</span>
+	<span class="token string">"golang.org/x/text"</span>
+	<span class="token string">"a/b/c"</span>
+	<span class="token string">"./e/f/g"</span>
+<span class="token punctuation">)</span>
+<span class="token operator">...</span> <span class="token operator">...</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们以 Go 1.11 版本之前的 GOPATH 模式为例，编译器在编译上述 p1 包时，会构建自己的源码搜索路径空间，该空间对应的搜索路径集合包括：</p>
+</div><div class="cl-preview-section"><pre class=" language-plain"><code class="prism  language-plain">- $GOROOT/src/fmt/
+- $GOROOT/src/time/
+- $GOROOT/src/github.com/bigwhite/effective-go-book/
+- $GOROOT/src/golang.org/x/text/
+- $GOROOT/src/a/b/c/
+- $GOPATH/src/github.com/bigwhite/effective-go-book/
+- $GOPATH/src/golang.org/x/text/
+- $GOPATH/src/a/b/c/
+- $CWD/e/f/g
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">最后一个包导入路径"./e/f/g"是一个本地相对路径，它的基础搜索路径是 $CWD，即执行编译命令时的当前工作目录。Go compiler 在编译源码时会使用-D 选项设置当前工作目录，该工作目录与"./e/f/g"的本地相对路径结合，便构成了一个源码搜索路径。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">到这里，我们已经给出了前面问题的答案：<strong>源文件头部的包导入语句 import 后面的部分就是一个路径，路径的最后一个分段也不是包名</strong>。我们再通过一个例子来证明这点。我们在$GOPATH/src/github.com/bigwhite/effective-go-book/chapter3-demo1 下面再建立 cmd/app2 和 pkg/pkg2 两个目录：</p>
+</div><div class="cl-preview-section"><pre class=" language-plain"><code class="prism  language-plain">
+$tree -LF 3 chapter3-demo1
+chapter3-demo1
+├── cmd/
+│   └── app2/
+│       └── main.go
+└── pkg/
+    └── pkg2/
+        └── pkg2.go
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">app2/main.go 和 pkg2/pkg2.go 的源码如下：</p>
+</div><div class="cl-preview-section"><pre class=" language-go"><code class="prism  language-go"><span class="token comment">// pkg2/pkg2.go</span>
+
+<span class="token keyword">package</span> mypkg2
+  
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">Func1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"mypkg2.Func1 invoked"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// app2/main.go</span>
+
+<span class="token keyword">package</span> main
+  
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+        <span class="token string">"github.com/bigwhite/effective-go-book/chapter3-demo1/pkg/pkg2"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        mypkg2<span class="token punctuation">.</span><span class="token function">Func1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">编译运行 app2：</p>
+</div><div class="cl-preview-section"><pre class=" language-plain"><code class="prism  language-plain">$go build github.com/bigwhite/effective-go-book/chapter3-demo1/cmd/app2
+$./app2
+mypkg2.Func1 invoked
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到这个例子与 app1 的不同之处在于 app2 的包导入语句中的路径末尾是 pkg2，而在 main 函数中使用的包名却是 mypkg2，这再次印证了包导入语句中的只是一个路径。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">不过 Go 语言有一个惯用法，那就是<strong>包导入路径的最后一段目录名最好与包名一致</strong>，就像 pkg1 那样：</p>
+</div><div class="cl-preview-section"><pre class=" language-go"><code class="prism  language-go"><span class="token comment">// app1/main.go</span>
+<span class="token keyword">package</span> main
+  
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+        <span class="token string">"github.com/bigwhite/effective-go-book/chapter3-demo1/pkg/pkg1"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        pkg1<span class="token punctuation">.</span><span class="token function">Func1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">pkg1 包导入路径的最后一段目录名为 pkg1，而包名也是 pkg1。也就是说上面代码中出现的两个 pkg1 虽然书写上时一模一样的，但代表的含义是完全不同的：<strong>包导入路径上的 pkg1 表示的是一个目录名；而 main 函数体中的 pkg1 则是包名。</strong></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">关于包导入，Go 语言还有另外一个惯用法：<strong>当包名与包导入路径中的最后一个目录名不同时，最好用下面语法将包名显式放入包导入语句</strong>。以上面 app2 为例：</p>
+</div><div class="cl-preview-section"><pre class=" language-go"><code class="prism  language-go"><span class="token comment">// app2/main.go</span>
+
+<span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+        mypkg2 <span class="token string">"github.com/bigwhite/effective-go-book/chapter3-demo1/pkg/pkg2"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        mypkg2<span class="token punctuation">.</span><span class="token function">Func1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">显然，这种惯用法让代码可读性更好。</p>
+</div><div class="cl-preview-section"><h2 id="同一源码文件的依赖包在同一源码搜索路径空间下包名冲突的问题" style="font-size: 30px;">3. 同一源码文件的依赖包在同一源码搜索路径空间下包名冲突的问题</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">同一个包名在不同的项目、不同的仓库下可能都会存在。同一个源码文件在其包导入路径构成源码搜索路径空间下很可能存在同名包。比如：我们有另外一个 chapter3-demo2，其下也有名为 pkg1 的包，导入路径为 <code>github.com/bigwhite/effective-go-book/chapter3-demo2/pkg/pkg1</code>。如果 cmd/app3 同时导入了 chapter3-demo1 和 chapter3-demo2 的 pkg1 包，那么会发生什么呢？</p>
+</div><div class="cl-preview-section"><pre class=" language-go"><code class="prism  language-go"><span class="token comment">// cmd/app3</span>
+
+
+<span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+        <span class="token string">"github.com/bigwhite/effective-go-book/chapter3-demo1/pkg/pkg1"</span>
+        <span class="token string">"github.com/bigwhite/effective-go-book/chapter3-demo2/pkg/pkg1"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        pkg1<span class="token punctuation">.</span><span class="token function">Func1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们编译一下 cmd/app3：</p>
+</div><div class="cl-preview-section"><pre class=" language-plain"><code class="prism  language-plain">$go build github.com/bigwhite/effective-go-book/chapter3-demo1/cmd/app3
+# github.com/bigwhite/effective-go-book/chapter3-demo1/cmd/app3
+./main.go:5:2: pkg1 redeclared as imported package name
+	previous declaration at ./main.go:4:2
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到的确出现同名包冲突的问题了！怎么解决这个问题呢？我们还是用为包导入路径下的包起别名的方法：</p>
+</div><div class="cl-preview-section"><pre class=" language-go"><code class="prism  language-go"><span class="token keyword">package</span> main
+  
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+        pkg1 <span class="token string">"github.com/bigwhite/effective-go-book/chapter3-demo1/pkg/pkg1"</span>
+        mypkg1 <span class="token string">"github.com/bigwhite/effective-go-book/chapter3-demo2/pkg/pkg1"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        pkg1<span class="token punctuation">.</span><span class="token function">Func1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        mypkg1<span class="token punctuation">.</span><span class="token function">Func1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">上面的 pkg1 指代的就是 chapter3-demo1/pkg/pkg1 下面的包；mypkg1 则指代的是 chapter3-demo1/pkg/pkg1 下面的包。就此，同名包冲突问题就轻松解决掉了。</p>
+</div><div class="cl-preview-section"><h2 id="小结" style="font-size: 30px;">4. 小结</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在本节中，我们通过实验对 Go 语言的包导入做了进一步的理解，Gopher 们应牢记以下几点结论：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">Go 编译器在编译过程中必然要使用的是编译单元（一个包）所依赖的包的源码；</li>
+<li style="font-size: 20px; line-height: 38px;">Go 源码文件头部的包导入语句中 import 后面的部分是一个路径，路径的最后一个分段是目录名，而不是包名；</li>
+<li style="font-size: 20px; line-height: 38px;">Go 编译器的包源码搜索路径由基本搜索路径和包导入路径组成。两者结合在一起后，编译器便可确定一个包的所有依赖包的源码路径的集合，这个集合构成了 Go 编译器的源码搜索路径空间；</li>
+<li style="font-size: 20px; line-height: 38px;">同一源码文件的依赖包在同一源码搜索路径空间下包名冲突的问题可以由包别名的方式解决。</li>
+</ul>
+</div>}
+                        </div>
+                    </div>
+                                            <!-- 买过的阅读 -->
+                        <div class="art-next-prev clearfix">
+                                                                                                <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/87/article/2384">
+                                                                    <div class="prev l clearfix">
+                                        <div class="icon l">
+                                            <i class="imv2-arrow3_l"></i>
+                                        </div>
+                                        <p>
+                                            15 注意：Go 字符串是原生类型
+                                        </p>
+                                    </div>
+                                </a>
+                                                                                                                            <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/87/article/2419">
+                                                                    <div class="next r clearfix">
+                                        <p>
+                                            17 init 函数的妙用
+                                        </p>
+                                        <div class="icon r">
+                                            <i class="imv2-arrow3_r"></i>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                                    </div>
+                                    </div>
+                <div class="comments-con js-comments-con" id="coments_con">
+                </div>
+
+                
+            </div>
+            
+            
+            
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-jiaQun-new hide" id="modal-jiaQun">
+    <div class="inner" style="">
+        <div class="modal-close js-close-jiaQun">
+            <i class="imv2-close"></i>
+        </div>
+        <div class="content">
+            <img src="https://img3.sycdn.imooc.com/5f51ecec0001392b05330597.jpg">
+            <div class="right-info">
+                <div class="title">
+                    扫码加入慕课前沿技术核心用户群
+                </div>
+                <div class="desc">
+                                            <p class="mb6">验证信息：<span id="joincode">2010312025386365</span><span class="copy js-copy-joincode">复制</span></p>
+                                        <p class="mb6">QQ讨论群号：729941811</p>
+                                            <p>QQ群URL：<a href="https://jq.qq.com/?_wv=1027&amp;k=5WJLMxV" target="_blank">点击访问</a></p>
+                                    </div>
+            </div>
+            <p class="tip">若遇到搜索不到QQ群或加群失败，请联系客服邮箱:kf@imooc.com</p>
+        </div>
+    </div>
+</div>
+ 
+<!-- 专栏介绍页专栏评价 -->
+
+<!-- 专栏介绍页底部三条评价 -->
+
+<!-- 专栏阅读页弹层目录和介绍页页面目录 -->
+
+<!-- 专栏阅读页发布回复 -->
+
+<!-- 专栏阅读页发布评论 -->
+
+<!-- 专栏阅读页底部评论 -->
+
+<!-- 专栏阅读 单个 评论 -->
+
+<!-- 新增回复和展开三条以外回复 -->
+
+<!-- 立即订阅的弹窗 -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div></body></html>

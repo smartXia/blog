@@ -1,0 +1,443 @@
+<html><head><meta charset="utf-8"><title>17 init 函数的妙用-慕课专栏</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+			<meta name="renderer" content="webkit">
+			<meta property="qc:admins" content="77103107776157736375">
+			<meta property="wb:webmaster" content="c4f857219bfae3cb">
+			<meta http-equiv="Access-Control-Allow-Origin" content="*">
+			<meta http-equiv="Cache-Control" content="no-transform ">
+			<meta http-equiv="Cache-Control" content="no-siteapp">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://www.imooc.com/static/img/common/touch-icon-ipad.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://www.imooc.com/static/img/common/touch-icon-iphone-retina.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://www.imooc.com/static/img/common/touch-icon-ipad-retina.png">
+			<link href="https://moco.imooc.com/captcha/style/captcha.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201907021539" type="text/css">
+			<link rel="stylesheet" href="https://www.imooc.com/static/lib/swiper/swiper-3.4.2.min.css?t=201907021539">
+			<link rel="stylesheet" href="https://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,column/zhuanlanChapter-less.css?t=2.5,course/inc/course_tipoff-less.css?t=2.5?v=201907051055" type="text/css">
+			<link charset="utf-8" rel="stylesheet" href="https://www.imooc.com/static/lib/ueditor/themes/imooc/css/ueditor.css?v=201907021539"><link rel="stylesheet" href="https://www.imooc.com/static/lib/baiduShare/api/css/share_style0_16.css?v=6aba13f0.css"></head>
+			<body><div id="main">
+
+
+<div class="main-con hide-menu">
+    <!-- 左侧菜单 & 索引 -->
+    
+    <div class="right-content" style="padding-left: 0px;">
+        <div class="container clearfix" id="top" style="width: 1134px; display: block;">
+            
+            
+            <div class="center_con js-center_con l" style="width: 1134px;">
+                <div class="article-con">
+                                            <!-- 买过的阅读 -->
+                        
+
+                    
+                    <div class="art-title" style="margin-top: 0px;">
+                        17 init 函数的妙用
+                    </div>
+                    <div class="art-info clearfix">
+                        
+                        <span class="l">
+                            更新时间：2020-10-23 11:45:46
+                        </span>
+                    </div>
+                    <div class="art-top">
+                                                <img src="https://img1.sycdn.imooc.com/5f92497c0001e24c06400426.jpg" alt="">
+                                                                        <div class="famous-word-box">
+                            <img src="https://www.imooc.com/static/img/column/bg-l.png" alt="" class="bg1 bg">
+                            <img src="https://www.imooc.com/static/img/column/bg-r.png" alt="" class="bg2 bg">
+                            <div class="famous-word">只有在那崎岖的小路上不畏艰险奋勇攀登的人,才有希望达到光辉的顶点。——马克思<p></p></div>
+                        </div>
+                                            </div>
+                    <div class="art-content js-lookimg">
+                        <div id="article_content">
+                            <div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">从程序逻辑结构角度来看，Go 包（package）是程序逻辑封装的基本单元，每个包都可以理解为一个”自治“的、封装良好的、对外部暴露有限接口的基本单元。一个 Go 程序就是由一组包组成的。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在 Go 包这一基本单元中分布着常量、包级变量、函数、类型和类型方法、接口等，我们要保证包内部的这些元素在被使用之前处于合理有效的初始状态，尤其是包级变量。在 Go 语言中，我们一般通过包的 init 函数来完成这一工作。</p>
+</div><div class="cl-preview-section"><h2 id="认识-init-函数" style="font-size: 30px;">1. 认识 init 函数</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 语言中有两个特殊的函数，一个是 main 包中的 main 函数，它是所有 Go 可执行程序的入口函数；另外一个就是包的 init 函数。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">init 函数是一个无参数无返回值的函数：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">func init() {
+	... ...
+}
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">如果一个包定义了 init 函数，Go 运行时会负责在该包初始化时调用它的 init 函数。在 Go 程序中我们不能显式调用 init，否则会在编译期间报错：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">// call_init_in_main.go
+package main
+
+import "fmt"
+
+func init() {
+	fmt.Println("init invoked")
+}
+
+func main() {
+	init()
+}
+
+$go run call_init_in_main.go 
+# command-line-arguments
+./call_init_in_main.go:10:2: undefined: init
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">一个 Go 包可以拥有多个 init 函数，每个组成 Go 包的 Go 源文件中亦可以定义多个 init 函数。在初始化该 Go 包时，Go 运行时会按照一定的次序逐一顺序地调用该包的 init 函数。Go 运行时不会并发调用 init 函数，它会等待一个 init 函数执行完毕返回后再执行下一个 init 函数，且每个 init 函数在整个 Go 程序生命周期内仅会被执行一次。因此，init 函数极其适合做一些包级数据初始化工作以及包级数据初始状态的检查工作。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">一个包内的、分布在多个文件中的多个 init 函数的执行次序是什么样的呢？一般来说，先被传递给 Go 编译器的源文件中的 init 函数先被执行；同一个源文件中的多个 init 函数按声明顺序依次执行。但 Go 语言的惯例告诉我们：不要依赖 init 函数的执行次序。</p>
+</div><div class="cl-preview-section"><h2 id="程序初始化顺序" style="font-size: 30px;">2. 程序初始化顺序</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">init 函数为何适合做包级数据初始化工作以及包级数据初始状态的检查工作呢？除了 init 函数是顺序执行并仅被执行一次之外，Go 程序初始化顺序也给 init 函数提供了胜任该工作的前提条件。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 程序由一组包组合而成，程序的初始化就是这些包的初始化。每个 Go 包都会有自己的依赖包、每个包还包含有常量、变量、init 函数(其中 main 包有 main 函数)等，这些元素在程序初始化过程中的初始化顺序是什么样的呢？我们用下面的这幅图来说明一下：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="https://img1.sycdn.imooc.com/5f9248da00015a0315101038.png" data-original="//img1.sycdn.imooc.com/5f9248da00015a0315101038.png" alt=""></p>
+</div><div class="cl-preview-section"><center>图4-1-1 包初始化顺序</center>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到在上图中：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">main 包依赖 pkg1、pkg4 两个包；</li>
+<li style="font-size: 20px; line-height: 38px;">Go 运行时会根据包导入的顺序，先去初始化 main 包的第一个依赖包 pkg1；</li>
+<li style="font-size: 20px; line-height: 38px;">Go 运行时遵循“深度优先”原则查看到：pkg1 依赖 pkg2，于是 Go 运行时去初始化 pkg2；</li>
+<li style="font-size: 20px; line-height: 38px;">pkg2 依赖 pkg3，Go 运行时去初始化 pkg3；</li>
+<li style="font-size: 20px; line-height: 38px;">pkg3 没有依赖包，于是 Go 运行时在 pkg3 包中按照”常量 -&gt; 变量 -&gt; init 函数"的顺序进行初始化；</li>
+<li style="font-size: 20px; line-height: 38px;">pkg3 初始化完毕后，Go 运行时会回到 pkg2 并对 pkg2 进行初始化；接下来再回到 pkg1 并对 pkg1 进行初始化；</li>
+<li style="font-size: 20px; line-height: 38px;">在调用完 pkg1 的 init 函数后，Go 运行时完成 main 包的第一个依赖包 pkg1 的初始化；</li>
+<li style="font-size: 20px; line-height: 38px;">Go 运行时接下来会初始化 main 包的第二个依赖包 pkg4；</li>
+<li style="font-size: 20px; line-height: 38px;">pkg4 的初始化过程与 pkg1 类似，也是先初始化其依赖包 pkg5，然后再初始化自身；</li>
+<li style="font-size: 20px; line-height: 38px;">当 Go 运行时初始化完 pkg4 后，也就完成了对 main 包所有依赖包的初始化，接下来初始化 main 包自身；</li>
+<li style="font-size: 20px; line-height: 38px;">在 main 包中，Go 运行时会按照”常量 -&gt; 变量 -&gt; init 函数"的顺序进行初始化，执行完这些初始化工作后才正式进入程序的入口函数 main 函数。</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">到这里，我们知道了 init 函数适合做包级数据初始化和初始状态检查的<strong>前提条件就是 init 函数的执行顺位排在其所在包的包级变量之后。</strong></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们再通过代码示例来验证一下上述的程序启动初始化顺序：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">// 示例程序的结构如下：
+
+package-init-order
+├── go.mod
+├── main.go
+├── pkg1
+│   └── pkg1.go
+├── pkg2
+│   └── pkg2.go
+└── pkg3
+    └── pkg3.go
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">包的依赖关系如下：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">main 包依赖 pkg1 和 pkg3；</li>
+<li style="font-size: 20px; line-height: 38px;">pkg1 依赖 pkg2。</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">由于篇幅所限，这里仅列出 main 包的代码，pkg1、pkg2 和 pkg3 包的代码与 main 包类似：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">// package-init-order/main.go
+
+package main
+
+import (
+	"fmt"
+
+	_ "github.com/bigwhite/package-init-order/pkg1"
+	_ "github.com/bigwhite/package-init-order/pkg3"
+)
+
+var (
+	_  = constInitCheck()
+	v1 = variableInit("v1")
+	v2 = variableInit("v2")
+)
+
+const (
+	c1 = "c1"
+	c2 = "c2"
+)
+
+func constInitCheck() string {
+	if c1 != "" {
+		fmt.Println("main: const c1 init")
+	}
+	if c1 != "" {
+		fmt.Println("main: const c2 init")
+	}
+	return ""
+}
+
+func variableInit(name string) string {
+	fmt.Printf("main: var %s init\n", name)
+	return name
+}
+
+func init() {
+	fmt.Println("main: init")
+}
+
+func main() {
+	// do nothing
+}
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到 main 包并未使用 pkg1 和 pkg3 中的函数或方法，而是直接通过包的空别名方式“触发”pkg1 和 pkg3 的初始化，下面是这个程序的运行结果：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">$go run main.go
+pkg2: const c init
+pkg2: var v init
+pkg2: init
+pkg1: const c init
+pkg1: var v init
+pkg1: init
+pkg3: const c init
+pkg3: var v init
+pkg3: init
+main: const c1 init
+main: const c2 init
+main: var v1 init
+main: var v2 init
+main: init
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">正如我们预期的那样，Go 运行时按照"pkg2 -&gt; pkg1 -&gt; pkg3 -&gt; main"的包顺序以及在包内“常量” -&gt; “变量” -&gt; init 函数的顺序进行初始化。</p>
+</div><div class="cl-preview-section"><h2 id="使用-init-函数检查包级变量的初始状态" style="font-size: 30px;">3. 使用 init 函数检查包级变量的初始状态</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">init 函数就好比 Go 包真正投入使用之前的一个唯一的“质检员”，负责对包内部以及暴露到外部的包级数据（主要是包级变量）的初始状态进行检查。在 Go 运行时和标准库中，我们能发现很多 init 检查包级变量的初始状态的例子。</p>
+</div><div class="cl-preview-section"><h3 id="a-重置包级变量值">a) 重置包级变量值</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们先看看标准库 flag 包的 init 函数：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">// $GOROOT/src/flag/flag.go
+
+func init() {
+        // Override generic FlagSet default Usage with call to global Usage.
+        // Note: This is not CommandLine.Usage = Usage,
+        // because we want any eventual call to use any updated value of Usage,
+        // not the value it has when this line is run.
+        CommandLine.Usage = commandLineUsage
+}
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">CommandLine 是 flag 包的一个导出包级变量，它也是默认情况下(如果你没有新创建一个 FlagSet)代表命令行的变量，我们从其初始化表达式即可看出：</p>
+</div><div class="cl-preview-section"><pre class=" language-go"><code class="prism  language-go"><span class="token keyword">var</span> CommandLine <span class="token operator">=</span> <span class="token function">NewFlagSet</span><span class="token punctuation">(</span>os<span class="token punctuation">.</span>Args<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> ExitOnError<span class="token punctuation">)</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">CommandLine 的 Usage 字段在 NewFlagSet 函数中被初始化为 FlagSet 实例（也就是 CommandLine)的方法值(method value)：defaultUsage。如果一直保持这样，那么使用 Flag 默认 CommandLine 的外用用户就无法自定义 usage 输出了。于是 flag 包在 init 函数中，将 ComandLine 的 Usage 字段设置为一个包内未导出函数 commandLineUsage，后者则直接使用了 flag 包的另外一个导出包变量 Usage。这样通过 init 函数将 CommandLine 与包变量 Usage 关联在一起。当用户将自定义 usage 赋值给 Usage 后，就相当于改变了 CommandLine 变量的 Usage。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">另外一个例子来自标准库的 context 包：</p>
+</div><div class="cl-preview-section"><pre class=" language-go"><code class="prism  language-go"><span class="token comment">// $GOROOT/src/context/context.go</span>
+
+<span class="token comment">// closedchan is a reusable closed channel.</span>
+<span class="token keyword">var</span> closedchan <span class="token operator">=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">chan</span> <span class="token keyword">struct</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">close</span><span class="token punctuation">(</span>closedchan<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">context 包在 cancelCtx 的 cancel 方法中需要一个可复用的、处于关闭状态的 channel，于是 context 包定义了一个未导出包级变量 closedchan 并对其进行了初始化。但初始化后的 closedchan 并不满足 context 包的要求，唯一能检查和更正其状态的地方就是 context 包的 init 函数，于是我们看到上面代码在 init 函数中将 closedchan 关闭了。</p>
+</div><div class="cl-preview-section"><h3 id="b-对包级变量进行初始化，保证其后续可用">b) 对包级变量进行初始化，保证其后续可用</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">有些包级变量需要一个较为复杂的初始化过程，简单的初始化表达式不能满足要求。而 init 函数则非常适合完成此项工作。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">标准库 regexp 包的 init 函数就负责完成了对内部特殊字节数组的初始化，这个特殊字节数组被包内的 special 函数使用，用于判断某个字符是否需要转义：</p>
+</div><div class="cl-preview-section"><pre class=" language-go"><code class="prism  language-go"><span class="token comment">//  $GOROOT/src/regexp/regexp.go</span>
+
+<span class="token comment">// Bitmap used by func special to check whether a character needs to be escaped.</span>
+<span class="token keyword">var</span> specialBytes <span class="token punctuation">[</span><span class="token number">16</span><span class="token punctuation">]</span><span class="token builtin">byte</span>
+
+<span class="token comment">// special reports whether byte b needs to be escaped by QuoteMeta.</span>
+<span class="token keyword">func</span> <span class="token function">special</span><span class="token punctuation">(</span>b <span class="token builtin">byte</span><span class="token punctuation">)</span> <span class="token builtin">bool</span> <span class="token punctuation">{</span>
+	<span class="token keyword">return</span> b <span class="token operator">&lt;</span> utf8<span class="token punctuation">.</span>RuneSelf <span class="token operator">&amp;&amp;</span> specialBytes<span class="token punctuation">[</span>b<span class="token operator">%</span><span class="token number">16</span><span class="token punctuation">]</span><span class="token operator">&amp;</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span><span class="token punctuation">(</span>b<span class="token operator">/</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span>
+<span class="token punctuation">}</span>
+  
+<span class="token keyword">func</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> b <span class="token operator">:=</span> <span class="token keyword">range</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span><span class="token string">`\.+*?()|[]{}^$`</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        	specialBytes<span class="token punctuation">[</span>b<span class="token operator">%</span><span class="token number">16</span><span class="token punctuation">]</span> <span class="token operator">|=</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span>b <span class="token operator">/</span> <span class="token number">16</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">标准库 net 包在 init 函数中对 rfc6724policyTable 这个未导出包级变量进行反转排序：</p>
+</div><div class="cl-preview-section"><pre class=" language-go"><code class="prism  language-go"><span class="token comment">// $GOROOT/src/net/addrselect.go</span>
+<span class="token keyword">func</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        sort<span class="token punctuation">.</span><span class="token function">Sort</span><span class="token punctuation">(</span>sort<span class="token punctuation">.</span><span class="token function">Reverse</span><span class="token punctuation">(</span><span class="token function">byMaskLength</span><span class="token punctuation">(</span>rfc6724policyTable<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">标准库 http 包则在 init 函数中根据环境变量 GODEBUG 的值对一些包级开关变量进行赋值：</p>
+</div><div class="cl-preview-section"><pre class=" language-go"><code class="prism  language-go"><span class="token comment">// $GOROOT/src/net/http/h2_bundle.go</span>
+<span class="token keyword">var</span> <span class="token punctuation">(</span>
+        http2VerboseLogs    <span class="token builtin">bool</span>
+        http2logFrameWrites <span class="token builtin">bool</span>
+        http2logFrameReads  <span class="token builtin">bool</span>
+        http2inTests        <span class="token builtin">bool</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        e <span class="token operator">:=</span> os<span class="token punctuation">.</span><span class="token function">Getenv</span><span class="token punctuation">(</span><span class="token string">"GODEBUG"</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> strings<span class="token punctuation">.</span><span class="token function">Contains</span><span class="token punctuation">(</span>e<span class="token punctuation">,</span> <span class="token string">"http2debug=1"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                http2VerboseLogs <span class="token operator">=</span> <span class="token boolean">true</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> strings<span class="token punctuation">.</span><span class="token function">Contains</span><span class="token punctuation">(</span>e<span class="token punctuation">,</span> <span class="token string">"http2debug=2"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                http2VerboseLogs <span class="token operator">=</span> <span class="token boolean">true</span>
+                http2logFrameWrites <span class="token operator">=</span> <span class="token boolean">true</span>
+                http2logFrameReads <span class="token operator">=</span> <span class="token boolean">true</span>
+        <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><h3 id="c-init-函数中的“注册模式”">c) init 函数中的“注册模式”</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">下面是使用<a href="https://github.com/lib/pg">lib/pq 包</a>访问 PostgreSQL 数据库的一段代码示例：</p>
+</div><div class="cl-preview-section"><pre class=" language-go"><code class="prism  language-go"><span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"database/sql"</span>
+	<span class="token boolean">_</span> <span class="token string">"github.com/lib/pq"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	db<span class="token punctuation">,</span> err <span class="token operator">:=</span> sql<span class="token punctuation">.</span><span class="token function">Open</span><span class="token punctuation">(</span><span class="token string">"postgres"</span><span class="token punctuation">,</span> <span class="token string">"user=pqgotest dbname=pqgotest sslmode=verify-full"</span><span class="token punctuation">)</span>
+	<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+		log<span class="token punctuation">.</span><span class="token function">Fatal</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+	<span class="token punctuation">}</span>
+
+	age <span class="token operator">:=</span> <span class="token number">21</span>
+	rows<span class="token punctuation">,</span> err <span class="token operator">:=</span> db<span class="token punctuation">.</span><span class="token function">Query</span><span class="token punctuation">(</span><span class="token string">"SELECT name FROM users WHERE age = $1"</span><span class="token punctuation">,</span> age<span class="token punctuation">)</span>
+	<span class="token operator">...</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">对于初学 Go 的 gopher 来说，这是一段“神奇”的代码，因为在以空别名方式导入 lib/pq 包后，main 函数中似乎并没有使用 pq 的任何变量、函数或方法。这段代码的奥秘全在 pq 包的 init 函数中：</p>
+</div><div class="cl-preview-section"><pre class=" language-go"><code class="prism  language-go"><span class="token comment">// github.com/lib/pq/conn.go</span>
+<span class="token operator">...</span> <span class="token operator">...</span>
+
+<span class="token keyword">func</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        sql<span class="token punctuation">.</span><span class="token function">Register</span><span class="token punctuation">(</span><span class="token string">"postgres"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>Driver<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token operator">...</span> <span class="token operator">...</span>
+
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">空别名方式导入 lib/pq 的副作用就是 Go 运行时会将 lib/pq 作为 main 包的依赖包，Go 运行时会初始化 pq 包，于是 pq 包的 init 函数得以执行。我们看到在 pq 包的 init 函数中，pq 包将自己实现的 sql 驱动(driver)注册到 sql 包中。这样只要应用层代码在 Open 数据库的时候传入驱动的名字（这里是“postgres”)，那么通过 sql.Open 函数返回的数据库实例句柄对数据库进行的操作实际上调用的都是 pq 这个驱动的相应实现。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">这种通过在 init 函数中注册自己的实现的模式，降低了 Go 包对外的直接暴露，尤其是包级变量的暴露，避免了外部通过包级变量对包状态的改动。从 database/sql 的角度来看，这种“注册模式”实质是一种工厂设计模式的实现，sql.Open 函数就是该模式中的工厂方法，它根据外部传入的驱动名称“生产”出不同类别的数据库实例句柄。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">这种“注册模式”在标准库的其他包中亦有广泛应用，比如：使用标准库 image 包获取各种格式的图片的宽和高：</p>
+</div><div class="cl-preview-section"><pre class=" language-go"><code class="prism  language-go"><span class="token comment">// get_image_size.go</span>
+<span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+        <span class="token string">"fmt"</span>
+        <span class="token string">"image"</span>
+        <span class="token boolean">_</span> <span class="token string">"image/gif"</span>
+        <span class="token boolean">_</span> <span class="token string">"image/jpeg"</span>
+        <span class="token boolean">_</span> <span class="token string">"image/png"</span>
+        <span class="token string">"os"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 支持png, jpeg, gif</span>
+        width<span class="token punctuation">,</span> height<span class="token punctuation">,</span> err <span class="token operator">:=</span> <span class="token function">imageSize</span><span class="token punctuation">(</span>os<span class="token punctuation">.</span>Args<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+                fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"get image size error:"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
+                <span class="token keyword">return</span>
+        <span class="token punctuation">}</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"image size: [%d, %d]\n"</span><span class="token punctuation">,</span> width<span class="token punctuation">,</span> height<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">imageSize</span><span class="token punctuation">(</span>imageFile <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token builtin">error</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        f<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> os<span class="token punctuation">.</span><span class="token function">Open</span><span class="token punctuation">(</span>imageFile<span class="token punctuation">)</span>
+        <span class="token keyword">defer</span> f<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        img<span class="token punctuation">,</span> <span class="token boolean">_</span><span class="token punctuation">,</span> err <span class="token operator">:=</span> image<span class="token punctuation">.</span><span class="token function">Decode</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+                <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> err
+        <span class="token punctuation">}</span>
+
+        b <span class="token operator">:=</span> img<span class="token punctuation">.</span><span class="token function">Bounds</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> b<span class="token punctuation">.</span>Max<span class="token punctuation">.</span>X<span class="token punctuation">,</span> b<span class="token punctuation">.</span>Max<span class="token punctuation">.</span>Y<span class="token punctuation">,</span> <span class="token boolean">nil</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">这个小程序支持 png、jpeg、gif 三种格式的图片，而达成这一目标正是因为 image/png、image/jpeg 和 image/gif 包在各自的 init 函数中将自己“注册”到 image 的支持格式列表中了：</p>
+</div><div class="cl-preview-section"><pre class=" language-go"><code class="prism  language-go"><span class="token comment">// $GOROOT/src/image/png/reader.go</span>
+<span class="token keyword">func</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        image<span class="token punctuation">.</span><span class="token function">RegisterFormat</span><span class="token punctuation">(</span><span class="token string">"png"</span><span class="token punctuation">,</span> pngHeader<span class="token punctuation">,</span> Decode<span class="token punctuation">,</span> DecodeConfig<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// $GOROOT/src/image/jpeg/reader.go</span>
+<span class="token keyword">func</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        image<span class="token punctuation">.</span><span class="token function">RegisterFormat</span><span class="token punctuation">(</span><span class="token string">"jpeg"</span><span class="token punctuation">,</span> <span class="token string">"\xff\xd8"</span><span class="token punctuation">,</span> Decode<span class="token punctuation">,</span> DecodeConfig<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// $GOROOT/src/image/gif/reader.go</span>
+<span class="token keyword">func</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        image<span class="token punctuation">.</span><span class="token function">RegisterFormat</span><span class="token punctuation">(</span><span class="token string">"gif"</span><span class="token punctuation">,</span> <span class="token string">"GIF8?a"</span><span class="token punctuation">,</span> Decode<span class="token punctuation">,</span> DecodeConfig<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>  
+</code></pre>
+</div><div class="cl-preview-section"><h3 id="d-init-函数中检查失败的处理方法">d) init 函数中检查失败的处理方法</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">init 函数是一个无参数无返回值的函数，并且它的主要目的就是保证其所在包在被正式使用之前包的初始状态是有效的。一旦 init 函数在检查包数据初始状态时遇到失败或错误的情况(尽管极少出现），则说明对包的“质检”亮了红灯，如果让包“出厂”，那么只会导致更为严重的影响。因此，在这种情况下，快速失败是最佳选择。我们一般建议直接调用 panic。或通过 log.Fatal 等方法记录异常日志后再调用 panic 使程序退出。</p>
+</div><div class="cl-preview-section"><h2 id="小结" style="font-size: 30px;">4. 小结</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">深入理解 init 函数，记住本节的几个要点即可：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">init 函数的几个特点：运行时调用、顺序、仅执行一次 。</li>
+<li style="font-size: 20px; line-height: 38px;">Go 程序的初始化顺序。</li>
+<li style="font-size: 20px; line-height: 38px;">init 函数是包出厂前的唯一“质检员”。</li>
+</ul>
+</div>}
+                        </div>
+                    </div>
+                                            <!-- 买过的阅读 -->
+                        <div class="art-next-prev clearfix">
+                                                                                                <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/87/article/2387">
+                                                                    <div class="prev l clearfix">
+                                        <div class="icon l">
+                                            <i class="imv2-arrow3_l"></i>
+                                        </div>
+                                        <p>
+                                            16 理解包导入路径的含义
+                                        </p>
+                                    </div>
+                                </a>
+                                                                                                                            <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/87/article/2420">
+                                                                    <div class="next r clearfix">
+                                        <p>
+                                            18 Go 函数是“一等公民”
+                                        </p>
+                                        <div class="icon r">
+                                            <i class="imv2-arrow3_r"></i>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                                    </div>
+                                    </div>
+                <div class="comments-con js-comments-con" id="coments_con">
+                </div>
+
+                
+            </div>
+            
+            
+            
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-jiaQun-new hide" id="modal-jiaQun">
+    <div class="inner" style="">
+        <div class="modal-close js-close-jiaQun">
+            <i class="imv2-close"></i>
+        </div>
+        <div class="content">
+            <img src="https://img1.sycdn.imooc.com/5f51ecec0001392b05330597.jpg">
+            <div class="right-info">
+                <div class="title">
+                    扫码加入慕课前沿技术核心用户群
+                </div>
+                <div class="desc">
+                                            <p class="mb6">验证信息：<span id="joincode">2010312025386365</span><span class="copy js-copy-joincode">复制</span></p>
+                                        <p class="mb6">QQ讨论群号：729941811</p>
+                                            <p>QQ群URL：<a href="https://jq.qq.com/?_wv=1027&amp;k=5WJLMxV" target="_blank">点击访问</a></p>
+                                    </div>
+            </div>
+            <p class="tip">若遇到搜索不到QQ群或加群失败，请联系客服邮箱:kf@imooc.com</p>
+        </div>
+    </div>
+</div>
+ 
+<!-- 专栏介绍页专栏评价 -->
+
+<!-- 专栏介绍页底部三条评价 -->
+
+<!-- 专栏阅读页弹层目录和介绍页页面目录 -->
+
+<!-- 专栏阅读页发布回复 -->
+
+<!-- 专栏阅读页发布评论 -->
+
+<!-- 专栏阅读页底部评论 -->
+
+<!-- 专栏阅读 单个 评论 -->
+
+<!-- 新增回复和展开三条以外回复 -->
+
+<!-- 立即订阅的弹窗 -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div></body></html>

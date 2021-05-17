@@ -1,0 +1,719 @@
+<html><head><meta charset="utf-8"><title>22 变长参数函数的妙用-慕课专栏</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+			<meta name="renderer" content="webkit">
+			<meta property="qc:admins" content="77103107776157736375">
+			<meta property="wb:webmaster" content="c4f857219bfae3cb">
+			<meta http-equiv="Access-Control-Allow-Origin" content="*">
+			<meta http-equiv="Cache-Control" content="no-transform ">
+			<meta http-equiv="Cache-Control" content="no-siteapp">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://www.imooc.com/static/img/common/touch-icon-ipad.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://www.imooc.com/static/img/common/touch-icon-iphone-retina.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://www.imooc.com/static/img/common/touch-icon-ipad-retina.png">
+			<link href="https://moco.imooc.com/captcha/style/captcha.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201907021539" type="text/css">
+			<link rel="stylesheet" href="https://www.imooc.com/static/lib/swiper/swiper-3.4.2.min.css?t=201907021539">
+			<link rel="stylesheet" href="https://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,column/zhuanlanChapter-less.css?t=2.5,course/inc/course_tipoff-less.css?t=2.5?v=201907051055" type="text/css">
+			<link charset="utf-8" rel="stylesheet" href="https://www.imooc.com/static/lib/ueditor/themes/imooc/css/ueditor.css?v=201907021539"><link rel="stylesheet" href="https://www.imooc.com/static/lib/baiduShare/api/css/share_style0_16.css?v=6aba13f0.css"></head>
+			<body><div id="main">
+
+
+<div class="main-con hide-menu">
+    <!-- 左侧菜单 & 索引 -->
+    
+    <div class="right-content" style="padding-left: 0px;">
+        <div class="container clearfix" id="top" style="width: 1134px; display: block;">
+            
+            
+            <div class="center_con js-center_con l" style="width: 1134px;">
+                <div class="article-con">
+                                            <!-- 买过的阅读 -->
+                        
+
+                    
+                    <div class="art-title" style="margin-top: 0px;">
+                        22 变长参数函数的妙用
+                    </div>
+                    <div class="art-info clearfix">
+                        
+                        <span class="l">
+                            更新时间：2020-10-30 09:42:34
+                        </span>
+                    </div>
+                    <div class="art-top">
+                                                <img src="https://img1.sycdn.imooc.com/5f924ea00001e30606400409.jpg" alt="">
+                                                                        <div class="famous-word-box">
+                            <img src="https://www.imooc.com/static/img/column/bg-l.png" alt="" class="bg1 bg">
+                            <img src="https://www.imooc.com/static/img/column/bg-r.png" alt="" class="bg2 bg">
+                            <div class="famous-word">完成工作的方法，是爱惜每一分钟。——达尔文<p></p></div>
+                        </div>
+                                            </div>
+                    <div class="art-content js-lookimg">
+                        <div id="article_content">
+                            <div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在 Go 语言中，我们日常使用最多但又经常被”忽视“的一类函数就是<strong>变长参数函数</strong>。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">说变长参数函数被使用得最多是因为最常用的 fmt 包、log 包中的几个导出函数都是变长参数函数：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// $GOROOT/src/fmt/print.go</span>
+<span class="token keyword">func</span> <span class="token function">Println</span><span class="token punctuation">(</span>a <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">,</span> err <span class="token builtin">error</span><span class="token punctuation">)</span>
+<span class="token keyword">func</span> <span class="token function">Printf</span><span class="token punctuation">(</span>format <span class="token builtin">string</span><span class="token punctuation">,</span> a <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">,</span> err <span class="token builtin">error</span><span class="token punctuation">)</span>
+<span class="token keyword">func</span> <span class="token function">Fprintf</span><span class="token punctuation">(</span>w io<span class="token punctuation">.</span>Writer<span class="token punctuation">,</span> format <span class="token builtin">string</span><span class="token punctuation">,</span> a <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">,</span> err <span class="token builtin">error</span><span class="token punctuation">)</span>
+<span class="token keyword">func</span> <span class="token function">Fprint</span><span class="token punctuation">(</span>w io<span class="token punctuation">.</span>Writer<span class="token punctuation">,</span> a <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">,</span> err <span class="token builtin">error</span><span class="token punctuation">)</span>
+<span class="token keyword">func</span> <span class="token function">Sprintf</span><span class="token punctuation">(</span>format <span class="token builtin">string</span><span class="token punctuation">,</span> a <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token builtin">string</span>
+<span class="token keyword">func</span> <span class="token function">Sprintln</span><span class="token punctuation">(</span>a <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token builtin">string</span>
+
+<span class="token comment">// $GOROOT/src/log/log.go</span>
+<span class="token keyword">func</span> <span class="token function">Printf</span><span class="token punctuation">(</span>format <span class="token builtin">string</span><span class="token punctuation">,</span> v <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">func</span> <span class="token function">Println</span><span class="token punctuation">(</span>v <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> 
+<span class="token keyword">func</span> <span class="token function">Fatal</span><span class="token punctuation">(</span>v <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">func</span> <span class="token function">Fatalf</span><span class="token punctuation">(</span>format <span class="token builtin">string</span><span class="token punctuation">,</span> v <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">func</span> <span class="token function">Fatalln</span><span class="token punctuation">(</span>v <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> 
+<span class="token keyword">func</span> <span class="token function">Panic</span><span class="token punctuation">(</span>v <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">func</span> <span class="token function">Panicf</span><span class="token punctuation">(</span>format <span class="token builtin">string</span><span class="token punctuation">,</span> v <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">func</span> <span class="token function">Panicln</span><span class="token punctuation">(</span>v <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">并且 Go 内置的常用于切片类型操作的 append 函数也是变长参数函数：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// $GOROOT/src/builtin/builtin.go</span>
+<span class="token keyword">func</span> <span class="token function">append</span><span class="token punctuation">(</span>slice <span class="token punctuation">[</span><span class="token punctuation">]</span>Type<span class="token punctuation">,</span> elems <span class="token operator">...</span>Type<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>Type
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">但日常我们却很少基于变长参数设计和实现自己的函数或方法。究其原因，笔者认为除了对变长参数函数的理解可能不足之外，更主要的原因是没有找到很好的变长参数函数应用模式。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">但有些时候使用变长参数函数可以简化代码逻辑，使代码更易阅读和理解。在这一节中，我就和大家一起来了解一下变长参数函数以及它的几个典型应用模式。</p>
+</div><div class="cl-preview-section"><h2 id="什么是变长参数函数" style="font-size: 30px;">1. 什么是变长参数函数</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">顾名思义，变长参数函数就是指函数调用时可以接受零个、一个或多个实际参数，就像下面对 fmt.Println 的调用那样：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go">fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// ok</span>
+fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Tony"</span><span class="token punctuation">,</span> <span class="token string">"Bai"</span><span class="token punctuation">)</span> <span class="token comment">// ok</span>
+fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Tony"</span><span class="token punctuation">,</span> <span class="token string">"Bai"</span><span class="token punctuation">,</span> <span class="token string">"is"</span><span class="token punctuation">,</span> <span class="token string">"a"</span><span class="token punctuation">,</span> <span class="token string">"gopher"</span><span class="token punctuation">)</span> <span class="token comment">// ok</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">对照下面 fmt.Println 函数的原型：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token keyword">func</span> <span class="token function">Println</span><span class="token punctuation">(</span>a <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">,</span> err <span class="token builtin">error</span><span class="token punctuation">)</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到：无论传入零个、两个还是多个实际参数，这些实参都传给了 Println 的形式参数 a。形参 a 的类型是一个比较”奇特“的组合：<strong>… interface{}</strong>，这种接受**”…T“<strong>类型形式参数的函数就被称为</strong>变长参数函数**。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">一个变长参数函数只能有一个**”…T“**类型形式参数，并且该形式参数应该为函数参数列表中的最后一个形式参数，否则 Go 编译器就会给出如下错误提示：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">func foo(args ...int, s string) int // syntax error: cannot use ... with non-final parameter args
+func bar(args1 ...int, args2 ...string) int // syntax error: cannot use ... with non-final parameter args1
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">变长参数函数的**”…T“**类型形式参数在函数体内呈现为[]T 类型的变量，我们可以将其理解为一个 Go 语法甜头：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// variadic_function_1.go</span>
+<span class="token keyword">func</span> <span class="token function">sum</span><span class="token punctuation">(</span>args <span class="token operator">...</span><span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> total <span class="token builtin">int</span>
+
+        <span class="token comment">// 下面的args的类型为[]int</span>
+        <span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> v <span class="token operator">:=</span> <span class="token keyword">range</span> args <span class="token punctuation">{</span> 
+                total <span class="token operator">+=</span> v
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">return</span> total
+<span class="token punctuation">}</span>
+
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">但在函数外部，<strong>”…T“</strong> 类型形式参数可匹配和接受的实参类型有两种：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">多个 T 类型变量；</li>
+<li style="font-size: 20px; line-height: 38px;"><strong>t…</strong>（t 为 []T 类型变量）；</li>
+</ul>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">// variadic_function_1.go
+
+func main() {
+        a, b, c := 1, 2, 3
+        println(sum(a, b, c)) // 传入多个int类型的变量
+        nums := []int{4, 5, 6}
+        println(sum(nums...)) // 传入"nums..."，num为[]int型变量
+}
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">但我们只能选择上述两种实参类型中的一种：要么是多个 T 类型变量，要么是<strong>t…</strong>（t 为[]T 类型变量）。如果两种放在一起混用，则会得到类似下面的编译错误：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token function">println</span><span class="token punctuation">(</span><span class="token function">sum</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c<span class="token punctuation">,</span> nums<span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// too many arguments in call to sum</span>
+	<span class="token function">have</span> <span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token operator">...</span><span class="token punctuation">)</span>
+	<span class="token function">want</span> <span class="token punctuation">(</span><span class="token operator">...</span><span class="token builtin">int</span><span class="token punctuation">)</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">这里将变长参数函数的形参和实参类型总结为下面的示意图：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="https://img1.sycdn.imooc.com/5f9248dc000172ad09910570.png" data-original="//img1.sycdn.imooc.com/5f9248dc000172ad09910570.png" alt=""></p>
+</div><div class="cl-preview-section"><center>图4-6-1: 变长参数函数的形参和实参</center>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">使用变长参数函数时最容易出现的一个问题就是实参与形参的不匹配，比如下面这个例子：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// variadic_function_2.go</span>
+<span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">dump</span><span class="token punctuation">(</span>args <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> v <span class="token operator">:=</span> <span class="token keyword">range</span> args <span class="token punctuation">{</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	s <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">{</span><span class="token string">"Tony"</span><span class="token punctuation">,</span> <span class="token string">"John"</span><span class="token punctuation">,</span> <span class="token string">"Jim"</span><span class="token punctuation">}</span>
+	<span class="token function">dump</span><span class="token punctuation">(</span>s<span class="token operator">...</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">运行这段代码：</p>
+</div><div class="cl-preview-section"><pre><code>$ go run variadic_function_2.go
+# command-line-arguments
+./variadic_function_2.go:14:6: cannot use s (type []string) as type []interface {} in argument to dump
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到：编译器给出了”类型不匹配“的错误。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">dump 函数的变长参数类型为”<strong>…interface{}</strong>“，因此匹配该形参的要么是 interface{} 类型的变量，要么为<strong>t…</strong>(t 类型为[]interface{})。在例子中给 dump 传入的实参为<strong>s…</strong>，但 s 的类型为[]string，并非[]interface{}，导致不匹配。这里要注意的是<strong>虽然 string 类型变量可以直接赋值给 interface{} 类型变量，但是 []string 类型变量并不能直接赋值给 []interface{} 类型变量</strong>。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">要消除编译错误，我们仅需将变量 s 的类型换为 []interface{}：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// variadic_function_2.go</span>
+
+<span class="token operator">...</span> <span class="token operator">...</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	s <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token string">"Tony"</span><span class="token punctuation">,</span> <span class="token string">"John"</span><span class="token punctuation">,</span> <span class="token string">"Jim"</span><span class="token punctuation">}</span>
+	<span class="token function">dump</span><span class="token punctuation">(</span>s<span class="token operator">...</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+$ <span class="token keyword">go</span> run variadic_function_2<span class="token punctuation">.</span><span class="token keyword">go</span> 
+Tony
+John
+Jim
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">不过有个例外，那就是 Go 内置的 append 函数，它支持通过下面的方式将字符串附加到一个字节切片后面：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// variadic_function_3.go</span>
+<span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	b <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+	b <span class="token operator">=</span> <span class="token function">append</span><span class="token punctuation">(</span>b<span class="token punctuation">,</span> <span class="token string">"hello"</span><span class="token operator">...</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">string</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+$ <span class="token keyword">go</span> run variadic_function_3<span class="token punctuation">.</span><span class="token keyword">go</span>
+hello
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">string 类型本是不满足类型要求的（append 本需要[]byte…)， 这算是 Go 编译器的一个优化，编译器自动将 string 隐式转换为了 []byte。如果是我们自定义的函数，那么是无论如何都不能支持这样的用法的：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// variadic_function_3.go</span>
+<span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">foo</span><span class="token punctuation">(</span>b <span class="token operator">...</span><span class="token builtin">byte</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">string</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	b <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+	b <span class="token operator">=</span> <span class="token function">append</span><span class="token punctuation">(</span>b<span class="token punctuation">,</span> <span class="token string">"hello"</span><span class="token operator">...</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">string</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+	<span class="token function">foo</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token operator">...</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+$ <span class="token keyword">go</span> run variadic_function_3<span class="token punctuation">.</span><span class="token keyword">go</span>
+# command<span class="token operator">-</span>line<span class="token operator">-</span>arguments
+<span class="token punctuation">.</span><span class="token operator">/</span>variadic_function_3<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">14</span><span class="token punctuation">:</span><span class="token number">6</span><span class="token punctuation">:</span> cannot use <span class="token string">"hello"</span> <span class="token punctuation">(</span><span class="token keyword">type</span> <span class="token builtin">string</span><span class="token punctuation">)</span> as <span class="token keyword">type</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span> in argument to foo
+
+</code></pre>
+</div><div class="cl-preview-section"><h2 id="模拟函数重载" style="font-size: 30px;">2. 模拟函数重载</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 语言不允许在同一个作用域下定义名字相同但函数原型不同的函数，如果定义这样的函数，Go 编译器会提示下面错误信息：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// variadic_function_4.go</span>
+<span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"fmt"</span>
+	<span class="token string">"strings"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">concat</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">{</span>
+	<span class="token keyword">return</span> fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%d %d"</span><span class="token punctuation">,</span> a<span class="token punctuation">,</span> b<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">concat</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">{</span>
+	<span class="token keyword">return</span> x <span class="token operator">+</span> <span class="token string">" "</span> <span class="token operator">+</span> y
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">concat</span><span class="token punctuation">(</span>s <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">{</span>
+	<span class="token keyword">return</span> strings<span class="token punctuation">.</span><span class="token function">Join</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> <span class="token string">" "</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token function">println</span><span class="token punctuation">(</span><span class="token function">concat</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token function">println</span><span class="token punctuation">(</span><span class="token function">concat</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">,</span> <span class="token string">"gopher"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token function">println</span><span class="token punctuation">(</span><span class="token function">concat</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">{</span><span class="token string">"hello"</span><span class="token punctuation">,</span> <span class="token string">"gopher"</span><span class="token punctuation">,</span> <span class="token string">"!"</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+$ <span class="token keyword">go</span> run variadic_function_4<span class="token punctuation">.</span><span class="token keyword">go</span>
+# command<span class="token operator">-</span>line<span class="token operator">-</span>arguments
+<span class="token punctuation">.</span><span class="token operator">/</span>variadic_function_4<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">9</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">:</span> too many arguments to <span class="token keyword">return</span>
+	<span class="token function">have</span> <span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token builtin">error</span><span class="token punctuation">)</span>
+	<span class="token function">want</span> <span class="token punctuation">(</span><span class="token builtin">string</span><span class="token punctuation">)</span>
+<span class="token punctuation">.</span><span class="token operator">/</span>variadic_function_4<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">12</span><span class="token punctuation">:</span><span class="token number">6</span><span class="token punctuation">:</span> concat redeclared in this block
+	previous declaration at <span class="token punctuation">.</span><span class="token operator">/</span>variadic_function_4<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">8</span><span class="token punctuation">:</span><span class="token number">23</span>
+<span class="token punctuation">.</span><span class="token operator">/</span>variadic_function_4<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">16</span><span class="token punctuation">:</span><span class="token number">6</span><span class="token punctuation">:</span> concat redeclared in this block
+	previous declaration at <span class="token punctuation">.</span><span class="token operator">/</span>variadic_function_4<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">12</span><span class="token punctuation">:</span><span class="token number">26</span>
+<span class="token punctuation">.</span><span class="token operator">/</span>variadic_function_4<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">21</span><span class="token punctuation">:</span><span class="token number">16</span><span class="token punctuation">:</span> too many arguments in call to concat
+	<span class="token function">have</span> <span class="token punctuation">(</span>number<span class="token punctuation">,</span> number<span class="token punctuation">)</span>
+	<span class="token function">want</span> <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">)</span>
+<span class="token punctuation">.</span><span class="token operator">/</span>variadic_function_4<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">22</span><span class="token punctuation">:</span><span class="token number">16</span><span class="token punctuation">:</span> too many arguments in call to concat
+	<span class="token function">have</span> <span class="token punctuation">(</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token punctuation">)</span>
+	<span class="token function">want</span> <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">)</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">如果要修复上面的例子程序，我们需要将三个”concat“函数作分别命名，比如：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">concatTwoInt
+concatTwoString
+concatStrings
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在其他一些主流编程语言中（比如:C++），这种在同一声明域中的名字相同但参数列表不同的函数被称为<strong>重载函数(overloaded function)</strong>，编译器根据实际的参数传递来判断究竟该使用哪个函数。通过重载函数，你可以根据参数的类型和数量为同名函数提供不同的语义。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">但 Go 语言并不支持函数重载，<a href="http://tip.golang.org/doc/faq#overloading">Go 语言官方常见问答(即：FAQ)</a>中给出的不支持的理由如下:</p>
+</div><div class="cl-preview-section"><blockquote>
+<p style="font-size: 20px; line-height: 38px;">其他语言的经验告诉我们，使用具有相同名称但函数签名不同的多种方法有时会很有用，但在实践中也可能会造成混淆和脆弱性。 在 Go 的类型系统中，仅按名称进行匹配并要求类型一致是一个主要的简化决策。</p>
+</blockquote>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">不可否认重载函数会增加语言的复杂性，笔者在早期使用 C++ 语言开发时已经深刻体会到了这一点。Go 语言的设计哲学也让最初的设计者们倾向于简化而放弃了对函数重载的支持，但他们也承认了有些时候函数重载是很有用的。那么我们在 Go 语言中怎么模拟重载函数呢？变长参数函数显然是最好的选择。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">如果要重载的函数的参数都是相同类型的，仅参数的个数是变化的，那么变长参数函数可以轻松对应；如果参数类型不同且个数可变，那么我们还要结合 interface{}类型的特性。我们来看一个例子：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// variadic_function_5.go</span>
+<span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"fmt"</span>
+	<span class="token string">"strings"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">concat</span><span class="token punctuation">(</span>sep <span class="token builtin">string</span><span class="token punctuation">,</span> args <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">{</span>
+	<span class="token keyword">var</span> result <span class="token builtin">string</span>
+	<span class="token keyword">for</span> i<span class="token punctuation">,</span> v <span class="token operator">:=</span> <span class="token keyword">range</span> args <span class="token punctuation">{</span>
+		<span class="token keyword">if</span> i <span class="token operator">!=</span> <span class="token number">0</span> <span class="token punctuation">{</span>
+			result <span class="token operator">+=</span> sep
+		<span class="token punctuation">}</span>
+		<span class="token keyword">switch</span> v<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token keyword">type</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		<span class="token keyword">case</span> <span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token builtin">int8</span><span class="token punctuation">,</span> <span class="token builtin">int16</span><span class="token punctuation">,</span> <span class="token builtin">int32</span><span class="token punctuation">,</span> <span class="token builtin">int64</span><span class="token punctuation">,</span>
+			<span class="token builtin">uint</span><span class="token punctuation">,</span> <span class="token builtin">uint8</span><span class="token punctuation">,</span> <span class="token builtin">uint16</span><span class="token punctuation">,</span> <span class="token builtin">uint32</span><span class="token punctuation">,</span> <span class="token builtin">uint64</span><span class="token punctuation">:</span>
+			result <span class="token operator">+=</span> fmt<span class="token punctuation">.</span><span class="token function">Sprintf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> v<span class="token punctuation">)</span>
+		<span class="token keyword">case</span> <span class="token builtin">string</span><span class="token punctuation">:</span>
+			result <span class="token operator">+=</span> fmt<span class="token punctuation">.</span><span class="token function">Sprintf</span><span class="token punctuation">(</span><span class="token string">"%s"</span><span class="token punctuation">,</span> v<span class="token punctuation">)</span>
+		<span class="token keyword">case</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">:</span>
+			ints <span class="token operator">:=</span> v<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">)</span>
+			<span class="token keyword">for</span> i<span class="token punctuation">,</span> v <span class="token operator">:=</span> <span class="token keyword">range</span> ints <span class="token punctuation">{</span>
+				<span class="token keyword">if</span> i <span class="token operator">!=</span> <span class="token number">0</span> <span class="token punctuation">{</span>
+					result <span class="token operator">+=</span> sep
+				<span class="token punctuation">}</span>
+				result <span class="token operator">+=</span> fmt<span class="token punctuation">.</span><span class="token function">Sprintf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> v<span class="token punctuation">)</span>
+			<span class="token punctuation">}</span>
+		<span class="token keyword">case</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">:</span>
+			strs <span class="token operator">:=</span> v<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">)</span>
+			result <span class="token operator">+=</span> strings<span class="token punctuation">.</span><span class="token function">Join</span><span class="token punctuation">(</span>strs<span class="token punctuation">,</span> sep<span class="token punctuation">)</span>
+		<span class="token keyword">default</span><span class="token punctuation">:</span>
+			fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"the argument type [%T] is not supported"</span><span class="token punctuation">,</span> v<span class="token punctuation">)</span>
+			<span class="token keyword">return</span> <span class="token string">""</span>
+		<span class="token punctuation">}</span>
+	<span class="token punctuation">}</span>
+	<span class="token keyword">return</span> result
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token function">println</span><span class="token punctuation">(</span><span class="token function">concat</span><span class="token punctuation">(</span><span class="token string">"-"</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token function">println</span><span class="token punctuation">(</span><span class="token function">concat</span><span class="token punctuation">(</span><span class="token string">"-"</span><span class="token punctuation">,</span> <span class="token string">"hello"</span><span class="token punctuation">,</span> <span class="token string">"gopher"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token function">println</span><span class="token punctuation">(</span><span class="token function">concat</span><span class="token punctuation">(</span><span class="token string">"-"</span><span class="token punctuation">,</span> <span class="token string">"hello"</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token function">uint32</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+		<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">{</span><span class="token number">11</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">13</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">17</span><span class="token punctuation">,</span>
+		<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">{</span><span class="token string">"robot"</span><span class="token punctuation">,</span> <span class="token string">"ai"</span><span class="token punctuation">,</span> <span class="token string">"ml"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+		<span class="token string">"hacker"</span><span class="token punctuation">,</span> <span class="token number">33</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在上面这个例子中，我们定义了一个 concat 函数，该函数支持接受任意数量的整型、字符串、整型切片、字符串切片参数，并将输入的参数通过分隔符（sep）连接在一起。看 main 函数中对 concat 的调用，是不是有一种调用重载函数的味道儿！我们运行一下该例子：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">$ go run variadic_function_5.go 
+1-2
+hello-gopher
+hello-1-2-11-12-13-17-robot-ai-ml-hacker-33
+</code></pre>
+</div><div class="cl-preview-section"><h2 id="模拟实现函数的可选参数与默认参数" style="font-size: 30px;">3. 模拟实现函数的可选参数与默认参数</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><strong>如果参数在传入时有隐式要求的固定顺序(这点由调用者保证)</strong>，我们还可以利用变长参数函数模拟实现函数的可选参数和默认参数。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们来看下面例子：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// variadic_function_6.go </span>
+<span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">type</span> record <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+	name    <span class="token builtin">string</span>
+	gender  <span class="token builtin">string</span>
+	age     <span class="token builtin">uint16</span>
+	city    <span class="token builtin">string</span>
+	country <span class="token builtin">string</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">enroll</span><span class="token punctuation">(</span>args <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token comment">/* name, gender, age, city = "Beijing", country = "China" */</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token operator">*</span>record<span class="token punctuation">,</span> <span class="token builtin">error</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">if</span> <span class="token function">len</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">5</span> <span class="token operator">||</span> <span class="token function">len</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">3</span> <span class="token punctuation">{</span>
+		<span class="token keyword">return</span> <span class="token boolean">nil</span><span class="token punctuation">,</span> fmt<span class="token punctuation">.</span><span class="token function">Errorf</span><span class="token punctuation">(</span><span class="token string">"the number of arguments passed is wrong"</span><span class="token punctuation">)</span>
+	<span class="token punctuation">}</span>
+
+	r <span class="token operator">:=</span> <span class="token operator">&amp;</span>record<span class="token punctuation">{</span>
+		city<span class="token punctuation">:</span>    <span class="token string">"Beijing"</span><span class="token punctuation">,</span> <span class="token comment">// 默认值：Beijing</span>
+		country<span class="token punctuation">:</span> <span class="token string">"China"</span><span class="token punctuation">,</span>   <span class="token comment">// 默认值：China</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token keyword">for</span> i<span class="token punctuation">,</span> v <span class="token operator">:=</span> <span class="token keyword">range</span> args <span class="token punctuation">{</span>
+		<span class="token keyword">switch</span> i <span class="token punctuation">{</span>
+		<span class="token keyword">case</span> <span class="token number">0</span><span class="token punctuation">:</span> <span class="token comment">// name</span>
+			name<span class="token punctuation">,</span> ok <span class="token operator">:=</span> v<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token builtin">string</span><span class="token punctuation">)</span>
+			<span class="token keyword">if</span> <span class="token operator">!</span>ok <span class="token punctuation">{</span>
+				<span class="token keyword">return</span> <span class="token boolean">nil</span><span class="token punctuation">,</span> fmt<span class="token punctuation">.</span><span class="token function">Errorf</span><span class="token punctuation">(</span><span class="token string">"name is not passed as string"</span><span class="token punctuation">)</span>
+			<span class="token punctuation">}</span>
+			r<span class="token punctuation">.</span>name <span class="token operator">=</span> name
+		<span class="token keyword">case</span> <span class="token number">1</span><span class="token punctuation">:</span> <span class="token comment">// gender</span>
+			gender<span class="token punctuation">,</span> ok <span class="token operator">:=</span> v<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token builtin">string</span><span class="token punctuation">)</span>
+			<span class="token keyword">if</span> <span class="token operator">!</span>ok <span class="token punctuation">{</span>
+				<span class="token keyword">return</span> <span class="token boolean">nil</span><span class="token punctuation">,</span> fmt<span class="token punctuation">.</span><span class="token function">Errorf</span><span class="token punctuation">(</span><span class="token string">"gender is not passed as string"</span><span class="token punctuation">)</span>
+			<span class="token punctuation">}</span>
+			r<span class="token punctuation">.</span>gender <span class="token operator">=</span> gender
+		<span class="token keyword">case</span> <span class="token number">2</span><span class="token punctuation">:</span> <span class="token comment">// age</span>
+			age<span class="token punctuation">,</span> ok <span class="token operator">:=</span> v<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">)</span>
+			<span class="token keyword">if</span> <span class="token operator">!</span>ok <span class="token punctuation">{</span>
+				<span class="token keyword">return</span> <span class="token boolean">nil</span><span class="token punctuation">,</span> fmt<span class="token punctuation">.</span><span class="token function">Errorf</span><span class="token punctuation">(</span><span class="token string">"age is not passed as int"</span><span class="token punctuation">)</span>
+			<span class="token punctuation">}</span>
+			r<span class="token punctuation">.</span>age <span class="token operator">=</span> <span class="token function">uint16</span><span class="token punctuation">(</span>age<span class="token punctuation">)</span>
+		<span class="token keyword">case</span> <span class="token number">3</span><span class="token punctuation">:</span> <span class="token comment">// city</span>
+			city<span class="token punctuation">,</span> ok <span class="token operator">:=</span> v<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token builtin">string</span><span class="token punctuation">)</span>
+			<span class="token keyword">if</span> <span class="token operator">!</span>ok <span class="token punctuation">{</span>
+				<span class="token keyword">return</span> <span class="token boolean">nil</span><span class="token punctuation">,</span> fmt<span class="token punctuation">.</span><span class="token function">Errorf</span><span class="token punctuation">(</span><span class="token string">"city is not passed as string"</span><span class="token punctuation">)</span>
+			<span class="token punctuation">}</span>
+			r<span class="token punctuation">.</span>city <span class="token operator">=</span> city
+		<span class="token keyword">case</span> <span class="token number">4</span><span class="token punctuation">:</span> <span class="token comment">// country</span>
+			country<span class="token punctuation">,</span> ok <span class="token operator">:=</span> v<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token builtin">string</span><span class="token punctuation">)</span>
+			<span class="token keyword">if</span> <span class="token operator">!</span>ok <span class="token punctuation">{</span>
+				<span class="token keyword">return</span> <span class="token boolean">nil</span><span class="token punctuation">,</span> fmt<span class="token punctuation">.</span><span class="token function">Errorf</span><span class="token punctuation">(</span><span class="token string">"country is not passed as string"</span><span class="token punctuation">)</span>
+			<span class="token punctuation">}</span>
+			r<span class="token punctuation">.</span>country <span class="token operator">=</span> country
+		<span class="token keyword">default</span><span class="token punctuation">:</span>
+			<span class="token keyword">return</span> <span class="token boolean">nil</span><span class="token punctuation">,</span> fmt<span class="token punctuation">.</span><span class="token function">Errorf</span><span class="token punctuation">(</span><span class="token string">"unknown argument passed"</span><span class="token punctuation">)</span>
+		<span class="token punctuation">}</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token keyword">return</span> r<span class="token punctuation">,</span> <span class="token boolean">nil</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	r<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> <span class="token function">enroll</span><span class="token punctuation">(</span><span class="token string">"小明"</span><span class="token punctuation">,</span> <span class="token string">"male"</span><span class="token punctuation">,</span> <span class="token number">23</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%+v\n"</span><span class="token punctuation">,</span> <span class="token operator">*</span>r<span class="token punctuation">)</span>
+
+	r<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">=</span> <span class="token function">enroll</span><span class="token punctuation">(</span><span class="token string">"小红"</span><span class="token punctuation">,</span> <span class="token string">"female"</span><span class="token punctuation">,</span> <span class="token number">13</span><span class="token punctuation">,</span> <span class="token string">"Hangzhou"</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%+v\n"</span><span class="token punctuation">,</span> <span class="token operator">*</span>r<span class="token punctuation">)</span>
+
+	r<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">=</span> <span class="token function">enroll</span><span class="token punctuation">(</span><span class="token string">"Leo Messi"</span><span class="token punctuation">,</span> <span class="token string">"male"</span><span class="token punctuation">,</span> <span class="token number">33</span><span class="token punctuation">,</span> <span class="token string">"Barcelona"</span><span class="token punctuation">,</span> <span class="token string">"Spain"</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%+v\n"</span><span class="token punctuation">,</span> <span class="token operator">*</span>r<span class="token punctuation">)</span>
+
+	r<span class="token punctuation">,</span> err <span class="token operator">:=</span> <span class="token function">enroll</span><span class="token punctuation">(</span><span class="token string">"小吴"</span><span class="token punctuation">,</span> <span class="token number">21</span><span class="token punctuation">,</span> <span class="token string">"Suzhou"</span><span class="token punctuation">)</span>
+	<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+		<span class="token keyword">return</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在该例子中，我们要实现一个 enroll 函数，用于登记一些人员信息。人员信息包括：姓名（name）、性别（gender）、年龄（age）、城市（city）和国家（country）。其中城市（city)和国家（country）这两个字段是可选字段并且具有默认值。我们结合变长参数函数和 interface{} 类型的特点来实现这个函数，city 和 country 的默认值是在 record 类型实例创建时赋予的初值。实现这样的一个 enroll 函数的前提就是其调用方要负责按正确的顺序传入参数并保证参数类型满足函数要求。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们运行一下上面的例子：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">$ go run variadic_function_6.go 
+{name:小明 gender:male age:23 city:Beijing country:China}
+{name:小红 gender:female age:13 city:Hangzhou country:China}
+{name:Leo Messi gender:male age:33 city:Barcelona country:Spain}
+gender is not passed as string
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">在第一次 enroll 函数调用时，我们省略了 city 和 country 的传参，因此得到了记录中 city 和 country 都是默认值；</li>
+<li style="font-size: 20px; line-height: 38px;">在第二次 enroll 函数调用时，我们省略了 country 的传参，因此得到的记录中，country 是默认值；</li>
+<li style="font-size: 20px; line-height: 38px;">第三次 enroll 函数调用，我们传递了 city 和 country，因此得到的记录中，city 和 country 没有使用默认值，使用的是传入的参数值；</li>
+<li style="font-size: 20px; line-height: 38px;">第四次 enroll 函数调用时，调用者没有按照约定传入 gender 参数，因此，enroll 函数返回一个错误。</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到基于上述前提而用 Go 实现的可选参数和默认参数是有局限的：调用者只能从右侧的参数开始逐一做省略传递的处理，比如：可以省略 country，可以省略 country、city，但不能省略 city 而不省略 country 的传递。</p>
+</div><div class="cl-preview-section"><h2 id="实现”功能选项“模式" style="font-size: 30px;">4. 实现”功能选项“模式</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">日常 Go 编程时，我们经常会去实现一些带有设置选项的创建型函数，比如：我们要创建一个网络通信的客户端，创建客户端实例的函数需要提供某种方式可以让调用者设置客户端的一些行为属性，比如：超时时间、重试次数等。对于一些复杂的 Go 包中的创建型函数，它要提供的可设置选项有时多达数十种，甚至后续还会增加。因此，设计和实现这样的创建型函数时要尤为考虑使用者的体验：不能因选项较多而提供过多的 API，并且要保证选项持续增加后，函数的对外接口依旧保持稳定。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">接下来就让我们用一个简单的示例来看看变长参数函数在这里究竟能发挥什么样的作用。我们先从一个简单的版本开始并对其进行持续优化，直到实现令我们满意的最终版本。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们来设计和实现一个 NewFinishedHouse 函数，该函数返回一个”FinishedHouse(精装房)“实例。生活中精装房是由不同装修选项的，比如：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">装修风格：美式/中式/欧式；</li>
+<li style="font-size: 20px; line-height: 38px;">是否安装中央空调系统；</li>
+<li style="font-size: 20px; line-height: 38px;">地面材料：瓷砖/实木地板；</li>
+<li style="font-size: 20px; line-height: 38px;">墙面材料：乳胶漆/壁纸/硅藻泥。</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">可能还有很多装修配置选项，但这里使用上述这几个就足以满足示例的需要了。</p>
+</div><div class="cl-preview-section"><h3 id="版本-1：通过参数暴露配置选项">1) 版本 1：通过参数暴露配置选项</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">一个最简单直接的实现方法就是通过函数参数暴露配置选项，让调用者可以自行设置自己所需要的精装房风格和使用的材料：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">// variadic_function_7.go 
+package main
+
+import "fmt"
+
+type FinishedHouse struct {
+	style                  int    // 0: Chinese, 1: American, 2: European
+	centralAirConditioning bool   // true or false
+	floorMaterial          string // "ground-tile" or ”wood"
+	wallMaterial           string // "latex" or "paper" or "diatom-mud"
+}
+
+func NewFinishedHouse(style int, centralAirConditioning bool,
+	floorMaterial, wallMaterial string) *FinishedHouse {
+
+	// here: you should do some check to the arguments passed
+
+	h := &amp;FinishedHouse{
+		style:                  style,
+		centralAirConditioning: centralAirConditioning,
+		floorMaterial:          floorMaterial,
+		wallMaterial:           wallMaterial,
+	}
+
+	return h
+}
+
+func main() {
+	fmt.Printf("%+v\n", NewFinishedHouse(0, true, "wood", "paper"))
+}
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">运行该例子：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">$ go run variadic_function_7.go 
+&amp;{style:0 centralAirConditioning:true floorMaterial:wood wallMaterial:paper}
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">上述这个设计的唯一优点就是能够快速实现，但不足之处却有很多，最致命的是<strong>该接口没法扩展</strong>。如果我们此时应用户要求增加一个室内门型设置的选项（可选实木门/板材套装门），那么该接口无法满足。考虑兼容性原则，该接口一但发布就成为了 API 的一部分，我们不能随意变更。于是我们唯一能做的就是新增一个创建函数，比如：<strong>NewFinishedHouseWithDoorOption</strong>。如果后续要增加其他设置选项，API 中很大可能会充斥着 NewFinishedHouseWithXxxOption1、NewFinishedHouseWithYyyOpiton、… NewFinishedHouseWithZzzOption 等新接口。</p>
+</div><div class="cl-preview-section"><h3 id="版本-2：使用结构体封装配置选项">2) 版本 2：使用结构体封装配置选项</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">软件设计中的一个比较重要的原则就是“封装变化”，既然我们无法控制将来要加入的配置选项的个数和内容，但还要尽可能保持提供单一接口，我们就把“配置选项”这个变量抽取出来封装到一个结构体中，这也是目前比较常见的作法。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">下面是我们的第二个版本：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">// variadic_function_8.go 
+package main
+
+import "fmt"
+
+type FinishedHouse struct {
+	style                  int    // 0: Chinese, 1: American, 2: European
+	centralAirConditioning bool   // true or false
+	floorMaterial          string // "ground-tile" or ”wood"
+	wallMaterial           string // "latex" or "paper" or "diatom-mud"
+}
+
+type Options struct {
+	Style                  int    // 0: Chinese, 1: American, 2: European
+	CentralAirConditioning bool   // true or false
+	FloorMaterial          string // "ground-tile" or ”wood"
+	WallMaterial           string // "latex" or "paper" or "diatom-mud"
+}
+
+func NewFinishedHouse(options *Options) *FinishedHouse {
+	// use default style and materials if option is nil
+	var style int = 0
+	var centralAirConditioning = true
+	var floorMaterial = "wood"
+	var wallMaterial = "paper"
+
+	if options != nil {
+		// here: you should do some check to the options passed
+
+		style = options.Style
+		centralAirConditioning = options.CentralAirConditioning
+		floorMaterial = options.FloorMaterial
+		wallMaterial = options.WallMaterial
+	}
+
+	h := &amp;FinishedHouse{
+		style:                  style,
+		centralAirConditioning: centralAirConditioning,
+		floorMaterial:          floorMaterial,
+		wallMaterial:           wallMaterial,
+	}
+
+	return h
+}
+
+func main() {
+	fmt.Printf("%+v\n", NewFinishedHouse(nil)) // use default options
+	fmt.Printf("%+v\n", NewFinishedHouse(&amp;Options{
+		Style:                  1,
+		CentralAirConditioning: false,
+		FloorMaterial:          "ground-tile",
+		WallMaterial:           "paper",
+	}))
+}
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们运行一下这个例子：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">$ go run variadic_function_8.go 
+&amp;{style:0 centralAirConditioning:true floorMaterial:wood wallMaterial:paper}
+&amp;{style:1 centralAirConditioning:false floorMaterial:ground-tile wallMaterial:paper}
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">使用这种方法，即便后续添加新配置选项，Options 结构体可以随着时间变迁而增长，但 FinishedHouse 创建函数本身的 API 签名是保持不变的；</li>
+<li style="font-size: 20px; line-height: 38px;">这种方法还使得调用者可以使用 nil 来表示他们希望使用默认配置选项来创建 FinishedHouse；</li>
+<li style="font-size: 20px; line-height: 38px;">这种方法还带来了额外收获：更好的文档记录（文档重点从对 NewFinishedHouse 函数的大段注释描述转移到了对 Options 结构体各字段的说明）。</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">当然这种方法也有其不足的地方：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">调用者可能会有如此疑问：传递 nil 和传递&amp;Options{}之间有区别吗？</li>
+<li style="font-size: 20px; line-height: 38px;">每次传递 Options 都要将 Options 中的所有字段做正确显式的赋值，即便调用者想使用某个配置项的默认值，赋值动作 1 依然不可少；</li>
+<li style="font-size: 20px; line-height: 38px;">调用者还可能有如此疑问：如果传递给 NewFinishedHourse 的 options 中的字段值在函数调用后发生了变化会发生什么情况？</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">带着这些疑问，我们进入 NewFinishedHouse 的下一个版本。</p>
+</div><div class="cl-preview-section"><h3 id="版本-3：使用“功能选项”模式">3) 版本 3：使用“功能选项”模式</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 语言之父 Rob Pike 早在 2014 年就在其一篇博文<a href="https://commandcenter.blogspot.com/2014/01/self-referential-functions-and-design.html">“自引用函数与选项设计”</a>中论述了一种被后人称为“功能选项(functional option)”的模式，这种模式应该是目前进行功能选项设计的最佳实践方案。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">接下来我们就来看看使用“功能选项”模式实现的 NewFinishedHouse 是什么样的：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// variadic_function_9.go </span>
+<span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">type</span> FinishedHouse <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+	style                  <span class="token builtin">int</span>    <span class="token comment">// 0: Chinese, 1: American, 2: European</span>
+	centralAirConditioning <span class="token builtin">bool</span>   <span class="token comment">// true or false</span>
+	floorMaterial          <span class="token builtin">string</span> <span class="token comment">// "ground-tile" or ”wood"</span>
+	wallMaterial           <span class="token builtin">string</span> <span class="token comment">// "latex" or "paper" or "diatom-mud"</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> Option <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token operator">*</span>FinishedHouse<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">NewFinishedHouse</span><span class="token punctuation">(</span>options <span class="token operator">...</span>Option<span class="token punctuation">)</span> <span class="token operator">*</span>FinishedHouse <span class="token punctuation">{</span>
+	h <span class="token operator">:=</span> <span class="token operator">&amp;</span>FinishedHouse<span class="token punctuation">{</span>
+		<span class="token comment">// default options</span>
+		style<span class="token punctuation">:</span>                  <span class="token number">0</span><span class="token punctuation">,</span>
+		centralAirConditioning<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+		floorMaterial<span class="token punctuation">:</span>          <span class="token string">"wood"</span><span class="token punctuation">,</span>
+		wallMaterial<span class="token punctuation">:</span>           <span class="token string">"paper"</span><span class="token punctuation">,</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> option <span class="token operator">:=</span> <span class="token keyword">range</span> options <span class="token punctuation">{</span>
+		<span class="token function">option</span><span class="token punctuation">(</span>h<span class="token punctuation">)</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token keyword">return</span> h
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">WithStyle</span><span class="token punctuation">(</span>style <span class="token builtin">int</span><span class="token punctuation">)</span> Option <span class="token punctuation">{</span>
+	<span class="token keyword">return</span> <span class="token keyword">func</span><span class="token punctuation">(</span>h <span class="token operator">*</span>FinishedHouse<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		h<span class="token punctuation">.</span>style <span class="token operator">=</span> style
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">WithFloorMaterial</span><span class="token punctuation">(</span>material <span class="token builtin">string</span><span class="token punctuation">)</span> Option <span class="token punctuation">{</span>
+	<span class="token keyword">return</span> <span class="token keyword">func</span><span class="token punctuation">(</span>h <span class="token operator">*</span>FinishedHouse<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		h<span class="token punctuation">.</span>floorMaterial <span class="token operator">=</span> material
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">WithWallMaterial</span><span class="token punctuation">(</span>material <span class="token builtin">string</span><span class="token punctuation">)</span> Option <span class="token punctuation">{</span>
+	<span class="token keyword">return</span> <span class="token keyword">func</span><span class="token punctuation">(</span>h <span class="token operator">*</span>FinishedHouse<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		h<span class="token punctuation">.</span>wallMaterial <span class="token operator">=</span> material
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">WithCentralAirConditioning</span><span class="token punctuation">(</span>centralAirConditioning <span class="token builtin">bool</span><span class="token punctuation">)</span> Option <span class="token punctuation">{</span>
+	<span class="token keyword">return</span> <span class="token keyword">func</span><span class="token punctuation">(</span>h <span class="token operator">*</span>FinishedHouse<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		h<span class="token punctuation">.</span>centralAirConditioning <span class="token operator">=</span> centralAirConditioning
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%+v\n"</span><span class="token punctuation">,</span> <span class="token function">NewFinishedHouse</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// use default options</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%+v\n"</span><span class="token punctuation">,</span> <span class="token function">NewFinishedHouse</span><span class="token punctuation">(</span><span class="token function">WithStyle</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+		<span class="token function">WithFloorMaterial</span><span class="token punctuation">(</span><span class="token string">"ground-tile"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+		<span class="token function">WithCentralAirConditioning</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">运行一下该新版例子：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">$ go run variadic_function_9.go 
+&amp;{style:0 centralAirConditioning:true floorMaterial:wood wallMaterial:paper}
+&amp;{style:1 centralAirConditioning:false floorMaterial:ground-tile wallMaterial:paper}
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到在该方案中，FinishedHouse 的配置选项不是通过存储在结构体中的配置参数传入的，而是通过对 FinishedHouse 值本身进行操作的函数调用（利用函数的“一等公民“特质）实现的，并且通过使用变长参数函数，我们可以随意扩展传入的配置选项的个数。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">功能选项模式使得我们在设计和实现类似 NewFinishedHouse 这样带有配置选项的函数或方法时可以收获如下好处：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">更漂亮的、不随时间变化的公共 API</li>
+<li style="font-size: 20px; line-height: 38px;">参数可读性更好</li>
+<li style="font-size: 20px; line-height: 38px;">配置选项高度可扩展</li>
+<li style="font-size: 20px; line-height: 38px;">提供使用默认选项的最简单方式</li>
+<li style="font-size: 20px; line-height: 38px;">使用更安全（不会像版本 2 那样在创建函数被调用后，调用者仍然可以修改 options）</li>
+</ul>
+</div><div class="cl-preview-section"><h2 id="小结" style="font-size: 30px;">5. 小结</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">本节要点：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">了解变长参数函数的特点和约束；</li>
+<li style="font-size: 20px; line-height: 38px;">变长参数函数可以在有限情况下模拟函数重载、可选参数和默认参数，但要谨慎使用，不要造成混淆；</li>
+<li style="font-size: 20px; line-height: 38px;">利用变长参数函数实现”功能选项（Functional Options)“模式。</li>
+</ul>
+</div>}
+                        </div>
+                    </div>
+                                            <!-- 买过的阅读 -->
+                        <div class="art-next-prev clearfix">
+                                                                                                <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/87/article/2423">
+                                                                    <div class="prev l clearfix">
+                                        <div class="icon l">
+                                            <i class="imv2-arrow3_l"></i>
+                                        </div>
+                                        <p>
+                                            21 方法集合决定接口实现
+                                        </p>
+                                    </div>
+                                </a>
+                                                                                                                        <!-- 未买不可试读或者未开放 -->
+                                    <a href="javascript:;" class="js-cantIn" data-ifopen="1" data-cantaste="1">
+                                                                    <div class="next r clearfix">
+                                        <p>
+                                            23 定义小接口是 Go 的惯例
+                                        </p>
+                                        <div class="icon r">
+                                            <i class="imv2-arrow3_r"></i>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                                    </div>
+                                    </div>
+                <div class="comments-con js-comments-con" id="coments_con">
+                </div>
+
+                
+            </div>
+            
+            
+            
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-jiaQun-new hide" id="modal-jiaQun">
+    <div class="inner" style="">
+        <div class="modal-close js-close-jiaQun">
+            <i class="imv2-close"></i>
+        </div>
+        <div class="content">
+            <img src="https://img3.sycdn.imooc.com/5f51ecec0001392b05330597.jpg">
+            <div class="right-info">
+                <div class="title">
+                    扫码加入慕课前沿技术核心用户群
+                </div>
+                <div class="desc">
+                                            <p class="mb6">验证信息：<span id="joincode">2010312025386365</span><span class="copy js-copy-joincode">复制</span></p>
+                                        <p class="mb6">QQ讨论群号：729941811</p>
+                                            <p>QQ群URL：<a href="https://jq.qq.com/?_wv=1027&amp;k=5WJLMxV" target="_blank">点击访问</a></p>
+                                    </div>
+            </div>
+            <p class="tip">若遇到搜索不到QQ群或加群失败，请联系客服邮箱:kf@imooc.com</p>
+        </div>
+    </div>
+</div>
+ 
+<!-- 专栏介绍页专栏评价 -->
+
+<!-- 专栏介绍页底部三条评价 -->
+
+<!-- 专栏阅读页弹层目录和介绍页页面目录 -->
+
+<!-- 专栏阅读页发布回复 -->
+
+<!-- 专栏阅读页发布评论 -->
+
+<!-- 专栏阅读页底部评论 -->
+
+<!-- 专栏阅读 单个 评论 -->
+
+<!-- 新增回复和展开三条以外回复 -->
+
+<!-- 立即订阅的弹窗 -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div></body></html>

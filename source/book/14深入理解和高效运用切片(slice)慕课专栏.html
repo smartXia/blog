@@ -1,0 +1,318 @@
+<html><head><meta charset="utf-8"><title>14 深入理解和高效运用切片(slice)-慕课专栏</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+			<meta name="renderer" content="webkit">
+			<meta property="qc:admins" content="77103107776157736375">
+			<meta property="wb:webmaster" content="c4f857219bfae3cb">
+			<meta http-equiv="Access-Control-Allow-Origin" content="*">
+			<meta http-equiv="Cache-Control" content="no-transform ">
+			<meta http-equiv="Cache-Control" content="no-siteapp">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://www.imooc.com/static/img/common/touch-icon-ipad.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://www.imooc.com/static/img/common/touch-icon-iphone-retina.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://www.imooc.com/static/img/common/touch-icon-ipad-retina.png">
+			<link href="https://moco.imooc.com/captcha/style/captcha.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201907021539" type="text/css">
+			<link rel="stylesheet" href="https://www.imooc.com/static/lib/swiper/swiper-3.4.2.min.css?t=201907021539">
+			<link rel="stylesheet" href="https://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,column/zhuanlanChapter-less.css?t=2.5,course/inc/course_tipoff-less.css?t=2.5?v=201907051055" type="text/css">
+			<link charset="utf-8" rel="stylesheet" href="https://www.imooc.com/static/lib/ueditor/themes/imooc/css/ueditor.css?v=201907021539"><link rel="stylesheet" href="https://www.imooc.com/static/lib/baiduShare/api/css/share_style0_16.css?v=6aba13f0.css"></head>
+			<body><div id="main">
+
+
+<div class="main-con hide-menu">
+    <!-- 左侧菜单 & 索引 -->
+    
+    <div class="right-content" style="padding-left: 0px;">
+        <div class="container clearfix" id="top" style="width: 1134px; display: block;">
+            
+            
+            <div class="center_con js-center_con l" style="width: 1134px;">
+                <div class="article-con">
+                                            <!-- 买过的阅读 -->
+                        
+
+                    
+                    <div class="art-title" style="margin-top: 0px;">
+                        14 深入理解和高效运用切片(slice)
+                    </div>
+                    <div class="art-info clearfix">
+                        
+                        <span class="l">
+                            更新时间：2020-10-14 10:25:38
+                        </span>
+                    </div>
+                    <div class="art-top">
+                                                <img src="https://img2.sycdn.imooc.com/5f6841380001f63960164016.jpg" alt="">
+                                                                        <div class="famous-word-box">
+                            <img src="https://www.imooc.com/static/img/column/bg-l.png" alt="" class="bg1 bg">
+                            <img src="https://www.imooc.com/static/img/column/bg-r.png" alt="" class="bg2 bg">
+                            <div class="famous-word">要成就一件大事业，必须从小事做起。——列宁<p></p></div>
+                        </div>
+                                            </div>
+                    <div class="art-content js-lookimg">
+                        <div id="article_content">
+                            <div class="cl-preview-section"><blockquote>
+<p style="font-size: 20px; line-height: 38px;">每当您花费大量时间使用某种特定工具时，深入了解它并了解如何高效地使用它是很值得的。- 佚名</p>
+</blockquote>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">slice，中文多译为“切片”，是 Go 语言在数组之上提供的一个重要的抽象数据类型。在 Go 语言中，绝大多数需要使用数组的场合，切片都实现了完美替代。并且和数组相比，切片提供了更通用、功能更强大且便捷的数据序列访问接口。</p>
+</div><div class="cl-preview-section"><h2 id="切片究竟是什么" style="font-size: 30px;">1. 切片究竟是什么</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在对切片一探究竟之前，我们先来简略了解一下 Go 语言中的数组。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 语言数组是一个固定长度的、容纳同构类型元素的连续序列。因此 Go 数组类型具有两个属性：元素类型和数组长度。但凡这两个属性相同的数组类型是等价的。比如下面变量 a、b、c 对应的数组类型是三个不同的数组类型：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token keyword">var</span> a <span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token builtin">int</span> 
+<span class="token keyword">var</span> b <span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token builtin">byte</span>
+<span class="token keyword">var</span> c <span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token builtin">int</span> 
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">变量 a、b 对应的数组类型长度属性相同，但元素类型不同（一个是 int，一个是 byte）；变量 a、c 对应的数组类型的元素类型相同，都是 int，但数组类型的长度不（一个是 8，一个是 9）。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 的数组是值语义，这意味着一个数组变量表示的是整个数组，这点与 C 语言完全不同。在 C 语言中，数组变量可视为指向数组第一个元素的指针。因此，在 Go 语言中传递数组是纯粹的值拷贝，对于元素类型 Size 较大或元素个数较多的数组，如果直接以数组类型参数传递到函数中会有不小的性能损耗。这时很多人会使用数组指针类型来定义函数参数，然后将数组地址传进函数，这样做的确可以避免性能损耗，但这是 C 语言的惯用法，在 Go 语言中，更地道的方式是使用切片。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">切片之于数组就像是文件描述符之于文件。在 Go 语言中，数组更多是“退居幕后”，承担的是底层存储空间的角色；而切片则走向“前台”，为底层的存储（数组）打开了一个访问的“窗口”。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="https://img1.sycdn.imooc.com/5f6841790001f3ec08430448.png" data-original="//img1.sycdn.imooc.com/5f6841790001f3ec08430448.png" alt="图片描述"></p>
+</div><div class="cl-preview-section"><center>图3-5-1：切片打开访问底层数组的“窗口”</center>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">因此，我们可以称切片是数组的“描述符”。切片之所以能在函数参数传递时避免较大性能损耗也是因为它是“描述符”的特性，切片这个描述符是固定大小的，无论底层的数组元素类型有多大和切片打开的窗口长度有多长。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">下面是切片在 Go 运行时（runtime）层面的内部表示：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">//$GOROOT/src/runtime/slice.go</span>
+
+<span class="token keyword">type</span> slice <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+        array unsafe<span class="token punctuation">.</span>Pointer
+        <span class="token builtin">len</span>   <span class="token builtin">int</span>
+        <span class="token builtin">cap</span>   <span class="token builtin">int</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到每个切片包含三个字段：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">array：是指向下层数组某元素的指针，该元素也是切片的起始元素；</li>
+<li style="font-size: 20px; line-height: 38px;">len：是切片的长度，即切片中当前元素的个数；</li>
+<li style="font-size: 20px; line-height: 38px;">cap：是切片的最大容量，cap &gt;= len。</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在运行时中，每个切片变量都是一个 runtime.slice 结构体的实例。我们用下面语句创建一个 slice 实例：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">s := make([]byte, 5)
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">下面的图展示了切片的内部表示：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="https://img1.sycdn.imooc.com/5f6841ac0001b91f09760625.png" data-original="//img1.sycdn.imooc.com/5f6841ac0001b91f09760625.png" alt="图片描述"></p>
+</div><div class="cl-preview-section"><center>图3-5-2：切片运行时表示（新切片）</center>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到通过上述语句创建的切片，编译器会自动为切片建立一个底层数组，如果没有在 make 中指定 cap 参数，那么 cap = len，即编译器建立的数组长度为 len。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们还可以创建对已存在数组进行操作的切片，这种语法 u[low:max] 称为数组的切片化：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go">u <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">{</span><span class="token number">11</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">13</span><span class="token punctuation">,</span> <span class="token number">14</span><span class="token punctuation">,</span> <span class="token number">15</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">,</span> <span class="token number">17</span><span class="token punctuation">,</span> <span class="token number">18</span><span class="token punctuation">,</span> <span class="token number">19</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">}</span>
+s <span class="token operator">:=</span> u<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">:</span><span class="token number">7</span><span class="token punctuation">]</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们用另外一幅图看看这个切片的内部表示：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="https://img1.sycdn.imooc.com/5f6841c90001875309810616.png" data-original="//img1.sycdn.imooc.com/5f6841c90001875309810616.png" alt="图片描述"></p>
+</div><div class="cl-preview-section"><center>图3-5-3：切片运行时表示（以已有数组为底层存储的切片）</center>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到切片 s 为我们打开了一个操作数组 u 的窗口，我们通过 s 看到的第一个元素是 u[3]，我们通过 s 能看到并操作的数组元素为 4 个（max-low）。切片的 cap 值取决于底层数组的长度。我们看到从切片 s 的第一个元素 s[0]，即 u[3] 到数组末尾一共有 7 个元素，因此切片 s 的 cap 为 7。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们可以为一个已存在数组建立多个操作数组的切片。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="https://img1.sycdn.imooc.com/5f6841ee000165b709050823.png" data-original="//img1.sycdn.imooc.com/5f6841ee000165b709050823.png" alt="图片描述"></p>
+</div><div class="cl-preview-section"><center>图3-5-4：切片运行时表示(基于统一数组建立多个切片）</center>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到既然上图中的三个切片 s1、s2、s3 都是数组 u 的“描述符”，那么无论通过哪个切片对数组进行的修改操作都会反映到其他切片中。比如：将 s3[0] 置为 24，那么 s1[2] 也会变成 24，因为 s3[0]直接操作的是底层数组 u 的第四个元素 u[3]。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">当切片作为函数参数传递给函数时，实际传递的就是切片的内部表示，也就是上面的 runtime.slice 结构体实例，因此无论切片“描述”的底层数组有多大，切片作为参数传递带来的性能损耗都是小到可以忽略不计的。这就是为什么函数在参数中多使用切片而不用数组指针的原因之一。当然另外一个原因就是切片可以提供比指针更为强大的功能，比如下标访问、边界溢出校验、动态扩容等。指针本身在 Go 语言中的功能也受到的限制，比如不支持指针算术运算。</p>
+</div><div class="cl-preview-section"><h2 id="切片的高级特性：动态扩容" style="font-size: 30px;">2. 切片的高级特性：动态扩容</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">如果仅仅是提供通过下标值来操作元素的类数组操作接口，那么切片就不会在 Go 中占据重要的位置。Go 切片还支持一个重要的高级特性：<strong>动态扩容</strong>。在“第 11 条 尽量定义零值可用的类”一节中我们提到过切片类型是“部分”满足零值可用理念的，即零值切片也可以通过 append 预定义函数进行元素赋值操作：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token keyword">var</span> s <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span> <span class="token comment">// s被赋予零值nil</span>
+s <span class="token operator">=</span> <span class="token function">append</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span> 
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">由于初值为零值，s 这个“描述符”并没有绑定对应的底层数组。而经过 append 操作后，s 显然已经“绑定”了属于它的底层数组。为了方便查看切片是如何动态扩容的，我们打印出每次 append 后的 s 的 len 和 cap 值：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// slice_append.go</span>
+<span class="token keyword">var</span> s <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span>  <span class="token comment">// s被赋予零值nil</span>
+s <span class="token operator">=</span> <span class="token function">append</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> <span class="token number">11</span><span class="token punctuation">)</span> 
+fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">cap</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">//1 1</span>
+s <span class="token operator">=</span> <span class="token function">append</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">)</span> 
+fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">cap</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">//2 2</span>
+s <span class="token operator">=</span> <span class="token function">append</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> <span class="token number">13</span><span class="token punctuation">)</span> 
+fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">cap</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">//3 4</span>
+s <span class="token operator">=</span> <span class="token function">append</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> <span class="token number">14</span><span class="token punctuation">)</span> 
+fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">cap</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">//4 4</span>
+s <span class="token operator">=</span> <span class="token function">append</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> <span class="token number">15</span><span class="token punctuation">)</span> 
+fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">cap</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">//5 8</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到 s 的 len 值是线性增长的，但 cap 值却呈现出不规则的变化。通过下图我们可以更容易看清楚多次 append 操作究竟是如何让 slice 进行动态扩容的。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="https://img1.sycdn.imooc.com/5f6842110001b39c10061278.png" data-original="//img1.sycdn.imooc.com/5f6842110001b39c10061278.png" alt="图片描述"></p>
+</div><div class="cl-preview-section"><center>图3-5-5：切片动态扩容</center>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到 append 会根据 slice 对底层数组容量的需求对底层数组进行动态调整：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">最初 s 初值为零值(nil)，此时 s 没有“绑定”底层数组；</li>
+<li style="font-size: 20px; line-height: 38px;">通过 append 操作向切片 s 添加一个元素 11，此时 append 会首先分配底层数组 u1（数组长度 1），然后将 s 内部表示中的 array 指向 u1，并设置 len = 1, cap = 1;</li>
+<li style="font-size: 20px; line-height: 38px;">通过 append 操作向切片 s 再添加一个元素 12，此时 len(s) = 1，cap(s) = 1，append 判断底层数组剩余空间不足以满足添加新元素的要求，于是创建了一个新的底层数组 u2，长度为 2（u1 数组长度的 2 倍），并将 u1 中的元素拷贝到 u2 中，最后将 s 内部表示中的 array 指向 u2，并设置 len = 2, cap = 2；</li>
+<li style="font-size: 20px; line-height: 38px;">通过 append 操作向切片 s 再添加一个元素 13，此时 len(s) = 2，cap(s) = 2，append 判断底层数组剩余空间不足以满足添加新元素的要求，于是创建了一个新的底层数组 u3，长度为 4（u2 数组长度的 2 倍），并将 u2 中的元素拷贝到 u3 中，最后将 s 内部表示中的 array 指向 u3，并设置 len = 3, cap 为 u3 数组长度，即 4 ；</li>
+<li style="font-size: 20px; line-height: 38px;">通过 append 操作向切片 s 再添加一个元素 14，此时 len(s) = 3, cap(s) = 4，append 判断底层数组剩余空间可以满足添加新元素的要求，于是将 14 放在下一个元素的位置（数组 u3 末尾），并将 s 内部表示中的 len 加 1，变为 4；</li>
+<li style="font-size: 20px; line-height: 38px;">通过 append 操作向切片 s 添加最后一个元素 15，此时 len(s) = 4，cap(s) = 4，append 判断底层数组剩余空间不足以满足添加新元素的要求，于是创建了一个新的底层数组 u4，长度为 8（u3 数组长度的 2 倍），并将 u3 中的元素拷贝到 u4 中，最后将 s 内部表示中的 array 指向 u4，并设置 len = 5, cap 为 u4 数组长度，即 8。</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到 append 会根据 slice 的需要，在当前底层数组容量无法满足的情况下，动态分配新的数组，新数组长度会按一定规律扩展（这里针对元素是 int 型的数组，新数组的容量为当前数组的 2 倍。其他类型的扩展系数可能有所不同），新数组建立后，append 会把旧数组中的数据 copy 到新数组中，之后新数组便成为了 slice 的底层数组，旧数组会被垃圾回收掉。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">append 操作有些时候会给 Gopher 带来一些困惑，比如通过语法 u[low:max] 形式进行数组切片化而创建的切片，一旦切片 cap 触碰到数组的上界，再对切片进行 append，切片就会和原数组的解除“绑定”：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// slice_unbind_orig_array.go</span>
+
+<span class="token keyword">package</span> main
+  
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        u <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">{</span><span class="token number">11</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">13</span><span class="token punctuation">,</span> <span class="token number">14</span><span class="token punctuation">,</span> <span class="token number">15</span><span class="token punctuation">}</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"array:"</span><span class="token punctuation">,</span> u<span class="token punctuation">)</span> <span class="token comment">// [11, 12, 13, 14, 15]</span>
+        s <span class="token operator">:=</span> u<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">]</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"slice(len=%d, cap=%d): %v\n"</span><span class="token punctuation">,</span> <span class="token function">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">cap</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">,</span> s<span class="token punctuation">)</span> <span class="token comment">// [12, 13]</span>
+        s <span class="token operator">=</span> <span class="token function">append</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> <span class="token number">24</span><span class="token punctuation">)</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"after append 24, array:"</span><span class="token punctuation">,</span> u<span class="token punctuation">)</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"after append 24, slice(len=%d, cap=%d): %v\n"</span><span class="token punctuation">,</span> <span class="token function">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">cap</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">,</span> s<span class="token punctuation">)</span>
+        s <span class="token operator">=</span> <span class="token function">append</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> <span class="token number">25</span><span class="token punctuation">)</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"after append 25, array:"</span><span class="token punctuation">,</span> u<span class="token punctuation">)</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"after append 25, slice(len=%d, cap=%d): %v\n"</span><span class="token punctuation">,</span> <span class="token function">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">cap</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">,</span> s<span class="token punctuation">)</span>
+        s <span class="token operator">=</span> <span class="token function">append</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> <span class="token number">26</span><span class="token punctuation">)</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"after append 26, array:"</span><span class="token punctuation">,</span> u<span class="token punctuation">)</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"after append 26, slice(len=%d, cap=%d): %v\n"</span><span class="token punctuation">,</span> <span class="token function">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">cap</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">,</span> s<span class="token punctuation">)</span>
+
+        s<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">22</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"after reassign 1st elem of slice, array:"</span><span class="token punctuation">,</span> u<span class="token punctuation">)</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"after reassign 1st elem of slice, slice(len=%d, cap=%d): %v\n"</span><span class="token punctuation">,</span> <span class="token function">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">cap</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">,</span> s<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">运行这段代码，我们得到如下结果：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go">$<span class="token keyword">go</span> run slice_unbind_orig_array<span class="token punctuation">.</span><span class="token keyword">go</span> 
+array<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">11</span> <span class="token number">12</span> <span class="token number">13</span> <span class="token number">14</span> <span class="token number">15</span><span class="token punctuation">]</span>
+<span class="token function">slice</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token builtin">cap</span><span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">12</span> <span class="token number">13</span><span class="token punctuation">]</span>
+after <span class="token builtin">append</span> <span class="token number">24</span><span class="token punctuation">,</span> array<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">11</span> <span class="token number">12</span> <span class="token number">13</span> <span class="token number">24</span> <span class="token number">15</span><span class="token punctuation">]</span>
+after <span class="token builtin">append</span> <span class="token number">24</span><span class="token punctuation">,</span> <span class="token function">slice</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token builtin">cap</span><span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">12</span> <span class="token number">13</span> <span class="token number">24</span><span class="token punctuation">]</span>
+after <span class="token builtin">append</span> <span class="token number">25</span><span class="token punctuation">,</span> array<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">11</span> <span class="token number">12</span> <span class="token number">13</span> <span class="token number">24</span> <span class="token number">25</span><span class="token punctuation">]</span>
+after <span class="token builtin">append</span> <span class="token number">25</span><span class="token punctuation">,</span> <span class="token function">slice</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token builtin">cap</span><span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">12</span> <span class="token number">13</span> <span class="token number">24</span> <span class="token number">25</span><span class="token punctuation">]</span>
+after <span class="token builtin">append</span> <span class="token number">26</span><span class="token punctuation">,</span> array<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">11</span> <span class="token number">12</span> <span class="token number">13</span> <span class="token number">24</span> <span class="token number">25</span><span class="token punctuation">]</span>
+after <span class="token builtin">append</span> <span class="token number">26</span><span class="token punctuation">,</span> <span class="token function">slice</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token builtin">cap</span><span class="token operator">=</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">12</span> <span class="token number">13</span> <span class="token number">24</span> <span class="token number">25</span> <span class="token number">26</span><span class="token punctuation">]</span>
+after reassign 1st elem of slice<span class="token punctuation">,</span> array<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">11</span> <span class="token number">12</span> <span class="token number">13</span> <span class="token number">24</span> <span class="token number">25</span><span class="token punctuation">]</span>
+after reassign 1st elem of slice<span class="token punctuation">,</span> <span class="token function">slice</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token builtin">cap</span><span class="token operator">=</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">22</span> <span class="token number">13</span> <span class="token number">24</span> <span class="token number">25</span> <span class="token number">26</span><span class="token punctuation">]</span>
+
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到当 append 25 之后，切片的元素已经触碰到了底层数组 u 的边界；此后再 append 26 后，append 发现底层数组已经无法满足 append 的要求，于是新创建了一个底层数组（数组长度为 cap(s)的 2 倍，即 8），并将 slice 的元素拷贝到新数组中了。这之后，我们即便再修改 slice 的第一个元素值，原数组 u 的元素也没有发生任何改变了，因为此时切片 s 与数组 u 已经解除了“绑定关系”，s 已经不再是数组 u 的“描述符”了。</p>
+</div><div class="cl-preview-section"><h3 id="尽量使用-cap-参数创建-slice">3. 尽量使用 cap 参数创建 slice</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到 append 操作是一并利器，它让 slice 类型部分满足了“零值可用”的理念。但从 append 的原理中我们也能看到重新分配底层数组并拷贝元素的操作代价还是蛮大的，尤其是当元素较多的情况下。那么如何减少或避免为过多内存分配和拷贝付出的代价呢？一种有效的方法就是根据 slice 的使用场景在为新创建的 slice 赋初值时使用 cap 参数。</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go">s <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span>T<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token builtin">cap</span><span class="token punctuation">)</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">下面是一个使用 cap 和不使用 cap 参数的 slice 的基准测试：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// slice_benchmark_test.go</span>
+<span class="token keyword">package</span> main
+  
+<span class="token keyword">import</span> <span class="token string">"testing"</span>
+
+<span class="token keyword">const</span> sliceSize <span class="token operator">=</span> <span class="token number">10000</span>
+
+<span class="token keyword">func</span> <span class="token function">BenchmarkSliceInitWithoutCap</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> n <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> n <span class="token operator">&lt;</span> b<span class="token punctuation">.</span>N<span class="token punctuation">;</span> n<span class="token operator">++</span> <span class="token punctuation">{</span>
+                sl <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+                <span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> sliceSize<span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">{</span>
+                        sl <span class="token operator">=</span> <span class="token function">append</span><span class="token punctuation">(</span>sl<span class="token punctuation">,</span> i<span class="token punctuation">)</span>
+                <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">BenchmarkSliceInitWithCap</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> n <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> n <span class="token operator">&lt;</span> b<span class="token punctuation">.</span>N<span class="token punctuation">;</span> n<span class="token operator">++</span> <span class="token punctuation">{</span>
+                sl <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> sliceSize<span class="token punctuation">)</span>
+                <span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> sliceSize<span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">{</span>
+                        sl <span class="token operator">=</span> <span class="token function">append</span><span class="token punctuation">(</span>sl<span class="token punctuation">,</span> i<span class="token punctuation">)</span>
+                <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">下面是基本测试运行的结果(go 1.12.7，macbook pro i5 8 核，16G 内存)：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go">$<span class="token keyword">go</span> test <span class="token operator">-</span>benchmem <span class="token operator">-</span>bench<span class="token operator">=</span><span class="token punctuation">.</span> slice_benchmark_test<span class="token punctuation">.</span><span class="token keyword">go</span>
+goos<span class="token punctuation">:</span> darwin
+goarch<span class="token punctuation">:</span> amd64
+BenchmarkSliceInitWithoutCap<span class="token number">-8</span>   	   <span class="token number">50000</span>	     <span class="token number">36484</span> ns<span class="token operator">/</span>op	  <span class="token number">386297</span> B<span class="token operator">/</span>op	      <span class="token number">20</span> allocs<span class="token operator">/</span>op
+BenchmarkSliceInitWithCap<span class="token number">-8</span>      	  <span class="token number">200000</span>	      <span class="token number">9250</span> ns<span class="token operator">/</span>op	   <span class="token number">81920</span> B<span class="token operator">/</span>op	       <span class="token number">1</span> allocs<span class="token operator">/</span>op
+PASS
+ok  	command<span class="token operator">-</span>line<span class="token operator">-</span>arguments	<span class="token number">4.</span>163s
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">通过结果我们看到，使用 cap 参数创建的 slice 进行 append 操作的平均性能（9250ns）是不带 cap 参数的 slice（36484ns）的 4 倍左右，并且每操作平均仅需一次内存分配。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">因此，如果可以预估出切片底层数组需要承载的元素数量，强烈建议在创建 slice 时带上 cap 参数。</p>
+</div><div class="cl-preview-section"><h2 id="小结" style="font-size: 30px;">4. 小结</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">切片是 Go 语言提供的重要数据类型，也是 Gopher 日常 Go 编码是最常使用的类型之一。切片是数组的“描述符”，在大多数场合替代了数组，并减少了数组指针作为函数参数的使用。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">append 在切片上的运用让切片类型部分支持了零值可用的理念，并且 append 对 slice 的动态扩充将 Gopher 们从手工管理底层存储的工作中解放了出来。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在可以预估出元素容量的前提下，使用 cap 参数创建 slice 可以提升 append 的平均操作性能，减少或消除因动态扩容带来的性能损耗。</p>
+</div>}
+                        </div>
+                    </div>
+                                            <!-- 买过的阅读 -->
+                        <div class="art-next-prev clearfix">
+                                                                                                <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/87/article/2382">
+                                                                    <div class="prev l clearfix">
+                                        <div class="icon l">
+                                            <i class="imv2-arrow3_l"></i>
+                                        </div>
+                                        <p>
+                                            13 用复合字面值作初值构造器
+                                        </p>
+                                    </div>
+                                </a>
+                                                                                                                            <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/87/article/2384">
+                                                                    <div class="next r clearfix">
+                                        <p>
+                                            15 注意：Go 字符串是原生类型
+                                        </p>
+                                        <div class="icon r">
+                                            <i class="imv2-arrow3_r"></i>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                                    </div>
+                                    </div>
+                <div class="comments-con js-comments-con" id="coments_con">
+                </div>
+
+                
+            </div>
+            
+            
+            
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-jiaQun-new hide" id="modal-jiaQun">
+    <div class="inner" style="">
+        <div class="modal-close js-close-jiaQun">
+            <i class="imv2-close"></i>
+        </div>
+        <div class="content">
+            <img src="https://img2.sycdn.imooc.com/5f51ecec0001392b05330597.jpg">
+            <div class="right-info">
+                <div class="title">
+                    扫码加入慕课前沿技术核心用户群
+                </div>
+                <div class="desc">
+                                            <p class="mb6">验证信息：<span id="joincode">2010312025386365</span><span class="copy js-copy-joincode">复制</span></p>
+                                        <p class="mb6">QQ讨论群号：729941811</p>
+                                            <p>QQ群URL：<a href="https://jq.qq.com/?_wv=1027&amp;k=5WJLMxV" target="_blank">点击访问</a></p>
+                                    </div>
+            </div>
+            <p class="tip">若遇到搜索不到QQ群或加群失败，请联系客服邮箱:kf@imooc.com</p>
+        </div>
+    </div>
+</div>
+ 
+<!-- 专栏介绍页专栏评价 -->
+
+<!-- 专栏介绍页底部三条评价 -->
+
+<!-- 专栏阅读页弹层目录和介绍页页面目录 -->
+
+<!-- 专栏阅读页发布回复 -->
+
+<!-- 专栏阅读页发布评论 -->
+
+<!-- 专栏阅读页底部评论 -->
+
+<!-- 专栏阅读 单个 评论 -->
+
+<!-- 新增回复和展开三条以外回复 -->
+
+<!-- 立即订阅的弹窗 -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div></body></html>

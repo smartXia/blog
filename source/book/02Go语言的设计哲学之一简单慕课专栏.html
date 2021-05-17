@@ -1,0 +1,227 @@
+<html><head><meta charset="utf-8"><title>02 Go语言的设计哲学之一：简单-慕课专栏</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+			<meta name="renderer" content="webkit">
+			<meta property="qc:admins" content="77103107776157736375">
+			<meta property="wb:webmaster" content="c4f857219bfae3cb">
+			<meta http-equiv="Access-Control-Allow-Origin" content="*">
+			<meta http-equiv="Cache-Control" content="no-transform ">
+			<meta http-equiv="Cache-Control" content="no-siteapp">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://www.imooc.com/static/img/common/touch-icon-ipad.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://www.imooc.com/static/img/common/touch-icon-iphone-retina.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://www.imooc.com/static/img/common/touch-icon-ipad-retina.png">
+			<link href="https://moco.imooc.com/captcha/style/captcha.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201907021539" type="text/css">
+			<link rel="stylesheet" href="https://www.imooc.com/static/lib/swiper/swiper-3.4.2.min.css?t=201907021539">
+			<link rel="stylesheet" href="https://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,column/zhuanlanChapter-less.css?t=2.5,course/inc/course_tipoff-less.css?t=2.5?v=201907051055" type="text/css">
+			<link charset="utf-8" rel="stylesheet" href="https://www.imooc.com/static/lib/ueditor/themes/imooc/css/ueditor.css?v=201907021539"><link rel="stylesheet" href="https://www.imooc.com/static/lib/baiduShare/api/css/share_style0_16.css?v=6aba13f0.css"></head>
+			<body><div id="main">
+
+
+<div class="main-con hide-menu">
+    <!-- 左侧菜单 & 索引 -->
+    
+    <div class="right-content" style="padding-left: 0px;">
+        <div class="container clearfix" id="top" style="width: 1134px; display: block;">
+            
+            
+            <div class="center_con js-center_con l" style="width: 1134px;">
+                <div class="article-con">
+                                            <!-- 买过的阅读 -->
+                        
+
+                    
+                    <div class="art-title" style="margin-top: 0px;">
+                        02 Go语言的设计哲学之一：简单
+                    </div>
+                    <div class="art-info clearfix">
+                        
+                        <span class="l">
+                            更新时间：2020-09-08 09:34:45
+                        </span>
+                    </div>
+                    <div class="art-top">
+                                                <img src="https://img3.sycdn.imooc.com/5f51f82a00018f0a06400359.jpg" alt="">
+                                                                        <div class="famous-word-box">
+                            <img src="https://www.imooc.com/static/img/column/bg-l.png" alt="" class="bg1 bg">
+                            <img src="https://www.imooc.com/static/img/column/bg-r.png" alt="" class="bg2 bg">
+                            <div class="famous-word">一个人追求的目标越高，他的才力就发展得越快，对社会就越有益。——高尔基<p></p></div>
+                        </div>
+                                            </div>
+                    <div class="art-content js-lookimg">
+                        <div id="article_content">
+                            <div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 语言从诞生那一刻到今天已经有十年多了，Go 语言的魅力使得其在全世界范围内拥有了百万级的拥趸<sup class="footnote-ref"><a href="#fn1" id="fnref1">1</a></sup>。那究竟是什么让大量的开发人员学习 Go 或从其他语言转向 Go 语言呢？笔者认为 Go 魅力的根源就来自于 Go 语言的设计哲学。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">关于 Go 语言的设计哲学，Go 语言之父们以及 Go 核心团队的开发者们并没有给出明确的官方说法。但在这里我将根据我个人对他们以及 Go 社区主流观点和代码行为的整理、分析和总结，列出四条 Go 语言的设计哲学。理解这些设计哲学将对读者形成 Go 原生编程思维、编写高质量 Go 代码起到积极的影响。</p>
+</div><div class="cl-preview-section"><h2 id="第一条原则-追求简单，少即是多" style="font-size: 30px;">第一条原则: 追求简单，少即是多</h2>
+</div><div class="cl-preview-section"><blockquote>
+<p style="font-size: 20px; line-height: 38px;">简单是一种伟大的美德，但我们需要更艰苦地努力才能实现它，并需要经过一个教育的过程才能去欣赏和领会它。但糟糕的是：复杂的东西似乎更有市场。- 图灵奖获得者迪杰·斯特拉(1984)</p>
+</blockquote>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">通常当我们向 Gopher 们提出这样一个问题：“你为什么喜欢 Go 语言”后，我们会得到很多种答案，诸如：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">编译速度快</li>
+<li style="font-size: 20px; line-height: 38px;">执行速度快</li>
+<li style="font-size: 20px; line-height: 38px;">单一二进制文件，部署简单</li>
+<li style="font-size: 20px; line-height: 38px;">好棒的工具集</li>
+<li style="font-size: 20px; line-height: 38px;">自带的标准库超级强大</li>
+<li style="font-size: 20px; line-height: 38px;">内置并发</li>
+<li style="font-size: 20px; line-height: 38px;">interface 很棒</li>
+<li style="font-size: 20px; line-height: 38px;">跨平台 Easy</li>
+<li style="font-size: 20px; line-height: 38px;">… …</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="https://img1.sycdn.imooc.com/5f51b8950001a36f08000576.png" data-original="//img1.sycdn.imooc.com/5f51b8950001a36f08000576.png" alt="图片描述"></p>
+</div><div class="cl-preview-section"><center>图1-2-1 Gopher喜欢Go的原因</center>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">但在我们得到的众多答案中：排名靠前而又占据多数的总是“Go 很简单”，这也和官方 Go 语言调查的结果是一致的。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="https://img1.sycdn.imooc.com/5f51b89e0001eeca08000456.png" data-original="//img1.sycdn.imooc.com/5f51b89e0001eeca08000456.png" alt="图片描述"></p>
+</div><div class="cl-preview-section"><center>图1-2-2 Go语言2016年调查结果节选[^2]</center>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">和那些通过相互借鉴而不断增加新特性来吸引程序员眼球的主流编程语言相比，比如 C++、Java 等，Go 的设计者们在语言设计之初就选择拒绝走语言特性融合的道路，选择了“做减法”，选择了“简单”，他们把复杂性留给了语言自身的设计和实现，留给了 Go 核心开发组自身，而将简单、易用和清晰留给了广大 gopher 们。因此，今天呈现在我们在眼前的是这样一门 Go 语言：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">简洁、常规的语法（不需要解析符号表)，它仅有 25 个关键字</li>
+<li style="font-size: 20px; line-height: 38px;">内置垃圾收集，降低开发人员内存管理的心智负担</li>
+<li style="font-size: 20px; line-height: 38px;">没有头文件</li>
+<li style="font-size: 20px; line-height: 38px;">显式依赖（package)</li>
+<li style="font-size: 20px; line-height: 38px;">没有循环依赖（package）</li>
+<li style="font-size: 20px; line-height: 38px;">常量只是数字</li>
+<li style="font-size: 20px; line-height: 38px;">头母大小写决定可见性</li>
+<li style="font-size: 20px; line-height: 38px;">任何类型都可以拥有方法（没有类）</li>
+<li style="font-size: 20px; line-height: 38px;">没有子类型继承（没有子类）</li>
+<li style="font-size: 20px; line-height: 38px;">没有算术转换</li>
+<li style="font-size: 20px; line-height: 38px;">接口是隐式的（无需“implements”声明）</li>
+<li style="font-size: 20px; line-height: 38px;">方法就是函数</li>
+<li style="font-size: 20px; line-height: 38px;">接口只是方法集合（没有数据）</li>
+<li style="font-size: 20px; line-height: 38px;">方法仅按名称匹配（不是按类型）</li>
+<li style="font-size: 20px; line-height: 38px;">没有构造函数或析构函数</li>
+<li style="font-size: 20px; line-height: 38px;">n++和 n–是语句，而不是表达式</li>
+<li style="font-size: 20px; line-height: 38px;">没有++n 和–n</li>
+<li style="font-size: 20px; line-height: 38px;">赋值不是表达式</li>
+<li style="font-size: 20px; line-height: 38px;">在赋值和函数调用中定义的求值顺序（无“序列点”概念）</li>
+<li style="font-size: 20px; line-height: 38px;">没有指针算术</li>
+<li style="font-size: 20px; line-height: 38px;">内存总是初始化为零值</li>
+<li style="font-size: 20px; line-height: 38px;">没有 const 或其他类型注解语法</li>
+<li style="font-size: 20px; line-height: 38px;">没有模板/泛型</li>
+<li style="font-size: 20px; line-height: 38px;">没有异常(exception)</li>
+<li style="font-size: 20px; line-height: 38px;">内置字符串、切片(slice)、字典(map)类型</li>
+<li style="font-size: 20px; line-height: 38px;">内置数组边界检查</li>
+<li style="font-size: 20px; line-height: 38px;">内置并发支持</li>
+<li style="font-size: 20px; line-height: 38px;">… …</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">任何的设计都存在着权衡与折中（tradeoff）。我们看到 Go 设计者选择的“简单”体现在站在巨人肩膀上去除或优化了以往语言中已被开发者证明为体验不好或难于驾驭的语法元素和语言机制，并提出了自己的一些创新性的设计（比如：头母大小写决定可见性、内存分配初始零值、内置以 go 关键字实现的并发支持等）。并且 Go 设计者推崇“最小方式”思维，即一个事情仅有一种方式或数量尽可能少的方式去完成，这大大减少了开发人员在路径方式选择上以及理解其他人所选择路径方式上的心智负担。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">正如 Rob Pike 所说的那样：“Go 语言实际上是复杂的，但只是让大家感觉很简单”。这句话背后的深意就是“简单”选择的背后则是 Go 语言自身实现层面的复杂，而这些复杂性被 Go 语言的设计者“隐藏”起来了，就比如我们通过一个简单的关键字“go”就可以搞定并发，这种简单的背后其实是 Go 团队缜密设计和持续付出的结果。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">此外，Go 的简单哲学还体现在 Go1 兼容性<sup class="footnote-ref"><a href="#fn2" id="fnref2">2</a></sup>的提出。对于面对工程问题解决的开发人员来说，Go1 大大降低了工程层面上语言版本升级所带来的消耗，让 Go 的工程实践变得格外简单。</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">Go1兼容性说明摘录
+
+Go1定义了两件事：第一，语言的规范; 第二，一组核心API的规范，即Go标准库的“标准包”。Go1的发布包括两个编译器套件gc和gccgo，以及核心库本身。
+
+编写符合Go1规范的程序将在该规范的生命周期内继续得到正确编译和运行。在某个不确定的点上，可能会出现Go2规范，但在那之前，在Go1的未来版本（Go 1.1，Go 1.2等）下，今天工作的Go程序仍应该继续正常工作。
+
+兼容性体现在源码级别上。版本之间无法保证已编译软件包的二进制兼容性。Go语言新版本发布后，源码需要使用新版本Go重新编译和链接。
+
+API可能会增长，增加新的包和功能，但不会以破坏现有Go1代码的方式进行。
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">从 Go 1.0 发布至今，Go1 兼容性始终被很好地遵守着，当初使用 Go 1.4 编写的代码如今也可以顺利地通过最新的 Go 1.14 版本的编译并正常运行起来。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">就像前面引用的图灵奖获得者迪杰·斯特拉的名言所说的那样，这种创新性的“简单”设计并不是一开始就能得到程序员的理解的，但在真正使用 Go 之后，这种身处设计哲学层面的“简单”便延伸到 Go 语言编程应用的方方面面，持续影响着 Go 语言编程思维的形成。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在 Go 演化进入关键阶段（走向 Go2<sup class="footnote-ref"><a href="#fn3" id="fnref3">3</a></sup>)的今天，有人曾经向 Go 核心团队提出这样一个问题：Go 后续演化的最大难点是什么？Go 的一名核心团队成员回答道：“最大的难题是如何能继续保持 Go 语言的简单”。</p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item" style="font-size: 20px; line-height: 38px;"><p style="font-size: 20px; line-height: 38px;">Russ Cox 《How Many Go Developers Are There?》<a href="https://research.swtch.com/gophercount">https://research.swtch.com/gophercount</a> <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item" style="font-size: 20px; line-height: 38px;"><p style="font-size: 20px; line-height: 38px;">Go1 兼容性 <a href="https://golang.org/doc/go1compat">https://golang.org/doc/go1compat</a> <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn3" class="footnote-item" style="font-size: 20px; line-height: 38px;"><p style="font-size: 20px; line-height: 38px;">走向 Go2 <a href="https://blog.golang.org/toward-go2">https://blog.golang.org/toward-go2</a> <a href="#fnref3" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+</div>}
+                        </div>
+                    </div>
+                                            <!-- 买过的阅读 -->
+                        <div class="art-next-prev clearfix">
+                                                                                                <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/87/article/2320">
+                                                                    <div class="prev l clearfix">
+                                        <div class="icon l">
+                                            <i class="imv2-arrow3_l"></i>
+                                        </div>
+                                        <p>
+                                            01 Go 语言的前生今世
+                                        </p>
+                                    </div>
+                                </a>
+                                                                                                                            <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/87/article/2322">
+                                                                    <div class="next r clearfix">
+                                        <p>
+                                            03 Go 语言的设计哲学之二：组合
+                                        </p>
+                                        <div class="icon r">
+                                            <i class="imv2-arrow3_r"></i>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                                    </div>
+                                    </div>
+                <div class="comments-con js-comments-con" id="coments_con">
+                </div>
+
+                
+            </div>
+            
+            
+            
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-jiaQun-new hide" id="modal-jiaQun">
+    <div class="inner" style="">
+        <div class="modal-close js-close-jiaQun">
+            <i class="imv2-close"></i>
+        </div>
+        <div class="content">
+            <img src="https://img2.sycdn.imooc.com/5f51ecec0001392b05330597.jpg">
+            <div class="right-info">
+                <div class="title">
+                    扫码加入慕课前沿技术核心用户群
+                </div>
+                <div class="desc">
+                                            <p class="mb6">验证信息：<span id="joincode">2010312025386365</span><span class="copy js-copy-joincode">复制</span></p>
+                                        <p class="mb6">QQ讨论群号：729941811</p>
+                                            <p>QQ群URL：<a href="https://jq.qq.com/?_wv=1027&amp;k=5WJLMxV" target="_blank">点击访问</a></p>
+                                    </div>
+            </div>
+            <p class="tip">若遇到搜索不到QQ群或加群失败，请联系客服邮箱:kf@imooc.com</p>
+        </div>
+    </div>
+</div>
+ 
+<!-- 专栏介绍页专栏评价 -->
+
+<!-- 专栏介绍页底部三条评价 -->
+
+<!-- 专栏阅读页弹层目录和介绍页页面目录 -->
+
+<!-- 专栏阅读页发布回复 -->
+
+<!-- 专栏阅读页发布评论 -->
+
+<!-- 专栏阅读页底部评论 -->
+
+<!-- 专栏阅读 单个 评论 -->
+
+<!-- 新增回复和展开三条以外回复 -->
+
+<!-- 立即订阅的弹窗 -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div></body></html>

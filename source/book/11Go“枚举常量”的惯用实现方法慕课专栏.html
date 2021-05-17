@@ -1,0 +1,332 @@
+<html><head><meta charset="utf-8"><title>11 Go“枚举常量”的惯用实现方法-慕课专栏</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+			<meta name="renderer" content="webkit">
+			<meta property="qc:admins" content="77103107776157736375">
+			<meta property="wb:webmaster" content="c4f857219bfae3cb">
+			<meta http-equiv="Access-Control-Allow-Origin" content="*">
+			<meta http-equiv="Cache-Control" content="no-transform ">
+			<meta http-equiv="Cache-Control" content="no-siteapp">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://www.imooc.com/static/img/common/touch-icon-ipad.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://www.imooc.com/static/img/common/touch-icon-iphone-retina.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://www.imooc.com/static/img/common/touch-icon-ipad-retina.png">
+			<link href="https://moco.imooc.com/captcha/style/captcha.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201907021539" type="text/css">
+			<link rel="stylesheet" href="https://www.imooc.com/static/lib/swiper/swiper-3.4.2.min.css?t=201907021539">
+			<link rel="stylesheet" href="https://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,column/zhuanlanChapter-less.css?t=2.5,course/inc/course_tipoff-less.css?t=2.5?v=201907051055" type="text/css">
+			<link charset="utf-8" rel="stylesheet" href="https://www.imooc.com/static/lib/ueditor/themes/imooc/css/ueditor.css?v=201907021539"><link rel="stylesheet" href="https://www.imooc.com/static/lib/baiduShare/api/css/share_style0_16.css?v=6aba13f0.css"></head>
+			<body><div id="main">
+
+
+<div class="main-con hide-menu">
+    <!-- 左侧菜单 & 索引 -->
+    
+    <div class="right-content" style="padding-left: 0px;">
+        <div class="container clearfix" id="top" style="width: 1134px; display: block;">
+            
+            
+            <div class="center_con js-center_con l" style="width: 1134px;">
+                <div class="article-con">
+                                            <!-- 买过的阅读 -->
+                        
+
+                    
+                    <div class="art-title" style="margin-top: 0px;">
+                        11 Go“枚举常量”的惯用实现方法
+                    </div>
+                    <div class="art-info clearfix">
+                        
+                        <span class="l">
+                            更新时间：2020-10-27 09:51:11
+                        </span>
+                    </div>
+                    <div class="art-top">
+                                                <img src="https://img4.sycdn.imooc.com/5f683d87000124af06400426.jpg" alt="">
+                                                                        <div class="famous-word-box">
+                            <img src="https://www.imooc.com/static/img/column/bg-l.png" alt="" class="bg1 bg">
+                            <img src="https://www.imooc.com/static/img/column/bg-r.png" alt="" class="bg2 bg">
+                            <div class="famous-word">没有引发任何行动的思想都不是思想，而是梦想。 —— 马丁<p></p></div>
+                        </div>
+                                            </div>
+                    <div class="art-content js-lookimg">
+                        <div id="article_content">
+                            <div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">C 家族（C-Family）的主流编程语言，如 C++、Java 等都提供了定义枚举常量的语法。在 C 语言中，枚举是一个命名的整型常数的集合，下面是我们使用枚举定义的 Weekday 类型：</p>
+</div><div class="cl-preview-section"><pre class="  language-c"><code class="prism  language-c"><span class="token comment">// C语法</span>
+<span class="token keyword">enum</span> Weekday <span class="token punctuation">{</span>
+        SUNDAY<span class="token punctuation">,</span>
+        MONDAY<span class="token punctuation">,</span>
+        TUESDAY<span class="token punctuation">,</span>
+        WEDNESDAY<span class="token punctuation">,</span>
+        THURSDAY<span class="token punctuation">,</span>
+        FRIDAY<span class="token punctuation">,</span>
+        SATURDAY
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">enum</span> Weekday d <span class="token operator">=</span> SATURDAY<span class="token punctuation">;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> d<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 6</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">C 语言针对枚举类型还提供了很多语法上的便利，比如：如果没有显式给枚举常量赋初始值，那么枚举类型的第一个常量的值为 0，后续常量的值依次加 1。与使用 define 宏定义的常量相比，C 编译器可以对专用的枚举类型做严格的类型检查，使得程序更为安全。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">枚举的存在代表了一类现实需求：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">有限数量标识符构成的集合，且多数情况下并不关心集合中标识符实际对应的值</li>
+<li style="font-size: 20px; line-height: 38px;">注重类型安全</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">与其他 C 家族主流语言（如 C++、Java）不同，Go 语言没有提供定义枚举常量的语法。我们通常使用常量语法定义枚举常量，比如用 Go 来定义上面的 Weekday：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token keyword">const</span> <span class="token punctuation">(</span>
+        Sunday    <span class="token operator">=</span> <span class="token number">0</span>
+        Monday    <span class="token operator">=</span> <span class="token number">1</span>
+        Tuesday   <span class="token operator">=</span> <span class="token number">2</span>
+        Wednesday <span class="token operator">=</span> <span class="token number">3</span>
+        Thursday  <span class="token operator">=</span> <span class="token number">4</span>
+        Friday    <span class="token operator">=</span> <span class="token number">5</span>
+        Saturday  <span class="token operator">=</span> <span class="token number">6</span>
+<span class="token punctuation">)</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">如果仅仅能支持到这种程度，那么 Go 就算不上是“站在巨人的肩膀上”了。首先 Go 的 const 语法提供了“隐式重复前一个非空表达式”的机制，比如下面代码：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token keyword">const</span> <span class="token punctuation">(</span>
+        Apple<span class="token punctuation">,</span> Banana <span class="token operator">=</span> <span class="token number">11</span><span class="token punctuation">,</span> <span class="token number">22</span>
+        Strawberry<span class="token punctuation">,</span> Grape 
+        Pear<span class="token punctuation">,</span> Watermelon 
+<span class="token punctuation">)</span>
+
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">常量定义的后两行没有显式给予初始赋值，Go 编译器将为其隐式使用第一行的表达式，这样上述定义等价于：</p>
+</div><div class="cl-preview-section"><pre class=" language-go"><code class="prism  language-go"><span class="token keyword">const</span> <span class="token punctuation">(</span>
+        Apple<span class="token punctuation">,</span> Banana <span class="token operator">=</span> <span class="token number">11</span><span class="token punctuation">,</span> <span class="token number">22</span>
+        Strawberry<span class="token punctuation">,</span> Grape  <span class="token operator">=</span> <span class="token number">11</span><span class="token punctuation">,</span> <span class="token number">22</span>
+        Pear<span class="token punctuation">,</span> Watermelon  <span class="token operator">=</span> <span class="token number">11</span><span class="token punctuation">,</span> <span class="token number">22</span>
+<span class="token punctuation">)</span>
+
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">不过这显然无法满足“枚举”的要求。Go 在这个机制的基础上又提供了<a href="https://tip.golang.org/ref/spec#Iota">iota</a>“神器”，有了 iota，我们就可以定义满足各种场景的枚举常量了。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">iota 是 Go 语言的一个预定义标识符，它表示的含义是 const 声明块（包括单行声明）中每个常量所处位置在块中的偏移值（从零开始）。同时，每一行中的 iota 自身也是一个无类型常量，可以像上一节所提到的无类型常量那样自动参与到不同类型的求值过程中，而无需对其进行显式转型操作。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">下面是 Go 标准库中 sync/mutex.go 中的一段枚举常量的定义：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// $GOROOT/src/sync/mutex.go (go 1.12.7)</span>
+<span class="token keyword">const</span> <span class="token punctuation">(</span> 
+        mutexLocked <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token boolean">iota</span> <span class="token comment">// mutex is locked</span>
+        mutexWoken
+        mutexStarving
+        mutexWaiterShift <span class="token operator">=</span> <span class="token boolean">iota</span>
+        starvationThresholdNs <span class="token operator">=</span> <span class="token number">1e6</span>
+<span class="token punctuation">)</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">这是一个很典型的诠释 iota 含义的例子，我们逐行来看：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">mutexLocked = 1 &lt;&lt; iota 这里是 const 声明块的第一行，iota 的值是该行在 const 块中的偏移，因此 iota 的值为 0，我们得到 mutexLocked 这个常量的值为 1 &lt;&lt; 0，即 1；</li>
+<li style="font-size: 20px; line-height: 38px;">mutexWorken 这里是 const 声明块的第二行，由于没有显式的常量初始化表达式，根据 const 声明块的“隐式重复前一个非空表达式”的机制，该行等价于 mutexWorken = 1 &lt;&lt; iota。该行为 const 块中的第二行，因此偏移量 iota 的值为 1，我们得到 mutexWorken 这个常量的值为 1&lt;&lt; 1，即 2；</li>
+<li style="font-size: 20px; line-height: 38px;">mutexStarving 该常量同 mutexWorken，该行等价于 mutexStarving = 1 &lt;&lt; iota，由于在该行的 iota 的值为 2，因此我们得到 mutexStarving 这个常量的值为 1 &lt;&lt; 2，即 4;</li>
+<li style="font-size: 20px; line-height: 38px;">mutexWaiterShift = iota 这一行的常量初始化表达式与前三行不同，由于该行为第四行，iota 的偏移值为 3，因此 mutexWaiterShift 的值就为 3。</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">位于同一行的 iota 即便出现多次，其值也是一样的：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">const (
+        Apple, Banana = iota, iota + 10 // 0, 10 (iota = 0)
+        Strawberry, Grape // 1, 11 (iota = 1)
+        Pear, Watermelon  // 2, 12 (iota = 2)
+)
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">如果我们要略过 iota = 0，而从 iota = 1 开始正式定义枚举常量，我们可以效仿下面代码：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// $GOROOT/src/syscall/net_js.go go 1.12.7</span>
+
+<span class="token keyword">const</span> <span class="token punctuation">(</span>
+        <span class="token boolean">_</span> <span class="token operator">=</span> <span class="token boolean">iota</span>
+        IPV6_V6ONLY
+        SOMAXCONN
+        SO_ERROR
+<span class="token punctuation">)</span>
+
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">如果我们要略过某一行，也可以使用类似方式:</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token keyword">const</span> <span class="token punctuation">(</span>
+        <span class="token boolean">_</span> <span class="token operator">=</span> <span class="token boolean">iota</span> <span class="token comment">// 0</span>
+        Pin1
+        Pin2
+        Pin3
+        <span class="token boolean">_</span>
+        Pin5    <span class="token comment">// 5   </span>
+<span class="token punctuation">)</span>
+
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">iota 的加入让 Go 在枚举常量定义上面的表达力大增：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">我们看到和传统 C 枚举常量相比，Go 提供的 iota 预定义标识符可以参与到常量的初始化表达式的计算中，这样我们可以以更为灵活的形式为枚举常量赋予初值。而传统 C 语言的枚举仅可以以已经定义了的常量参与到其他常量的初始值表达式中。比如：</li>
+</ul>
+</div><div class="cl-preview-section"><pre class="  language-c"><code class="prism  language-c">C代码：
+
+<span class="token keyword">enum</span> Season <span class="token punctuation">{</span>
+        spring<span class="token punctuation">,</span>
+        summer <span class="token operator">=</span> spring <span class="token operator">+</span> <span class="token number">2</span><span class="token punctuation">,</span>
+        fall <span class="token operator">=</span> spring <span class="token operator">+</span> <span class="token number">3</span><span class="token punctuation">,</span>
+        winter <span class="token operator">=</span> fall <span class="token operator">+</span> <span class="token number">1</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">和带有 iota（行偏移值）的初始化表达式相比，在阅读上面这段代码时，如果要对 winter 进行求值，我们还要向上查询 fall 的值和 spring 的值。</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">Go 的枚举常量可不限于整型值，定义浮点型枚举常量也可以。</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">C 语言无法定义浮点类型的枚举常量，但 Go 语言可以，这其中的部分功劳要归功于 Go 无类型常量。</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token keyword">const</span> <span class="token punctuation">(</span>
+        PI   <span class="token operator">=</span> <span class="token number">3.1415926</span>              <span class="token comment">// π</span>
+        PI_2 <span class="token operator">=</span> <span class="token number">3.1415926</span> <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">*</span> <span class="token boolean">iota</span><span class="token punctuation">)</span> <span class="token comment">// π/2</span>
+        PI_4                          <span class="token comment">// π/4   </span>
+<span class="token punctuation">)</span>    
+</code></pre>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">iota 让你维护枚举常量“列表”更容易</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们使用传统的枚举常量声明方式声明一组“颜色”常量：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">const ( 
+        Black  = 1 
+        Red    = 2
+        Yellow = 3
+)
+
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">常量按照首字母顺序排序。假如我们要增加一个颜色 Blue，根据字母序，这个新常量应该放在 Red 的前面，但这样一来，我们就需要将 Red 到 Yellow 的常量值都手动+1，十分费力。</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token keyword">const</span> <span class="token punctuation">(</span>
+        Blue   <span class="token operator">=</span> <span class="token number">1</span>
+        Black  <span class="token operator">=</span> <span class="token number">2</span>
+        Red    <span class="token operator">=</span> <span class="token number">3</span>
+        Yellow <span class="token operator">=</span> <span class="token number">4</span>
+<span class="token punctuation">)</span>
+
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们使用 iota 重新定义这组“颜色”枚举常量：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token keyword">const</span> <span class="token punctuation">(</span>
+        <span class="token boolean">_</span> <span class="token operator">=</span> <span class="token boolean">iota</span>     
+        Blue
+        Red 
+        Yellow     
+<span class="token punctuation">)</span> 
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">现在无论后期增加多少种颜色，我们只需将常量名插入到对应位置即可，其他无需做任何手工调整。</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">使用有类型枚举常量保证类型安全。</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">枚举常量多数也是无类型常量。如果要严格考虑类型安全，可以定义有类型枚举常量。下面是 Go 标准库中一段定义有类型枚举常量的例子：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// $GOROOT/src/time/time.go</span>
+
+<span class="token keyword">type</span> Weekday <span class="token builtin">int</span>
+
+<span class="token keyword">const</span> <span class="token punctuation">(</span>
+        Sunday Weekday <span class="token operator">=</span> <span class="token boolean">iota</span>
+        Monday
+        Tuesday
+        Wednesday
+        Thursday
+        Friday
+        Saturday
+<span class="token punctuation">)</span>
+
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">这样，后续要使用 Sunday~Saturday 这些有类型枚举常量，必须匹配 Weekday 类型的变量。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">最后，我还要提一个“反例”。在一些枚举常量名称与其初始值有强烈对应关系的时候，枚举常量会直接使用显式数值作为常量的初始值，这样的情况极其少见，在 Go 标准库中我仅找到这一处：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// $GOROOT/bytes/buffer.go</span>
+
+<span class="token comment">// Don't use iota for these, as the values need to correspond with the</span>
+<span class="token comment">// names and comments, which is easier to see when being explicit.</span>
+<span class="token keyword">const</span> <span class="token punctuation">(</span>
+        opRead      readOp <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token comment">// Any other read operation.</span>
+        opInvalid   readOp <span class="token operator">=</span> <span class="token number">0</span>  <span class="token comment">// Non-read operation.</span>
+        opReadRune1 readOp <span class="token operator">=</span> <span class="token number">1</span>  <span class="token comment">// Read rune of size 1.</span>
+        opReadRune2 readOp <span class="token operator">=</span> <span class="token number">2</span>  <span class="token comment">// Read rune of size 2.</span>
+        opReadRune3 readOp <span class="token operator">=</span> <span class="token number">3</span>  <span class="token comment">// Read rune of size 3.</span>
+        opReadRune4 readOp <span class="token operator">=</span> <span class="token number">4</span>  <span class="token comment">// Read rune of size 4.</span>
+<span class="token punctuation">)</span>
+</code></pre>
+</div>}
+                        </div>
+                    </div>
+                                            <!-- 买过的阅读 -->
+                        <div class="art-next-prev clearfix">
+                                                                                                <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/87/article/2379">
+                                                                    <div class="prev l clearfix">
+                                        <div class="icon l">
+                                            <i class="imv2-arrow3_l"></i>
+                                        </div>
+                                        <p>
+                                            10 无类型常量让代码更简化
+                                        </p>
+                                    </div>
+                                </a>
+                                                                                                                            <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/87/article/2381">
+                                                                    <div class="next r clearfix">
+                                        <p>
+                                            12 定义“零值可用”的类型
+                                        </p>
+                                        <div class="icon r">
+                                            <i class="imv2-arrow3_r"></i>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                                    </div>
+                                    </div>
+                <div class="comments-con js-comments-con" id="coments_con">
+                </div>
+
+                
+            </div>
+            
+            
+            
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-jiaQun-new hide" id="modal-jiaQun">
+    <div class="inner" style="">
+        <div class="modal-close js-close-jiaQun">
+            <i class="imv2-close"></i>
+        </div>
+        <div class="content">
+            <img src="https://img4.sycdn.imooc.com/5f51ecec0001392b05330597.jpg">
+            <div class="right-info">
+                <div class="title">
+                    扫码加入慕课前沿技术核心用户群
+                </div>
+                <div class="desc">
+                                            <p class="mb6">验证信息：<span id="joincode">2010312025386365</span><span class="copy js-copy-joincode">复制</span></p>
+                                        <p class="mb6">QQ讨论群号：729941811</p>
+                                            <p>QQ群URL：<a href="https://jq.qq.com/?_wv=1027&amp;k=5WJLMxV" target="_blank">点击访问</a></p>
+                                    </div>
+            </div>
+            <p class="tip">若遇到搜索不到QQ群或加群失败，请联系客服邮箱:kf@imooc.com</p>
+        </div>
+    </div>
+</div>
+ 
+<!-- 专栏介绍页专栏评价 -->
+
+<!-- 专栏介绍页底部三条评价 -->
+
+<!-- 专栏阅读页弹层目录和介绍页页面目录 -->
+
+<!-- 专栏阅读页发布回复 -->
+
+<!-- 专栏阅读页发布评论 -->
+
+<!-- 专栏阅读页底部评论 -->
+
+<!-- 专栏阅读 单个 评论 -->
+
+<!-- 新增回复和展开三条以外回复 -->
+
+<!-- 立即订阅的弹窗 -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div></body></html>

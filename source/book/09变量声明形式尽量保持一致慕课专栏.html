@@ -1,0 +1,403 @@
+<html><head><meta charset="utf-8"><title>09 变量声明形式尽量保持一致-慕课专栏</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+			<meta name="renderer" content="webkit">
+			<meta property="qc:admins" content="77103107776157736375">
+			<meta property="wb:webmaster" content="c4f857219bfae3cb">
+			<meta http-equiv="Access-Control-Allow-Origin" content="*">
+			<meta http-equiv="Cache-Control" content="no-transform ">
+			<meta http-equiv="Cache-Control" content="no-siteapp">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://www.imooc.com/static/img/common/touch-icon-ipad.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://www.imooc.com/static/img/common/touch-icon-iphone-retina.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://www.imooc.com/static/img/common/touch-icon-ipad-retina.png">
+			<link href="https://moco.imooc.com/captcha/style/captcha.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201907021539" type="text/css">
+			<link rel="stylesheet" href="https://www.imooc.com/static/lib/swiper/swiper-3.4.2.min.css?t=201907021539">
+			<link rel="stylesheet" href="https://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,column/zhuanlanChapter-less.css?t=2.5,course/inc/course_tipoff-less.css?t=2.5?v=201907051055" type="text/css">
+			<link charset="utf-8" rel="stylesheet" href="https://www.imooc.com/static/lib/ueditor/themes/imooc/css/ueditor.css?v=201907021539"><link rel="stylesheet" href="https://www.imooc.com/static/lib/baiduShare/api/css/share_style0_16.css?v=6aba13f0.css"></head>
+			<body><div id="main">
+
+
+<div class="main-con hide-menu">
+    <!-- 左侧菜单 & 索引 -->
+    
+    <div class="right-content" style="padding-left: 0px;">
+        <div class="container clearfix" id="top" style="width: 1134px; display: block;">
+            
+            
+            <div class="center_con js-center_con l" style="width: 1134px;">
+                <div class="article-con">
+                                            <!-- 买过的阅读 -->
+                        
+
+                    
+                    <div class="art-title" style="margin-top: 0px;">
+                        09 变量声明形式尽量保持一致
+                    </div>
+                    <div class="art-info clearfix">
+                        
+                        <span class="l">
+                            更新时间：2020-09-25 09:51:31
+                        </span>
+                    </div>
+                    <div class="art-top">
+                                                <img src="https://img2.sycdn.imooc.com/5f683b8600017bad06400426.jpg" alt="">
+                                                                        <div class="famous-word-box">
+                            <img src="https://www.imooc.com/static/img/column/bg-l.png" alt="" class="bg1 bg">
+                            <img src="https://www.imooc.com/static/img/column/bg-r.png" alt="" class="bg2 bg">
+                            <div class="famous-word">学习从来无捷径，循序渐进登高峰。 —— 高永祚<p></p></div>
+                        </div>
+                                            </div>
+                    <div class="art-content js-lookimg">
+                        <div id="article_content">
+                            <div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">和 Python、Ruby 等动态脚本语言不同，Go 语言沿袭了静态语言的传统：<strong>使用变量之前需要先进行变量的声明</strong>。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">这里大致列一下 Go 语言常见的变量声明形式：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token keyword">var</span> a <span class="token builtin">int32</span>
+<span class="token keyword">var</span> s <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">"hello"</span>
+<span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">13</span>
+n <span class="token operator">:=</span> <span class="token number">17</span>
+<span class="token keyword">var</span> <span class="token punctuation">(</span>
+    crlf       <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span><span class="token string">"\r\n"</span><span class="token punctuation">)</span>
+    colonSpace <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span><span class="token string">": "</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">如果让 Go 语言的设计者重新来设计一次变量声明语法，我相信他们很大可能不会给予 Gopher 们这么大的变量声明灵活性，但目前这一切都无法改变。对于以面向工程著称且以解决“规模化（scale）”问题为目标的 Go 语言而言，Gopher 们在进行变量声明形式的选择上应该尽量保持项目范围内是一致的。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 语言有两类变量：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">包级变量（package varible）：即在 package 级别可见的变量。如果是导出变量，则该包级变量也可以被视为全局变量；</li>
+<li style="font-size: 20px; line-height: 38px;">局部变量（local varible）：函数或方法体内声明的变量，仅在函数或方法体内可见。</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">下面我们就来分别说明一下这两类变量在声明形式选择上保持一致性的一些最佳实践。</p>
+</div><div class="cl-preview-section"><h2 id="包级变量的声明形式" style="font-size: 30px;">1. 包级变量的声明形式</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">包级变量只能使用带有 var 关键字的变量声明形式，但在形式细节上仍有一定灵活度。我们从变量声明的时候是否延迟初始化这个角度对包级变量进行一次分类。</p>
+</div><div class="cl-preview-section"><h3 id="声明并同时显式初始化">1). 声明并同时显式初始化</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">下面是摘自 Go 标准库中的代码(Go 版本 1.12)：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// $GOROOT/src/io/pipe.go</span>
+<span class="token keyword">var</span> ErrClosedPipe <span class="token operator">=</span> errors<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token string">"io: read/write on closed pipe"</span><span class="token punctuation">)</span>
+
+<span class="token comment">// $GOROOT/src/io/io.go</span>
+<span class="token keyword">var</span> ErrShortWrite <span class="token operator">=</span> errors<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token string">"short write"</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> ErrShortBuffer <span class="token operator">=</span> errors<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token string">"short buffer"</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> EOF <span class="token operator">=</span> errors<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token string">"EOF"</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> ErrUnexpectedEOF <span class="token operator">=</span> errors<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token string">"unexpected EOF"</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> ErrNoProgress <span class="token operator">=</span> errors<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token string">"multiple Read calls return no data or error"</span><span class="token punctuation">)</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到，对于变量声明的同时进行显式初始化的这类包级变量，实践中多使用下面格式：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token keyword">var</span> variableName <span class="token operator">=</span> InitExpression
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 编译器会自动根据等号右侧 InitExpression 结果值的类型确定左侧声明的变量的类型。对于下面这些声明语句，Go 会为包级变量设置默认类型：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">17</span> 
+<span class="token keyword">var</span> f <span class="token operator">=</span> <span class="token number">3.14</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">对于未显式赋予类型的整型变量 a，Go 编译器会将之设置为默认类型 int；而浮点型变量 f 的默认类型则为 float64。如果我们不接受默认类型，而是要显式为 a 和 f 指定类型，那么我们有两种方式：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token keyword">var</span> a <span class="token builtin">int32</span> <span class="token operator">=</span> <span class="token number">17</span> 
+<span class="token keyword">var</span> f <span class="token builtin">float32</span> <span class="token operator">=</span> <span class="token number">3.14</span>
+
+vs<span class="token punctuation">.</span>
+
+<span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token function">int32</span><span class="token punctuation">(</span><span class="token number">17</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> f <span class="token operator">=</span> <span class="token function">float32</span><span class="token punctuation">(</span><span class="token number">3.14</span><span class="token punctuation">)</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">从声明一致性的角度出发，Go 更推荐我们使用后者，这样就统一了接受默认类型和显式指定类型两种声明形式，尤其是在将这些变量放在一个 var 块中声明时，我们更青睐下面这样的形式：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token keyword">var</span> <span class="token punctuation">(</span>
+	a <span class="token operator">=</span> <span class="token number">17</span>
+	f <span class="token operator">=</span> <span class="token function">float32</span><span class="token punctuation">(</span><span class="token number">3.14</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">而不是下面这种看起来不一致的声明形式：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token keyword">var</span> <span class="token punctuation">(</span>
+	a  <span class="token operator">=</span> <span class="token number">17</span>
+	f <span class="token builtin">float32</span> <span class="token operator">=</span> <span class="token number">3.14</span>
+<span class="token punctuation">)</span>
+
+</code></pre>
+</div><div class="cl-preview-section"><h3 id="声明但延迟初始化">2). 声明但延迟初始化</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">对于声明时并不立即显式初始化的包级变量，我们使用最基本的声明形式：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token keyword">var</span> a <span class="token builtin">int32</span>
+<span class="token keyword">var</span> f <span class="token builtin">float64</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们知道，虽然没有显式初始化，Go 语言也会让这些变量拥有初始的“零值”。如果是自定义的类型，保证其零值可用是非常必要的，这个我们在后续章节会详细说明。</p>
+</div><div class="cl-preview-section"><h3 id="声明聚类与就近原则">3). 声明聚类与就近原则</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 语言提供 var 块用于将多于一个的变量声明放在一起，并且在语法上不会限制放置在 var 块中的声明类型。但是我们一般将同一类的变量声明放在一个 var 块中，不同类的声明放在不同的 var 块中；或者将延迟初始化的变量声明放在一个 var 块，而将声明且显式初始化的变量放在另一个 var 块中。这里我称之为“声明聚类”。比如下面 Go 标准库中的代码：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// $GOROOT/src/net/http/server.go</span>
+
+<span class="token keyword">var</span> <span class="token punctuation">(</span>
+    bufioReaderPool   sync<span class="token punctuation">.</span>Pool
+    bufioWriter2kPool sync<span class="token punctuation">.</span>Pool
+    bufioWriter4kPool sync<span class="token punctuation">.</span>Pool
+<span class="token punctuation">)</span>
+
+<span class="token keyword">var</span> copyBufPool <span class="token operator">=</span> sync<span class="token punctuation">.</span>Pool<span class="token punctuation">{</span>
+    New<span class="token punctuation">:</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">{</span>
+        b <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">,</span> <span class="token number">32</span><span class="token operator">*</span><span class="token number">1024</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token operator">&amp;</span>b
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+<span class="token operator">...</span> <span class="token operator">...</span>
+
+<span class="token comment">// $GOROOT/src/net/net.go</span>
+<span class="token keyword">var</span> <span class="token punctuation">(</span>
+    <span class="token comment">// aLongTimeAgo is a non-zero time, far in the past, used for</span>
+    <span class="token comment">// immediate cancelation of dials.</span>
+    aLongTimeAgo <span class="token operator">=</span> time<span class="token punctuation">.</span><span class="token function">Unix</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+
+    <span class="token comment">// nonDeadline and noCancel are just zero values for</span>
+    <span class="token comment">// readability with functions taking too many parameters.</span>
+    noDeadline <span class="token operator">=</span> time<span class="token punctuation">.</span>Time<span class="token punctuation">{</span><span class="token punctuation">}</span>
+    noCancel   <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">chan</span> <span class="token keyword">struct</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token boolean">nil</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">var</span> threadLimit <span class="token keyword">chan</span> <span class="token keyword">struct</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token operator">...</span> <span class="token operator">...</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到在 server.go 中，copyBufPool 变量没有放入 var 块就是因为它的声明是带有显式初始化的，而 var 块中的变量声明都是延迟初始化的；net.go 中的 threadLimit 单独放在 var 块外面，一方面是考虑它是延迟初始化的变量声明，另一方面 threadLimit 在含义上与 var 块中标识时间限制的变量也有所不同。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">那么大家可能还有一个问题，那就是是否将包级变量的声明全部集中放在源文件头部呢？使用静态编程语言的开发人员都知道，变量声明最佳实践中还有一条：就近原则。即尽可能在靠近第一次使用变量的位置声明该变量。就近原则实际上也是变量的作用域最小化的一种实现手段。在 Go 标准库中我们很容易找到符合就近原则的变量声明的例子：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// $GOROOT/src/net/http/request.go</span>
+
+<span class="token comment">// ErrNoCookie is returned by Request's Cookie method when a cookie is not found.</span>
+<span class="token keyword">var</span> ErrNoCookie <span class="token operator">=</span> errors<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token string">"http: named cookie not present"</span><span class="token punctuation">)</span>
+
+<span class="token comment">// Cookie returns the named cookie provided in the request or</span>
+<span class="token comment">// ErrNoCookie if not found.</span>
+<span class="token comment">// If multiple cookies match the given name, only one cookie will</span>
+<span class="token comment">// be returned.</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>r <span class="token operator">*</span>Request<span class="token punctuation">)</span> <span class="token function">Cookie</span><span class="token punctuation">(</span>name <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token operator">*</span>Cookie<span class="token punctuation">,</span> <span class="token builtin">error</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> c <span class="token operator">:=</span> <span class="token keyword">range</span> <span class="token function">readCookies</span><span class="token punctuation">(</span>r<span class="token punctuation">.</span>Header<span class="token punctuation">,</span> name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> c<span class="token punctuation">,</span> <span class="token boolean">nil</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token boolean">nil</span><span class="token punctuation">,</span> ErrNoCookie
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">当然如果一个包级变量在包内部被多处使用，那么这个变量还是放在源文件头部声明比较适合。</p>
+</div><div class="cl-preview-section"><h2 id="局部变量的声明形式" style="font-size: 30px;">2. 局部变量的声明形式</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">有了包级变量做铺垫，我们再来讲解局部变量就容易很多了。和包级变量相比，局部变量又多了一种短变量声明形式，这也是局部变量采用最多的一种声明形式，下面我们来详细看看。</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">对于延迟初始化的局部变量声明，采用带有 var 关键字的声明形式。</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">如下面代码中的变量 buf：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// $GOROOT/src/strings/replace.go</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>r <span class="token operator">*</span>byteReplacer<span class="token punctuation">)</span> <span class="token function">Replace</span><span class="token punctuation">(</span>s <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> buf <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span> <span class="token comment">// lazily allocated</span>
+    <span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token function">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">{</span>
+        b <span class="token operator">:=</span> s<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+        <span class="token keyword">if</span> r<span class="token punctuation">[</span>b<span class="token punctuation">]</span> <span class="token operator">!=</span> b <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> buf <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+                buf <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            buf<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> r<span class="token punctuation">[</span>b<span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> buf <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> s
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token function">string</span><span class="token punctuation">(</span>buf<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">另外最常见的采用 var 关键字的声明的变量之一就是 err：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token keyword">var</span> err <span class="token builtin">error</span>
+</code></pre>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">对于声明且显式初始化的局部变量，建议使用短变量声明形式。</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">短变量声明形式是局部变量最常用的声明形式，它遍布在 Go 标准库代码中。 对于接受默认类型的变量，我们使用下面形式：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">a := 17
+f := 3.14
+s := "hello, gopher!"
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">对于不接受默认类型的变量，我们依然可以使用短变量声明形式，只是在":="右侧要做一个显式转型：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go">a <span class="token operator">:=</span> <span class="token function">int32</span><span class="token punctuation">(</span><span class="token number">17</span><span class="token punctuation">)</span>
+f <span class="token operator">:=</span> <span class="token function">float32</span><span class="token punctuation">(</span><span class="token number">3.14</span><span class="token punctuation">)</span>
+s <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span><span class="token string">"hello, gopher!"</span><span class="token punctuation">)</span>
+</code></pre>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">尽量在分支控制时应用短变量声明形式。</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">这应该是 Go 中短变量声明形式应用最广泛的场景了。在编写 Go 代码时，我们很少单独声明用于分支控制语句中的变量，而是将其与 if、for 等通过短变量声明形式融合在一起，就像下面这样：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// $GOROOT/src/strings/strings.go</span>
+<span class="token keyword">func</span> <span class="token function">LastIndexAny</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> chars <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> chars <span class="token operator">==</span> <span class="token string">""</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Avoid scanning all of s.</span>
+        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token function">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">8</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 作者注：在if条件控制语句中使用短变量声明形式</span>
+        <span class="token keyword">if</span> as<span class="token punctuation">,</span> isASCII <span class="token operator">:=</span> <span class="token function">makeASCIISet</span><span class="token punctuation">(</span>chars<span class="token punctuation">)</span><span class="token punctuation">;</span> isASCII <span class="token punctuation">{</span> 
+            <span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token function">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&gt;=</span> <span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">--</span> <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> as<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">return</span> i
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token function">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span> i <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token punctuation">{</span> 
+        <span class="token comment">// 作者注：在for循环控制语句中使用短变量声明形式</span>
+        r<span class="token punctuation">,</span> size <span class="token operator">:=</span> utf8<span class="token punctuation">.</span><span class="token function">DecodeLastRuneInString</span><span class="token punctuation">(</span>s<span class="token punctuation">[</span><span class="token punctuation">:</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        i <span class="token operator">-=</span> size
+        <span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> c <span class="token operator">:=</span> <span class="token keyword">range</span> chars <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> r <span class="token operator">==</span> c <span class="token punctuation">{</span>
+                <span class="token keyword">return</span> i
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// $GOROOT/src/net/net.go</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>v <span class="token operator">*</span>Buffers<span class="token punctuation">)</span> <span class="token function">WriteTo</span><span class="token punctuation">(</span>w io<span class="token punctuation">.</span>Writer<span class="token punctuation">)</span> <span class="token punctuation">(</span>n <span class="token builtin">int64</span><span class="token punctuation">,</span> err <span class="token builtin">error</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 作者注：在for循环控制语句中使用短变量声明形式</span>
+    <span class="token keyword">if</span> wv<span class="token punctuation">,</span> ok <span class="token operator">:=</span> w<span class="token punctuation">.</span><span class="token punctuation">(</span>buffersWriter<span class="token punctuation">)</span><span class="token punctuation">;</span> ok <span class="token punctuation">{</span> 
+        <span class="token keyword">return</span> wv<span class="token punctuation">.</span><span class="token function">writeBuffers</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span> 
+ 
+    <span class="token comment">// 作者注：在if条件控制语句中使用短变量声明形式</span>
+    <span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> b <span class="token operator">:=</span> <span class="token keyword">range</span> <span class="token operator">*</span>v <span class="token punctuation">{</span>
+        nb<span class="token punctuation">,</span> err <span class="token operator">:=</span> w<span class="token punctuation">.</span><span class="token function">Write</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span>
+        n <span class="token operator">+=</span> <span class="token function">int64</span><span class="token punctuation">(</span>nb<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+            v<span class="token punctuation">.</span><span class="token function">consume</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+            <span class="token keyword">return</span> n<span class="token punctuation">,</span> err
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    v<span class="token punctuation">.</span><span class="token function">consume</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> n<span class="token punctuation">,</span> <span class="token boolean">nil</span>
+<span class="token punctuation">}</span>
+
+
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">这样的应用方式同时也体现出“就近”原则，也让变量的作用域最小化了。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">由于良好的函数/方法设计讲究的是“单一职责”，因此每个函数/方法规模都不大，很少需要应用 var 块来聚类声明局部变量，当然如果你在声明局部变量时遇到适合聚类的应用场景，你也应该毫不犹豫地使用 var 块来声明多于一个的局部变量。比如：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// $GOROOT/src/net/dial.go</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>r <span class="token operator">*</span>Resolver<span class="token punctuation">)</span> <span class="token function">resolveAddrList</span><span class="token punctuation">(</span>ctx context<span class="token punctuation">.</span>Context<span class="token punctuation">,</span> op<span class="token punctuation">,</span> network<span class="token punctuation">,</span> 
+                            addr <span class="token builtin">string</span><span class="token punctuation">,</span> hint Addr<span class="token punctuation">)</span> <span class="token punctuation">(</span>addrList<span class="token punctuation">,</span> <span class="token builtin">error</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token operator">...</span> <span class="token operator">...</span>
+    <span class="token keyword">var</span> <span class="token punctuation">(</span>
+        tcp      <span class="token operator">*</span>TCPAddr
+        udp      <span class="token operator">*</span>UDPAddr
+        ip       <span class="token operator">*</span>IPAddr
+        wildcard <span class="token builtin">bool</span>
+    <span class="token punctuation">)</span>
+   <span class="token operator">...</span> <span class="token operator">...</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">或是：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// $GOROOT/src/reflect/type.go </span>
+<span class="token comment">// 这是一个非常长的函数，因此将所有var声明都聚合在函数的开始处了</span>
+<span class="token keyword">func</span> <span class="token function">StructOf</span><span class="token punctuation">(</span>fields <span class="token punctuation">[</span><span class="token punctuation">]</span>StructField<span class="token punctuation">)</span> Type <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> <span class="token punctuation">(</span>
+        hash       <span class="token operator">=</span> <span class="token function">fnv1</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span><span class="token string">"struct {"</span><span class="token punctuation">)</span><span class="token operator">...</span><span class="token punctuation">)</span>
+        size       <span class="token builtin">uintptr</span>
+        typalign   <span class="token builtin">uint8</span>
+        comparable <span class="token operator">=</span> <span class="token boolean">true</span>
+        hashable   <span class="token operator">=</span> <span class="token boolean">true</span>
+        methods    <span class="token punctuation">[</span><span class="token punctuation">]</span>method
+
+        fs   <span class="token operator">=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span>structField<span class="token punctuation">,</span> <span class="token function">len</span><span class="token punctuation">(</span>fields<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        repr <span class="token operator">=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">)</span>
+        fset <span class="token operator">=</span> <span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token keyword">struct</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token comment">// fields' names</span>
+
+        hasPtr    <span class="token operator">=</span> <span class="token boolean">false</span> <span class="token comment">// records whether at least one struct-field is a pointer</span>
+        hasGCProg <span class="token operator">=</span> <span class="token boolean">false</span> <span class="token comment">// records whether a struct-field type has a GCProg</span>
+    <span class="token punctuation">)</span>
+
+    <span class="token operator">...</span> <span class="token operator">...</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="cl-preview-section"><h2 id="小结" style="font-size: 30px;">3. 小结</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">使用一致的变量声明是 Go 语言的一个最佳实践，我们用一幅图将变量声明形式做个形象化的小结：<br>
+<img class="" src="https://img1.sycdn.imooc.com/5f683aa7000144c808000489.png" data-original="//img1.sycdn.imooc.com/5f683aa7000144c808000489.png" alt="图片描述"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">从图中我们看到要想做好代码中变量声明的一致性，我们需要明确要声明的变量是包级变量还是局部变量、是否要延迟初始化、是否接受默认类型、是否是分支控制变量并结合聚类和就近原则。</p>
+</div>}
+                        </div>
+                    </div>
+                                            <!-- 买过的阅读 -->
+                        <div class="art-next-prev clearfix">
+                                                                                                <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/87/article/2377">
+                                                                    <div class="prev l clearfix">
+                                        <div class="icon l">
+                                            <i class="imv2-arrow3_l"></i>
+                                        </div>
+                                        <p>
+                                            08 Go 标识符的命名惯例
+                                        </p>
+                                    </div>
+                                </a>
+                                                                                                                            <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/87/article/2379">
+                                                                    <div class="next r clearfix">
+                                        <p>
+                                            10 无类型常量让代码更简化
+                                        </p>
+                                        <div class="icon r">
+                                            <i class="imv2-arrow3_r"></i>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                                    </div>
+                                    </div>
+                <div class="comments-con js-comments-con" id="coments_con">
+                </div>
+
+                
+            </div>
+            
+            
+            
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-jiaQun-new hide" id="modal-jiaQun">
+    <div class="inner" style="">
+        <div class="modal-close js-close-jiaQun">
+            <i class="imv2-close"></i>
+        </div>
+        <div class="content">
+            <img src="https://img4.sycdn.imooc.com/5f51ecec0001392b05330597.jpg">
+            <div class="right-info">
+                <div class="title">
+                    扫码加入慕课前沿技术核心用户群
+                </div>
+                <div class="desc">
+                                            <p class="mb6">验证信息：<span id="joincode">2010312025386365</span><span class="copy js-copy-joincode">复制</span></p>
+                                        <p class="mb6">QQ讨论群号：729941811</p>
+                                            <p>QQ群URL：<a href="https://jq.qq.com/?_wv=1027&amp;k=5WJLMxV" target="_blank">点击访问</a></p>
+                                    </div>
+            </div>
+            <p class="tip">若遇到搜索不到QQ群或加群失败，请联系客服邮箱:kf@imooc.com</p>
+        </div>
+    </div>
+</div>
+ 
+<!-- 专栏介绍页专栏评价 -->
+
+<!-- 专栏介绍页底部三条评价 -->
+
+<!-- 专栏阅读页弹层目录和介绍页页面目录 -->
+
+<!-- 专栏阅读页发布回复 -->
+
+<!-- 专栏阅读页发布评论 -->
+
+<!-- 专栏阅读页底部评论 -->
+
+<!-- 专栏阅读 单个 评论 -->
+
+<!-- 新增回复和展开三条以外回复 -->
+
+<!-- 立即订阅的弹窗 -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div></body></html>

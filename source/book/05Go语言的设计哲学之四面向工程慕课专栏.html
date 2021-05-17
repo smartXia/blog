@@ -1,0 +1,213 @@
+<html><head><meta charset="utf-8"><title>05 Go 语言的设计哲学之四：面向工程-慕课专栏</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+			<meta name="renderer" content="webkit">
+			<meta property="qc:admins" content="77103107776157736375">
+			<meta property="wb:webmaster" content="c4f857219bfae3cb">
+			<meta http-equiv="Access-Control-Allow-Origin" content="*">
+			<meta http-equiv="Cache-Control" content="no-transform ">
+			<meta http-equiv="Cache-Control" content="no-siteapp">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://www.imooc.com/static/img/common/touch-icon-ipad.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://www.imooc.com/static/img/common/touch-icon-iphone-retina.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://www.imooc.com/static/img/common/touch-icon-ipad-retina.png">
+			<link href="https://moco.imooc.com/captcha/style/captcha.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201907021539" type="text/css">
+			<link rel="stylesheet" href="https://www.imooc.com/static/lib/swiper/swiper-3.4.2.min.css?t=201907021539">
+			<link rel="stylesheet" href="https://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,column/zhuanlanChapter-less.css?t=2.5,course/inc/course_tipoff-less.css?t=2.5?v=201907051055" type="text/css">
+			<link charset="utf-8" rel="stylesheet" href="https://www.imooc.com/static/lib/ueditor/themes/imooc/css/ueditor.css?v=201907021539"><link rel="stylesheet" href="https://www.imooc.com/static/lib/baiduShare/api/css/share_style0_16.css?v=6aba13f0.css"></head>
+			<body><div id="main">
+
+
+<div class="main-con hide-menu">
+    <!-- 左侧菜单 & 索引 -->
+    
+    <div class="right-content" style="padding-left: 0px;">
+        <div class="container clearfix" id="top" style="width: 1134px; display: block;">
+            
+            
+            <div class="center_con js-center_con l" style="width: 1134px;">
+                <div class="article-con">
+                                            <!-- 买过的阅读 -->
+                        
+
+                    
+                    <div class="art-title" style="margin-top: 0px;">
+                        05 Go 语言的设计哲学之四：面向工程
+                    </div>
+                    <div class="art-info clearfix">
+                        
+                        <span class="l">
+                            更新时间：2020-09-16 09:48:21
+                        </span>
+                    </div>
+                    <div class="art-top">
+                                                <img src="https://img2.sycdn.imooc.com/5f5ee83500015dc406400434.jpg" alt="">
+                                                                        <div class="famous-word-box">
+                            <img src="https://www.imooc.com/static/img/column/bg-l.png" alt="" class="bg1 bg">
+                            <img src="https://www.imooc.com/static/img/column/bg-r.png" alt="" class="bg2 bg">
+                            <div class="famous-word">机遇只偏爱那些有准备的头脑。——巴斯德<p></p></div>
+                        </div>
+                                            </div>
+                    <div class="art-content js-lookimg">
+                        <div id="article_content">
+                            <div class="cl-preview-section"><h2 id="第四条原则-面向工程，“自带电池”" style="font-size: 30px;">第四条原则: 面向工程，“自带电池”</h2>
+</div><div class="cl-preview-section"><blockquote>
+<p style="font-size: 20px; line-height: 38px;">软件工程指引着 Go 语言的设计。- Rob Pike(2012)</p>
+</blockquote>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">要想理解这条设计哲学，我们依然需要回到三位 Go 语言之父在设计 Go 语言时的初衷：**面向解决真实世界中 Google 内部大规模软件开发存在的各种问题，为这些问题提供答案。**主要的问题包括：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">程序构建慢</li>
+<li style="font-size: 20px; line-height: 38px;">失控的依赖管理</li>
+<li style="font-size: 20px; line-height: 38px;">开发人员使用编程语言的不同子集（比如 C++支持多范式，这样有些人用 OO，有些人用泛型）</li>
+<li style="font-size: 20px; line-height: 38px;">代码可理解性差（代码可读性差，文档差等)</li>
+<li style="font-size: 20px; line-height: 38px;">功能重复实现</li>
+<li style="font-size: 20px; line-height: 38px;">升级更新消耗大</li>
+<li style="font-size: 20px; line-height: 38px;">实现自动化工具难度高</li>
+<li style="font-size: 20px; line-height: 38px;">版本问题</li>
+<li style="font-size: 20px; line-height: 38px;">跨语言构建问题</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">很多编程语言设计者或其拥趸认为这些问题并不是一门编程语言应该去解决的，但 Go 语言的设计者并不这么看，他们以更高更广阔的视角去审视软件开发领域尤其是大规模软件开发过程中遇到的各种问题，并在 Go 语言最初设计阶段就将解决工程问题作为 Go 的设计原则之一去考虑 Go 语法、工具与标准库的设计，这也是 Go 与其他偏学院派、偏研究性编程语言在设计思路上的一个重大差异。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 语言取得阶段性成功后，这种思路也在开始影响着后续新编程语言的设计，并且一些现有的主流编程语言也在借鉴 Go 的一些设计，比如：越来越多的语言认可统一代码风格的优越之处，并开始提供官方统一的 fmt 工具（例如：rust 的 rustfmt）；又比如：Go 创新提出的最小版本选择（minimal version selection，缩写为 mvs）也在被其他语言的包依赖工具所支持（比如：rust 的 cargo 支持 mvs）。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 设计者将所有工程问题浓缩为一个词"scale"，总觉得将 scale 这个词翻译为任何中文词汇都无法传神地表达其含义，暂译为“规模”吧。这里的规模化有两层含义：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">用 Go 构建的软件系统的并发规模，比如：这类系统并发关注点的数量、处理数据的量级、同时与之交互的服务的数量等；</li>
+<li style="font-size: 20px; line-height: 38px;">开发过程的规模，包括代码库大小、参与开发、相互协作的工程师的数量等。</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">从 Go1 开始，Go 的目标就是为了让开发者能够更容易、更高效地构建规模化（scale）的软件。Go 设计者期望 Go 可以游刃有余地应对产品规模和过程规模变大后带来的各种复杂性问题。Go 语言的演进方向也是继续优化和消除 Go 语言自身面对规模化问题时应对不好的地方，比如：Go 1.9 引入的 type alias 以应对大型代码仓库代码重构、Go 1.11 引入的 go module 机制解决不完善的包依赖问题等。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">这种设计哲学的落地让 Go 语言具有广泛的规模适应性：既可以被仅有 5 人的初创团队用于开发终端工具，也能够满足像 Google 这样的超巨型公司大规模团队开发大规模网络服务程序的需要。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">那么 Go 是如何解决工程领域规模化所带来的问题的呢？我们从语言、标准库和工具三个方面来看一下。</p>
+</div><div class="cl-preview-section"><h3 id="语言">1) 语言</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">语法是编程语言的用户接口，它直接影响开发人员对于这门语言的使用体验。Go 语言首先是一门简单的语言，简单意味着可读性好，容易理解，容易上手工作，容易修复错误，节省开发者时间，提升开发者间的沟通效率。但作为面向工程的编程语言，光有简单的设计哲学还不够，每个语言设计细节还都要经过“工程规模化”的考验和打磨，需要在细节上做好充分的思考和讨论。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">比如 Rob Pike 就曾谈到过 Go 当初为何没有使用 Python 那样的代码缩进来表示程序结构，而是选择了与 C 语言相同的大括号，就是因为他们经过调查发现 Python 的缩进结构在构建小规模程序时的确很方便，但是当代码库变得更大的时候，缩进式的结构非常容易出错。从工程的安全性和可靠性角度考虑，Go 团队最终选择了大括号代码块结构。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">类似的面向工程的语音设计细节考量还包括：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">重新设计编译单元和目标文件格式，实现 Go 源码快速构建，让大工程的构建时间缩短到类似 Python 的交互式编译的编译速度；</li>
+<li style="font-size: 20px; line-height: 38px;">如果源文件导入它不使用的包，则程序将无法编译。这可以充分保证任何 Go 程序的依赖树是精确的。这也可以保证在构建程序时不会编译额外的代码，从而最大限度地缩短编译时间；</li>
+<li style="font-size: 20px; line-height: 38px;">去除包的循环依赖，循环依赖会在大规模的代码中引发问题，因为它们要求编译器同时处理更大的源文件集，这会减慢增量构建；</li>
+<li style="font-size: 20px; line-height: 38px;">在处理依赖关系时，有时会通过允许一部分重复代码来避免引入较多依赖关系。比如：net 包具有其自己的整数到十进制转换实现，以避免依赖于较大且依赖性较大的格式化 io 包；</li>
+<li style="font-size: 20px; line-height: 38px;">包路径是唯一的，而包名不必唯一的。导入路径必须唯一标识要导入的包，而名称只是包的使用者如何引用其内容的约定。包名称不必是唯一的约定大大降低了开发人员给包起唯一名字的心智负担；</li>
+<li style="font-size: 20px; line-height: 38px;">故意不支持默认函数参数。因为在规模工程中，很多开发者利用默认函数参数机制，向函数添加过多的参数以弥补函数 API 的设计缺陷，这会导致函数拥有太多的参数，降低清晰度和可读性；</li>
+<li style="font-size: 20px; line-height: 38px;">首字母大小写定义标识符可见性，这是 Go 的一个创新。它让开发人员通过名称即可知晓其可见性，而无需回到标识符定义的位置查找并确定其可见性，这提升了开发人员阅读代码的效率；</li>
+<li style="font-size: 20px; line-height: 38px;">在语义层面，相对于 C，Go 做了很多改动，提升了语言的健壮性，比如：去除指针算术、去除隐式的数字转型等；</li>
+<li style="font-size: 20px; line-height: 38px;">内置垃圾收集，这对于大型工程项目来说，大大降低了程序员在内存管理方面的负担，程序员使用 GC 感受到的好处超过了付出的成本，并且这些成本主要由语言实现者来承担；</li>
+<li style="font-size: 20px; line-height: 38px;">内置并发支持，为网络软件带来了简单性，简单又带来了健壮，这是大型工程软件开发所需要的；</li>
+<li style="font-size: 20px; line-height: 38px;">增加 type alias，支持大规模代码库的重构。</li>
+</ul>
+</div><div class="cl-preview-section"><h3 id="标准库">2) 标准库</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 被称为“内置电池（battery-included）”的编程语言。“内置电池”原指购买了电子设备后，在包装盒中包含了电池，电子设备可以开箱即用，无需再次出去购买电池。如果说一门编程语言是“自带电池”，则说明这门语言标准库功能丰富，多数功能无需依赖外部的第三方包或库，Go 语言恰是这类编程语言。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">由于诞生年代较晚，且目标较为明确，Go 在标准库中提供了各类高质量且性能优良的功能包，其中的 net/http、crypto/xx、encoding/xx 等包充分迎合了云原生时代的关于 API/RPC Web 服务的构建需求，Go 开发者可以直接基于标准库提供的这些包实现一个满足生产要求的 API 服务，从而减少对外部第三方包或库的依赖，降低工程代码依赖管理的复杂性，也降低了开发人员学习第三方库的心智负担。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">仅使用标准库来构建系统，这对于开发人员还是蛮有吸引力的。在很多关于选用何种 Go Web 开发框架的调查中，选择标准库的依然占大多数，这也是 Go 社区显著区别于其他编程语言社区的一点。Go 团队还在 <a href="http://golang.org/x">golang.org/x</a> 路径下面提供了暂未放入标准库的扩展库/补充库供广大 Gopher 使用，包括：text、net、crypto 等，这些库的质量也是非常高的，标准库中部分包也将 <a href="http://golang.org/x">golang.org/x</a> 下的 text、net 和 crypto 包作为依赖包 vendor 到 Go 标准库中。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 语言目前在 GUI、mobile 开发领域占有的份额较低，这很可能与 Go 标准库没有内置这类包不无关系。在 2016 年的 Gopher 用户调查中，Gopher 们最希望标准库增加的功能中，GUI 和 mobile 包就排名靠前。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="https://img1.sycdn.imooc.com/5f5ee8fc00018e3d08000249.png" data-original="//img1.sycdn.imooc.com/5f5ee8fc00018e3d08000249.png" alt="图片描述"></p>
+</div><div class="cl-preview-section"><center><font size="2">图1-5-1 Go语言2016年调查结果节选</font></center>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">这也或多或少从反向证明了“内置电池”对于工程领域问题解决的重要性。</p>
+</div><div class="cl-preview-section"><h3 id="工具">3) 工具</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">开发人员在工程过程中需要使用工具。而 Go 语言提供了这个星球上最全面、最贴心的编程语言官方工具链，涵盖了编译、编辑、依赖获取、调试、测试、文档、性能剖析等方方面面。</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">构建和运行：go build/go run</li>
+<li style="font-size: 20px; line-height: 38px;">依赖包查看与获取：go list/go get/go mod xx</li>
+<li style="font-size: 20px; line-height: 38px;">编辑辅助格式化：go fmt/gofmt</li>
+<li style="font-size: 20px; line-height: 38px;">文档查看：go doc/godoc</li>
+<li style="font-size: 20px; line-height: 38px;">单元测试/基准测试/测试覆盖率：go test</li>
+<li style="font-size: 20px; line-height: 38px;">代码静态分析：go vet</li>
+<li style="font-size: 20px; line-height: 38px;">性能剖析与跟踪结果查看：go tool pprof/go tool trace</li>
+<li style="font-size: 20px; line-height: 38px;">升级到新 Go 版本 API 的辅助工具：go tool fix</li>
+<li style="font-size: 20px; line-height: 38px;">报告 Go 语言 bug：go bug</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">值得重点提及的是 gofmt 统一了 Go 语言的编码风格，在其他语言开发者还在为代码风格争论不休的时候，Go 开发者可以更加专注于领域业务中。同时，相同的代码风格让以往困扰开发者的代码阅读、理解和评审工作变得容易了很多，至少 Go 开发者再也不会有那种因代码风格的不同而产生的陌生感。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在提供丰富的工具链的同时，Go 语言的语法、package 系统以及命名惯例的设计也让针对 Go 的工具更容易编写，并且 Go 在标准库中提供了官方的词法分析器、语法解析器和类型检查器相关 package，开发者可以基于这些包快速构建 Go 工具。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们可以说 Go 构建了一个开放的工具链生态系统，它鼓励社区和开发人员为 Go 添加更多、更实用的工具，而更多、更好的工具反过来又帮助 Go 更好地解决工程上的“规模化”问题，这是一个良性的生态循环。</p>
+</div>}
+                        </div>
+                    </div>
+                                            <!-- 买过的阅读 -->
+                        <div class="art-next-prev clearfix">
+                                                                                                <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/87/article/2340">
+                                                                    <div class="prev l clearfix">
+                                        <div class="icon l">
+                                            <i class="imv2-arrow3_l"></i>
+                                        </div>
+                                        <p>
+                                            04 Go语言的设计哲学之三：并发
+                                        </p>
+                                    </div>
+                                </a>
+                                                                                                                            <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/87/article/2342">
+                                                                    <div class="next r clearfix">
+                                        <p>
+                                            06 参考 Go 项目布局设计你的项目结构
+                                        </p>
+                                        <div class="icon r">
+                                            <i class="imv2-arrow3_r"></i>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                                    </div>
+                                    </div>
+                <div class="comments-con js-comments-con" id="coments_con">
+                </div>
+
+                
+            </div>
+            
+            
+            
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-jiaQun-new hide" id="modal-jiaQun">
+    <div class="inner" style="">
+        <div class="modal-close js-close-jiaQun">
+            <i class="imv2-close"></i>
+        </div>
+        <div class="content">
+            <img src="https://img1.sycdn.imooc.com/5f51ecec0001392b05330597.jpg">
+            <div class="right-info">
+                <div class="title">
+                    扫码加入慕课前沿技术核心用户群
+                </div>
+                <div class="desc">
+                                            <p class="mb6">验证信息：<span id="joincode">2010312025386365</span><span class="copy js-copy-joincode">复制</span></p>
+                                        <p class="mb6">QQ讨论群号：729941811</p>
+                                            <p>QQ群URL：<a href="https://jq.qq.com/?_wv=1027&amp;k=5WJLMxV" target="_blank">点击访问</a></p>
+                                    </div>
+            </div>
+            <p class="tip">若遇到搜索不到QQ群或加群失败，请联系客服邮箱:kf@imooc.com</p>
+        </div>
+    </div>
+</div>
+ 
+<!-- 专栏介绍页专栏评价 -->
+
+<!-- 专栏介绍页底部三条评价 -->
+
+<!-- 专栏阅读页弹层目录和介绍页页面目录 -->
+
+<!-- 专栏阅读页发布回复 -->
+
+<!-- 专栏阅读页发布评论 -->
+
+<!-- 专栏阅读页底部评论 -->
+
+<!-- 专栏阅读 单个 评论 -->
+
+<!-- 新增回复和展开三条以外回复 -->
+
+<!-- 立即订阅的弹窗 -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div></body></html>
