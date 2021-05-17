@@ -1,0 +1,219 @@
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PHP-SPL(数据结构) | Some</title><meta name="keywords" content="PHP,数据结构"><meta name="author" content="夏夏天,xiapeifu@gmail.com"><meta name="copyright" content="夏夏天"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="php SPL四种常用的数据结构1.栈【先进后出】  123456789&lt;span style&#x3D;&quot;font-size:18px;&quot;&gt;$stack &#x3D; new SplStack();$stack-&gt;push(&#39;data1&#39;);$stack-&gt;push(&#39;data2&#39;);$stack-&gt;push(&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP-SPL(数据结构)">
+<meta property="og:url" content="https://smartxia.github.io/blog/2020/06/23/PHP/PHP-SPL(%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84)/index.html">
+<meta property="og:site_name" content="Some">
+<meta property="og:description" content="php SPL四种常用的数据结构1.栈【先进后出】  123456789&lt;span style&#x3D;&quot;font-size:18px;&quot;&gt;$stack &#x3D; new SplStack();$stack-&gt;push(&#39;data1&#39;);$stack-&gt;push(&#39;data2&#39;);$stack-&gt;push(&amp;">
+<meta property="og:locale">
+<meta property="og:image" content="https://smartxia.github.io/blog/img/php.jpeg">
+<meta property="article:published_time" content="2020-06-23T10:04:39.000Z">
+<meta property="article:modified_time" content="2021-05-17T06:17:43.392Z">
+<meta property="article:author" content="夏夏天">
+<meta property="article:tag" content="PHP">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://smartxia.github.io/blog/img/php.jpeg"><link rel="shortcut icon" href="/blog/img/favicon.png"><link rel="canonical" href="https://smartxia.github.io/blog/2020/06/23/PHP/PHP-SPL(%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84)/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/blog/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/blog/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: 夏夏天","link":"Link: ","source":"Source: Some","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2021-05-17 14:17:43'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/blog/atom.xml" title="Some" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="http://s2-cdn.oneitfarm.com/e12ece12233b4059860acf48637d830a.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/blog/archives/"><div class="headline">Articles</div><div class="length-num">47</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/blog/tags/"><div class="headline">Tags</div><div class="length-num">44</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/blog/categories/"><div class="headline">Categories</div><div class="length-num">17</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/blog/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/blog/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="//tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/blog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/blog/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/blog/movies/"><i class="fa-fw fas fa-film"></i><span> Movie</span></a></li><li><a class="site-page child" href="/blog/photos/"><i class="fa-fw fas fa-picture"></i><span> Photo</span></a></li><li><a class="site-page child" href="/blog/games/"><i class="fa-fw fas fa-gamepad"></i><span> Game</span></a></li><li><a class="site-page child" href="/blog/books/"><i class="fa-fw fas fa-book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/blog/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/blog/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/blog/messageboard/"><i class="fa-fw fas fa-coffee"></i><span> Messageboard</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/blog/img/php.jpeg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/blog/">Some</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/blog/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/blog/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="//tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/blog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/blog/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/blog/movies/"><i class="fa-fw fas fa-film"></i><span> Movie</span></a></li><li><a class="site-page child" href="/blog/photos/"><i class="fa-fw fas fa-picture"></i><span> Photo</span></a></li><li><a class="site-page child" href="/blog/games/"><i class="fa-fw fas fa-gamepad"></i><span> Game</span></a></li><li><a class="site-page child" href="/blog/books/"><i class="fa-fw fas fa-book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/blog/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/blog/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/blog/messageboard/"><i class="fa-fw fas fa-coffee"></i><span> Messageboard</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">PHP-SPL(数据结构)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2020-06-23T10:04:39.000Z" title="Created 2020-06-23 18:04:39">2020-06-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2021-05-17T06:17:43.392Z" title="Updated 2021-05-17 14:17:43">2021-05-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/blog/categories/PHP/">PHP</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="PHP-SPL(数据结构)"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p>php SPL四种常用的数据结构<br>1.栈【先进后出】</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;span style&#x3D;&quot;font-size:18px;&quot;&gt;$stack &#x3D; new SplStack();</span><br><span class="line">$stack-&gt;push(&#39;data1&#39;);</span><br><span class="line">$stack-&gt;push(&#39;data2&#39;);</span><br><span class="line">$stack-&gt;push(&#39;data3&#39;);</span><br><span class="line">echo $stack-&gt;pop();</span><br><span class="line"> </span><br><span class="line">&#x2F;&#x2F;输出结果为</span><br><span class="line">&#x2F;&#x2F;data3&lt;&#x2F;span&gt;&lt;span style&#x3D;&quot;font-size:24px;font-weight: bold;&quot;&gt;</span><br><span class="line">&lt;&#x2F;span&gt;</span><br></pre></td></tr></table></figure>
+
+<p>2.队列【先进先出 后进后出】</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;span style&#x3D;&quot;font-size:18px;&quot;&gt;$queue &#x3D; new SplQueue();</span><br><span class="line">$queue-&gt;enqueue(&quot;data1&quot;);</span><br><span class="line">$queue-&gt;enqueue(&quot;data2&quot;);</span><br><span class="line">$queue-&gt;enqueue(&quot;data3&quot;);</span><br><span class="line">echo $queue-&gt;dequeue();</span><br><span class="line">&#x2F;&#x2F;输出结果为</span><br><span class="line">&#x2F;&#x2F;data1&lt;&#x2F;span&gt;</span><br></pre></td></tr></table></figure>
+<p>3.堆</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;span style&#x3D;&quot;font-size:18px;&quot;&gt;$heap &#x3D; new SplMinHeap();</span><br><span class="line">$heap-&gt;insert(&quot;data1&quot;);</span><br><span class="line">$heap-&gt;insert(&quot;data2&quot;);</span><br><span class="line">echo $heap-&gt;extract();</span><br><span class="line">&#x2F;&#x2F;输出结果为</span><br><span class="line">&#x2F;&#x2F;data1&lt;&#x2F;span&gt;</span><br></pre></td></tr></table></figure>
+
+<p>4.固定尺寸数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;span style&#x3D;&quot;font-size:18px;&quot;&gt;$array &#x3D; new SplFixedArray(5);</span><br><span class="line">$array[0]&#x3D;1;</span><br><span class="line">$array[3]&#x3D;3;</span><br><span class="line">$array[2]&#x3D;2;</span><br><span class="line">var_dump($array);</span><br><span class="line">&#x2F;&#x2F;输出结果为</span><br><span class="line">&#x2F;&#x2F; object(SplFixedArray)[1]</span><br><span class="line">&#x2F;&#x2F; public 0 &#x3D;&gt; int 1</span><br><span class="line">&#x2F;&#x2F; public 1 &#x3D;&gt; null</span><br><span class="line">&#x2F;&#x2F; public 2 &#x3D;&gt; int 2</span><br><span class="line">&#x2F;&#x2F; public 3 &#x3D;&gt; int 3</span><br></pre></td></tr></table></figure>
+<p>————————————————<br>推荐学习：<a target="_blank" rel="noopener" href="http://www.imooc.com/video/4849">http://www.imooc.com/video/4849</a><br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengwish/article/details/51742264">https://blog.csdn.net/zhengwish/article/details/51742264</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:xiapeifu@gmail.com">夏夏天</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://smartxia.github.io/blog/2020/06/23/PHP/PHP-SPL(%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84)/">https://smartxia.github.io/blog/2020/06/23/PHP/PHP-SPL(数据结构)/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/blog/tags/PHP/">PHP</a><a class="post-meta__tags" href="/blog/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></div><div class="post_share"><div class="social-share" data-image="/blog/img/php.jpeg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> Donate</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="http://s2-cdn.oneitfarm.com/ec13d36268ae41d7aaf87d5505324b6a.png" target="_blank"><img class="post-qr-code-img" data-lazy-src="http://s2-cdn.oneitfarm.com/ec13d36268ae41d7aaf87d5505324b6a.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="http://s2-cdn.oneitfarm.com/2eef3a681187495aa43ff8bbe1173c09.png" target="_blank"><img class="post-qr-code-img" data-lazy-src="http://s2-cdn.oneitfarm.com/2eef3a681187495aa43ff8bbe1173c09.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/blog/2020/06/29/GOLANG/GOLANG-%E7%AC%94%E8%AE%B02-ArrayMapSlice/"><img class="prev-cover" data-lazy-src="/blog/img/golang.jpeg" onerror="onerror=null;src='/blog/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">GOLANG-笔记-ArrayMapSlice</div></div></a></div><div class="next-post pull-right"><a href="/blog/2020/06/23/PHP/PHP-Use-%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/"><img class="next-cover" data-lazy-src="/blog/img/php.jpeg" onerror="onerror=null;src='/blog/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">PHP-use</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> Related Articles</span></div><div class="relatedPosts-list"><div><a href="/blog/2020/06/23/PHP/PHP-Use-使用场景/" title="PHP-use"><img class="cover" data-lazy-src="/blog/img/php.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-23</div><div class="title">PHP-use</div></div></a></div><div><a href="/blog/2020/06/22/PHP/PHP-异常类/" title="PHP-异常类"><img class="cover" data-lazy-src="/blog/img/php.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-22</div><div class="title">PHP-异常类</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="http://s2-cdn.oneitfarm.com/e12ece12233b4059860acf48637d830a.jpg" onerror="this.onerror=null;this.src='/blog/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">夏夏天</div><div class="author-info__description">以地事秦 犹抱薪救火 薪不尽 火不灭</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/blog/archives/"><div class="headline">Articles</div><div class="length-num">47</div></a></div><div class="card-info-data-item is-center"><a href="/blog/tags/"><div class="headline">Tags</div><div class="length-num">44</div></a></div><div class="card-info-data-item is-center"><a href="/blog/categories/"><div class="headline">Categories</div><div class="length-num">17</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/blog/atom.xml" target="_blank" title=""><i class="fa fa-rss"></i></a><a class="social-icon" href="https://github.com/smartXia" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:xiapeifu@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://gitee.com/xiapeifu" target="_blank" title="Gitee"><i class="iconfont gitee"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/blog/2021/05/17/GIT/cannot%20stat/" title="git 使用 connot stat"><img data-lazy-src="/blog/img/404.jpg" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="git 使用 connot stat"/></a><div class="content"><a class="title" href="/blog/2021/05/17/GIT/cannot%20stat/" title="git 使用 connot stat">git 使用 connot stat</a><time datetime="2021-05-17T06:12:35.000Z" title="Created 2021-05-17 14:12:35">2021-05-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2021/05/17/PHP/PHP-%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0-destruct/" title="PHP-析构函数-destruct"><img data-lazy-src="/blog/img/php.jpeg" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="PHP-析构函数-destruct"/></a><div class="content"><a class="title" href="/blog/2021/05/17/PHP/PHP-%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0-destruct/" title="PHP-析构函数-destruct">PHP-析构函数-destruct</a><time datetime="2021-05-17T06:04:51.777Z" title="Created 2021-05-17 14:04:51">2021-05-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2021/05/17/GOLANG/GOLANG-%E7%AC%94%E8%AE%B03-nil-slice-map/" title="GOLANG-笔记-ArrayMapSlice"><img data-lazy-src="/blog/img/golang.jpeg" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="GOLANG-笔记-ArrayMapSlice"/></a><div class="content"><a class="title" href="/blog/2021/05/17/GOLANG/GOLANG-%E7%AC%94%E8%AE%B03-nil-slice-map/" title="GOLANG-笔记-ArrayMapSlice">GOLANG-笔记-ArrayMapSlice</a><time datetime="2021-05-17T06:04:51.650Z" title="Created 2021-05-17 14:04:51">2021-05-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2021/05/14/GOLANG/GOLANG-%E6%94%B9%E5%96%84golang50%E4%B8%AA%E6%9C%89%E6%95%88%E5%AE%9E%E8%B7%B5/" title="GOLANG-改善golang50个有效实践"><img data-lazy-src="/blog/img/golang.jpeg" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="GOLANG-改善golang50个有效实践"/></a><div class="content"><a class="title" href="/blog/2021/05/14/GOLANG/GOLANG-%E6%94%B9%E5%96%84golang50%E4%B8%AA%E6%9C%89%E6%95%88%E5%AE%9E%E8%B7%B5/" title="GOLANG-改善golang50个有效实践">GOLANG-改善golang50个有效实践</a><time datetime="2021-05-14T05:24:11.000Z" title="Created 2021-05-14 13:24:11">2021-05-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2021/05/14/%E5%85%B6%E4%BB%96/%E5%85%B6%E4%BB%96-%E8%BD%AF%E4%BB%B6%E8%A1%8C%E4%B8%9A%E9%AB%98%E9%A2%91%E5%8D%95%E8%AF%8D/" title="其他-软件行业高频单词"><img data-lazy-src="/blog/img/%E5%85%B6%E4%BB%96.jfif" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="其他-软件行业高频单词"/></a><div class="content"><a class="title" href="/blog/2021/05/14/%E5%85%B6%E4%BB%96/%E5%85%B6%E4%BB%96-%E8%BD%AF%E4%BB%B6%E8%A1%8C%E4%B8%9A%E9%AB%98%E9%A2%91%E5%8D%95%E8%AF%8D/" title="其他-软件行业高频单词">其他-软件行业高频单词</a><time datetime="2021-05-14T02:20:48.000Z" title="Created 2021-05-14 10:20:48">2021-05-14</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 夏夏天</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">简</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/blog/js/utils.js"></script><script src="/blog/js/main.js"></script><script src="/blog/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/blog/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'b5KjzAk69Lg3yBaVPeEiuljv-gzGzoHsz',
+      appKey: 'Yb0PJ1jscpDdBIvDLO6MEYUy',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: true,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
