@@ -4,6 +4,50 @@
   
     
     <entry>
+      <title>PHP-析构函数-destruct</title>
+      <link href="/blog/2021/05/17/PHP-%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0-destruct/"/>
+      <url>/blog/2021/05/17/PHP-%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0-destruct/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><blockquote><p>phpStrom 里alt+insert 会出现的一些函数</p></blockquote><h3 id="析构函数destruct"><a href="#析构函数destruct" class="headerlink" title="析构函数destruct"></a>析构函数destruct</h3><p><img src= "/blog/img/loading.gif" data-lazy-src="http://s2-cdn.oneitfarm.com/d7f45961508248afb2f08e0bd137ca9c.png" alt="image.png"></p><p>简单理解：构造函数的对立面<br>构造函数：<strong>construct()在初始化对象的时候默认执行的<br>析构函数：</strong>destruct()在对象销毁回收时候默认执行的，类似于web框架里面的钩子函数</p><p>触发条件 当对象或者变量 消失时候</p><p>关键词：unset或者对象生命周期结束</p><p>phpStrom 里alt+insert 会出现的一些函数</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">calss A&#123;</span><br><span class="line">    </span><br><span class="line">protected $data &#x3D; [];</span><br><span class="line"></span><br><span class="line">public function insert($data)</span><br><span class="line">    &#123;</span><br><span class="line">        $data[&#39;appkey&#39;] &#x3D; getAppkey();</span><br><span class="line">        $data[&#39;channel&#39;] &#x3D; getChannel();</span><br><span class="line">        $this-&gt;data[] &#x3D; $data;</span><br><span class="line">        &#x2F;&#x2F;这个[]意思在多个多次调用的时候插入整个数组很关键，可以看下面内容 请求中 php 如何分配phpfpm</span><br><span class="line">    &#125;</span><br><span class="line"> public function __destruct()</span><br><span class="line">    &#123;</span><br><span class="line">        if ($this-&gt;data) &#123;</span><br><span class="line">            $this-&gt;getDB()-&gt;insert_batch($this-&gt;table, $this-&gt;data);</span><br><span class="line">            $id &#x3D; $this-&gt;getDB()-&gt;insert_id();</span><br><span class="line">            Ioc()-&gt;CallRecordModel-&gt;_delete([</span><br><span class="line">                &#39;id &lt;&#39; &#x3D;&gt; $id - 50000</span><br><span class="line">            ], &#39;&#39;, 1000);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$zend&#x3D;new A();</span><br><span class="line">$zend-&gt;insert([&quot;aaaaa&quot;]);</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> php </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>GOLANG-笔记-ArrayMapSlice</title>
+      <link href="/blog/2021/05/17/GOLANG-%E7%AC%94%E8%AE%B03-nil-slice-map/"/>
+      <url>/blog/2021/05/17/GOLANG-%E7%AC%94%E8%AE%B03-nil-slice-map/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">### 1. :&#x3D; &#x3D; &#x3D;&#x3D;</span><br><span class="line"></span><br><span class="line">:&#x3D; 给某变量的第一次赋值，初始化</span><br><span class="line"></span><br><span class="line">&#x3D; 变量的非第一次赋值</span><br><span class="line"></span><br><span class="line">&#x3D;&#x3D; 等于操作符</span><br><span class="line"></span><br><span class="line">### 2. go中nil的使用</span><br><span class="line"></span><br><span class="line">指针、切片、映射、通道、函数和接口的零值则是 nil。</span><br><span class="line"></span><br><span class="line">- nil 标识符是不能比较的</span><br><span class="line">- nil 不是关键字或保留字</span><br><span class="line">- nil 没有默认类型</span><br><span class="line">- 不同类型 nil 的指针是一样的</span><br><span class="line">- 不同类型的 nil 是不能比较的</span><br><span class="line">- 两个相同类型的 nil 值也可能无法比较</span><br><span class="line">- nil 是 map、slice、pointer、channel、func、interface 的零值</span><br><span class="line">- 不同类型的 nil 值占用的内存大小可能是不一样的</span><br><span class="line"></span><br><span class="line">### 3.切片 slice</span><br><span class="line"></span><br><span class="line">类似于py或Java的list ,是数组的抽象,支持数组扩容 定义:</span><br><span class="line">slice1 :&#x3D; make([]type, len)</span><br><span class="line"></span><br><span class="line">len 获取长度 cap 获取容量 append(slice1 ,v1,...) copy(new_slice,slice1)</span><br><span class="line"></span><br><span class="line">### 4.集合 map</span><br><span class="line"></span><br><span class="line">map 无序k-v ,快速根据k 找到v,类似于索引,在做循环打印的时候，无法固定返回顺序，因为map 用hash表来实现的</span><br><span class="line"></span><br><span class="line">- 声明变量，默认 map 是 nil var map_val map[key_data_type]value_data_type</span><br><span class="line"></span><br><span class="line">- 使用 make 函数 map_val :&#x3D; make(map[key_data_type]value_data_type)</span><br><span class="line"></span><br><span class="line">### 并发</span><br><span class="line">goroutine </span><br><span class="line">go sync()</span><br><span class="line">### 通道 channel</span><br><span class="line">既然已经有了线程的概念，那么就会存在线程间的同步和通讯问题，Go 使用通道（channel）来实现。</span><br><span class="line"></span><br><span class="line">通道可用于两个 goroutine 之间通过传递一个指定类型的值来同步运行和通讯。使用操作符 &lt;-，符号左边是接收者，右边是发送者。</span><br><span class="line"></span><br><span class="line">使用 make 创建 channel，如下：</span><br><span class="line"></span><br><span class="line">​&#96;&#96;&#96;</span><br><span class="line">ch :&#x3D; make(chan int, 100) &#x2F;&#x2F; make 第二个参数 100 是该通道的缓冲区，是一个可选参数，如果不指定，那么就是无缓冲的通道</span><br><span class="line">ch &lt;- v    &#x2F;&#x2F; 把 v 发送到通道 ch</span><br><span class="line">v :&#x3D; &lt;-ch  &#x2F;&#x2F; 从 ch 接收数据</span><br><span class="line">&#x2F;&#x2F; 并把值赋给 v</span><br><span class="line">​&#96;&#96;&#96;</span><br><span class="line">通道与消息队列是等效的，如果通道缓冲区满，那么再往通道里塞数据，就会阻塞该 goroutine；同样，如果通道缓冲区没有数据了，再次接收通道数据，也会阻塞该 goroutine。</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> golang </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Slice </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>GOLANG-改善golang50个有效实践</title>
       <link href="/blog/2021/05/14/GOLANG-%E6%94%B9%E5%96%84golang50%E4%B8%AA%E6%9C%89%E6%95%88%E5%AE%9E%E8%B7%B5/"/>
       <url>/blog/2021/05/14/GOLANG-%E6%94%B9%E5%96%84golang50%E4%B8%AA%E6%9C%89%E6%95%88%E5%AE%9E%E8%B7%B5/</url>
@@ -91,25 +135,6 @@
     
     
     <entry>
-      <title>PHP-析构函数-destruct</title>
-      <link href="/blog/2021/05/10/PHP-%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0-destruct/"/>
-      <url>/blog/2021/05/10/PHP-%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0-destruct/</url>
-      
-        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><blockquote><p>phpStrom 里alt+insert 会出现的一些函数</p></blockquote><h3 id="析构函数destruct"><a href="#析构函数destruct" class="headerlink" title="析构函数destruct"></a>析构函数destruct</h3><p><img src= "/blog/img/loading.gif" data-lazy-src="http://s2-cdn.oneitfarm.com/d7f45961508248afb2f08e0bd137ca9c.png" alt="image.png"></p><p>简单理解：构造函数的对立面<br>构造函数：<strong>construct()在初始化对象的时候默认执行的<br>析构函数：</strong>destruct()在对象销毁回收时候默认执行的，类似于web框架里面的钩子函数</p><p>触发条件 当对象或者变量 消失时候</p><p>关键词：unset或者对象生命周期结束</p><p>phpStrom 里alt+insert 会出现的一些函数</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">calss A&#123;</span><br><span class="line">    </span><br><span class="line">protected $data &#x3D; [];</span><br><span class="line"></span><br><span class="line">public function insert($data)</span><br><span class="line">    &#123;</span><br><span class="line">        $data[&#39;appkey&#39;] &#x3D; getAppkey();</span><br><span class="line">        $data[&#39;channel&#39;] &#x3D; getChannel();</span><br><span class="line">        $this-&gt;data[] &#x3D; $data;</span><br><span class="line">        &#x2F;&#x2F;这个[]意思在多个多次调用的时候插入整个数组很关键，可以看下面内容 请求中 php 如何分配phpfpm</span><br><span class="line">    &#125;</span><br><span class="line"> public function __destruct()</span><br><span class="line">    &#123;</span><br><span class="line">        if ($this-&gt;data) &#123;</span><br><span class="line">            $this-&gt;getDB()-&gt;insert_batch($this-&gt;table, $this-&gt;data);</span><br><span class="line">            $id &#x3D; $this-&gt;getDB()-&gt;insert_id();</span><br><span class="line">            Ioc()-&gt;CallRecordModel-&gt;_delete([</span><br><span class="line">                &#39;id &lt;&#39; &#x3D;&gt; $id - 50000</span><br><span class="line">            ], &#39;&#39;, 1000);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$zend&#x3D;new A();</span><br><span class="line">$zend-&gt;insert([&quot;aaaaa&quot;]);</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> php </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>GOLANG-笔记5-gin开发规范</title>
       <link href="/blog/2021/04/29/GOLANG-%E7%AC%94%E8%AE%B05-gin%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/"/>
       <url>/blog/2021/04/29/GOLANG-%E7%AC%94%E8%AE%B05-gin%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/</url>
@@ -181,31 +206,6 @@
         <tags>
             
             <tag> diary </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>GOLANG-笔记-ArrayMapSlice</title>
-      <link href="/blog/2021/04/29/GOLANG-%E7%AC%94%E8%AE%B03-nil-slice-map/"/>
-      <url>/blog/2021/04/29/GOLANG-%E7%AC%94%E8%AE%B03-nil-slice-map/</url>
-      
-        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">### 1. :&#x3D; &#x3D; &#x3D;&#x3D;</span><br><span class="line"></span><br><span class="line">:&#x3D; 给某变量的第一次赋值，初始化</span><br><span class="line"></span><br><span class="line">&#x3D; 变量的非第一次赋值</span><br><span class="line"></span><br><span class="line">&#x3D;&#x3D; 等于操作符</span><br><span class="line"></span><br><span class="line">### 2. go中nil的使用</span><br><span class="line"></span><br><span class="line">指针、切片、映射、通道、函数和接口的零值则是 nil。</span><br><span class="line"></span><br><span class="line">- nil 标识符是不能比较的</span><br><span class="line">- nil 不是关键字或保留字</span><br><span class="line">- nil 没有默认类型</span><br><span class="line">- 不同类型 nil 的指针是一样的</span><br><span class="line">- 不同类型的 nil 是不能比较的</span><br><span class="line">- 两个相同类型的 nil 值也可能无法比较</span><br><span class="line">- nil 是 map、slice、pointer、channel、func、interface 的零值</span><br><span class="line">- 不同类型的 nil 值占用的内存大小可能是不一样的</span><br><span class="line"></span><br><span class="line">### 3.切片 slice</span><br><span class="line"></span><br><span class="line">类似于py或Java的list ,是数组的抽象,支持数组扩容 定义:</span><br><span class="line">slice1 :&#x3D; make([]type, len)</span><br><span class="line"></span><br><span class="line">len 获取长度 cap 获取容量 append(slice1 ,v1,...) copy(new_slice,slice1)</span><br><span class="line"></span><br><span class="line">### 4.集合 map</span><br><span class="line"></span><br><span class="line">map 无序k-v ,快速根据k 找到v,类似于索引,在做循环打印的时候，无法固定返回顺序，因为map 用hash表来实现的</span><br><span class="line"></span><br><span class="line">- 声明变量，默认 map 是 nil var map_val map[key_data_type]value_data_type</span><br><span class="line"></span><br><span class="line">- 使用 make 函数 map_val :&#x3D; make(map[key_data_type]value_data_type)</span><br><span class="line"></span><br><span class="line">### 并发</span><br><span class="line">goroutine </span><br><span class="line">go sync()</span><br><span class="line">### 通道 channel</span><br><span class="line">既然已经有了线程的概念，那么就会存在线程间的同步和通讯问题，Go 使用通道（channel）来实现。</span><br><span class="line"></span><br><span class="line">通道可用于两个 goroutine 之间通过传递一个指定类型的值来同步运行和通讯。使用操作符 &lt;-，符号左边是接收者，右边是发送者。</span><br><span class="line"></span><br><span class="line">使用 make 创建 channel，如下：</span><br><span class="line"></span><br><span class="line">​&#96;&#96;&#96;</span><br><span class="line">ch :&#x3D; make(chan int, 100) &#x2F;&#x2F; make 第二个参数 100 是该通道的缓冲区，是一个可选参数，如果不指定，那么就是无缓冲的通道</span><br><span class="line">ch &lt;- v    &#x2F;&#x2F; 把 v 发送到通道 ch</span><br><span class="line">v :&#x3D; &lt;-ch  &#x2F;&#x2F; 从 ch 接收数据</span><br><span class="line">&#x2F;&#x2F; 并把值赋给 v</span><br><span class="line">​&#96;&#96;&#96;</span><br><span class="line">通道与消息队列是等效的，如果通道缓冲区满，那么再往通道里塞数据，就会阻塞该 goroutine；同样，如果通道缓冲区没有数据了，再次接收通道数据，也会阻塞该 goroutine。</span><br></pre></td></tr></table></figure>]]></content>
-      
-      
-      <categories>
-          
-          <category> golang </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Slice </tag>
             
         </tags>
       
