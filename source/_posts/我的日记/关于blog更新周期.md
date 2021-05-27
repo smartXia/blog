@@ -5,7 +5,7 @@ tags:
 categories:
   - diary
 cover: img/day.jpg
-sticky: 100
+sticky: 1
 ---
 
 
