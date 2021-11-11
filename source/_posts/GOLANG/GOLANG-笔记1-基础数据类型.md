@@ -21,4 +21,50 @@ The Uint keyword signifies an integral type that stores calues according to the 
 > 关键字表示一种整型类型，该类型根据下表显示的大小和范围存储值。
 ————————————————
 
+### golang数据类型：
+
+#### 布尔类型 
+
+true false
+
+#### 数字类型 整形 浮点型
+
+**整形：**
+
+无符号：uint 8、uint 16、uint 32、uint 64、长度（0~2次方-1）
+
+有符号：int 8、int 16、int 32、int 64、长度:例如int 8（负的2^7~2^7-1）
+
+有无符号：没有符号位的数字只**能有0和正值**,有符号位的数字可以有**正零,负零和正数负数**.
+
+**浮点型：**float（32单精度） float（64双精度）
+
+| 序号 | 类型和描述                        |
+| :--- | :-------------------------------- |
+| 1    | **float32** IEEE-754 32位浮点型数 |
+| 2    | **float64** IEEE-754 64位浮点型数 |
+| 3    | **complex64** 32 位实数和虚数     |
+| 4    | **complex128** 64 位实数和虚数    |
+
+#### 字符串类型
+
+
+
+#### 派生类型
+
+**派生类型:**
+
+- (a) 指针类型（Pointer）
+- (b) 数组类型
+- (c) 结构化类型(struct)
+- (d) Channel 类型
+- (e) 函数类型
+- (f) 切片类型
+- (g) 接口类型（interface）
+- (h) Map 类型
+
+------
+
+虚数：https://www.ruanyifeng.com/blog/2012/09/imaginary_number.html
+
 原文链接：https://blog.csdn.net/janny_flower/article/details/81082424
