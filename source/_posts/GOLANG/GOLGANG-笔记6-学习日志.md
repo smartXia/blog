@@ -1,7 +1,7 @@
 ---
 title: GOLGANG-笔记6-学习日志位运算符
 categories:
-  - golang
+  - GOLANG
 date: 2021-08-27 09:55:06
 tags: 
 cover: /img/golang.jpeg

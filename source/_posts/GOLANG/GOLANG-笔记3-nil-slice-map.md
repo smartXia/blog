@@ -4,7 +4,7 @@ title: GOLANG-笔记-ArrayMapSlice
 date: 2021年4月26日
 cover: /img/golang.jpeg
 categories:
-  - golang
+  - GOLANG
 tags: 
   - Slice
 keywords: Array Map Slice

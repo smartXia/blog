@@ -9,7 +9,7 @@ tags:
   - module
 cover: /img/golang.jpeg
 categories:
-  - golang
+  - GOLANG
 ---
 
 ## zap

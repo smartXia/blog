@@ -7,7 +7,7 @@ tags:
   - gin
 cover: /img/golang.jpeg
 categories:
-  - golang
+  - GOLANG
 ---
 ## Go语言Web框架基线版本
 

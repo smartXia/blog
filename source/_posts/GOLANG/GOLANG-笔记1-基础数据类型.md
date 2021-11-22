@@ -4,7 +4,7 @@ date: 2020-06-09 17:36:01
 tags:
 cover: /img/golang.jpeg
 categories:
-  - golang
+  - GOLANG
 ---
 ### int  和 uint
 uint类型长度取决于 CPU，如果是32位CPU就是4个字节，如果是64位就是8个字节。我的电脑是64位的，而 playground 是32位的

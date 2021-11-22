@@ -2,8 +2,8 @@
 title: golang调度-channel
 cover: /img/golang.jpeg
 categories:
-  - golang
-date: 2021-11-15 18:56:27
+  - GOLANG
+date: 2021-1-10 18:56:27
 tags: 
   - golang
 ---

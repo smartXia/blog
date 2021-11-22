@@ -7,7 +7,7 @@ tags:
   - 推荐
 cover: /img/golang.jpeg
 categories:
-  - golang
+  - GOLANG
 ---
  > 闲逛好久go论坛，找到一本适合看的教程，花了点时间将这个文章搬运过来，自己慢慢研读
 #### 1 [语言的前生今世](https://smartxia.github.io/blog/book/01Go语言的前生今世慕课专栏.html) 
