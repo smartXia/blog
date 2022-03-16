@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://smartxia.github.io/blog/"/>
-  <updated>2021-11-18T06:09:17.557Z</updated>
+  <updated>2022-03-16T07:20:04.925Z</updated>
   <id>https://smartxia.github.io/blog/</id>
   
   <author>
@@ -17,11 +17,127 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>darp Docs</title>
+    <link href="https://smartxia.github.io/blog/2022/03/16/darp-Docs/"/>
+    <id>https://smartxia.github.io/blog/2022/03/16/darp-Docs/</id>
+    <published>2022-03-16T06:59:18.000Z</published>
+    <updated>2022-03-16T07:20:04.925Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><p>dapr 文档贡献<br>dapr 文档贡献规则：<a href="https://docs.dapr.io/zh-hans/contributing/contributing-docs/">https://docs.dapr.io/zh-hans/contributing/contributing-docs/</a></p><p>dapr 文档网站使用hugo 开发工具：</p><p>Windows：安装流程<br>安装scoope<br>powerSheel ：执行命令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">set-executionpolicy remotesigned -scope currentuser</span><br><span class="line"></span><br><span class="line">iex (new-object net.webclient).downloadstring(&#39;https:&#x2F;&#x2F;get.scoop.sh&#39;)</span><br><span class="line"></span><br><span class="line">执行scoope help 查看是否安装正常</span><br><span class="line"></span><br><span class="line">执行   scoop install hugo</span><br><span class="line">      scoop install hugo-extended</span><br><span class="line">这两部即可 完成对其安装</span><br><span class="line"></span><br><span class="line">文档：https:&#x2F;&#x2F;gohugo.io&#x2F;getting-started&#x2F;installing&#x2F;</span><br><span class="line"></span><br></pre></td></tr></table></figure><h3><span id="1执行doc仓库下载和安装依赖">1.执行doc仓库下载和安装依赖</span></h3><p>仓库：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;github.com.cnpmjs.org&#x2F;dapr&#x2F;docs.git</span><br><span class="line"></span><br><span class="line">执行：</span><br><span class="line">git submodule update --init --recursive</span><br><span class="line"></span><br><span class="line">这步可能遇到下载不下来情况，可以按照此步骤进行操作</span><br><span class="line"></span><br><span class="line">1.执行 git submodule update --init</span><br><span class="line">2.去.gitmodules文件 进行编辑将所有的https:&#x2F;&#x2F;github.com  后缀加上 cnpmjs.org</span><br><span class="line">(这个原理可以参考:谷歌插件---GitHub加速1.3.5)</span><br><span class="line">3.然后利用git submodule sync更新子项目对应的url</span><br><span class="line">4.git submodule update --init --recursive，最后执行</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;s2-cdn.oneitfarm.com&#x2F;6d3518411d074f9eae604f77da39da83.png</span><br></pre></td></tr></table></figure><p><img src="//s2-cdn.oneitfarm.com/a23f2220daff4375ba97522c7edc552c.png" alt></p><p>错误1.</p><p><img src="//s2-cdn.oneitfarm.com/c036d24abc364f00be0870faec874818.png" alt="image-20220316151455745"></p><p>解决方案：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">使用git代理：</span><br><span class="line">git config *--global https.proxy*</span><br><span class="line">执行命令后取消代理</span><br><span class="line">git config --global --unset https.proxy</span><br></pre></td></tr></table></figure><p>错误2：</p><p><img src="//s2-cdn.oneitfarm.com/b933985e39524c7ea6763610f552ecd7.png" alt="//s2-cdn.oneitfarm.com/b933985e39524c7ea6763610f552ecd7.png"></p><p>解决方案：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这个是因为没有执行git module的 下载</span><br></pre></td></tr></table></figure><h3><span id="2安装依赖">2.安装依赖</span></h3><p>此项目使用的还是npm </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
+      
+    
+    </summary>
+    
+    
+      <category term="dapr" scheme="https://smartxia.github.io/blog/categories/dapr/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>GOLANG-grpc-2</title>
+    <link href="https://smartxia.github.io/blog/2021/12/09/GOLANG/GOLANG-grpc-2/"/>
+    <id>https://smartxia.github.io/blog/2021/12/09/GOLANG/GOLANG-grpc-2/</id>
+    <published>2021-12-09T07:05:54.000Z</published>
+    <updated>2021-12-09T07:11:34.656Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><p>脑图：</p><p><a href="https://naotu.baidu.com/file/c80e753e20e8ab18a80cb573ac08e912?token=e89e127e95b325d5">https://naotu.baidu.com/file/c80e753e20e8ab18a80cb573ac08e912?token=e89e127e95b325d5</a></p><p>服务端的操作：</p><p>取出server</p><p>挂载方法</p><p>注册服务</p><p>创建监听</p><p>客户端：</p><p>创建链接</p><p>new 一个client</p><p>调用client方法</p><p>获取返回值</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>x86和arm架构区别</title>
+    <link href="https://smartxia.github.io/blog/2021/12/02/%E5%BB%BA%E7%AB%99/x86%E5%92%8Carm%E6%9E%B6%E6%9E%84%E5%8C%BA%E5%88%AB/"/>
+    <id>https://smartxia.github.io/blog/2021/12/02/%E5%BB%BA%E7%AB%99/x86%E5%92%8Carm%E6%9E%B6%E6%9E%84%E5%8C%BA%E5%88%AB/</id>
+    <published>2021-12-02T08:22:44.000Z</published>
+    <updated>2021-12-09T07:04:57.353Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><h3><span id="什么是arm架构">什么是arm架构</span></h3><p>ARM架构过去称之为进阶精简指令集机器，是一个32位的精简指令集（RISC）处理器架构，其广泛的使用在嵌入式系统设计，由于节能的特点，ARM非常适合处理移动通讯领域，符合其设计目标低消耗 电量的特性，在今日，ARM家族占了所有32位嵌入式处理器75%的比例，使它成为占全世界最多数的32位架构之一。ARM处理器可以在很多消费性电子产品上看到，从可携式装置（PDA、移动电话、多媒体播放器、掌上型电子游戏，和计算机）到电脑外设（硬盘、桌上型路由器）甚至在导弹的弹载计算机等军用设施中都有他的存在。在此还有一些基于ARM设计的派生产品，重要产品还包括Marvell的XScale架构和德州仪器的OMAP系列.</p><p>arm架构图</p><p>下图所示的是ARM构架图。它由32位ALU、若干个32位通用寄存器以及状态寄存器、32&TImes;8位乘法器、32&TImes;32位桶形移位寄存器、指令译码以及控制逻辑、指令流水线和数据/地址寄存器组成.</p><p><img src="http://file.elecfans.com/web1/M00/50/D9/o4YBAFr7zl2AGVr8AABPkxqzXZA667.jpg" alt></p><p>1、ALU：它有两个操作数锁存器、加法器、逻辑功能、结果以及零检测逻辑构成。</p><p>2、桶形移位寄存器：ARM采用了32&TImes;32位的桶形移位寄存器，这样可以使在左移/右移n位、环移n位和算术右移n位等都可以一次完成。</p><p>3、高速乘法器：乘法器一般采用“加一移位”的方法来实现乘法。ARM为了提高运算速度，则采用两位乘法的方法，根据乘数的2位来实现“加一移位”运算;ARM高速乘法器采用32&TImes;8位的结构，这样，可以降低集成度（其相应芯片面积不到并行乘法器的1/3）。</p><p>4、浮点部件：浮点部件是作为选件供ARM构架使用。FPA10浮点加速器是作为协处理方式与ARM相连，并通过协处理指令的解释来执行。</p><p>5、控制器：ARM的控制器采用的是硬接线的可编程逻辑阵列PLA。</p><p>6、寄存器</p><h2><span id="x86架构"><strong>x86架构</strong></span></h2><p><img src="http://file.elecfans.com/web1/M00/50/ED/pIYBAFr7zpSASlXUAABbDZ2xUGo091.jpg" alt></p><p>当然，这个架构图并不是所有的都是如此，根据不同的主板，平台，架构是略有差别的比如说，目前很多主板已经将北桥集成到CPU当中，将南桥集成为PCH，但大致的框架还是如此的。下面对这个架构图上的各个内容分别进行一些简介:</p><p>   1：CPU，大家都不陌生的名词，中央处理器，计算机的核心大脑。</p><p>　2： 北桥（North Bridge Chipset）：北桥是电脑主板上的一块芯片，位于CPU插座边，起连接作用。</p><p>　3：南桥芯片（South Bridge）是主板芯片组的重要组成部分，一般位于主板上离CPU插槽较远的下方，PCI插槽的附近，这种布局是考虑到它所连接的I/O总线较多，离处理器远一点有利于布线。</p><p>　4： 内存是计算机中重要的部件之一，它是与CPU进行沟通的桥梁。计算机中所有程序的运行都是在内存中进行的，因此内存的性能对计算机的影响非常大。</p><p>　5：显卡（Video card，Graphics card）全称显示接口卡，又称显示适配器，是计算机最基本配置、最重要的配件之一。</p><p>　6：显示j接口</p><p>　7：网卡是工作在链路层的网络组件，是局域网中连接计算机和传输介质的接口，不仅能实现与局域网传输介质之间的物理连接和电信号匹配，还涉及帧的发送与接收、帧的封装与拆封、介质访问控制、数据的编码与解码以及数据缓存的功能等。</p><p>　8：声卡的基本功能是把来自话筒、磁带、光盘的原始声音信号加以转换，输出到耳机、扬声器、扩音机、录音机等声响设备，或通过音乐设备数字接口（MIDI）使乐器发出美妙的声音。</p><p>　9：SATA（Serial Advanced Technology Attachment，串行高级技术附件）是一种基于行业标准的串行硬件驱动器接口，是由Intel、IBM、Dell、APT、Maxtor和Seagate公司共同提出的硬盘接口规范。</p><p>　10：硬盘是电脑主要的存储媒介之一，由一个或者多个铝制或者玻璃制的碟片组成。碟片外覆盖有铁磁性材料。</p><p>　11：总线</p><h2><span id="arm架构和x86架构有什么区别"><strong>arm架构和x86架构有什么区别</strong></span></h2><p><strong>一、性能</strong> </p><p>​    X86结构的电脑无论如何都比ARM结构的系统在性能方面要快得多、强得多。X86的CPU随便就是1G以上、双核、四核大行其道，通常使用45nm（甚至更高级）制程的工艺进行生产；而ARM方面：CPU通常是几百兆，最近才出现1G左右的CPU，制程通常使用不到65nm制程的工艺，可以说在性能和生产工艺方面ARM根本不是X86结构系统的对手。</p><p>　　但ARM的优势不在于性能强大而在于效率，ARM采用RISC流水线指令集，在完成综合性工作方面根本就处于劣势，而在一些任务相对固定的应用场合其优势就能发挥得淋漓尽致.</p><p><strong>二、扩展能力</strong></p><p>​    X86结构的电脑采用“桥”的方式与扩展设备（如：硬盘、内存等）进行连接，而且x86结构的电脑出现了近30年，其配套扩展的设备种类多、价格也比较便宜，所以x86结构的电脑能很容易进行性能扩展，如增加内存、硬盘等.</p><p>　　ARM结构的电脑是通过专用的数据接口使CPU与数据存储设备进行连接，所以ARM的存储、内存等性能扩展难以进行（一般在产品设计时已经定好其内存及数据存储的容量），所以采用ARM结构的系统，一般不考虑扩展。基本奉行“够用就好”的原则.</p><p> <strong>三、操作系统的兼容性</strong></p><p>​    X86系统由微软及Intel构建的Wintel联盟一统天下，垄断了个人电脑操作系统近30年，形成巨大的用户群，也深深固化了众多用户的使用习惯，同时x86系统在硬件和软件开发方面已经形成统一的标准，几乎所有x86硬件平台都可以直接使用微软的视窗系统及现在流行的几乎所有工具软件，所以x86系统在兼容性方面具有无可比拟的优势。</p><p>　　ARM系统几乎都采用<strong>Linux</strong>的操作系统，而且几乎所有的硬件系统都要单独构建自己的系统，与其他系统不能兼容，这也导致其应用软件不能方便移植，这一点一直严重制约了ARM系统的发展和应用。GOOGLE开发了开放式的<strong>Android</strong>系统后，统一了ARM结构电脑的操作系统，使新推出基于ARM结构的电脑系统有了统一的、开放式的、免费的操作系统，为ARM的发展提供了强大的支持和动力.</p><p><strong>四、软件开发的方便性及可使用工具的多样性</strong></p><p>​    X86结构的系统推出已经近30年，在此期间，x86电脑经过飞速发展的黄金时期，用户的应用、软件配套、软件开发工具的配套及兼容等工作，已经到达非常成熟甚至可以说是完美的境界。所以使用X86电脑系统不仅有大量的第三方软件可供选择，也有大量的软件编程工具可以帮助您完成您所希望完成的工作。</p><p>　　Arm结构的电脑系统因为硬件性能的制约、操作系统的精简、以及系统兼容等问题的制约，造成Arm结构的电脑系统不可能像X86电脑系统那样有众多的编程工具和第三方软件可供选择及使用，ARM的编程语言大多采用C和JAVA。</p><p>　　对这一点的比较，更直接的结论是：基于x86结构电脑系统平台开发软件比arm结构系统更容易、更简单、实际成本也更低，同时更容易找到第三方软件（免去自己开发的时间和成本），而且软件移植更容易。</p><p>　　从以上对比分析，给了我们的一个很清晰的感觉，ARM和X86结构的电脑根本就无法对比，ARM根本就不是X86电脑的的对手。是的，如果只考虑上述几个方面的要数，ARM确实无法与X86电脑竞争，甚至连比较的资格都没有。但是近1、2年，ARM的产品在终端应用特别是手持终端应用飞速发展（如：智能手机、平板电脑等），其销售数量已经远远超出x86结构的电脑销售数量，可见ARM是具有其与X86结构电脑不可对比的优势。该优势就是：<strong>功耗.</strong></p><p><strong>五、功耗</strong> </p><p>X86电脑因考虑要适应各种应用的需求，其发展思路是：性能+速度。20多年来x86电脑的速度从原来8088的几M发展到现在随便就是几G，而且还是几核，其速度和性能已经提升了千、万倍，技术进步使x86电脑成为大众生活中不可缺少的一部分。但是x86电脑发展的方向和模式，使其功耗一直居高不下，一台电脑随便就是几百瓦，即使是号称低功耗节能的手提电脑或上网本，也有十几、二十多瓦的功耗，这与ARM结构的电脑就无法相比.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>HTTP 请求方法之CONNECT method</title>
+    <link href="https://smartxia.github.io/blog/2021/11/25/HTTP/HTTP-%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95%E4%B9%8BCONNECT-method/"/>
+    <id>https://smartxia.github.io/blog/2021/11/25/HTTP/HTTP-%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95%E4%B9%8BCONNECT-method/</id>
+    <published>2021-11-25T01:36:06.000Z</published>
+    <updated>2021-12-02T08:21:37.983Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><blockquote><p>HTTP1.1 中的connect<br>1.http请求代理就是connect这个方法，connect网页开发中不会使用<br>2.connect的作用将服务器作为代理，让服务器提用户访问其他网页（翻墙），之后将数据返回用户<br>3.connect是将通过TCP代理链接服务器的，假如我想让代理服务器访问，<a href="https://baidu.com网站，首先要简历一条客户端到代理服务器的tcp的链接">https://baidu.com网站，首先要简历一条客户端到代理服务器的tcp的链接</a><br>然后给代理服务器发送一个http报文</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CONNECT https:&#x2F;&#x2F;www.jianshu.com&#x2F;u&#x2F;f67233ce6c0c:80 HTTP&#x2F;1.1</span><br><span class="line">Host: www.web-tinker.com:80</span><br><span class="line">Proxy-Connection: Keep-Alive</span><br><span class="line">Proxy-Authorization: Basic *</span><br><span class="line">Content-Length: 0</span><br></pre></td></tr></table></figure><p>在发送完这个请求之后，代理服务器会响应请求，返回一个200的信息，但这个200并不同于我们平时见到的OK，而是Connection Established</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
+      
+    
+    </summary>
+    
+    
+      <category term="HTTP" scheme="https://smartxia.github.io/blog/categories/HTTP/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>弱势文化</title>
+    <link href="https://smartxia.github.io/blog/2021/11/22/%E6%88%91%E7%9A%84%E6%97%A5%E8%AE%B0/%E5%BC%B1%E5%8A%BF%E6%96%87%E5%8C%96/"/>
+    <id>https://smartxia.github.io/blog/2021/11/22/%E6%88%91%E7%9A%84%E6%97%A5%E8%AE%B0/%E5%BC%B1%E5%8A%BF%E6%96%87%E5%8C%96/</id>
+    <published>2021-11-22T05:37:08.000Z</published>
+    <updated>2021-11-22T06:38:09.164Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><p><img src="https://pic1.zhimg.com/v2-bb213c477bc9d02350862acc72395838_720w.jpg?source=3af55fa1" alt="preview"></p><p>知识的快餐：我们为什么要懂点哲学<br>什么是哲学，哲学可不可以理解成为人的认知的差异，哲学里的文化属性到底代表着什么</p><blockquote><p>闲暇产生思辨，思辨消解教条主义和陈腐习俗，发展出敏锐的感知，让人丧失行动的决断。</p><p>思想，在分析迷宫冒险前行，发现社会背后的个体，玻璃其正常的社会功能，转向内在，发现自我</p><p>共同的利益，和共同体的意识衰退，如今没有公民只有个人</p><p>个体通过思索意识到自己本身就是生存的目的，他要求国际从此以往加强而不是利用他的能力，以此为代价，个人将维持国家的持续</p></blockquote><p><strong>社会经济的发展带来的我们物质和生活的增长，被冠以着数十年来通过个体努力的结果，于是国家造就了弱势文化的典型思想:误以为将自己的生活水平的提高，是通过自己勤劳获取的，殊不知这是吃着国家的红利，而并非自己真的可以通过真正的努力获取的温饱</strong></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
+      
+    
+    </summary>
+    
+    
+      <category term="diary" scheme="https://smartxia.github.io/blog/categories/diary/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>GOLANG-GPM的深入理解</title>
-    <link href="https://smartxia.github.io/blog/2021/11/18/GOLANG-GPM%E7%9A%84%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3/"/>
-    <id>https://smartxia.github.io/blog/2021/11/18/GOLANG-GPM%E7%9A%84%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3/</id>
+    <link href="https://smartxia.github.io/blog/2021/11/18/GOLANG/GOLANG-GPM%E7%9A%84%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3/"/>
+    <id>https://smartxia.github.io/blog/2021/11/18/GOLANG/GOLANG-GPM%E7%9A%84%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3/</id>
     <published>2021-11-18T02:08:03.000Z</published>
-    <updated>2021-11-18T06:09:17.557Z</updated>
+    <updated>2021-12-09T11:10:51.192Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><p>深入golang runtime的调度</p><h3><span id="理解调度器的启动">理解调度器的启动</span></h3><p>runtime：</p><p>scheduler:</p><p>TLS:</p><p>spinning:</p><p>systemstack,mcall,asmcgocall</p><p>主要源码文件:</p><p>调度基本组件：</p><p><strong>G(goroutine)</strong>：调度器的基本单位，存储的goroutine的执行stack信息，状态以及任务函数</p><p>在g的眼中只有p,p就是运行的G的“CPU”</p><p>相当于两级线程</p><blockquote><p>g的任务函数</p></blockquote><p>每个g的实例都有任务函数，如下代码</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">userFun:&#x3D;func()&#123;fmt.Println(&quot;111&quot;)&#125;</span><br><span class="line">go userFunc();</span><br></pre></td></tr></table></figure><p>go的关键词创建了一个goroutine,此时gouroutine的任务函数userFun</p><p><strong>P（processor）</strong></p><p>p表示逻辑processor，代表M执行的上下文</p><p>p的最大作用是拥有各种G的对象队列，链表，cache,和状态</p><p>p的数量也代表go的执行并发度，即多少个goroutine可以同时执行</p><p>这里的p虽然表示逻辑处理器，但是p并不代表任何执行代码，对于g来说，p相当于cpu的核，g只有绑定p才能调度。对于M来说，p提供了执行环境（Context），如分配内存状态（mcache）,任务队列G等</p><p><strong>M(machine)</strong></p><p>M代表真正的执行计算资源，可以任务他就是os thread(系统线程)</p><p>M是真正的执行者，每个M就像一个勤劳的工作者，总是从各种队列找到可运行的G,而且这样的M的可以同时存在多个</p><p>M在绑定有效P，可以进行调度循环，而且M并不保留G状态，这个是g可以跨M调度的基础</p>]]></content>
     
@@ -47,9 +163,9 @@
     <link href="https://smartxia.github.io/blog/2021/11/17/GOLANG/GOLANG-%E7%BA%AF%E7%BA%AF%E7%9A%84%E8%AF%AD%E6%B3%95%E4%BB%94%E7%9A%84%E6%B2%A1%E8%90%BD/"/>
     <id>https://smartxia.github.io/blog/2021/11/17/GOLANG/GOLANG-%E7%BA%AF%E7%BA%AF%E7%9A%84%E8%AF%AD%E6%B3%95%E4%BB%94%E7%9A%84%E6%B2%A1%E8%90%BD/</id>
     <published>2021-11-17T03:57:39.000Z</published>
-    <updated>2021-11-18T05:39:16.298Z</updated>
+    <updated>2021-11-18T09:58:21.894Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><h2><span id="基础">基础</span></h2><h3><span id="1-对于已经关闭的channel的处理">1. 对于已经关闭的channel的处理</span></h3><p>读已经关闭的channel，一直能读到东西，但是读到的东西根据通道内关闭前是否有元素而不同，</p><ul><li>关闭前，buffer有还未读取的，会读取到chan内的值，且返回是否读取成功的bool值为true</li><li>关闭前，buffer的值读完，channel元素值为0，bool值为false</li></ul><p>写入：直接panic</p><h3><span id="2-make和new区别">2. Make和new区别</span></h3><p>make：返回特定类型channel，slice,map</p><p>new: 开辟新内存和指针</p><h3><span id="3-nil-切片和空切片一不一样">3. nil 切片和空切片一不一样</span></h3><p>指向的地址不一样。nill引用指针地址为0，空切片执行数组指针地址，且为一个固定值</p><p>数据结构：data,len,cap</p><h3><span id="4-字符串转byte数组会发生内存拷贝吗">4. 字符串转byte数组，会发生内存拷贝吗</span></h3><p>严格来说，只要发生类型强转，都会发生内存拷贝。</p><p>那么go有个很强的包叫 <code>unsafe</code> 。先获取变量地址，字符串转成底层结构，通过unsafe包，转为切片数组,再通过指针指向实际内容</p><p>string 数据结构 {data,len} </p><h3><span id="5-json包变量不加tag会怎么样">5. json包变量不加tag会怎么样</span></h3><p>和key的大小写有关</p><h3><span id="6-gpm">6. GPM</span></h3><p>指向另一篇详细（）</p><h3><span id="7docker-的网络通信模式">7.Docker 的网络通信模式。</span></h3><p>四种：</p><p>1.host模式：和宿主机公用一个network NameSpace 。容器不会配置任何自己网卡，而是使用自己宿主机的IP和端口</p><p>2.container模式：指定和其他容器共享network nameSpace,而不是和宿主机共享</p><p>3.none模式：告诉容器放到自己网站堆里，但是不要配置他的网络</p><p>4.brideg模式：docker默认的网络模式，此模式会将主机docker链接到虚拟网桥上</p>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><h2><span id="基础">基础</span></h2><h3><span id="1-对于已经关闭的channel的处理">1. 对于已经关闭的channel的处理</span></h3><p>读已经关闭的channel，一直能读到东西，但是读到的东西根据通道内关闭前是否有元素而不同，</p><ul><li>关闭前，buffer有还未读取的，会读取到chan内的值，且返回是否读取成功的bool值为true</li><li>关闭前，buffer的值读完，channel元素值为0，bool值为false</li></ul><p>写入：直接panic</p><h3><span id="2-make和new区别">2. Make和new区别</span></h3><p>make：返回特定类型channel，slice,map</p><p>new: 开辟新内存和指针，泛化类型</p><h3><span id="3-nil-切片和空切片一不一样">3. nil 切片和空切片一不一样</span></h3><p>指向的地址不一样。nill引用指针地址为0，空切片执行数组指针地址，且为一个固定值</p><p>数据结构：data,len,cap</p><h3><span id="4-字符串转byte数组会发生内存拷贝吗">4. 字符串转byte数组，会发生内存拷贝吗</span></h3><p>严格来说，只要发生类型强转，都会发生内存拷贝。</p><p>那么go有个很强的包叫 <code>unsafe</code> 。先获取变量地址，字符串转成底层结构，通过unsafe包，转为切片数组,再通过指针指向实际内容</p><p>string 数据结构 {data,len} </p><h3><span id="5-json包变量不加tag会怎么样">5. json包变量不加tag会怎么样</span></h3><p>和key的大小写有关</p><h3><span id="6-gpm">6. GPM</span></h3><p>指向另一篇详细（）</p><h3><span id="7docker-的网络通信模式">7.Docker 的网络通信模式。</span></h3><p>四种：</p><p>1.host模式：和宿主机公用一个network NameSpace 。容器不会配置任何自己网卡，而是使用自己宿主机的IP和端口</p><p>2.container模式：指定和其他容器共享network nameSpace,而不是和宿主机共享</p><p>3.none模式：告诉容器放到自己网站堆里，但是不要配置他的网络</p><p>4.brideg模式：docker默认的网络模式，此模式会将主机docker链接到虚拟网桥上</p><h3><span id="8访问私有成员">8.访问私有成员</span></h3><blockquote><p>调用其他包共有结构的私有成员变<strong>量</strong></p></blockquote><p><strong>绕过小写不公开</strong></p><p>用unsafe包中的unsafe.Pointer获取到结构体对象的首地址，然后加上想访问的私有变量的偏移地址就是私有变量的地址</p><h3><span id="9-数组和切片的区别">9、数组和切片的区别</span></h3><p>长度，容量，数组指针</p><p>切片是指针类型，数组是是值类型</p><p>数据长度固定，切片不固定</p><p>切片比数组多个属性（cap）,切片底层是数组</p><ul><li>扩容：小于1024 每次cap翻倍，超过变成1.25</li><li>扩容后没触及原数组容量，那么切片指针指向的位置，还是原数组，扩容后，超过原数组容量，会开辟一块新内存，原来的值拷贝过来，也不会影响原来数组</li><li>append:</li></ul><h3><span id="10介绍-rune-类型">10.介绍 rune 类型</span></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">package main</span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">func main() &#123;</span><br><span class="line">    var str &#x3D; &quot;hello 你好&quot;</span><br><span class="line">    fmt.Println(&quot;len(str):&quot;, len(str))</span><br><span class="line">    &#x2F;&#x2F;12个 </span><br><span class="line">    &#x2F;&#x2F;中文字符在unicode下占2个字节，在utf-8编码下占3个字节 go默认utf-8 5+1+3*2</span><br><span class="line">    &#x2F;&#x2F;通过rune类型处理unicode字符</span><br><span class="line">    fmt.Println(&quot;rune:&quot;, len([]rune(str))) &#x2F;&#x2F;8个</span><br><span class="line">    fmt.Println(&quot;RuneCountInString:&quot;, utf8.RuneCountInString(str))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>byte等同于uint8，而不是int8</p><p>rune 等同于int32,常用来处理unicode或utf-8字符</p><h3><span id="11-panic-defer-recover">11 panic defer recover</span></h3><p>panic() 函数</p><p>函数中遇到panic语句，会立即终止当前函数的执行，在panic所在函数内如果存在要执行的defer函数列表，按照defer的逆序执行</p><p>recover() 函数</p><p>recover函数的返回值报告协程是否正在遭遇panic</p><p>有异常时，recover()只能调用一次，后面再次调用则捕获不到任何异常</p><p>通常办法：go中可以抛出一个panic的异常，然后在defer中通过recover捕获这个异常，然后正常处理，从而恢复正常代码的执行</p><h3><span id="12-读写锁和互斥锁">12 读写锁和互斥锁</span></h3><p>总结：</p><ol><li>1.在单纯的只是获取锁和释放锁时，互斥锁的用时要少一些，这主要是因为多个线程同时获取读写锁的情况比较少出现。</li><li>golang底层实现上，互斥锁确实要比读写锁的性能要好一些，这主要是因为读写锁的底层实现其实是互斥锁加上计数器</li><li>在 增 强 协 程 互 相 冲 突 的 效 果 后 ， 读 写 锁 的 性 能 要 明 显 高 于 互 斥 锁 </li></ol><h3><span id="13结构体是否可以比较">13.结构体是否可以比较</span></h3><p>回到上面的划重点部分，在总结中我们可以知道，golang中 <em>Slice<em>，</em>Map<em>，</em>Function</em> 这三种数据类型是不可以直接比较的。我们再看看S结构体，该结构体并没有包含不可比较的成员变量，所以该结构体是可以直接比较的。</p><p> <em>reflect.DeepEqual 函数</em> 来对两个变量进行比较。</p><h3><span id="14golang-channel是线程安全的吗">14.golang channel是线程安全的吗</span></h3><p>如果把线程安全定义为允许多个goroutine同时去读写，那么golang 的channel 是线程安全的。不需要在并发读写同一个channe时加锁。</p><h3><span id="15channel数据结构">15.channel数据结构</span></h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> hchan <span class="keyword">struct</span> &#123;</span><br><span class="line">    qcount   <span class="keyword">uint</span>           <span class="comment">// total data in the queue</span></span><br><span class="line">    dataqsiz <span class="keyword">uint</span>           <span class="comment">// size of the circular queue</span></span><br><span class="line">    buf      unsafe.Pointer <span class="comment">// points to an array of dataqsiz elements</span></span><br><span class="line">    elemsize <span class="keyword">uint16</span></span><br><span class="line">    closed   <span class="keyword">uint32</span></span><br><span class="line">    elemtype *_type <span class="comment">// element type</span></span><br><span class="line">    sendx    <span class="keyword">uint</span>   <span class="comment">// send index</span></span><br><span class="line">    recvx    <span class="keyword">uint</span>   <span class="comment">// receive index</span></span><br><span class="line">    recvq    waitq  <span class="comment">// list of recv waiters</span></span><br><span class="line">    sendq    waitq  <span class="comment">// list of send waiters</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// lock protects all fields in hchan, as well as several</span></span><br><span class="line">    <span class="comment">// fields in sudogs blocked on this channel.</span></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="comment">// Do not change another G&#x27;s status while holding this lock</span></span><br><span class="line">    <span class="comment">// (in particular, do not ready a G), as this can deadlock</span></span><br><span class="line">    <span class="comment">// with stack shrinking.</span></span><br><span class="line">    lock mutex</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> waitq <span class="keyword">struct</span> &#123;</span><br><span class="line">    first *sudog</span><br><span class="line">    last  *sudog</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
@@ -224,10 +340,10 @@
   
   <entry>
     <title>开发空间使用文档</title>
-    <link href="https://smartxia.github.io/blog/2021/09/01/%E5%BC%80%E5%8F%91%E7%A9%BA%E9%97%B4%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/"/>
-    <id>https://smartxia.github.io/blog/2021/09/01/%E5%BC%80%E5%8F%91%E7%A9%BA%E9%97%B4%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/</id>
+    <link href="https://smartxia.github.io/blog/2021/09/01/Wiki/%E5%BC%80%E5%8F%91%E7%A9%BA%E9%97%B4%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/"/>
+    <id>https://smartxia.github.io/blog/2021/09/01/Wiki/%E5%BC%80%E5%8F%91%E7%A9%BA%E9%97%B4%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/</id>
     <published>2021-09-01T07:44:30.000Z</published>
-    <updated>2021-11-16T03:33:44.715Z</updated>
+    <updated>2021-12-02T08:21:58.882Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><h2><span id="开发空间使用文档">开发空间使用文档</span></h2><h3><span id="项目设置">项目设置</span></h3><h4><span id="项目主页">项目主页</span></h4><p>项目名称：默认创建的时候的名称，可以在这里修改</p><p>封面：项目的封面，可以用来发布，图片尺寸符合页面提示内容</p><p>简介：项目的一些简单介绍</p><h4><span id="代码仓库">代码仓库</span></h4><p>代码仓库默认分为语言类型的git仓库，所带有的框架默认支持打包，和支持中台的基本框架</p><p>前端仓库：vue idg等</p><p>后端仓库：golang java php node 等 </p><p>ios,android,中台小程序，微信小程序，h5，浏览器插件，pc，跨段应用，</p><p>勤务仓库，和区块链专用仓库，并支持复制其他仓库</p><h5><span id="仓库使用">仓库使用：</span></h5><p>默认开发者为主master分支管理员</p><p>分支:</p><p>合并请求：可以合并其他用户提交的合并请求</p><p>标签：利用此标签可以用来打包集成各类型的资产包和镜像</p><p>成员：可以添加成员</p><h4><span id="镜像管理">镜像管理</span></h4><p>可以分为两大类：镜像（可以直接放在服务器运行的）包管理（可以支持其他服务引入的）</p><p>镜像根据仓库类型里的tag然后进行打包：</p><p>包括：php(5-*7)类型，golang(13-15)java 和其他类型打包 vue类型镜像</p><p>包根据仓库里的tag进行打包：</p><p>包括:npm android ios composer h5等类型dab</p><h4><span id="成员管理">成员管理</span></h4><p>此处用来添加用户，其中项目成员基本权限要有：项目负责人或者项目参与者。支持批量添加用户角色</p><h4><span id="部署设置">部署设置</span></h4><p>b部署设置放在此处比较早，需要后端或者项目负责人添加。</p><p>其中包括：对项目所需要的容器资源类型进行配置，和资源模板配置，cpu membery port 等</p><h3><span id="产品定义">产品定义</span></h3><ul><li>模块列表：默认有主模块。主模块权限属于第一个使用产品定义的人，并非创建者。</li></ul><p>可以选择新增模块，填写模块名称和描述，模块标签</p><p>模块之间支持的功能：利用密钥来实现复制（内容复制）和分享（通道分享）</p><p>模块之间可以添加用户，给用户赋予模块负责人、模块参与者（只有浏览权限）</p><ul><li><p>任务列表：</p><p>包括产品、后端、设计使用的基本工具和文档</p><p>需求定义：产品需要写的一些基本功能提供。项目创立之初的一些信息收集，和基本的作图，设计用例，数据模型等功能的支持</p><p>设计文档：一些基本的设计图片文稿，竞品分析，设计用的图片且支持图片拖动执行</p><p>技术定义：后端的一些基本api文档填写</p><p>数据定义：数据库相关的基本使用</p><p>每个分类下分为各种的类型使用，种类繁多，满足项目创立之初所有的使用</p></li></ul><h3><span id="多语言管理">多语言管理</span></h3><h4><span id="项目多语言">项目多语言</span></h4><p>支撑项目内关键词，各个国家语言的翻译使用</p><h3><span id="会议记录">会议记录</span></h3><p>记录项目成员每次开会使用的基本任务</p><h3><span id="接入管理">接入管理</span></h3><p>中台核心内容：支持开发者创建开发容器，支持实例数据填写ACL权限管控，支持用户购买</p><h3><span id="资源管理">资源管理</span></h3><p>容器云所需的资源购买和资源配置</p><h3><span id="部署空间">部署空间</span></h3><p>中台核心内容：支持开发者创建开发容器，支持实例数据填写ACL权限管控，支持用户购买</p><h3><span id="项目管理">项目管理</span></h3><p>项目issue配置</p><h3><span id="cicd">CICD</span></h3><p>项目自动化测试</p><h3><span id="发布管理">发布管理</span></h3><p>项目发布到市场</p><h3><span id="gui管理">GUI管理</span></h3><p>gui前端界面自动化添加</p><h3><span id="wiki">WIKI</span></h3><p>项目Wiki记录</p>]]></content>
     
@@ -392,128 +508,6 @@
     
     
       <category term="其他" scheme="https://smartxia.github.io/blog/categories/%E5%85%B6%E4%BB%96/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>孔乙己和阿Q</title>
-    <link href="https://smartxia.github.io/blog/2021/05/26/%E6%88%91%E7%9A%84%E6%97%A5%E8%AE%B0/%E5%AD%94%E4%B9%99%E5%B7%B1%E5%92%8C%E9%98%BFQ/"/>
-    <id>https://smartxia.github.io/blog/2021/05/26/%E6%88%91%E7%9A%84%E6%97%A5%E8%AE%B0/%E5%AD%94%E4%B9%99%E5%B7%B1%E5%92%8C%E9%98%BFQ/</id>
-    <published>2021-05-26T02:23:14.000Z</published>
-    <updated>2021-11-16T03:33:44.717Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><p>孔乙己原为鲁迅笔下的一个旧时代的人物，我们可以简单理解为一个臭读书的<br>阿Q我们听到的最多的是阿Q精神：自恋不自知的小人物<br>这些都是鲁迅笔下的小人物，之前不大明白鲁迅为何喜欢写这些我们现在看起来抨击小人物的短片小说，<br>包括对闰土 阿Q 孔乙己 祥林嫂 范爱农等等这些现在看起来很离谱的事情，这要是放到现在不得不说是一股奇葩的力量<br>在微博贡献，因为本人也是个冲浪的键盘侠。<br>但了解过鲁迅大大说过一句很经典的话：学医救不了中国人<br>当时是民国 想想这句话到底有几个味道大家便知道了<br>现在提起来中国人，你走到哪里都是自豪的，除了蜜汁自信呢的美帝，最起码在国外是没问题的，对于一个长时间被中央人民广播电台熏陶的年青人是这样的</p><p>当时中国是被侵略，被十几个人打，想想那画面，不敢还手，对于国家至此，何况老百姓。<br>其实鲁迅笔下任务用的最多为小小的底层任务对社会，谈不上社会，而是对自己的生活圈子里造成的影响，可有可无的那种。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
-      
-    
-    </summary>
-    
-    
-      <category term="diary" scheme="https://smartxia.github.io/blog/categories/diary/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>从正则表达式的iUs说说模式修正符</title>
-    <link href="https://smartxia.github.io/blog/2021/05/25/PHP/PHP-%E4%BB%8E%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84iUs%E8%AF%B4%E8%AF%B4%E6%A8%A1%E5%BC%8F%E4%BF%AE%E6%AD%A3%E7%AC%A6/"/>
-    <id>https://smartxia.github.io/blog/2021/05/25/PHP/PHP-%E4%BB%8E%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84iUs%E8%AF%B4%E8%AF%B4%E6%A8%A1%E5%BC%8F%E4%BF%AE%E6%AD%A3%E7%AC%A6/</id>
-    <published>2021-05-25T11:06:09.000Z</published>
-    <updated>2021-11-16T03:33:44.696Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><p>本想做个简单的采集程序，发现被抓页面代码的规律后发现抓下来的内容没有放到一个数组中，而是放在一个元素中，无奈找遍资料发现在正则表达式后加上”/iUs”后竟然可以了。<br>hexo<br>网上关于iUs的说明多数都是抄袭的，没有做过多的解释，对于一个小学毕业证是买来的人来说是在是不好理解。不过幸亏Google让我找到答案。</p><p>“iUs” 在这里叫“模式修正符”。模式修正符其实就是几个字母，可以一次使用一个也可以一次使用多个，每一个都具有一定的意义，模式修正符是对正则表达式的扩展；“/模式修正符”，其中正斜线“/”为边界符。下表列出来有那些模式修正符：</p><p>模式修正符    说明<br>i    表示在和模式进行匹配进不区分大小写<br>m    将模式视为多行，使用^和$表示任何一行都可以以正则表达式开始或结束<br>s    如果没有使用这个模式修正符号，元字符中的”.”默认不能表示换行符号,将字符串视为单行<br>x    表示模式中的空白忽略不计<br>e    正则表达式必须使用在preg_replace替换字符串的函数中时才可以使用(讲这个函数时再说)<br>A    以模式字符串开头，相当于元字符^<br>Z    以模式字符串结尾，相当于元字符$<br>U    正则表达式的特点：就是比较“贪婪”，使用该模式修正符可以取消贪婪模式</p><h3><span id="1模式修正符m">1，模式修正符m。</span></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$pattern &#x3D; ‘&#x2F;^abc&#x2F;m’;</span><br><span class="line">$string &#x3D; ‘bcd</span><br><span class="line">abc</span><br><span class="line">cba’;</span><br><span class="line">if (preg_match($pattern, $string, $arr)) &#123;</span><br><span class="line">echo “正则表达式&lt;b&gt;&#123;$pattern&#125;&lt;&#x2F;b&gt;和字符串&lt;b&gt;&#123;$string&#125;&lt;&#x2F;b&gt;匹配成功&lt;br&gt;”;</span><br><span class="line">print_r($arr);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">echo “&lt;font color&#x3D;’red’&gt;正则表达式&#123;$pattern&#125;和字符串&#123;$string&#125;匹配失败&lt;&#x2F;font&gt;”;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure><p>匹配结果是成功的。注意：我们在使用模式修正符m的时候，将匹配字符串看成是多行而不是默认的单行，所以任何一行只要是以abc开头，就匹配成功。但是，如果能匹配的行前面有空格的话，就不能匹配了!除非修改正则表达式的匹配模式。</p><h3><span id="2模式修正符s">2，模式修正符s。</span></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$pattern &#x3D; ‘&#x2F;a.*c&#x2F;s’;</span><br><span class="line">$string &#x3D; ‘adsadsa</span><br><span class="line">c’;</span><br><span class="line">if (preg_match($pattern, $string, $arr)) &#123;</span><br><span class="line">echo “正则表达式&lt;b&gt;&#123;$pattern&#125;&lt;&#x2F;b&gt;和字符串&lt;b&gt;&#123;$string&#125;&lt;&#x2F;b&gt;匹配成功&lt;br&gt;”;</span><br><span class="line">print_r($arr);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">echo “&lt;font color&#x3D;’red’&gt;正则表达式&#123;$pattern&#125;和字符串&#123;$string&#125;匹配失败&lt;&#x2F;font&gt;”;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure><p>这次的匹配记过也是成功的。如果你将上例中的模式修正符s去掉的话，匹配就会失败。因为模式修正符s将匹配字符串看作是单行的，所以这个时候，元字符中的”.”就可以表示换行符号了。</p><h3><span id="3模式修正符x">3，模式修正符x。</span></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$pattern &#x3D; ‘&#x2F;a c&#x2F;x’;</span><br><span class="line">$string &#x3D; ‘a c’;</span><br><span class="line">if (preg_match($pattern, $string, $arr)) &#123;</span><br><span class="line">echo “正则表达式&lt;b&gt;&#123;$pattern&#125;&lt;&#x2F;b&gt;和字符串&lt;b&gt;&#123;$string&#125;&lt;&#x2F;b&gt;匹配成功&lt;br&gt;”;</span><br><span class="line">print_r($arr);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">echo “&lt;font color&#x3D;’red’&gt;正则表达式&#123;$pattern&#125;和字符串&#123;$string&#125;匹配失败&lt;&#x2F;font&gt;”;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure><p>这次的匹配结果是失败的。因为我们使用模式修正符x取消了模式中的空格。注意：我们无法使用模式修正符取消\s表示的空白。</p><h3><span id="4模式修正符a">4，模式修正符A。</span></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$pattern &#x3D; ‘&#x2F;ac&#x2F;A’;</span><br><span class="line">$string &#x3D; ‘acahgyghvbm’;</span><br><span class="line">if (preg_match($pattern, $string, $arr)) &#123;</span><br><span class="line">echo “正则表达式&lt;b&gt;&#123;$pattern&#125;&lt;&#x2F;b&gt;和字符串&lt;b&gt;&#123;$string&#125;&lt;&#x2F;b&gt;匹配成功&lt;br&gt;”;</span><br><span class="line">print_r($arr);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">echo “&lt;font color&#x3D;’red’&gt;正则表达式&#123;$pattern&#125;和字符串&#123;$string&#125;匹配失败&lt;&#x2F;font&gt;”;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>正则表达式表示的含义是匹配以ac开头的字符串，结果成功。</p><p>模式修正符Z表示的是以字符串结尾的匹配，和A的用法是一样的，我们不再进行演示。</p><h3><span id="5模式修正符u">5，模式修正符U。</span></h3><p>这个模式修正符是十分重要的!在正则表达式中，其本身是“贪婪”的。那什么是贪婪模式呢?贪婪模式的意思就是说，正则表达式默认会在查找到第一个匹配后，继续尝试后面的匹配，如果能找到匹配，则匹配最大的范围字符串。但有的时候这并不是我们想要的结果，所以我们需要取消贪婪模式。</p><p>我们还是先看一个贪婪模式的例子：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$pattern &#x3D; ‘&#x2F;&lt;b&gt;.*&lt;\&#x2F;b&gt;&#x2F;’;</span><br><span class="line">$string &#x3D; ‘&lt;b&gt;welcome&lt;&#x2F;b&gt; &lt;b&gt;to&lt;&#x2F;b&gt; &lt;b&gt;phpfuns&lt;&#x2F;b&gt;’;</span><br><span class="line">if (preg_match($pattern, $string, $arr)) &#123;</span><br><span class="line">echo “正则表达式&lt;b&gt;&#123;$pattern&#125;&lt;&#x2F;b&gt;和字符串&lt;b&gt;&#123;$string&#125;&lt;&#x2F;b&gt;匹配成功&lt;br&gt;”;</span><br><span class="line">print_r($arr);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">echo “&lt;font color&#x3D;’red’&gt;正则表达式&#123;$pattern&#125;和字符串&#123;$string&#125;匹配失败&lt;&#x2F;font&gt;”;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure><p>这个实例的本意是匹配welcome，但是结果却匹配了welcome to phpfuns整个字符串(注意我们的字符串’welcome to phpfuns’，其开头和结尾正好构成了正则表达式的模式匹配，所以匹配成功)，这就是正则表达式的贪婪模式。当然，这不是我们要的结果。</p><p>取消贪婪模式<br>我们可以使用模式修正符U和元字符?两种方式取消正则表达式的贪婪模式。</p><p>模式修正符U取消贪婪模式</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$pattern &#x3D; ‘&#x2F;&lt;b&gt;.*&lt;\&#x2F;b&gt;&#x2F;U’;</span><br><span class="line">$string &#x3D; ‘&lt;b&gt;welcome&lt;&#x2F;b&gt; &lt;b&gt;to&lt;&#x2F;b&gt; &lt;b&gt;phpfuns&lt;&#x2F;b&gt;’;</span><br><span class="line">if (preg_match($pattern, $string, $arr)) &#123;</span><br><span class="line">echo “正则表达式&lt;b&gt;&#123;$pattern&#125;&lt;&#x2F;b&gt;和字符串&lt;b&gt;&#123;$string&#125;&lt;&#x2F;b&gt;匹配成功&lt;br&gt;”;</span><br><span class="line">print_r($arr);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">echo “&lt;font color&#x3D;’red’&gt;正则表达式&#123;$pattern&#125;和字符串&#123;$string&#125;匹配失败&lt;&#x2F;font&gt;”;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure><p>元字符?取消贪婪模式</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$pattern &#x3D; ‘&#x2F;&lt;b&gt;.*?&lt;\&#x2F;b&gt;&#x2F;’;</span><br><span class="line">$string &#x3D; ‘&lt;b&gt;welcome&lt;&#x2F;b&gt; &lt;b&gt;to&lt;&#x2F;b&gt; &lt;b&gt;phpfuns&lt;&#x2F;b&gt;dsadsadas’;</span><br><span class="line">if (preg_match($pattern, $string, $arr)) &#123;</span><br><span class="line">echo “正则表达式&lt;b&gt;&#123;$pattern&#125;&lt;&#x2F;b&gt;和字符串&lt;b&gt;&#123;$string&#125;&lt;&#x2F;b&gt;匹配成功&lt;br&gt;”;</span><br><span class="line">print_r($arr);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">echo “&lt;font color&#x3D;’red’&gt;正则表达式&#123;$pattern&#125;和字符串&#123;$string&#125;匹配失败&lt;&#x2F;font&gt;”;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure><p>注意元字符的位置，我们必须在“”之前结束贪婪模式，才能达到我们的目的</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
-      
-    
-    </summary>
-    
-    
-      <category term="PHP" scheme="https://smartxia.github.io/blog/categories/PHP/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>关于 URL 中协议的省略</title>
-    <link href="https://smartxia.github.io/blog/2021/05/25/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86/%E5%85%B3%E4%BA%8E-URL-%E4%B8%AD%E5%8D%8F%E8%AE%AE%E7%9A%84%E7%9C%81%E7%95%A5/"/>
-    <id>https://smartxia.github.io/blog/2021/05/25/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86/%E5%85%B3%E4%BA%8E-URL-%E4%B8%AD%E5%8D%8F%E8%AE%AE%E7%9A%84%E7%9C%81%E7%95%A5/</id>
-    <published>2021-05-25T01:15:06.000Z</published>
-    <updated>2021-11-16T03:33:44.710Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><p>前天看了 Google HTML/CSS 代码风格指南，里面有很多值得借鉴的地方，也学到了一些新东西，其中第一条说道，HTML 和 CSS 代码中引用的图片、媒体、CSS 和 JS 文件中的 URL 都可以去掉协议部分（http: 和 https:），比如</p><script src="http://www.google-analytics.com/ga.js" type="text/javascript"></script><script src="https://www.google-analytics.com/ga.js" type="text/javascript"></script><p>都可以换成：</p><script src="//www.google-analytics.com/ga.js" type="text/javascript"></script><p>只要是使用 http、https 这两种协议都可以省略。原因是可以节省一点文件体积（当然只是那么一点点），另外一个原因 Google 说是可以解决混合内容的问题。起初我对这个第二点不是很了解，所以特意搜索了下。最后从 Paul Irish 的一篇文章找到答案，链接在文后。文章是两三年前写的，老外研究问题总是比我们要早啊。</p><p>以 // 开头的叫做相对URL（protocol-relative URL），相关的标准可以看 RFC 3986 Section 4.2，内容不是一般的长估计大家也没耐心去看吧。总之浏览器遇到相对 URL，则会根据当前的网页协议，自动在 // 前面加上相同的协议。如当前网页是 http 访问，那么所有的相对引用 // 都会变成http://。https 同理。如果你在本地查看，协议就会变成 file://。</p><p>所以，如果省略协议，就需要保证引用的外部资源也采用和网页相同的协议，或者保证资源可以同时通过 http 和 https 访问。经过 StackOverflow 网友测试，这种用法几乎所有的浏览器都能支持，只有在 IE7/8 下会有一点小问题，就是通过相对 URL 引用的 CSS 文件（无论 <link> 或 @import）会被下载两遍。所以对性能有一点影响。</p><p>至于 Google 提到的混合内容问题，其实是指IE有时会弹出的一个警告框：</p><p>这个框想必大家也都见过。通常是在浏览 https 网页的时候出现，原因是网页里引用了 http 协议的外部资源，由于 http 被认为是不安全的，IE 才会给出提示。如果引用的时候写成相对 URL，浏览器就会自动采用 https 协议下载，这样就解决了问题。</p><p>所以，我们平时写代码还是可以放心使用相对 URL 的，写博客的大概很少开 https，当然做项目的就例外了。如果你引用的资源里有 https 协议的就特别处理一下，或者只要 http 也能访问到资源就可以。我看了下国内的站点这么用的还不多，有一次看到百度音乐这么用过。不过 Google 很多站点都已经是这样的写法了。</p><hr>> 参考资料：<p><a href="http://paulirish.com/2010/the-protocol-relative-url/">http://paulirish.com/2010/the-protocol-relative-url/</a><br><a href="http://stackoverflow.com/questions/4831741/can-i-change-all-my-http-links-to-just">http://stackoverflow.com/questions/4831741/can-i-change-all-my-http-links-to-just</a><br><a href="https://developer.mozilla.org/zh-CN/">https://developer.mozilla.org/zh-CN/</a></p><blockquote><p>转载 自：<a href="http://pandacafe.net/post/231?huvqlc=r5eup1">http://pandacafe.net/post/231?huvqlc=r5eup1</a></p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
-      
-    
-    </summary>
-    
-    
-      <category term="前端知识" scheme="https://smartxia.github.io/blog/categories/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86/"/>
-    
-    
-      <category term="http://" scheme="https://smartxia.github.io/blog/tags/http/"/>
-    
-      <category term="https://" scheme="https://smartxia.github.io/blog/tags/https/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>天气晴-2021-5-20</title>
-    <link href="https://smartxia.github.io/blog/2021/05/20/%E6%88%91%E7%9A%84%E6%97%A5%E8%AE%B0/%E5%A4%A9%E6%B0%94%E6%99%B4-2021-5-20/"/>
-    <id>https://smartxia.github.io/blog/2021/05/20/%E6%88%91%E7%9A%84%E6%97%A5%E8%AE%B0/%E5%A4%A9%E6%B0%94%E6%99%B4-2021-5-20/</id>
-    <published>2021-05-20T01:09:27.000Z</published>
-    <updated>2021-11-16T03:33:44.716Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><h3><span id="今天是2021年5月20日是个好日子">今天是2021年5月20日，是个好日子</span></h3><p> 早上打开电脑 撇了下右下角的电脑，是2021/5/20 嗯是个吉利的数字</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
-      
-    
-    </summary>
-    
-    
-      <category term="diary" scheme="https://smartxia.github.io/blog/categories/diary/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>百年孤独</title>
-    <link href="https://smartxia.github.io/blog/2021/05/18/%E7%BB%8F%E5%85%B8%E8%AF%BB%E7%89%A9/%E7%BB%8F%E5%85%B8%E8%AF%BB%E7%89%A9/"/>
-    <id>https://smartxia.github.io/blog/2021/05/18/%E7%BB%8F%E5%85%B8%E8%AF%BB%E7%89%A9/%E7%BB%8F%E5%85%B8%E8%AF%BB%E7%89%A9/</id>
-    <published>2021-05-18T01:33:24.000Z</published>
-    <updated>2021-11-16T03:33:44.719Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><blockquote><h3><span id="家族的第一个人被捆在树上最后一个人正被蚂蚁吃掉">家族的第一个人被捆在树上，最后一个人正被蚂蚁吃掉</span></h3></blockquote><ul><li>这本书到底讲了什么？作者想表达什么？自己有了什么样的感触<hr></li></ul><h3><span id="经典语句">经典语句</span></h3><p>1、多年以后，奥雷连诺上校站在行刑队面前，准会想起父亲带他去参观冰块的那个遥远的下午。</p><p>2、 过去都是假的，回忆是一条没有归途的路，以往的一切春天都无法复原，即使最狂热最坚贞的爱情，归根结底也不过是一种瞬息即逝的现实，唯有孤独永恒。</p><p>3、买下一张永久车票，登上一列永无终点的火车。</p><p>4、我们趋行在人生这个亘古的旅途，在坎坷中奔跑，在挫折里涅槃，忧愁缠满全身，痛苦飘洒一地。我们累，却无从止歇；我们苦，却无法回避。</p><p>5、生命中真正重要的不是你遭遇了什么，而是你记住了哪些事，又是如何铭记的。</p><p>6、我确实一度死去，但难以忍受孤独又重返人世。</p><p>7、他渴望孤独，对整个世界的怨恨咬噬着他的内心。</p><p>8、我们趋行在人生这个亘古的旅途，在坎坷中奔跑，在挫折里涅槃，忧愁缠满全身，痛苦飘洒一地。我们累，却无从止歇；我们苦，却无法回避。</p><p>9、所有人都显得很寂寞，用自己的方式想尽办法排遣寂寞，事实上仍是延续自己的寂寞。寂寞是造化对群居者的诅咒，孤独才是寂寞的唯一出口。</p><p>10、这手稿上所写的事情过去不曾，将来也永远不会重复，因为命中注定要一百年处于孤独的世家决不会有出现在世上的第二次机会。</p><h3><span id="百年孤独讲述了什么">百年孤独讲述了什么</span></h3><p>《百年孤独》讲的是一个叫布恩迪亚家族百年的兴衰以及小镇马孔多的发展变迁史。</p><p>布恩迪亚家族的每一代人都在努力地摆脱孤独落后的生活状态，但是却一次又一次的失败，最终，家族的最后一个人被蚂蚁吃掉，整个屋子也被风卷走，从此消失在地球上，再未出现。</p><p>孤独会让人丧失对生活的希望。没有人喜欢孤独，布恩迪亚家族的人付出了一辈又一辈的努力，却依然是一场空，书也表现了人类的抗争，对命运的无可奈何以及天性的顽固。</p><h3><span id="百年孤独反思">百年孤独反思</span></h3><p>《百年孤独》是哥伦比亚作家加西亚·马尔克斯的一部长篇小说</p><p>百年孤独比较适合25岁以上，经历过社会的人看。这样才能读出韵味的。</p><p>说到底《百年孤独》好在它的新颖，不仅让人们看到一个不一样的故事，也让人看到了小说不一样的表现手，而且这种不一样的表现手法，被国内许多的作家所借鉴引用。这也就是《百年孤独》的好处。</p><p>可以不客气地说，《百年孤独》影响了中国当代文学的走向，国内许多的作家，正是由于看了这本小说之后，才开始写出了自己最为重要的作品，例如莫言、陈忠实、余华、阎连科等等，这些国内一线作家，那都是受到了《百年孤独》的影响，他们的作品里，都有着《百年孤独》的影子。也正是这一份影响，使得它在国人心目中，有着崇高的地位。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\blog\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\blog\assets\js\APlayer.m
-      
-    
-    </summary>
-    
     
     
   </entry>
