@@ -1,0 +1,229 @@
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>x86和arm架构区别 | Some</title><meta name="author" content="夏夏天,xiapeifu@gmail.com"><meta name="copyright" content="夏夏天"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="什么是arm架构ARM架构过去称之为进阶精简指令集机器，是一个32位的精简指令集（RISC）处理器架构，其广泛的使用在嵌入式系统设计，由于节能的特点，ARM非常适合处理移动通讯领域，符合其设计目标低消耗 电量的特性，在今日，ARM家族占了所有32位嵌入式处理器75%的比例，使它成为占全世界最多数的3"><link rel="shortcut icon" href="/blog/img/favicon.png"><link rel="canonical" href="https://smartxia.github.io/blog/2021/12/02/%E5%BB%BA%E7%AB%99/x86%E5%92%8Carm%E6%9E%B6%E6%9E%84%E5%8C%BA%E5%88%AB/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/blog/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/blog/',
+  algolia: undefined,
+  localSearch: {"path":"/blog/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: 夏夏天","link":"Link: ","source":"Source: Some","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'x86和arm架构区别',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-03-12 10:43:39'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/blog/atom.xml" title="Some" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://s2-cdn.oneitfarm.com/e12ece12233b4059860acf48637d830a.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/blog/archives/"><div class="headline">Articles</div><div class="length-num">74</div></a><a href="/blog/tags/"><div class="headline">Tags</div><div class="length-num">48</div></a><a href="/blog/categories/"><div class="headline">Categories</div><div class="length-num">20</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/blog/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/blog/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="//tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/blog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/blog/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/blog/movies/"><i class="fa-fw fas fa-film"></i><span> Movie</span></a></li><li><a class="site-page child" href="/blog/photos/"><i class="fa-fw fas fa-picture"></i><span> Photo</span></a></li><li><a class="site-page child" href="/blog/games/"><i class="fa-fw fas fa-gamepad"></i><span> Game</span></a></li><li><a class="site-page child" href="/blog/books/"><i class="fa-fw fas fa-book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/blog/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/blog/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/blog/messageboard/"><i class="fa-fw fas fa-coffee"></i><span> Messageboard</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/blog/img/404.jpg')"><nav id="nav"><span id="blog-info"><a href="/blog/" title="Some"><span class="site-name">Some</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/blog/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/blog/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="//tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/blog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/blog/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/blog/movies/"><i class="fa-fw fas fa-film"></i><span> Movie</span></a></li><li><a class="site-page child" href="/blog/photos/"><i class="fa-fw fas fa-picture"></i><span> Photo</span></a></li><li><a class="site-page child" href="/blog/games/"><i class="fa-fw fas fa-gamepad"></i><span> Game</span></a></li><li><a class="site-page child" href="/blog/books/"><i class="fa-fw fas fa-book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/blog/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/blog/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/blog/messageboard/"><i class="fa-fw fas fa-coffee"></i><span> Messageboard</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">x86和arm架构区别</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2021-12-02T08:22:44.000Z" title="Created 2021-12-02 16:22:44">2021-12-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-03-12T02:43:39.604Z" title="Updated 2024-03-12 10:43:39">2024-03-12</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="x86和arm架构区别"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3><span id="什么是arm架构">什么是arm架构</span></h3><p>ARM架构过去称之为进阶精简指令集机器，是一个32位的精简指令集（RISC）处理器架构，其广泛的使用在嵌入式系统设计，由于节能的特点，ARM非常适合处理移动通讯领域，符合其设计目标低消耗 电量的特性，在今日，ARM家族占了所有32位嵌入式处理器75%的比例，使它成为占全世界最多数的32位架构之一。ARM处理器可以在很多消费性电子产品上看到，从可携式装置（PDA、移动电话、多媒体播放器、掌上型电子游戏，和计算机）到电脑外设（硬盘、桌上型路由器）甚至在导弹的弹载计算机等军用设施中都有他的存在。在此还有一些基于ARM设计的派生产品，重要产品还包括Marvell的XScale架构和德州仪器的OMAP系列.</p>
+<p>arm架构图</p>
+<p>下图所示的是ARM构架图。它由32位ALU、若干个32位通用寄存器以及状态寄存器、32&TImes;8位乘法器、32&TImes;32位桶形移位寄存器、指令译码以及控制逻辑、指令流水线和数据&#x2F;地址寄存器组成.</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://file.elecfans.com/web1/M00/50/D9/o4YBAFr7zl2AGVr8AABPkxqzXZA667.jpg"></p>
+<p>1、ALU：它有两个操作数锁存器、加法器、逻辑功能、结果以及零检测逻辑构成。</p>
+<p>2、桶形移位寄存器：ARM采用了32&TImes;32位的桶形移位寄存器，这样可以使在左移&#x2F;右移n位、环移n位和算术右移n位等都可以一次完成。</p>
+<p>3、高速乘法器：乘法器一般采用“加一移位”的方法来实现乘法。ARM为了提高运算速度，则采用两位乘法的方法，根据乘数的2位来实现“加一移位”运算;ARM高速乘法器采用32&TImes;8位的结构，这样，可以降低集成度（其相应芯片面积不到并行乘法器的1&#x2F;3）。</p>
+<p>4、浮点部件：浮点部件是作为选件供ARM构架使用。FPA10浮点加速器是作为协处理方式与ARM相连，并通过协处理指令的解释来执行。</p>
+<p>5、控制器：ARM的控制器采用的是硬接线的可编程逻辑阵列PLA。</p>
+<p>6、寄存器</p>
+<h2><span id="x86架构"><strong>x86架构</strong></span></h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://file.elecfans.com/web1/M00/50/ED/pIYBAFr7zpSASlXUAABbDZ2xUGo091.jpg"></p>
+<p>当然，这个架构图并不是所有的都是如此，根据不同的主板，平台，架构是略有差别的比如说，目前很多主板已经将北桥集成到CPU当中，将南桥集成为PCH，但大致的框架还是如此的。下面对这个架构图上的各个内容分别进行一些简介:</p>
+<p>   1：CPU，大家都不陌生的名词，中央处理器，计算机的核心大脑。</p>
+<p>　2： 北桥（North Bridge Chipset）：北桥是电脑主板上的一块芯片，位于CPU插座边，起连接作用。</p>
+<p>　3：南桥芯片（South Bridge）是主板芯片组的重要组成部分，一般位于主板上离CPU插槽较远的下方，PCI插槽的附近，这种布局是考虑到它所连接的I&#x2F;O总线较多，离处理器远一点有利于布线。</p>
+<p>　4： 内存是计算机中重要的部件之一，它是与CPU进行沟通的桥梁。计算机中所有程序的运行都是在内存中进行的，因此内存的性能对计算机的影响非常大。</p>
+<p>　5：显卡（Video card，Graphics card）全称显示接口卡，又称显示适配器，是计算机最基本配置、最重要的配件之一。</p>
+<p>　6：显示j接口</p>
+<p>　7：网卡是工作在链路层的网络组件，是局域网中连接计算机和传输介质的接口，不仅能实现与局域网传输介质之间的物理连接和电信号匹配，还涉及帧的发送与接收、帧的封装与拆封、介质访问控制、数据的编码与解码以及数据缓存的功能等。</p>
+<p>　8：声卡的基本功能是把来自话筒、磁带、光盘的原始声音信号加以转换，输出到耳机、扬声器、扩音机、录音机等声响设备，或通过音乐设备数字接口（MIDI）使乐器发出美妙的声音。</p>
+<p>　9：SATA（Serial Advanced Technology Attachment，串行高级技术附件）是一种基于行业标准的串行硬件驱动器接口，是由Intel、IBM、Dell、APT、Maxtor和Seagate公司共同提出的硬盘接口规范。</p>
+<p>　10：硬盘是电脑主要的存储媒介之一，由一个或者多个铝制或者玻璃制的碟片组成。碟片外覆盖有铁磁性材料。</p>
+<p>　11：总线</p>
+<h2><span id="arm架构和x86架构有什么区别"><strong>arm架构和x86架构有什么区别</strong></span></h2><p><strong>一、性能</strong> </p>
+<p>​    X86结构的电脑无论如何都比ARM结构的系统在性能方面要快得多、强得多。X86的CPU随便就是1G以上、双核、四核大行其道，通常使用45nm（甚至更高级）制程的工艺进行生产；而ARM方面：CPU通常是几百兆，最近才出现1G左右的CPU，制程通常使用不到65nm制程的工艺，可以说在性能和生产工艺方面ARM根本不是X86结构系统的对手。</p>
+<p>　　但ARM的优势不在于性能强大而在于效率，ARM采用RISC流水线指令集，在完成综合性工作方面根本就处于劣势，而在一些任务相对固定的应用场合其优势就能发挥得淋漓尽致.</p>
+<p><strong>二、扩展能力</strong></p>
+<p>​    X86结构的电脑采用“桥”的方式与扩展设备（如：硬盘、内存等）进行连接，而且x86结构的电脑出现了近30年，其配套扩展的设备种类多、价格也比较便宜，所以x86结构的电脑能很容易进行性能扩展，如增加内存、硬盘等.</p>
+<p>　　ARM结构的电脑是通过专用的数据接口使CPU与数据存储设备进行连接，所以ARM的存储、内存等性能扩展难以进行（一般在产品设计时已经定好其内存及数据存储的容量），所以采用ARM结构的系统，一般不考虑扩展。基本奉行“够用就好”的原则.</p>
+<p> <strong>三、操作系统的兼容性</strong></p>
+<p>​    X86系统由微软及Intel构建的Wintel联盟一统天下，垄断了个人电脑操作系统近30年，形成巨大的用户群，也深深固化了众多用户的使用习惯，同时x86系统在硬件和软件开发方面已经形成统一的标准，几乎所有x86硬件平台都可以直接使用微软的视窗系统及现在流行的几乎所有工具软件，所以x86系统在兼容性方面具有无可比拟的优势。</p>
+<p>　　ARM系统几乎都采用<strong>Linux</strong>的操作系统，而且几乎所有的硬件系统都要单独构建自己的系统，与其他系统不能兼容，这也导致其应用软件不能方便移植，这一点一直严重制约了ARM系统的发展和应用。GOOGLE开发了开放式的<strong>Android</strong>系统后，统一了ARM结构电脑的操作系统，使新推出基于ARM结构的电脑系统有了统一的、开放式的、免费的操作系统，为ARM的发展提供了强大的支持和动力.</p>
+<p><strong>四、软件开发的方便性及可使用工具的多样性</strong></p>
+<p>​    X86结构的系统推出已经近30年，在此期间，x86电脑经过飞速发展的黄金时期，用户的应用、软件配套、软件开发工具的配套及兼容等工作，已经到达非常成熟甚至可以说是完美的境界。所以使用X86电脑系统不仅有大量的第三方软件可供选择，也有大量的软件编程工具可以帮助您完成您所希望完成的工作。</p>
+<p>　　Arm结构的电脑系统因为硬件性能的制约、操作系统的精简、以及系统兼容等问题的制约，造成Arm结构的电脑系统不可能像X86电脑系统那样有众多的编程工具和第三方软件可供选择及使用，ARM的编程语言大多采用C和JAVA。</p>
+<p>　　对这一点的比较，更直接的结论是：基于x86结构电脑系统平台开发软件比arm结构系统更容易、更简单、实际成本也更低，同时更容易找到第三方软件（免去自己开发的时间和成本），而且软件移植更容易。</p>
+<p>　　从以上对比分析，给了我们的一个很清晰的感觉，ARM和X86结构的电脑根本就无法对比，ARM根本就不是X86电脑的的对手。是的，如果只考虑上述几个方面的要数，ARM确实无法与X86电脑竞争，甚至连比较的资格都没有。但是近1、2年，ARM的产品在终端应用特别是手持终端应用飞速发展（如：智能手机、平板电脑等），其销售数量已经远远超出x86结构的电脑销售数量，可见ARM是具有其与X86结构电脑不可对比的优势。该优势就是：<strong>功耗.</strong></p>
+<p><strong>五、功耗</strong> </p>
+<p>X86电脑因考虑要适应各种应用的需求，其发展思路是：性能+速度。20多年来x86电脑的速度从原来8088的几M发展到现在随便就是几G，而且还是几核，其速度和性能已经提升了千、万倍，技术进步使x86电脑成为大众生活中不可缺少的一部分。但是x86电脑发展的方向和模式，使其功耗一直居高不下，一台电脑随便就是几百瓦，即使是号称低功耗节能的手提电脑或上网本，也有十几、二十多瓦的功耗，这与ARM结构的电脑就无法相比.</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://smartxia.github.io/blog">夏夏天</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://smartxia.github.io/blog/2021/12/02/%E5%BB%BA%E7%AB%99/x86%E5%92%8Carm%E6%9E%B6%E6%9E%84%E5%8C%BA%E5%88%AB/">https://smartxia.github.io/blog/2021/12/02/建站/x86和arm架构区别/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/blog/img/404.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>Sponsor</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="http://s2-cdn.oneitfarm.com/ec13d36268ae41d7aaf87d5505324b6a.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://s2-cdn.oneitfarm.com/ec13d36268ae41d7aaf87d5505324b6a.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="http://s2-cdn.oneitfarm.com/2eef3a681187495aa43ff8bbe1173c09.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://s2-cdn.oneitfarm.com/2eef3a681187495aa43ff8bbe1173c09.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/blog/2021/12/09/GOLANG/GOLANG-grpc-2/" title="GOLANG-grpc-2"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/blog/img/404.jpg" onerror="onerror=null;src='/blog/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">GOLANG-grpc-2</div></div></a></div><div class="next-post pull-right"><a href="/blog/2021/11/25/HTTP/HTTP-%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95%E4%B9%8BCONNECT-method/" title="HTTP 请求方法之CONNECT method"><div class="cover" style="background: /img/cloud.jfif"></div><div class="pagination-info"><div class="label">Next</div><div class="next_info">HTTP 请求方法之CONNECT method</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://s2-cdn.oneitfarm.com/e12ece12233b4059860acf48637d830a.jpg" onerror="this.onerror=null;this.src='/blog/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">夏夏天</div><div class="author-info__description">以地事秦 犹抱薪救火 薪不尽 火不灭</div></div><div class="card-info-data site-data is-center"><a href="/blog/archives/"><div class="headline">Articles</div><div class="length-num">74</div></a><a href="/blog/tags/"><div class="headline">Tags</div><div class="length-num">48</div></a><a href="/blog/categories/"><div class="headline">Categories</div><div class="length-num">20</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/blog/atom.xml" target="_blank" title=""><i class="fa fa-rss"></i></a><a class="social-icon" href="https://github.com/smartXia" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:xiapeifu@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://gitee.com/xiapeifu" target="_blank" title="Gitee"><i class="iconfont gitee"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">什么是arm架构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number"></span> <span class="toc-text">x86架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number"></span> <span class="toc-text">arm架构和x86架构有什么区别</span></a></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/blog/2024/03/12/PHP/PHP-%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0-destruct/" title="PHP-析构函数-destruct"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/blog/img/php.jpeg" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="PHP-析构函数-destruct"/></a><div class="content"><a class="title" href="/blog/2024/03/12/PHP/PHP-%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0-destruct/" title="PHP-析构函数-destruct">PHP-析构函数-destruct</a><time datetime="2024-03-12T02:43:39.598Z" title="Created 2024-03-12 10:43:39">2024-03-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2024/03/12/GOLANG/GOLANG-%E7%AC%94%E8%AE%B03-nil-slice-map/" title="GOLANG-笔记-ArrayMapSlice"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/blog/img/golang.jpeg" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="GOLANG-笔记-ArrayMapSlice"/></a><div class="content"><a class="title" href="/blog/2024/03/12/GOLANG/GOLANG-%E7%AC%94%E8%AE%B03-nil-slice-map/" title="GOLANG-笔记-ArrayMapSlice">GOLANG-笔记-ArrayMapSlice</a><time datetime="2024-03-12T02:43:39.590Z" title="Created 2024-03-12 10:43:39">2024-03-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2022/03/16/darp-Docs/" title="darp Docs"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/blog/img/404.jpg" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="darp Docs"/></a><div class="content"><a class="title" href="/blog/2022/03/16/darp-Docs/" title="darp Docs">darp Docs</a><time datetime="2022-03-16T06:59:18.000Z" title="Created 2022-03-16 14:59:18">2022-03-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2021/12/09/GOLANG/GOLANG-grpc-2/" title="GOLANG-grpc-2"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/blog/img/404.jpg" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="GOLANG-grpc-2"/></a><div class="content"><a class="title" href="/blog/2021/12/09/GOLANG/GOLANG-grpc-2/" title="GOLANG-grpc-2">GOLANG-grpc-2</a><time datetime="2021-12-09T07:05:54.000Z" title="Created 2021-12-09 15:05:54">2021-12-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2021/12/02/%E5%BB%BA%E7%AB%99/x86%E5%92%8Carm%E6%9E%B6%E6%9E%84%E5%8C%BA%E5%88%AB/" title="x86和arm架构区别"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/blog/img/404.jpg" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="x86和arm架构区别"/></a><div class="content"><a class="title" href="/blog/2021/12/02/%E5%BB%BA%E7%AB%99/x86%E5%92%8Carm%E6%9E%B6%E6%9E%84%E5%8C%BA%E5%88%AB/" title="x86和arm架构区别">x86和arm架构区别</a><time datetime="2021-12-02T08:22:44.000Z" title="Created 2021-12-02 16:22:44">2021-12-02</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 夏夏天</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">简</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="chat-btn" type="button" title="Chat"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/blog/js/utils.js?v=4.13.0"></script><script src="/blog/js/main.js?v=4.13.0"></script><script src="/blog/js/tw_cn.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.8.8/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const initValine = () => {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'b5KjzAk69Lg3yBaVPeEiuljv-gzGzoHsz',
+      appKey: 'Yb0PJ1jscpDdBIvDLO6MEYUy',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  const loadValine = async () => {
+    if (typeof Valine === 'function') initValine()
+    else {
+      await getScript('https://cdn.jsdelivr.net/npm/valine@1.5.1/dist/Valine.min.js')
+      initValine()
+    }
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script></div><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/blog/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>

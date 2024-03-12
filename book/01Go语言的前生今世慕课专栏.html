@@ -1,0 +1,649 @@
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Some | Some</title><meta name="author" content="夏夏天,xiapeifu@gmail.com"><meta name="copyright" content="夏夏天"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="01 Go 语言的前生今世-慕课专栏"><link rel="shortcut icon" href="/blog/img/favicon.png"><link rel="canonical" href="https://smartxia.github.io/blog/book/01Go%E8%AF%AD%E8%A8%80%E7%9A%84%E5%89%8D%E7%94%9F%E4%BB%8A%E4%B8%96%E6%85%95%E8%AF%BE%E4%B8%93%E6%A0%8F.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/blog/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/blog/',
+  algolia: undefined,
+  localSearch: {"path":"/blog/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: 夏夏天","link":"Link: ","source":"Source: Some","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Some',
+  isPost: false,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-03-12 10:43:39'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/blog/atom.xml" title="Some" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://s2-cdn.oneitfarm.com/e12ece12233b4059860acf48637d830a.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/blog/archives/"><div class="headline">Articles</div><div class="length-num">74</div></a><a href="/blog/tags/"><div class="headline">Tags</div><div class="length-num">48</div></a><a href="/blog/categories/"><div class="headline">Categories</div><div class="length-num">20</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/blog/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/blog/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="//tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/blog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/blog/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/blog/movies/"><i class="fa-fw fas fa-film"></i><span> Movie</span></a></li><li><a class="site-page child" href="/blog/photos/"><i class="fa-fw fas fa-picture"></i><span> Photo</span></a></li><li><a class="site-page child" href="/blog/games/"><i class="fa-fw fas fa-gamepad"></i><span> Game</span></a></li><li><a class="site-page child" href="/blog/books/"><i class="fa-fw fas fa-book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/blog/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/blog/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/blog/messageboard/"><i class="fa-fw fas fa-coffee"></i><span> Messageboard</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header" style="background-image: url('http://s2-cdn.oneitfarm.com/cac574f332b3413f89164d966759be51.jpg')"><nav id="nav"><span id="blog-info"><a href="/blog/" title="Some"><span class="site-name">Some</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/blog/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/blog/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="//tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/blog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/blog/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/blog/movies/"><i class="fa-fw fas fa-film"></i><span> Movie</span></a></li><li><a class="site-page child" href="/blog/photos/"><i class="fa-fw fas fa-picture"></i><span> Photo</span></a></li><li><a class="site-page child" href="/blog/games/"><i class="fa-fw fas fa-gamepad"></i><span> Game</span></a></li><li><a class="site-page child" href="/blog/books/"><i class="fa-fw fas fa-book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/blog/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/blog/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/blog/messageboard/"><i class="fa-fw fas fa-coffee"></i><span> Messageboard</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="page-site-info"><h1 id="site-title">Some</h1></div></header><main class="layout" id="content-inner"><div id="page"><div id="article-container"><html><head><meta charset="utf-8"><title>01 Go 语言的前生今世-慕课专栏</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+			<meta name="renderer" content="webkit">
+			<meta property="qc:admins" content="77103107776157736375">
+			<meta property="wb:webmaster" content="c4f857219bfae3cb">
+			<meta http-equiv="Access-Control-Allow-Origin" content="*">
+			<meta http-equiv="Cache-Control" content="no-transform ">
+			<meta http-equiv="Cache-Control" content="no-siteapp">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://www.imooc.com/static/img/common/touch-icon-ipad.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://www.imooc.com/static/img/common/touch-icon-iphone-retina.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://www.imooc.com/static/img/common/touch-icon-ipad-retina.png">
+			<link href="https://moco.imooc.com/captcha/style/captcha.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201907021539" type="text/css">
+			<link rel="stylesheet" href="https://www.imooc.com/static/lib/swiper/swiper-3.4.2.min.css?t=201907021539">
+			<link rel="stylesheet" href="https://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,column/zhuanlanChapter-less.css?t=2.5,course/inc/course_tipoff-less.css?t=2.5?v=201907051055" type="text/css">
+			<link charset="utf-8" rel="stylesheet" href="https://www.imooc.com/static/lib/ueditor/themes/imooc/css/ueditor.css?v=201907021539"><link rel="stylesheet" href="https://www.imooc.com/static/lib/baiduShare/api/css/share_style0_16.css?v=6aba13f0.css"></head>
+			<body><div id="main">
+
+
+<div class="main-con hide-menu">
+    <!-- 左侧菜单 & 索引 -->
+    
+    <div class="right-content" style="padding-left: 0px;">
+        <div class="container clearfix" id="top" style="width: 1134px; display: block;">
+            
+            
+            <div class="center_con js-center_con l" style="width: 1134px;">
+                <div class="article-con">
+                                            <!-- 买过的阅读 -->
+                        
+
+                    
+                    <div class="art-title" style="margin-top: 0px;">
+                        01 Go 语言的前生今世
+                    </div>
+                    <div class="art-info clearfix">
+                        
+                        <span class="l">
+                            更新时间：2020-09-08 09:34:16
+                        </span>
+                    </div>
+                    <div class="art-top">
+                                                <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2.sycdn.imooc.com/5f51f31200012d9006400359.jpg" alt>
+                                                                        <div class="famous-word-box">
+                            <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://www.imooc.com/static/img/column/bg-l.png" alt class="bg1 bg">
+                            <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://www.imooc.com/static/img/column/bg-r.png" alt class="bg2 bg">
+                            <div class="famous-word">我要扼住命运的咽喉，它妄想使我屈服，这绝对办不到。生活是这样美好，活他一千辈子吧！——贝多芬<p></p></div>
+                        </div>
+                                            </div>
+                    <div class="art-content js-lookimg">
+                        <div id="article_content">
+                            <div class="cl-preview-section"><h2 style="font-size: 30px;"><span id="1-go-语言的诞生">1. Go 语言的诞生</span></h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">2007 年 9 月 20 日的下午，在谷歌山景城总部的一间办公室里，谷歌的大佬级程序员 Rob Pike<sup class="footnote-ref"><a href="#fn1" id="fnref1">1</a></sup>在等待一个 C++ 项目构建的过程中和谷歌的另外两个大佬级程序员 Robert Griesemer<sup class="footnote-ref"><a href="#fn2" id="fnref2">2</a></sup>和 Ken Thompson<sup class="footnote-ref"><a href="#fn3" id="fnref3">3</a></sup>进行了一次有关设计一门新编程语言的讨论<sup class="footnote-ref"><a href="#fn4" id="fnref4">4</a></sup>。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img1.sycdn.imooc.com/5f51b6dd0001e4ef06280355.png" data-original="//img1.sycdn.imooc.com/5f51b6dd0001e4ef06280355.png" alt="图片描述"></p>
+</div><div class="cl-preview-section"><center>图1-1-1 Go语言之父(从左到右分别是Robert Griesemer、Rob Pike和Ken Thompson)</center>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">当时的谷歌内部主要使用 C++ 语言构建各种系统，但 C++ 的巨大复杂性、编译构建速度慢以及在编写服务端程序时对并发支持的不便等让三位大佬产生了重新设计一门新编程语言的想法。在他们的初步构想中，这门新语言应该是能够给程序员带来快乐、匹配未来硬件发展趋势并适合用来开发谷歌内部大规模程序的。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">趁热打铁！在第一天的简短讨论后，第二天这三位大佬又在总部的一间名为 Yaounde 的会议室里进行了一场有关这门新语言具体设计的会议。会后的第二天，Robert Griesemer 发出了一封题为“prog lang discussion”的电邮，这封电邮便成为了这门新语言的第一版设计稿，三位大佬在这门语言的一些基础语法特性上达成了初步一致。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">9 月 25 日，Rob Pike 在一封回复电邮中把这门新编程语言命名为 Go：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">    Subject: Re: prog lang discussion
+    From: Rob 'Commander' Pike
+    Date: Tue, Sep 25, 2007 at 3:12 PM
+    To: Robert Griesemer, Ken Thompson
+
+    i had a couple of thoughts on the drive home.
+
+    1. name
+
+    'go'. you can invent reasons for this name but it has nice properties.
+    it's short, easy to type. tools: goc, gol, goa. if there's an interactive
+    debugger/interpreter it could just be called 'go'. the suffix is .go
+    ...
+</code></pre>
+</div><div class="cl-preview-section"><h2 style="font-size: 30px;"><span id="2-go-语言的早期团队和演化历程">2. Go 语言的早期团队和演化历程</span></h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">经过早期讨论，三位 Go 作者在语言设计上达成初步一致后，便开启了 Go 语言迭代设计和实现的过程。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">2008 年初，Unix 之父 Ken Thompson 实现了第一版 Go 编译器，用于验证之前的设计。这个编译器先将 Go 代码转换为 C 代码，再由 C 编译器编译成二进制文件。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">到 2008 年中旬，Go 的第一版设计基本结束了。这时，同样在谷歌工作的 Ian Lance Taylor 给 Go 语言的三位作者发了一封电子邮件。他宣称为 Go 语言实现了一个 gcc 的前端，这也是 Go 语言的第二个编译器。</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">    Subject: A gcc frontend for Go
+    From: Ian Lance Taylor
+    Date: Sat, Jun 7, 2008 at 7:06 PM
+    To: Robert Griesemer, Rob Pike, Ken Thompson
+
+    One of my office-mates pointed me at http://.../go_lang.html .  It
+    seems like an interesting language, and I threw together a gcc
+    frontend for it.  It's missing a lot of features, of course, but it
+    does compile the prime sieve code on the web page.
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">随后，Ian Lance Taylor 正式加入 Go 语言开发团队，并在后面的 Go 语言发展演进进程中成为了 Go 语言及工具设计和实现的核心人物之一。Russ Cox 也是在 2008 年加入到刚成立不久的 Go 语言开发团队的。随着他的加入，他的一些天赋也随即在语言设计和实现中展现出来，比如<a target="_blank" rel="noopener" href="https://golang.org/pkg/io/#Reader">io.Reader</a>和<a target="_blank" rel="noopener" href="https://golang.org/pkg/io/#Writer">io.Writer</a>接口，奠定了所有 I/O 库的整体结构。</p>
+</div><div class="cl-preview-section"><h2 style="font-size: 30px;"><span id="3-go-语言正式公布并开源">3. Go 语言正式公布并开源</span></h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">2009 年 10 月 30 日，Rob Pike 在 Google Techtalk 上做了一次有关 Go 语言的演讲《<a target="_blank" rel="noopener" href="https://github.com/golang/talks/blob/master/2009/go_talk-20091030.pdf">The Go Programming Language</a>》，这也是 Go 语言第一次公之于众。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 语言项目在 2009 年 11 月 10 日<a target="_blank" rel="noopener" href="https://opensource.googleblog.com/2009/11/hey-ho-lets-go.html">正式开源</a>，之后这一天被官方定位 Go 语言的诞辰。最初 Go 语言项目托管在 <a target="_blank" rel="noopener" href="http://code.google.com">code.google.com</a> 上，几年后迁移至 GitHub。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">随着 Go 语言的开源，Go 语言吸引了全世界开发者的目光。再加上 Go 三位作者在业界的影响力以及谷歌这座大树的加持，更多有才华的程序员加入到 Go 开发团队中，更多贡献者开始为 Go 语言项目添砖加瓦。于是，Go 在发布的当年(2009 年)就成为了著名编程语言排行榜 TIOBE 的年度最佳编程语言。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 发布后就吸引了一些公司，尤其是云计算领域的初创公司成为了 Go 语言的早期接纳者。在经过若干年的磨合后，在这些公司中诞生了不乏像 Docker、Kubernetes 这样的“杀手级”或示范性项目，这些项目也让 Go 被誉为<a target="_blank" rel="noopener" href="http://redmonk.com/dberkholz/2014/03/18/go-the-emerging-language-of-cloud-infrastructure/">“云计算基础设施新兴语言”</a>或直接称为云计算语言。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在发布后，Go 语言也拥有了自己的“吉祥物” - 一只由 Rob Pike 夫人<a target="_blank" rel="noopener" href="http://reneefrench.io">Renee French</a>设计的地鼠，从此地鼠称为了世界各地 Go 程序员的象征。Go 程序员也被称为 Gopher，Go 语言官方技术大会也被称为 GopherCon。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img1.sycdn.imooc.com/5f51b73c0001cfa802450300.png" data-original="//img1.sycdn.imooc.com/5f51b73c0001cfa802450300.png" alt="图片描述"></p>
+</div><div class="cl-preview-section"><center>图1-1-2 Go语言吉祥物</center>
+</div><div class="cl-preview-section"><h2 style="font-size: 30px;"><span id="4-go-语言的版本">4. Go 语言的版本</span></h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">和绝大多数编程语言相似，Go 语言也是“站在巨人的肩膀上的”，正如下图所示，Go 继承了诸多编程语言的特性。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img1.sycdn.imooc.com/5f51b74300018f3306000476.png" data-original="//img1.sycdn.imooc.com/5f51b74300018f3306000476.png" alt="图片描述"></p>
+</div><div class="cl-preview-section"><center>图1-1-3 Go的先祖</center>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 的基本语法参考了 C 语言，是“C 家族语言”的一个分支；而 Go 的声明语法、包概念则受到了 Pascal/Modula/Oberon 的启发；一些并发的思想则来自于受到了 Tony Hoare 教授 CSP 理论影响的语言，比如：Newsqueak 和 Limbo。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">2009 年 11 月 10 日，Go 语言正式对外发布并开源。之后，Go 语言在一段时间内采用了“Weekly Release”的模式，即每周发布一个版本。目前我们在 <a target="_blank" rel="noopener" href="http://github.com">github.com</a> 上 golang 的官方仓库中仍能找到的早期的 Weekly Release 版本，比如：“weekly.2009-11-06”。</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;">从 2011 年 3 月 7 日开始，除了 Weekly Release，Go 项目还会每月发布一个 Release，即 Monthly Release，比如：release.r56，这种情况一直延续到 Go 1.0 版本发布之前；</p>
+</li>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;">2012 年 3 月 28 日，<a target="_blank" rel="noopener" href="https://blog.golang.org/go-version-1-is-released">Go 1.0 正式发布</a>。同时 Go 官方发布 <a target="_blank" rel="noopener" href="https://golang.org/doc/go1compat">Go1 兼容性</a>承诺：只要符合 Go1 语言规范的源代码，Go 编译器将保证向后兼容；</p>
+</li>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;">2013 年 5 月 13 日，<a target="_blank" rel="noopener" href="https://blog.golang.org/go-11-is-released">Go 1.1 版本发布</a>。主要的变动点包括：</p>
+<ul>
+<li style="font-size: 20px; line-height: 38px;">新增"method value"语法：允许将方法绑定到一个特定的 receiver 实例上，从而形成一个 function；</li>
+<li style="font-size: 20px; line-height: 38px;">引入"terminating statement"的概念；</li>
+<li style="font-size: 20px; line-height: 38px;">将 64 位平台上的 int 类型的字节数升为 8 个字节，即 64 bits；</li>
+<li style="font-size: 20px; line-height: 38px;">更为精确的 Heap GC，尤其是针对 32 位平台。</li>
+</ul>
+</li>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;">2013 年 12 月 1 日，<a target="_blank" rel="noopener" href="https://blog.golang.org/go12">Go 1.2 版本发布</a>。从 Go 1.2 开始，Go 开发组启动了“以每 6 个月为一个发布周期”的发布计划。Go 1.2 版本主要的变动点包括：</p>
+<ul>
+<li style="font-size: 20px; line-height: 38px;">增加 Full slice expression: a[low : high : max];</li>
+<li style="font-size: 20px; line-height: 38px;">实现抢占式 Goroutine 调度器；</li>
+<li style="font-size: 20px; line-height: 38px;">go test 新增-cover 标志用于计算测试覆盖率。</li>
+</ul>
+</li>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;">2014 年 6 月 18 日，<a target="_blank" rel="noopener" href="https://blog.golang.org/go1.3">Go 1.3 版本发布</a>。主要的变动点包括：</p>
+<ul>
+<li style="font-size: 20px; line-height: 38px;">支持更多平台：solaris,dragonfly,plan9,nacl 等；</li>
+<li style="font-size: 20px; line-height: 38px;">goroutine 的 stack 模型从”segmented“ model 改为了“contiguous” model，改善“Hot stack split”问题；</li>
+<li style="font-size: 20px; line-height: 38px;">更为精确的 Stack GC。</li>
+</ul>
+</li>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;">2014 年 12 月 10 日，<a target="_blank" rel="noopener" href="https://blog.golang.org/go1.4">Go 1.4 版本发布</a>。Go 1.4 也是最后一个编译器和 runtime 由 C 语言实现的版本。其主要的变动点包括：</p>
+<ul>
+<li style="font-size: 20px; line-height: 38px;">新增 for range x {…}形式的 for-range 语法；</li>
+<li style="font-size: 20px; line-height: 38px;">使用 Go 语言替换 runtime 的部分 C 语言实现，这使得 GC 变得全面精确；</li>
+<li style="font-size: 20px; line-height: 38px;">由于 contiguous stack 的应用，goroutine 的默认栈大小从 8k 减小为 2k；</li>
+<li style="font-size: 20px; line-height: 38px;">增加 internal package 机制；</li>
+<li style="font-size: 20px; line-height: 38px;">增加"canonical import path"机制；</li>
+<li style="font-size: 20px; line-height: 38px;">新增 go generate 子命令；</li>
+<li style="font-size: 20px; line-height: 38px;">删除 Go source 树中的 src/pkg/xxx 中 pkg 这一级别，直接使用 src/xxx。</li>
+</ul>
+</li>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;">2015 年 8 月 19 日，<a target="_blank" rel="noopener" href="https://blog.golang.org/go1.5">Go 1.5 版本发布</a>，Go 1.5 版本是一个里程碑式的重要版本。因为从这个版本开始，Go 实现了自举，即无需再依赖 C 编译器。但 Go 编译器的性能照比 Go 1.4 的 C 实现有了较大幅度的下降。其主要的变动点包括：</p>
+<ul>
+<li style="font-size: 20px; line-height: 38px;">Go 编译器和 runtime 使用 Go 全部重写，原先的 C 实现被彻底移除；</li>
+<li style="font-size: 20px; line-height: 38px;">跨平台编译 Go 程序更为简洁，只需设置两个环境变量即可：GOARCH 和 GOOS；</li>
+<li style="font-size: 20px; line-height: 38px;">支持 map literal;</li>
+<li style="font-size: 20px; line-height: 38px;">GOMAXPROCS 的初始默认值由 1 改为了运行环境的 CPU 核数；</li>
+<li style="font-size: 20px; line-height: 38px;">大幅度优化 GC 延迟，多数情况 GC "Stop The World"的时间低于 10ms；</li>
+<li style="font-size: 20px; line-height: 38px;">增加 vendor 机制，改善 Go 包依赖管理；</li>
+<li style="font-size: 20px; line-height: 38px;">增加 go tool trace 子命令；</li>
+<li style="font-size: 20px; line-height: 38px;">go build 增加-buildmode 命令选项，支持将 Go 代码编译为 shared library 形式。</li>
+</ul>
+</li>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;">2016 年 2 月 17 日，<a target="_blank" rel="noopener" href="https://blog.golang.org/go1.6">Go 1.6 版本发布</a>。主要的变动点包括：</p>
+<ul>
+<li style="font-size: 20px; line-height: 38px;">进一步优化 GC 延迟，实现 Go 程序在占用大内存的情况下，GC 延迟仍低于 10ms；</li>
+<li style="font-size: 20px; line-height: 38px;">自动支持 HTTP/2；</li>
+<li style="font-size: 20px; line-height: 38px;">定义了在 C 代码中共享 Go 指针的规则。</li>
+</ul>
+</li>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;">2016 年 8 月 15 日，<a target="_blank" rel="noopener" href="https://blog.golang.org/go1.7">Go 1.7 版本发布</a>。主要的变动点包括：</p>
+<ul>
+<li style="font-size: 20px; line-height: 38px;">针对 x86-64，实现了 SSA 后端，使得编译出的 binary file size 减少 20%~30%；运行效率提升 5%~35%；</li>
+<li style="font-size: 20px; line-height: 38px;">Go 编译器的性能比 Go 1.6 版本提升近一倍；</li>
+<li style="font-size: 20px; line-height: 38px;">go test 支持 subtests 和 sub-benchmarks；</li>
+<li style="font-size: 20px; line-height: 38px;">标准库新增 context 包。</li>
+</ul>
+</li>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;">2017 年 2 月 16 日，<a target="_blank" rel="noopener" href="https://blog.golang.org/go1.8">Go 1.8 版本发布</a>。主要的变动点包括：</p>
+<ul>
+<li style="font-size: 20px; line-height: 38px;">支持仅 tags 不同的两个 struct 可以相互做显式类型转换；</li>
+<li style="font-size: 20px; line-height: 38px;">标准库增加 sort.Slice 函数；</li>
+<li style="font-size: 20px; line-height: 38px;">支持 HTTP/2 Push 机制；</li>
+<li style="font-size: 20px; line-height: 38px;">支持支持 HTTP Server 优雅退出；</li>
+<li style="font-size: 20px; line-height: 38px;">增加了对 Mutex 和 RWMutex 的 profiling(剖析)支持；</li>
+<li style="font-size: 20px; line-height: 38px;">支持 Go plugins，增加 plugin 包；</li>
+<li style="font-size: 20px; line-height: 38px;">支持默认的 GOPATH 路径，无需再显式设置；</li>
+<li style="font-size: 20px; line-height: 38px;">进一步优化 SSA 后端代码，程序平均性能提升 10%左右；</li>
+<li style="font-size: 20px; line-height: 38px;">Go 编译器性能进一步提升，平均编译链接的性能提升幅度在 15%左右；</li>
+<li style="font-size: 20px; line-height: 38px;">GC 的延迟进一步降低，STW(Stop The World)的时间通常将低于 100 微秒，甚至经常低于 10 微秒。</li>
+<li style="font-size: 20px; line-height: 38px;">优化 defer 的实现，使得其性能损耗降低了一半。</li>
+</ul>
+</li>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;">2017 年 8 月 25 日，<a target="_blank" rel="noopener" href="https://blog.golang.org/go1.9">Go 1.9 版本发布</a>。主要的变动点包括：</p>
+<ul>
+<li style="font-size: 20px; line-height: 38px;">新增了 type alias 语法；</li>
+<li style="font-size: 20px; line-height: 38px;">在原先的支持包级别的并发编译的基础上又实现了包函数级别的并发编译，使得 Go 编译性能有 10%左右的提升;</li>
+<li style="font-size: 20px; line-height: 38px;">大内存对象分配性能得到显著提升；</li>
+<li style="font-size: 20px; line-height: 38px;">增加了对 monotonic clock 的支持；</li>
+<li style="font-size: 20px; line-height: 38px;">提供了一个支持并发的 Map 类型：sync.Map；</li>
+<li style="font-size: 20px; line-height: 38px;">增加 math/bits 包，将高性能位操作实现收入标准库。</li>
+</ul>
+</li>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;">2018 年 2 月 17 日，<a target="_blank" rel="noopener" href="https://blog.golang.org/go1.10">Go 1.10 版本发布</a>。主要的变动点包括：</p>
+<ul>
+<li style="font-size: 20px; line-height: 38px;">支持默认 GOROOT，开发者无需显式设置 GOROOT 环境变量；</li>
+<li style="font-size: 20px; line-height: 38px;">增加 GOTMPDIR 环境变量；</li>
+<li style="font-size: 20px; line-height: 38px;">通过 cache 大幅提升构建和 go test 执行的性能，并基于源文件内容是否变化判定是否使用 cache 结果；</li>
+<li style="font-size: 20px; line-height: 38px;">支持 Unicode 10.0 版本。</li>
+</ul>
+</li>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;">2018 年 8 月 25 日，<a target="_blank" rel="noopener" href="https://blog.golang.org/go1.11">Go 1.11 版本发布</a>。<a target="_blank" rel="noopener" href="https://github.com/golang/go/releases/tag/go1.11">Go 1.11</a>是<a target="_blank" rel="noopener" href="https://research.swtch.com/">Russ Cox</a>在<a target="_blank" rel="noopener" href="https://www.gophercon.com/">GopherCon</a> 2017 大会上发表 <a target="_blank" rel="noopener" href="https://blog.golang.org/toward-go2">"Toward Go2"</a>之后的第一个 Go 版本，新的 Go 包管理机制 go modules 在 Go 1.11 中的落地为后续<a target="_blank" rel="noopener" href="https://github.com/golang/go/wiki/Go2">“Go2”</a>的提议渐进落地奠定了良好的基础。该版本主要的变动点包括：</p>
+<ul>
+<li style="font-size: 20px; line-height: 38px;">引入 Go module，为 Go 包管理提供了创新性的解决方案；</li>
+<li style="font-size: 20px; line-height: 38px;">引入对 WebAssembly 的支持，让 Gopher 可以使用 Go 语言来开发前端 Web 应用；</li>
+<li style="font-size: 20px; line-height: 38px;">为调试器增加了一个新的实验功能：允许在调试过程中动态调用 Go 函数。</li>
+</ul>
+</li>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;">2019 年 2 月 25 日，<a target="_blank" rel="noopener" href="https://blog.golang.org/go1.12">Go 1.12 版本发布</a>。主要的变动点包括：</p>
+<ul>
+<li style="font-size: 20px; line-height: 38px;">对 Go 1.11 中增加的 go modules 机制做了进一步优化；</li>
+<li style="font-size: 20px; line-height: 38px;">增加对 TLS 1.3 的支持；</li>
+<li style="font-size: 20px; line-height: 38px;">优化了大量 heap 依然存在时 GC 清理环节的性能，使得一次 GC 后的内存分配延迟得以改善；</li>
+<li style="font-size: 20px; line-height: 38px;">运行时更加积极地将释放的内存归还给操作系统，以应对大块内存分配无法重用已存在的堆空间的问题；</li>
+<li style="font-size: 20px; line-height: 38px;">该版本中 Build cache 成为必需。</li>
+</ul>
+</li>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;">2019 年 9 月 4 日，<a target="_blank" rel="noopener" href="https://blog.golang.org/go1.13">Go 1.13 版本发布</a>。主要的变动点包括：</p>
+<ul>
+<li style="font-size: 20px; line-height: 38px;">增加以 0b 或 0B 开头的二进制数字字面量形式，如：<code>0b111</code>；</li>
+<li style="font-size: 20px; line-height: 38px;">增加以"0o"或"0O"开头的八进制数字字面量形式，如：<code>0o700</code>；</li>
+<li style="font-size: 20px; line-height: 38px;">增加以 0x 或 0X 开头的十六进制形式的浮点数字面量，如：<code>0x123.86p+2</code>；</li>
+<li style="font-size: 20px; line-height: 38px;">支持在数字字面量中通过数字分隔符"_"提高可读性，如：<code>a := 5_3_7</code>等；</li>
+<li style="font-size: 20px; line-height: 38px;">取消了移位操作(<code>&gt;&gt;</code>和<code>&lt;&lt;</code>)的右操作数仅能是无符号数的限制；</li>
+<li style="font-size: 20px; line-height: 38px;">继续对 Go module 机制进行优化，包括：当<code>GO111MODULE=auto</code>时，无论是在$GOPATH/src 下还是 GOPATH 之外的仓库中&gt;，只要目录下有 go.mod，Go 编译器都会使用 go module 来管理依赖；GOPROXY 支持配置多个代理，默认值为<code>https://proxy.golang.org,direct</code>；提供了 GOPRIVATE 变量，用于指示哪些仓库下的 module 是私有的，即不需要通过 GOPROXY 下载，也不需要通过 GOSUMDB 去验证其校验和；</li>
+<li style="font-size: 20px; line-height: 38px;">Go 错误处理改善：在标准库中增加 <a target="_blank" rel="noopener" href="http://errors.Is">errors.Is</a> 和 As 函数来解决 error value 的比较判定问题；增加 errors.Unwrap 函数来解决 error 的展开(unwrap)问题；</li>
+<li style="font-size: 20px; line-height: 38px;">defer 性能提升 30%；</li>
+<li style="font-size: 20px; line-height: 38px;">支持的 unicode 标准从 10.0 版本升级到<a target="_blank" rel="noopener" href="http://www.unicode.org/versions/Unicode11.0.0/">Unicode 11.0 版本</a>。</li>
+</ul>
+</li>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;">2020 年 2 月 26 日，<a target="_blank" rel="noopener" href="https://blog.golang.org/go1.14">Go 1.14 版本发布</a>。主要的变动点包括：</p>
+<ul>
+<li style="font-size: 20px; line-height: 38px;">支持<a target="_blank" rel="noopener" href="https://github.com/golang/proposal/blob/master/design/6977-overlapping-interfaces.md">嵌入接口的方法集可重叠</a>；</li>
+<li style="font-size: 20px; line-height: 38px;">支持 goroutine 的异步抢占式调度；</li>
+<li style="font-size: 20px; line-height: 38px;">defer 性能得到大幅优化，理论上可实现 30%的提升；</li>
+<li style="font-size: 20px; line-height: 38px;">重新实现了运行时(runtime)层的 timer；</li>
+<li style="font-size: 20px; line-height: 38px;">go module 可应用于生产环境；</li>
+<li style="font-size: 20px; line-height: 38px;">标准库 testing 包增加<code>Cleanup</code>方法用于实现测试执行后的清理工作。</li>
+</ul>
+</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 团队发布的 Go 语言稳定版本总体质量一直很高，少有影响使用的重大 bug。Go 团队一直建议大家使用最新的发布版。Google 的产品，比如 Google App Engine（以下简称为 GAE），向来是这方面的“急先锋” —— 一般在 Go 新版本发布不久后，GAE 便会宣布支持最新版本的 Go。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 团队每年发布两次大版本，一般是在二月份和八月份发布。Go 团队对最新的两个 Go 稳定版本提供支持，比如如果目前最新版本是 Go 1.14，那么 Go 团队会为 Go 1.14 和 Go 1.13 提供支持。如果 Go 1.15 版本发布，支持的版本将变成 Go 1.15 和 Go 1.14。支持的范围主要包括修复版本中存在的重大问题、仅文档变更以及安全问题更新。</p>
+</div><div class="cl-preview-section"><h2 style="font-size: 30px;"><span id="5-小结">5. 小结</span></h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">了解一门编程语言的诞生历史和早期演化史，有助于程序员在学习这门语言的同时产生或加深对语言的认同感。程序员能感同身受，从而能更加有热情的投入到这门语言的学习和使用当中。同时这种认同感也能积极推动程序员在后续的实践中形成语言的原生思维（比如：Go 语言思维），从而更加高效地利用这门语言进行编程，解决实际问题。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">同时，了解 Go 版本的发布历史以及不同版本的主要变动点，将有助于程序员根据自身的实际情况选择最为适合的 Go 版本。</p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item" style="font-size: 20px; line-height: 38px;"><p style="font-size: 20px; line-height: 38px;">Rob Pike（罗伯·派克），早期贝尔实验室成员，参与了 Plan9 操作系统、C 编译器以及多种语言编译器的设计和实现，UTF-8 发明人之一。 <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item" style="font-size: 20px; line-height: 38px;"><p style="font-size: 20px; line-height: 38px;">Robert Griesemer（罗伯特·格瑞史莫），Java 的 HotSpot 虚拟机和 Chrome 浏览器的 JavaScript V8 引擎的设计者之一。 <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn3" class="footnote-item" style="font-size: 20px; line-height: 38px;"><p style="font-size: 20px; line-height: 38px;">Ken Thompson（肯·汤普逊），图灵奖得主、Unix 之父以及 C 语言的发明人之一。 <a href="#fnref3" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn4" class="footnote-item" style="font-size: 20px; line-height: 38px;"><p style="font-size: 20px; line-height: 38px;">“少即是多” - <a target="_blank" rel="noopener" href="https://commandcenter.blogspot.com/2012/06/less-is-exponentially-more.html">https://commandcenter.blogspot.com/2012/06/less-is-exponentially-more.html</a> <a href="#fnref4" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+</div>}
+                        </div>
+                    </div>
+                                            <!-- 买过的阅读 -->
+                        <div class="art-next-prev clearfix">
+                                                                                                                            <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/87/article/2321">
+                                                                    <div class="next r clearfix">
+                                        <p>
+                                            02 Go语言的设计哲学之一：简单
+                                        </p>
+                                        <div class="icon r">
+                                            <i class="imv2-arrow3_r"></i>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                                    </div>
+                                    </div>
+                <div class="comments-con js-comments-con" id="coments_con">
+                </div>
+
+                
+            </div>
+            
+            
+            
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-jiaQun-new hide" id="modal-jiaQun">
+    <div class="inner" style>
+        <div class="modal-close js-close-jiaQun">
+            <i class="imv2-close"></i>
+        </div>
+        <div class="content">
+            <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img1.sycdn.imooc.com/5f51ecec0001392b05330597.jpg">
+            <div class="right-info">
+                <div class="title">
+                    扫码加入慕课前沿技术核心用户群
+                </div>
+                <div class="desc">
+                                            <p class="mb6">验证信息：<span id="joincode">2010312025386365</span><span class="copy js-copy-joincode">复制</span></p>
+                                        <p class="mb6">QQ讨论群号：729941811</p>
+                                            <p>QQ群URL：<a href="https://jq.qq.com/?_wv=1027&amp;k=5WJLMxV" target="_blank">点击访问</a></p>
+                                    </div>
+            </div>
+            <p class="tip">若遇到搜索不到QQ群或加群失败，请联系客服邮箱:kf@imooc.com</p>
+        </div>
+    </div>
+</div>
+ 
+<!-- 专栏介绍页专栏评价 -->
+
+<!-- 专栏介绍页底部三条评价 -->
+
+<!-- 专栏阅读页弹层目录和介绍页页面目录 -->
+
+<!-- 专栏阅读页发布回复 -->
+
+<!-- 专栏阅读页发布评论 -->
+
+<!-- 专栏阅读页底部评论 -->
+
+<!-- 专栏阅读 单个 评论 -->
+
+<!-- 新增回复和展开三条以外回复 -->
+
+<!-- 立即订阅的弹窗 -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div></body></html></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://s2-cdn.oneitfarm.com/e12ece12233b4059860acf48637d830a.jpg" onerror="this.onerror=null;this.src='/blog/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">夏夏天</div><div class="author-info__description">以地事秦 犹抱薪救火 薪不尽 火不灭</div></div><div class="card-info-data site-data is-center"><a href="/blog/archives/"><div class="headline">Articles</div><div class="length-num">74</div></a><a href="/blog/tags/"><div class="headline">Tags</div><div class="length-num">48</div></a><a href="/blog/categories/"><div class="headline">Categories</div><div class="length-num">20</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/blog/atom.xml" target="_blank" title=""><i class="fa fa-rss"></i></a><a class="social-icon" href="https://github.com/smartXia" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:xiapeifu@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://gitee.com/xiapeifu" target="_blank" title="Gitee"><i class="iconfont gitee"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/blog/2024/03/12/PHP/PHP-%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0-destruct/" title="PHP-析构函数-destruct"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/blog/img/php.jpeg" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="PHP-析构函数-destruct"/></a><div class="content"><a class="title" href="/blog/2024/03/12/PHP/PHP-%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0-destruct/" title="PHP-析构函数-destruct">PHP-析构函数-destruct</a><time datetime="2024-03-12T02:43:39.598Z" title="Created 2024-03-12 10:43:39">2024-03-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2024/03/12/GOLANG/GOLANG-%E7%AC%94%E8%AE%B03-nil-slice-map/" title="GOLANG-笔记-ArrayMapSlice"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/blog/img/golang.jpeg" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="GOLANG-笔记-ArrayMapSlice"/></a><div class="content"><a class="title" href="/blog/2024/03/12/GOLANG/GOLANG-%E7%AC%94%E8%AE%B03-nil-slice-map/" title="GOLANG-笔记-ArrayMapSlice">GOLANG-笔记-ArrayMapSlice</a><time datetime="2024-03-12T02:43:39.590Z" title="Created 2024-03-12 10:43:39">2024-03-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2022/03/16/darp-Docs/" title="darp Docs"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/blog/img/404.jpg" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="darp Docs"/></a><div class="content"><a class="title" href="/blog/2022/03/16/darp-Docs/" title="darp Docs">darp Docs</a><time datetime="2022-03-16T06:59:18.000Z" title="Created 2022-03-16 14:59:18">2022-03-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2021/12/09/GOLANG/GOLANG-grpc-2/" title="GOLANG-grpc-2"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/blog/img/404.jpg" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="GOLANG-grpc-2"/></a><div class="content"><a class="title" href="/blog/2021/12/09/GOLANG/GOLANG-grpc-2/" title="GOLANG-grpc-2">GOLANG-grpc-2</a><time datetime="2021-12-09T07:05:54.000Z" title="Created 2021-12-09 15:05:54">2021-12-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2021/12/02/%E5%BB%BA%E7%AB%99/x86%E5%92%8Carm%E6%9E%B6%E6%9E%84%E5%8C%BA%E5%88%AB/" title="x86和arm架构区别"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/blog/img/404.jpg" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="x86和arm架构区别"/></a><div class="content"><a class="title" href="/blog/2021/12/02/%E5%BB%BA%E7%AB%99/x86%E5%92%8Carm%E6%9E%B6%E6%9E%84%E5%8C%BA%E5%88%AB/" title="x86和arm架构区别">x86和arm架构区别</a><time datetime="2021-12-02T08:22:44.000Z" title="Created 2021-12-02 16:22:44">2021-12-02</time></div></div></div></div><div class="card-widget" id="card-newest-comments"><div class="item-headline"><i class="fas fa-comment-dots"></i><span>Latest Comments</span></div><div class="aside-list"><span>loading...</span></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
+            <a class="card-more-btn" href="/blog/categories/" title="View More">
+    <i class="fas fa-angle-right"></i></a>
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/DOCKER/"><span class="card-category-list-name">DOCKER</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/Diary/"><span class="card-category-list-name">Diary</span><span class="card-category-list-count">2</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/Diary/Games/"><span class="card-category-list-name">Games</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/Diary/PlayStation/"><span class="card-category-list-name">PlayStation</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/GOLANG/"><span class="card-category-list-name">GOLANG</span><span class="card-category-list-count">14</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/HTTP/"><span class="card-category-list-name">HTTP</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/Life/"><span class="card-category-list-name">Life</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/MYSQL/"><span class="card-category-list-name">MYSQL</span><span class="card-category-list-count">3</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/blog/tags/pubsub/" style="font-size: 1.1em; color: #999">pubsub</a> <a href="/blog/tags/cgi/" style="font-size: 1.1em; color: #999">cgi</a> <a href="/blog/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 1.1em; color: #999">数据结构</a> <a href="/blog/tags/%E6%97%A5%E5%BF%97/" style="font-size: 1.1em; color: #999">日志</a> <a href="/blog/tags/Iterator-%E7%AD%89%E5%BE%85%E6%9B%B4%E6%96%B0/" style="font-size: 1.1em; color: #999">Iterator - 等待更新</a> <a href="/blog/tags/ssr/" style="font-size: 1.1em; color: #999">ssr</a> <a href="/blog/tags/%E4%B8%BB%E9%A2%98/" style="font-size: 1.1em; color: #999">主题</a> <a href="/blog/tags/docekr-images/" style="font-size: 1.1em; color: #999">docekr images</a> <a href="/blog/tags/Slice/" style="font-size: 1.23em; color: #999ea6">Slice</a> <a href="/blog/tags/redis/" style="font-size: 1.37em; color: #99a4b2">redis</a> <a href="/blog/tags/Generator/" style="font-size: 1.1em; color: #999">Generator</a> <a href="/blog/tags/fastcgi/" style="font-size: 1.1em; color: #999">fastcgi</a> <a href="/blog/tags/gox/" style="font-size: 1.1em; color: #999">gox</a> <a href="/blog/tags/%E6%8E%A8%E8%8D%90/" style="font-size: 1.1em; color: #999">推荐</a> <a href="/blog/tags/strlen/" style="font-size: 1.1em; color: #999">strlen</a> <a href="/blog/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 1.1em; color: #999">设计模式</a> <a href="/blog/tags/wiki/" style="font-size: 1.37em; color: #99a4b2">wiki</a> <a href="/blog/tags/php/" style="font-size: 1.1em; color: #999">php</a> <a href="/blog/tags/gin/" style="font-size: 1.1em; color: #999">gin</a> <a href="/blog/tags/rpc/" style="font-size: 1.23em; color: #999ea6">rpc()</a> <a href="/blog/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 1.1em; color: #999">工具</a> <a href="/blog/tags/HEXO/" style="font-size: 1.1em; color: #999">HEXO</a> <a href="/blog/tags/farmworker/" style="font-size: 1.1em; color: #999">farmworker</a> <a href="/blog/tags/golang/" style="font-size: 1.5em; color: #99a9bf">golang</a> <a href="/blog/tags/cli/" style="font-size: 1.1em; color: #999">cli</a> <a href="/blog/tags/Closure/" style="font-size: 1.1em; color: #999">Closure</a> <a href="/blog/tags/%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0/" style="font-size: 1.1em; color: #999">匿名函数</a> <a href="/blog/tags/xhprof-docker-push/" style="font-size: 1.1em; color: #999">xhprof docker push</a> <a href="/blog/tags/%E6%95%99%E7%A8%8B/" style="font-size: 1.1em; color: #999">教程</a> <a href="/blog/tags/photo/" style="font-size: 1.1em; color: #999">photo</a> <a href="/blog/tags/zap/" style="font-size: 1.1em; color: #999">zap</a> <a href="/blog/tags/PHP/" style="font-size: 1.37em; color: #99a4b2">PHP</a> <a href="/blog/tags/MSYQL/" style="font-size: 1.1em; color: #999">MSYQL</a> <a href="/blog/tags/%E4%B9%A6%E7%B1%8D/" style="font-size: 1.1em; color: #999">书籍</a> <a href="/blog/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 1.1em; color: #999">排序</a> <a href="/blog/tags/module/" style="font-size: 1.1em; color: #999">module</a> <a href="/blog/tags/%E7%BC%96%E7%A0%81/" style="font-size: 1.1em; color: #999">编码</a> <a href="/blog/tags/%E7%BD%91%E6%98%93%E4%BA%91-server%E9%85%B1-py-%E4%BA%91%E5%87%BD%E6%95%B0-%E5%BE%85%E6%9B%B4%E6%96%B0/" style="font-size: 1.1em; color: #999">网易云 server酱 py 云函数  待更新</a> <a href="/blog/tags/USE/" style="font-size: 1.1em; color: #999">USE</a> <a href="/blog/tags/%E5%BE%85%E6%9B%B4%E6%96%B0/" style="font-size: 1.23em; color: #999ea6">待更新</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span><a class="card-more-btn" href="/blog/archives/" title="View More">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2024/03/"><span class="card-archive-list-date">March 2024</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2022/03/"><span class="card-archive-list-date">March 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2021/12/"><span class="card-archive-list-date">December 2021</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2021/11/"><span class="card-archive-list-date">November 2021</span><span class="card-archive-list-count">7</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2021/10/"><span class="card-archive-list-date">October 2021</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2021/09/"><span class="card-archive-list-date">September 2021</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2021/08/"><span class="card-archive-list-date">August 2021</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2021/06/"><span class="card-archive-list-date">June 2021</span><span class="card-archive-list-count">4</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">74</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-03-12T03:45:18.980Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 夏夏天</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">简</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="chat-btn" type="button" title="Chat"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/blog/js/utils.js?v=4.13.0"></script><script src="/blog/js/main.js?v=4.13.0"></script><script src="/blog/js/tw_cn.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.8.8/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const initValine = () => {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'b5KjzAk69Lg3yBaVPeEiuljv-gzGzoHsz',
+      appKey: 'Yb0PJ1jscpDdBIvDLO6MEYUy',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  const loadValine = async () => {
+    if (typeof Valine === 'function') initValine()
+    else {
+      await getScript('https://cdn.jsdelivr.net/npm/valine@1.5.1/dist/Valine.min.js')
+      initValine()
+    }
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script></div><script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.19.0/js/md5.min.js"></script><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[image]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[link]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[code]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getIcon = (icon, mail) => {
+    if (icon) return icon
+    let defaultIcon = '?d=monsterid'
+    let iconUrl = `https://gravatar.loli.net/avatar/${md5(mail.toLowerCase()) + defaultIcon}`
+    return iconUrl
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += 'No comments'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const getComment = () => {
+    const serverURL = 'https://b5KjzAk6.api.lncldglobal.com'
+
+    var settings = {
+      "method": "GET",
+      "headers": {
+        "X-LC-Id": 'b5KjzAk69Lg3yBaVPeEiuljv-gzGzoHsz',
+        "X-LC-Key": 'Yb0PJ1jscpDdBIvDLO6MEYUy',
+        "Content-Type": "application/json"
+      },
+    }
+
+    fetch(`${serverURL}/1.1/classes/Comment?limit=6&order=-createdAt`,settings)
+      .then(response => response.json())
+      .then(data => {
+        const valineArray = data.results.map(function (e) {
+          return {
+            'avatar': getIcon(e.QQAvatar, e.mail),
+            'content': changeContent(e.comment),
+            'nick': e.nick,
+            'url': e.url + '#' + e.objectId,
+            'date': e.updatedAt,
+          }
+        })
+        saveToLocal.set('valine-newest-comments', JSON.stringify(valineArray), 10/(60*24))
+        generateHtml(valineArray)
+      }).catch(e => {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "Unable to retrieve comments, please check the configuration"
+      }) 
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('valine-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/blog/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>

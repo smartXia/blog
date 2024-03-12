@@ -1,0 +1,1114 @@
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Some | Some</title><meta name="author" content="夏夏天,xiapeifu@gmail.com"><meta name="copyright" content="夏夏天"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="15 注意：Go 字符串是原生类型-慕课专栏"><link rel="shortcut icon" href="/blog/img/favicon.png"><link rel="canonical" href="https://smartxia.github.io/blog/book/15%E6%B3%A8%E6%84%8FGo%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%98%AF%E5%8E%9F%E7%94%9F%E7%B1%BB%E5%9E%8B%E6%85%95%E8%AF%BE%E4%B8%93%E6%A0%8F.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/blog/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/blog/',
+  algolia: undefined,
+  localSearch: {"path":"/blog/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: 夏夏天","link":"Link: ","source":"Source: Some","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Some',
+  isPost: false,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-03-12 10:43:39'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/blog/atom.xml" title="Some" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://s2-cdn.oneitfarm.com/e12ece12233b4059860acf48637d830a.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/blog/archives/"><div class="headline">Articles</div><div class="length-num">74</div></a><a href="/blog/tags/"><div class="headline">Tags</div><div class="length-num">48</div></a><a href="/blog/categories/"><div class="headline">Categories</div><div class="length-num">20</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/blog/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/blog/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="//tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/blog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/blog/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/blog/movies/"><i class="fa-fw fas fa-film"></i><span> Movie</span></a></li><li><a class="site-page child" href="/blog/photos/"><i class="fa-fw fas fa-picture"></i><span> Photo</span></a></li><li><a class="site-page child" href="/blog/games/"><i class="fa-fw fas fa-gamepad"></i><span> Game</span></a></li><li><a class="site-page child" href="/blog/books/"><i class="fa-fw fas fa-book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/blog/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/blog/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/blog/messageboard/"><i class="fa-fw fas fa-coffee"></i><span> Messageboard</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header" style="background-image: url('http://s2-cdn.oneitfarm.com/cac574f332b3413f89164d966759be51.jpg')"><nav id="nav"><span id="blog-info"><a href="/blog/" title="Some"><span class="site-name">Some</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/blog/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/blog/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="//tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/blog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/blog/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/blog/movies/"><i class="fa-fw fas fa-film"></i><span> Movie</span></a></li><li><a class="site-page child" href="/blog/photos/"><i class="fa-fw fas fa-picture"></i><span> Photo</span></a></li><li><a class="site-page child" href="/blog/games/"><i class="fa-fw fas fa-gamepad"></i><span> Game</span></a></li><li><a class="site-page child" href="/blog/books/"><i class="fa-fw fas fa-book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/blog/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/blog/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/blog/messageboard/"><i class="fa-fw fas fa-coffee"></i><span> Messageboard</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="page-site-info"><h1 id="site-title">Some</h1></div></header><main class="layout" id="content-inner"><div id="page"><div id="article-container"><html><head><meta charset="utf-8"><title>15 注意：Go 字符串是原生类型-慕课专栏</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+			<meta name="renderer" content="webkit">
+			<meta property="qc:admins" content="77103107776157736375">
+			<meta property="wb:webmaster" content="c4f857219bfae3cb">
+			<meta http-equiv="Access-Control-Allow-Origin" content="*">
+			<meta http-equiv="Cache-Control" content="no-transform ">
+			<meta http-equiv="Cache-Control" content="no-siteapp">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://www.imooc.com/static/img/common/touch-icon-ipad.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://www.imooc.com/static/img/common/touch-icon-iphone-retina.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://www.imooc.com/static/img/common/touch-icon-ipad-retina.png">
+			<link href="https://moco.imooc.com/captcha/style/captcha.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201907021539" type="text/css">
+			<link rel="stylesheet" href="https://www.imooc.com/static/lib/swiper/swiper-3.4.2.min.css?t=201907021539">
+			<link rel="stylesheet" href="https://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,column/zhuanlanChapter-less.css?t=2.5,course/inc/course_tipoff-less.css?t=2.5?v=201907051055" type="text/css">
+			<link charset="utf-8" rel="stylesheet" href="https://www.imooc.com/static/lib/ueditor/themes/imooc/css/ueditor.css?v=201907021539"><link rel="stylesheet" href="https://www.imooc.com/static/lib/baiduShare/api/css/share_style0_16.css?v=6aba13f0.css"></head>
+			<body><div id="main">
+
+
+<div class="main-con hide-menu">
+    <!-- 左侧菜单 & 索引 -->
+    
+    <div class="right-content" style="padding-left: 0px;">
+        <div class="container clearfix" id="top" style="width: 1134px; display: block;">
+            
+            
+            <div class="center_con js-center_con l" style="width: 1134px;">
+                <div class="article-con">
+                                            <!-- 买过的阅读 -->
+                        
+
+                    
+                    <div class="art-title" style="margin-top: 0px;">
+                        15 注意：Go 字符串是原生类型
+                    </div>
+                    <div class="art-info clearfix">
+                        
+                        <span class="l">
+                            更新时间：2020-10-19 16:56:55
+                        </span>
+                    </div>
+                    <div class="art-top">
+                                                <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img1.sycdn.imooc.com/5f68464b0001797406400318.jpg" alt>
+                                                                        <div class="famous-word-box">
+                            <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://www.imooc.com/static/img/column/bg-l.png" alt class="bg1 bg">
+                            <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://www.imooc.com/static/img/column/bg-r.png" alt class="bg2 bg">
+                            <div class="famous-word">才能一旦让懒惰支配，它就一无可为。——克雷洛夫<p></p></div>
+                        </div>
+                                            </div>
+                    <div class="art-content js-lookimg">
+                        <div id="article_content">
+                            <div class="cl-preview-section"><h2 style="font-size: 30px;"><span id="1-go-语言的字符串类型">1. Go 语言的字符串类型</span></h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">字符串类型是现代编程语言中最常使用的数据类型之一。在 Go 语言的先祖之一 C 语言当中，字符串类型并没有被显式定义，而是以字符串字面值常量或以’\0’结尾的字符类型（char）数组来呈现的：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go">#define GOAUTHERS <span class="token string">"Robert Griesemer, Rob Pike, and Ken Thompson"</span>
+<span class="token keyword">const</span> char <span class="token operator">*</span> s <span class="token operator">=</span> <span class="token string">"hello world"</span>
+char s<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"hello gopher"</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">这给 C 程序员在使用字符串时带来一些问题，诸如：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">类型安全性差；</li>
+<li style="font-size: 20px; line-height: 38px;">字符串操作要时时刻刻考虑结尾的’\0’；</li>
+<li style="font-size: 20px; line-height: 38px;">字符串数据可变（主要指以字符数组形式定义的字符串类型）；</li>
+<li style="font-size: 20px; line-height: 38px;">获取字符串长度代价大（O(n)时间复杂度）；</li>
+<li style="font-size: 20px; line-height: 38px;">未内置对非 ASCII 字符（如中文字符）的处理。</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 内置了 string 类型，统一了对“字符串”的抽象。这样无论是字符串常量、字符串变量或是代码中出现的字符串字面值，它们的类型都被统一设置为 string：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go">
+<span class="token comment">// sources/string_type.go</span>
+
+<span class="token keyword">package</span> main
+  
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">const</span> <span class="token punctuation">(</span>
+        s <span class="token operator">=</span> <span class="token string">"string constant"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">var</span> s1 <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">"string variable"</span>
+
+        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%T\n"</span><span class="token punctuation">,</span> s<span class="token punctuation">)</span> <span class="token comment">// string</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%T\n"</span><span class="token punctuation">,</span> s1<span class="token punctuation">)</span> <span class="token comment">// string</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%T\n"</span><span class="token punctuation">,</span> <span class="token string">"temporary string literal"</span><span class="token punctuation">)</span> <span class="token comment">// string</span>
+<span class="token punctuation">&#125;</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go string 类型设计充分吸取了 C 语言字符串设计的经验教训，并结合了其他主流语言在字符串类型设计上的最佳实践，最终为 Gopher 呈现的 Go string 类型具有如下功能特点：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><strong>string 类型的数据是不可变的</strong></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">一旦声明了一个 string 类型的标识符，无论是变量还是变量，那么该标识符所指代的数据在整个程序的生命周期内便无法被更改。下面我来尝试修改一下 string 数据，看看能得到怎样的结果。先来看第一种方法：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// sources/string_immutable1.go</span>
+
+<span class="token keyword">package</span> main
+  
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+        <span class="token string">"fmt"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// original string</span>
+        <span class="token keyword">var</span> s <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">"hello"</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"original string:"</span><span class="token punctuation">,</span> s<span class="token punctuation">)</span>
+
+        <span class="token comment">// reslice it and try to change the original string</span>
+        sl <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+        sl<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'t'</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"slice:"</span><span class="token punctuation">,</span> <span class="token function">string</span><span class="token punctuation">(</span>sl<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"after reslice, the original string is:"</span><span class="token punctuation">,</span> <span class="token function">string</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">该程序的运行结果如下：</p>
+</div><div class="cl-preview-section"><pre><code>$go run string_immutable1.go
+original string: hello
+slice: tello
+after reslice, the original string is: hello
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到在例子中我们试图通过将 string 转换为一个 slice 并通过该 slice 对其内容进行修改，但结果事与愿违。对 string 进行 slice 转换后，Go 编译器会为 slice 变量重新分配底层存储而不是共用 string 的底层存储，因此对 slice 的修改并未对原 string 的数据产生任何影响。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们再来试试通过更为“暴力”一些的手段对 string 的数据发起“攻击”：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go">
+<span class="token comment">// sources/string_immutable2.go</span>
+
+<span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"fmt"</span>
+	<span class="token string">"unsafe"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// original string</span>
+	<span class="token keyword">var</span> s <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">"hello"</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"original string:"</span><span class="token punctuation">,</span> s<span class="token punctuation">)</span>
+
+	<span class="token comment">// try to change the original string through unsafe pointer</span>
+	<span class="token function">modifyString</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>s<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">modifyString</span><span class="token punctuation">(</span>s <span class="token operator">*</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// 取出第一个8字节的值</span>
+	p <span class="token operator">:=</span> <span class="token punctuation">(</span><span class="token operator">*</span><span class="token builtin">uintptr</span><span class="token punctuation">)</span><span class="token punctuation">(</span>unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+	<span class="token comment">// 获取底层数组的地址</span>
+	<span class="token keyword">var</span> array <span class="token operator">*</span><span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token builtin">byte</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">)</span><span class="token punctuation">(</span>unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span><span class="token operator">*</span>p<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+	<span class="token keyword">var</span> <span class="token builtin">len</span> <span class="token operator">*</span><span class="token builtin">int</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token operator">*</span><span class="token builtin">int</span><span class="token punctuation">)</span><span class="token punctuation">(</span>unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span><span class="token function">uintptr</span><span class="token punctuation">(</span>unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> unsafe<span class="token punctuation">.</span><span class="token function">Sizeof</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token builtin">uintptr</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token boolean">nil</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+	<span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token punctuation">(</span><span class="token operator">*</span><span class="token builtin">len</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%p =&gt; %c\n"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">*</span>array<span class="token punctuation">)</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token operator">*</span>array<span class="token punctuation">)</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+		p1 <span class="token operator">:=</span> <span class="token operator">&amp;</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">*</span>array<span class="token punctuation">)</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+		v <span class="token operator">:=</span> <span class="token punctuation">(</span><span class="token operator">*</span>p1<span class="token punctuation">)</span>
+		<span class="token punctuation">(</span><span class="token operator">*</span>p1<span class="token punctuation">)</span> <span class="token operator">=</span> v <span class="token operator">+</span> <span class="token number">1</span> <span class="token comment">//try to change the character</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们试图通过 unsafe 指针指向 string 在运行时内部表示结构（具体参考本节后面的讲解）中的数据存储块的地址，然后通过指针修改那块内存中存储的数据。我们运行这段程序得到下面的结果：</p>
+</div><div class="cl-preview-section"><pre><code>$go run string_immutable2.go
+original string: hello
+0x10d1b9d =&gt; h
+unexpected fault address 0x10d1b9d
+fatal error: fault
+[signal SIGBUS: bus error code=0x2 addr=0x10d1b9d pc=0x109b079]
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到：对 string 的底层的数据存储区仅能做只读操作，一旦试图修改那块区域的数据，便会得到 SIGBUS 的运行时错误。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><strong>零值可用</strong></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go string 类型支持零值可用的理念。Go 字符串无需像 C 语言中那样考虑结尾’\0’字符，因此其零值为""，长度为 0。</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token keyword">var</span> s <span class="token builtin">string</span>
+fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token comment">// s = ""</span>
+fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// 0</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><strong>获取长度的时间复杂度是 O(1) 级别</strong></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go string 类型数据是不可变的，因此一旦有了初值后，那块数据就不会改变，其长度也不会改变。Go 将这个长度作为一个字段存储在了运行时的 string 类型结构中了（在本节后面有说明）。这样获取 string 长度的操作，即 len(s) 实际上就是读取存储在运行时中的那个长度值，这是一个代价极低的 O(1)操作。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><strong>支持通过+/+=操作符进行字符串连接</strong></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">通过+/+=操作符进行的字符串连接是对开发者体验最好的字符串连接操作，Go 语言支持这种操作。</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go">s <span class="token operator">:=</span> <span class="token string">"Rob Pike, "</span>
+s <span class="token operator">=</span> s <span class="token operator">+</span> <span class="token string">"Robert Griesemer, "</span>
+s <span class="token operator">+=</span> <span class="token string">" Ken Thompson"</span>
+
+fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token comment">// Rob Pike, Robert Griesemer, Ken Thompson</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><strong>支持各种比较关系操作符：==、!= 、&gt;=、&lt;=、&gt; 和 &lt;</strong></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 支持各种比较关系操作符：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// sources/string_compare.go</span>
+<span class="token keyword">package</span> main
+  
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// ==</span>
+        s1 <span class="token operator">:=</span> <span class="token string">"世界和平"</span>
+        s2 <span class="token operator">:=</span> <span class="token string">"世界"</span> <span class="token operator">+</span> <span class="token string">"和平"</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>s1 <span class="token operator">==</span> s2<span class="token punctuation">)</span> <span class="token comment">// true</span>
+
+        <span class="token comment">// !=</span>
+        s1 <span class="token operator">=</span> <span class="token string">"Go"</span>
+        s2 <span class="token operator">=</span> <span class="token string">"C"</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>s1 <span class="token operator">!=</span> s2<span class="token punctuation">)</span> <span class="token comment">// true</span>
+
+        <span class="token comment">// &lt; and &lt;=</span>
+        s1 <span class="token operator">=</span> <span class="token string">"12345"</span>
+        s2 <span class="token operator">=</span> <span class="token string">"23456"</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>s1 <span class="token operator">&lt;</span> s2<span class="token punctuation">)</span>  <span class="token comment">// true</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>s1 <span class="token operator">&lt;=</span> s2<span class="token punctuation">)</span> <span class="token comment">// true</span>
+
+        <span class="token comment">// &gt; and &gt;=</span>
+        s1 <span class="token operator">=</span> <span class="token string">"12345"</span>
+        s2 <span class="token operator">=</span> <span class="token string">"123"</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>s1 <span class="token operator">&gt;</span> s2<span class="token punctuation">)</span>  <span class="token comment">// true</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>s1 <span class="token operator">&gt;=</span> s2<span class="token punctuation">)</span> <span class="token comment">// true</span>
+<span class="token punctuation">&#125;</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">鉴于 Go string 是不可变的，因此如果两个字符串的 length 不相同，那么无需比较具体字符串数据，也可以断定两个字符串是不同的；如果 length 相同，则要进一步判断数据指针是否指向同一块底层存储数据。如果相同，则两个字符串是等价的，如果不同，则还需进一步去比对实际的数据内容。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><strong>对非 ASCII 字符提供原生支持</strong></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 源文件的字符编码默认为 UTF-8 编码。UTF-8 编码是目前市面上最流行的字符编码格式，囊括了几乎所有主流非 ASCII 字符（包括汉语字符）。Go string 类型也是以 UTF-8 编码作为内码存储将对应的文本存储在内存当中的。我们来看一个例子：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// sources/string_nonascii.go</span>
+<span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> 
+        <span class="token comment">// 中文字符  Unicode CodePoint(码点)   UTF8编码</span>
+        <span class="token comment">//  中          U+4E2D                  E4B8AD</span>
+        <span class="token comment">//  国          U+56FD                  E59BBD</span>
+        <span class="token comment">//  欢          U+6B22                  E6ACA2</span>
+        <span class="token comment">//  迎          U+8FCE                  E8BF8E</span>
+        <span class="token comment">//  您          U+60A8                  E682A8</span>
+        s <span class="token operator">:=</span> <span class="token string">"中国欢迎您"</span>
+        rs <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">rune</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+        sl <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+        <span class="token keyword">for</span> i<span class="token punctuation">,</span> v <span class="token operator">:=</span> <span class="token keyword">range</span> rs <span class="token punctuation">&#123;</span> 
+                <span class="token keyword">var</span> utf8Bytes <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span>
+                <span class="token keyword">for</span> j <span class="token operator">:=</span> i <span class="token operator">*</span> <span class="token number">3</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> <span class="token punctuation">(</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">3</span><span class="token punctuation">;</span> j<span class="token operator">++</span> <span class="token punctuation">&#123;</span> 
+                        utf8Bytes <span class="token operator">=</span> <span class="token function">append</span><span class="token punctuation">(</span>utf8Bytes<span class="token punctuation">,</span> sl<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span>
+                <span class="token punctuation">&#125;</span> 
+                fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%s =&gt; %X =&gt; %X\n"</span><span class="token punctuation">,</span> <span class="token function">string</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">,</span> v<span class="token punctuation">,</span> utf8Bytes<span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span> 
+<span class="token punctuation">&#125;</span>
+
+$<span class="token keyword">go</span> run string_nonascii<span class="token punctuation">.</span><span class="token keyword">go</span>
+中 <span class="token operator">=</span><span class="token operator">&gt;</span> 4E2D <span class="token operator">=</span><span class="token operator">&gt;</span> E4B8AD
+国 <span class="token operator">=</span><span class="token operator">&gt;</span> 56FD <span class="token operator">=</span><span class="token operator">&gt;</span> E59BBD
+欢 <span class="token operator">=</span><span class="token operator">&gt;</span> 6B22 <span class="token operator">=</span><span class="token operator">&gt;</span> E6ACA2
+迎 <span class="token operator">=</span><span class="token operator">&gt;</span> 8FCE <span class="token operator">=</span><span class="token operator">&gt;</span> E8BF8E
+您 <span class="token operator">=</span><span class="token operator">&gt;</span> 60A8 <span class="token operator">=</span><span class="token operator">&gt;</span> E682A8
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到字符串变量 s 中存储的文本是”中国欢迎你“五个汉字字符（非 ASCII 字符范畴），这里我们输出了每个中文字符对应的 Unicode 码点（Code Point，见输出结果的第二列），一个 rune 对应一个码点。UTF-8 编码是 Unicode 码点的一种字符编码形式，也是最常用的一种编码格式，也是 Go 默认的字符编码格式。我们还可以使用其他字符编码格式来映射 Unicode 码点，比如：UTF-16 等。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在 UTF-8 中，大多数中文字符都使用三个字节表示。[]byte(s)的转型让我们获得了 s 底层存储的“复制品”，从而我们得到了每个汉字字符对应的 UTF-8 编码字节(见输出结果的第三列)。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><strong>原生支持多行字符串</strong></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">C 语言中要构造多行字符串，要么使用多个字符串的自然拼接，要么需要结合续行符"\"，很难控制好格式：</p>
+</div><div class="cl-preview-section"><pre class="  language-c"><code class="prism  language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+
+<span class="token keyword">char</span> <span class="token operator">*</span>s <span class="token operator">=</span> <span class="token string">"好雨知时节，当春乃发生。\n"</span>
+<span class="token string">"随风潜入夜，润物细无声。\n"</span>
+<span class="token string">"野径云俱黑，江船火独明。\n"</span>
+<span class="token string">"晓看红湿处，花重锦官城。"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">char</span> <span class="token operator">*</span>s1 <span class="token operator">=</span> <span class="token string">"好雨知时节，当春乃发生。\n\
+随风潜入夜，润物细无声。\n\
+野径云俱黑，江船火独明。\n\
+晓看红湿处，花重锦官城。"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s\n"</span><span class="token punctuation">,</span> s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s\n"</span><span class="token punctuation">,</span> s1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 语言直接提供了通过反引号(`)构造“所见即所得”的多行字符串的方法：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// sources/string_multilines.go</span>
+<span class="token keyword">package</span> main
+  
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">const</span> s <span class="token operator">=</span> <span class="token string">`好雨知时节，当春乃发生。
+随风潜入夜，润物细无声。
+野径云俱黑，江船火独明。
+晓看红湿处，花重锦官城。`</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+$<span class="token keyword">go</span> run string_multilines<span class="token punctuation">.</span><span class="token keyword">go</span> 
+好雨知时节，当春乃发生。
+随风潜入夜，润物细无声。
+野径云俱黑，江船火独明。
+晓看红湿处，花重锦官城。
+</code></pre>
+</div><div class="cl-preview-section"><h2 style="font-size: 30px;"><span id="2-字符串的内部表示">2. 字符串的内部表示</span></h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go string 类型上述特性的实现与 Go 运行时对 string 类型的内部表示是分不开的。Go string 在运行时表示为下面结构：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// $GOROOT/src/runtime/string.go</span>
+<span class="token keyword">type</span> stringStruct <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+        str unsafe<span class="token punctuation">.</span>Pointer
+        <span class="token builtin">len</span> <span class="token builtin">int</span>
+<span class="token punctuation">&#125;</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到 string 类型也是一个“描述符”，它本身并不真正存储数据，而仅是由一个指向底层存储的指针和字符串的长度字段组成。我们结合一个 string 的实例化过程来看。下面是 runtime 包中实例化一个字符串对应的函数：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// $GOROOT/src/runtime/string.go</span>
+
+<span class="token comment">// rawstring allocates storage for a new string. The returned</span>
+<span class="token comment">// string and byte slice both refer to the same storage.</span>
+<span class="token comment">// The storage is not zeroed. Callers should use</span>
+<span class="token comment">// b to set the string contents and then drop b.</span>
+<span class="token keyword">func</span> <span class="token function">rawstring</span><span class="token punctuation">(</span>size <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>s <span class="token builtin">string</span><span class="token punctuation">,</span> b <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        p <span class="token operator">:=</span> <span class="token function">mallocgc</span><span class="token punctuation">(</span><span class="token function">uintptr</span><span class="token punctuation">(</span>size<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token boolean">nil</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
+        
+        <span class="token function">stringStructOf</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>s<span class="token punctuation">)</span><span class="token punctuation">.</span>str <span class="token operator">=</span> p
+        <span class="token function">stringStructOf</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>s<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">len</span> <span class="token operator">=</span> size
+
+        <span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">*</span>slice<span class="token punctuation">)</span><span class="token punctuation">(</span>unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">=</span> slice<span class="token punctuation">&#123;</span>p<span class="token punctuation">,</span> size<span class="token punctuation">,</span> size<span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">return</span>
+<span class="token punctuation">&#125;</span>       
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们用下面示意图来表示 rawstring 调用后的一个 string 实例的状态：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img1.sycdn.imooc.com/5f68454a00016ade09130896.png" data-original="//img1.sycdn.imooc.com/5f68454a00016ade09130896.png" alt="图片描述"></p>
+</div><div class="cl-preview-section"><center>图3-6-1 string类型在运行时的表示</center>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到每个字符串类型变量/常量对应一个 stringStruct 实例，经过 rawstring 实例化后，stringStruct 中的 str 指针指向真正存储字符串数据的底层内存区域，len 字段存储的是字符串的长度（这里是 5）；rawstring 同时还创建了一个临时的 slice，该 slice 的 array 指针也同样指向存储字符串数据的底层内存区域。注意 rawstring 调用后，新申请的内存区域还未被写入数据，该 slice 就是用于后续 runtime 层向其写入数据（“hello”）用的，写完数据后，该 slice 就可以被回收掉了，这也是上图中将 slice 结构以虚线框表示的原因。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">通过 string 在运行时的表示我们可以得到这样一个结论，那就是我们直接将 string 类型通过函数/方法参数传入也不会有太多的损耗，因为传入的仅仅是一个“描述符”，而不是真正的字符串数据。我们可以通过一个简单的基准测试来验证一下：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// sources/string_as_param_benchmark_test.go</span>
+<span class="token keyword">package</span> main
+  
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+        <span class="token string">"testing"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">var</span> s <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">`Go, also known as Golang, is a statically typed, compiled programming language designed at Google by Robert Griesemer, Rob Pike, and Ken Thompson. Go is syntactically similar to C, but with memory safety, garbage collection, structural typing, and communicating sequential processes (CSP)-style concurrency.`</span>
+
+<span class="token keyword">func</span> <span class="token function">handleString</span><span class="token punctuation">(</span>s <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token boolean">_</span> <span class="token operator">=</span> s <span class="token operator">+</span> <span class="token string">"hello"</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">handlePtrToString</span><span class="token punctuation">(</span>s <span class="token operator">*</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token boolean">_</span> <span class="token operator">=</span> <span class="token operator">*</span>s <span class="token operator">+</span> <span class="token string">"hello"</span>
+
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">BenchmarkHandleString</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">for</span> n <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> n <span class="token operator">&lt;</span> b<span class="token punctuation">.</span>N<span class="token punctuation">;</span> n<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
+                <span class="token function">handleString</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">BenchmarkHandlePtrToString</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">for</span> n <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> n <span class="token operator">&lt;</span> b<span class="token punctuation">.</span>N<span class="token punctuation">;</span> n<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
+                <span class="token function">handlePtrToString</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>s<span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">运行该基准测试：</p>
+</div><div class="cl-preview-section"><pre><code>$go test -bench . -benchmem string_as_param_benchmark_test.go 
+goos: darwin
+goarch: amd64
+BenchmarkHandleString-8        	15668872	        70.7 ns/op	     320 B/op	       1 allocs/op
+BenchmarkHandlePtrToString-8   	15809401	        71.8 ns/op	     320 B/op	       1 allocs/op
+PASS
+ok  	command-line-arguments	2.407s
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到直接传入 string 与传入 string 指针两者的基准测试结果几乎一模一样。Gopher 们大可放心地直接使用 string 作为函数/方法参数类型。</p>
+</div><div class="cl-preview-section"><h2 style="font-size: 30px;"><span id="3-字符串的高效构造">3. 字符串的高效构造</span></h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">前面提到过，Go 原生支持通过 +/+= 操作符来连接多个字符串以构造一个更长的字符串，并且通过 +/+= 操作符的字符串连接构造是最自然、开发体验最好的一种。但 Go 还提供了其他一些构造字符串的方法，比如：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">使用 fmt.Sprintf</li>
+<li style="font-size: 20px; line-height: 38px;">使用 strings.Join</li>
+<li style="font-size: 20px; line-height: 38px;">使用 strings.Builder</li>
+<li style="font-size: 20px; line-height: 38px;">使用 bytes.Buffer</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在这些方法中哪种方法更为高效呢？我们使用基准测试的数据来做参考：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// sources/string_concat_benchmark_test.go</span>
+
+<span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"bytes"</span>
+	<span class="token string">"fmt"</span>
+	<span class="token string">"strings"</span>
+	<span class="token string">"testing"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">var</span> sl <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">&#123;</span>
+	<span class="token string">"Rob Pike "</span><span class="token punctuation">,</span>
+	<span class="token string">"Robert Griesemer "</span><span class="token punctuation">,</span>
+	<span class="token string">"Ken Thompson "</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">concatStringByOperator</span><span class="token punctuation">(</span>sl <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> s <span class="token builtin">string</span>
+	<span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> v <span class="token operator">:=</span> <span class="token keyword">range</span> sl <span class="token punctuation">&#123;</span>
+		s <span class="token operator">+=</span> v
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">return</span> s
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">concatStringBySprintf</span><span class="token punctuation">(</span>sl <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> s <span class="token builtin">string</span>
+	<span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> v <span class="token operator">:=</span> <span class="token keyword">range</span> sl <span class="token punctuation">&#123;</span>
+		s <span class="token operator">=</span> fmt<span class="token punctuation">.</span><span class="token function">Sprintf</span><span class="token punctuation">(</span><span class="token string">"%s%s"</span><span class="token punctuation">,</span> s<span class="token punctuation">,</span> v<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">return</span> s
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">concatStringByJoin</span><span class="token punctuation">(</span>sl <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> strings<span class="token punctuation">.</span><span class="token function">Join</span><span class="token punctuation">(</span>sl<span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">concatStringByStringsBuilder</span><span class="token punctuation">(</span>sl <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> b strings<span class="token punctuation">.</span>Builder
+	<span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> v <span class="token operator">:=</span> <span class="token keyword">range</span> sl <span class="token punctuation">&#123;</span>
+		b<span class="token punctuation">.</span><span class="token function">WriteString</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">return</span> b<span class="token punctuation">.</span><span class="token function">String</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">concatStringByStringsBuilderWithInitSize</span><span class="token punctuation">(</span>sl <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> b strings<span class="token punctuation">.</span>Builder
+	b<span class="token punctuation">.</span><span class="token function">Grow</span><span class="token punctuation">(</span><span class="token number">64</span><span class="token punctuation">)</span>
+	<span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> v <span class="token operator">:=</span> <span class="token keyword">range</span> sl <span class="token punctuation">&#123;</span>
+		b<span class="token punctuation">.</span><span class="token function">WriteString</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">return</span> b<span class="token punctuation">.</span><span class="token function">String</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">concatStringByBytesBuffer</span><span class="token punctuation">(</span>sl <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> b bytes<span class="token punctuation">.</span>Buffer
+	<span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> v <span class="token operator">:=</span> <span class="token keyword">range</span> sl <span class="token punctuation">&#123;</span>
+		b<span class="token punctuation">.</span><span class="token function">WriteString</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">return</span> b<span class="token punctuation">.</span><span class="token function">String</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">concatStringByBytesBufferWithInitSize</span><span class="token punctuation">(</span>sl <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">&#123;</span>
+	buf <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">)</span>
+	b <span class="token operator">:=</span> bytes<span class="token punctuation">.</span><span class="token function">NewBuffer</span><span class="token punctuation">(</span>buf<span class="token punctuation">)</span>
+	<span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> v <span class="token operator">:=</span> <span class="token keyword">range</span> sl <span class="token punctuation">&#123;</span>
+		b<span class="token punctuation">.</span><span class="token function">WriteString</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">return</span> b<span class="token punctuation">.</span><span class="token function">String</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">BenchmarkConcatStringByOperator</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">for</span> n <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> n <span class="token operator">&lt;</span> b<span class="token punctuation">.</span>N<span class="token punctuation">;</span> n<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
+		<span class="token function">concatStringByOperator</span><span class="token punctuation">(</span>sl<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">BenchmarkConcatStringBySprintf</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">for</span> n <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> n <span class="token operator">&lt;</span> b<span class="token punctuation">.</span>N<span class="token punctuation">;</span> n<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
+		<span class="token function">concatStringBySprintf</span><span class="token punctuation">(</span>sl<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">BenchmarkConcatStringByJoin</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">for</span> n <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> n <span class="token operator">&lt;</span> b<span class="token punctuation">.</span>N<span class="token punctuation">;</span> n<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
+		<span class="token function">concatStringByJoin</span><span class="token punctuation">(</span>sl<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">BenchmarkConcatStringByStringsBuilder</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">for</span> n <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> n <span class="token operator">&lt;</span> b<span class="token punctuation">.</span>N<span class="token punctuation">;</span> n<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
+		<span class="token function">concatStringByStringsBuilder</span><span class="token punctuation">(</span>sl<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">BenchmarkConcatStringByStringsBuilderWithInitSize</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">for</span> n <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> n <span class="token operator">&lt;</span> b<span class="token punctuation">.</span>N<span class="token punctuation">;</span> n<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
+		<span class="token function">concatStringByStringsBuilderWithInitSize</span><span class="token punctuation">(</span>sl<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">BenchmarkConcatStringByBytesBuffer</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">for</span> n <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> n <span class="token operator">&lt;</span> b<span class="token punctuation">.</span>N<span class="token punctuation">;</span> n<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
+		<span class="token function">concatStringByBytesBuffer</span><span class="token punctuation">(</span>sl<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">BenchmarkConcatStringByBytesBufferWithInitSize</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">for</span> n <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> n <span class="token operator">&lt;</span> b<span class="token punctuation">.</span>N<span class="token punctuation">;</span> n<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
+		<span class="token function">concatStringByBytesBufferWithInitSize</span><span class="token punctuation">(</span>sl<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">运行该基准测试：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">$go test -bench=. -benchmem ./string_concat_benchmark_test.go
+goos: darwin
+goarch: amd64
+BenchmarkConcatStringByOperator-8                     	11744653	        89.1 ns/op	      80 B/op	       2 allocs/op
+BenchmarkConcatStringBySprintf-8                      	 2792876	       420 ns/op	     176 B/op	       8 allocs/op
+BenchmarkConcatStringByJoin-8                         	22923051	        49.1 ns/op	      48 B/op	       1 allocs/op
+BenchmarkConcatStringByStringsBuilder-8               	11347185	        96.6 ns/op	     112 B/op	       3 allocs/op
+BenchmarkConcatStringByStringsBuilderWithInitSize-8   	26315769	        42.3 ns/op	      64 B/op	       1 allocs/op
+BenchmarkConcatStringByBytesBuffer-8                  	14265033	        82.6 ns/op	     112 B/op	       2 allocs/op
+BenchmarkConcatStringByBytesBufferWithInitSize-8      	24777525	        48.1 ns/op	      48 B/op	       1 allocs/op
+PASS
+ok  	command-line-arguments	8.816s
+
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">从基准测试的输出结果的第三列，即每操作耗时的数值来看：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">做了预初始化的 strings.Builder 连接构建字符串效率最高；</li>
+<li style="font-size: 20px; line-height: 38px;">带有预初始化的 bytes.Buffer 和 strings.Join 两种方法不相伯仲，分列二三位；</li>
+<li style="font-size: 20px; line-height: 38px;">未预初始的 strings.Builder、bytes.Buffer 和操作符连接在第三档次；</li>
+<li style="font-size: 20px; line-height: 38px;">fmt.Sprintf性能最差，排在末尾。</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">由此可以得出一些结论：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">在能预估出最终字符串长度的情况下，使用预初始化的 strings.Builder 连接构建字符串效率最高；</li>
+<li style="font-size: 20px; line-height: 38px;">strings.Join 连接构造字符串的平均性能最稳定，如果输入的多个字符串是以[]string 承载，那么 strings.Join 也是不错的选择；</li>
+<li style="font-size: 20px; line-height: 38px;">使用操作符连接的方式最直观、最自然；如果在编译器可以知晓预连接的字符串个数，那么使用此种方式可以得到编译器的优化处理；</li>
+<li style="font-size: 20px; line-height: 38px;">fmt.Sprintf 虽然效率不高，但也不是一无是处；如果是由多种不同类型变量来构造特定格式的字符串，那么这种方式还是最适合的。</li>
+</ul>
+</div><div class="cl-preview-section"><h2 style="font-size: 30px;"><span id="4-字符串相关的高效转换">4. 字符串相关的高效转换</span></h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在前面的例子中，我们看到了 string 到[]rune 以及 string 到[]byte 的转换，这两个转换也是可逆的，也就是说 string 和[]rune、[]byte 可以双向相互转换。下面就是从[]rune 或[]byte 反向转换为 string 的例子：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// sources/string_slice_to_string.go</span>
+<span class="token keyword">package</span> main
+  
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        rs <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">rune</span><span class="token punctuation">&#123;</span>
+                <span class="token number">0x4E2D</span><span class="token punctuation">,</span>
+                <span class="token number">0x56FD</span><span class="token punctuation">,</span>
+                <span class="token number">0x6B22</span><span class="token punctuation">,</span>
+                <span class="token number">0x8FCE</span><span class="token punctuation">,</span>
+                <span class="token number">0x60A8</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#125;</span>
+
+        s <span class="token operator">:=</span> <span class="token function">string</span><span class="token punctuation">(</span>rs<span class="token punctuation">)</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span> 
+
+        sl <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">&#123;</span>
+                <span class="token number">0xE4</span><span class="token punctuation">,</span> <span class="token number">0xB8</span><span class="token punctuation">,</span> <span class="token number">0xAD</span><span class="token punctuation">,</span>
+                <span class="token number">0xE5</span><span class="token punctuation">,</span> <span class="token number">0x9B</span><span class="token punctuation">,</span> <span class="token number">0xBD</span><span class="token punctuation">,</span>
+                <span class="token number">0xE6</span><span class="token punctuation">,</span> <span class="token number">0xAC</span><span class="token punctuation">,</span> <span class="token number">0xA2</span><span class="token punctuation">,</span>
+                <span class="token number">0xE8</span><span class="token punctuation">,</span> <span class="token number">0xBF</span><span class="token punctuation">,</span> <span class="token number">0x8E</span><span class="token punctuation">,</span>
+                <span class="token number">0xE6</span><span class="token punctuation">,</span> <span class="token number">0x82</span><span class="token punctuation">,</span> <span class="token number">0xA8</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#125;</span>
+
+        s <span class="token operator">=</span> <span class="token function">string</span><span class="token punctuation">(</span>sl<span class="token punctuation">)</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+$<span class="token keyword">go</span> run string_slice_to_string<span class="token punctuation">.</span><span class="token keyword">go</span>
+中国欢迎您
+中国欢迎您
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">无论是 string 转 slice 还是 slice 转 string，转换都是要付出代价的，这些代价的根源在于 string 是不可变的，运行时要为转换后的类型分配新内存。我们以 byte slice 与 string 相互转换为例，看看转换过程的内存分配情况：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// sources/string_mallocs_in_convert.go</span>
+
+<span class="token keyword">package</span> main
+  
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+        <span class="token string">"fmt"</span>
+        <span class="token string">"testing"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">byteSliceToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        sl <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">&#123;</span>
+                <span class="token number">0xE4</span><span class="token punctuation">,</span> <span class="token number">0xB8</span><span class="token punctuation">,</span> <span class="token number">0xAD</span><span class="token punctuation">,</span>
+                <span class="token number">0xE5</span><span class="token punctuation">,</span> <span class="token number">0x9B</span><span class="token punctuation">,</span> <span class="token number">0xBD</span><span class="token punctuation">,</span>
+                <span class="token number">0xE6</span><span class="token punctuation">,</span> <span class="token number">0xAC</span><span class="token punctuation">,</span> <span class="token number">0xA2</span><span class="token punctuation">,</span>
+                <span class="token number">0xE8</span><span class="token punctuation">,</span> <span class="token number">0xBF</span><span class="token punctuation">,</span> <span class="token number">0x8E</span><span class="token punctuation">,</span>
+                <span class="token number">0xE6</span><span class="token punctuation">,</span> <span class="token number">0x82</span><span class="token punctuation">,</span> <span class="token number">0xA8</span><span class="token punctuation">,</span>
+                <span class="token number">0xEF</span><span class="token punctuation">,</span> <span class="token number">0xBC</span><span class="token punctuation">,</span> <span class="token number">0x8C</span><span class="token punctuation">,</span>
+                <span class="token number">0xE5</span><span class="token punctuation">,</span> <span class="token number">0x8C</span><span class="token punctuation">,</span> <span class="token number">0x97</span><span class="token punctuation">,</span>
+                <span class="token number">0xE4</span><span class="token punctuation">,</span> <span class="token number">0xBA</span><span class="token punctuation">,</span> <span class="token number">0xAC</span><span class="token punctuation">,</span>
+                <span class="token number">0xE6</span><span class="token punctuation">,</span> <span class="token number">0xAC</span><span class="token punctuation">,</span> <span class="token number">0xA2</span><span class="token punctuation">,</span>
+                <span class="token number">0xE8</span><span class="token punctuation">,</span> <span class="token number">0xBF</span><span class="token punctuation">,</span> <span class="token number">0x8E</span><span class="token punctuation">,</span>
+                <span class="token number">0xE6</span><span class="token punctuation">,</span> <span class="token number">0x82</span><span class="token punctuation">,</span> <span class="token number">0xA8</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token boolean">_</span> <span class="token operator">=</span> <span class="token function">string</span><span class="token punctuation">(</span>sl<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">stringToByteSlice</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        s <span class="token operator">:=</span> <span class="token string">"中国欢迎您，北京换欢您"</span>
+        <span class="token boolean">_</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>testing<span class="token punctuation">.</span><span class="token function">AllocsPerRun</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> byteSliceToString<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>testing<span class="token punctuation">.</span><span class="token function">AllocsPerRun</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> stringToByteSlice<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">运行这个例子：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">$go run string_mallocs_in_convert.go
+1
+1
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到：针对"中国欢迎您，北京换欢您"这个长度的字符串，在 string 与 byte slice 互转的过程中都要有一次的内存分配操作。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在 Go 运行时层面，字符串与 rune slice、byte slice 相互转换对应的函数如下：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">// $GOROOT/src/runtime/string.go
+slicebytetostring: []byte -&gt; string
+slicerunetostring: []rune -&gt; string
+stringtoslicebyte: string -&gt; []byte
+stringtoslicerune: string -&gt; []rune
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们以 byte slice 为例，看看 slicebytetostring 和 stringtoslicebyte 的实现：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// $GOROOT/src/runtime/string.go</span>
+
+<span class="token comment">// The constant is known to the compiler.</span>
+<span class="token comment">// There is no fundamental theory behind this number.</span>
+<span class="token keyword">const</span> tmpStringBufSize <span class="token operator">=</span> <span class="token number">32</span>
+<span class="token keyword">type</span> tmpBuf <span class="token punctuation">[</span>tmpStringBufSize<span class="token punctuation">]</span><span class="token builtin">byte</span>
+
+<span class="token keyword">func</span> <span class="token function">stringtoslicebyte</span><span class="token punctuation">(</span>buf <span class="token operator">*</span>tmpBuf<span class="token punctuation">,</span> s <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">var</span> b <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span>
+        <span class="token keyword">if</span> buf <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token operator">&amp;&amp;</span> <span class="token function">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token operator">&lt;=</span> <span class="token function">len</span><span class="token punctuation">(</span>buf<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token operator">*</span>buf <span class="token operator">=</span> tmpBuf<span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+                b <span class="token operator">=</span> buf<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token function">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">]</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+                b <span class="token operator">=</span> <span class="token function">rawbyteslice</span><span class="token punctuation">(</span><span class="token function">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token function">copy</span><span class="token punctuation">(</span>b<span class="token punctuation">,</span> s<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> b
+<span class="token punctuation">&#125;</span>
+
+
+<span class="token keyword">func</span> <span class="token function">slicebytetostring</span><span class="token punctuation">(</span>buf <span class="token operator">*</span>tmpBuf<span class="token punctuation">,</span> b <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>str <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        l <span class="token operator">:=</span> <span class="token function">len</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> l <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">&#123;</span>
+                <span class="token comment">// Turns out to be a relatively common case.</span>
+                <span class="token comment">// Consider that you want to parse out data between parens in "foo()bar",</span>
+                <span class="token comment">// you find the indices and convert the subslice to string.</span>
+                <span class="token keyword">return</span> <span class="token string">""</span>
+        <span class="token punctuation">&#125;</span>       
+
+        <span class="token comment">// ... ... 此处省略一些代码</span>
+
+        <span class="token keyword">if</span> l <span class="token operator">==</span> <span class="token number">1</span> <span class="token punctuation">&#123;</span>
+                <span class="token function">stringStructOf</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>str<span class="token punctuation">)</span><span class="token punctuation">.</span>str <span class="token operator">=</span> unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>staticbytes<span class="token punctuation">[</span>b<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+                <span class="token function">stringStructOf</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>str<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">len</span> <span class="token operator">=</span> <span class="token number">1</span>
+                <span class="token keyword">return</span>
+        <span class="token punctuation">&#125;</span>       
+        
+        <span class="token keyword">var</span> p unsafe<span class="token punctuation">.</span>Pointer
+        <span class="token keyword">if</span> buf <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token operator">&amp;&amp;</span> <span class="token function">len</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span> <span class="token operator">&lt;=</span> <span class="token function">len</span><span class="token punctuation">(</span>buf<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                p <span class="token operator">=</span> unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span>buf<span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+                p <span class="token operator">=</span> <span class="token function">mallocgc</span><span class="token punctuation">(</span><span class="token function">uintptr</span><span class="token punctuation">(</span><span class="token function">len</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token boolean">nil</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>       
+        <span class="token function">stringStructOf</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>str<span class="token punctuation">)</span><span class="token punctuation">.</span>str <span class="token operator">=</span> p
+        <span class="token function">stringStructOf</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>str<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">len</span> <span class="token operator">=</span> <span class="token function">len</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span>
+        <span class="token function">memmove</span><span class="token punctuation">(</span>p<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">*</span>slice<span class="token punctuation">)</span><span class="token punctuation">(</span>unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>array<span class="token punctuation">,</span> <span class="token function">uintptr</span><span class="token punctuation">(</span><span class="token function">len</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span>
+<span class="token punctuation">&#125;</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">欲要更高效地进行转换，唯一的方法就是减少和避免额外的内存分配操作。我们看到运行时实现转换的函数中已经加入了一些避免每种情况都要分配新内存操作的优化(比如：tmpBuf 的复用)。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">slice 类型是不可比较的，而 string 类型是可比较的，因此在日常 Go 编码中，我们会经常遇到将 slice 临时转换为 string 的情况。Go 编译器为这样的场景提供了优化。在运行时中有一个名为 slicebytetostringtmp 的函数就是协助实现这一优化的：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// $GOROOT/src/runtime/string.go</span>
+<span class="token keyword">func</span> <span class="token function">slicebytetostringtmp</span><span class="token punctuation">(</span>b <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> raceenabled <span class="token operator">&amp;&amp;</span> <span class="token function">len</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token punctuation">&#123;</span>
+                <span class="token function">racereadrangepc</span><span class="token punctuation">(</span>unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>b<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                        <span class="token function">uintptr</span><span class="token punctuation">(</span><span class="token function">len</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                        <span class="token function">getcallerpc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                        <span class="token function">funcPC</span><span class="token punctuation">(</span>slicebytetostringtmp<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">if</span> msanenabled <span class="token operator">&amp;&amp;</span> <span class="token function">len</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token punctuation">&#123;</span>
+                <span class="token function">msanread</span><span class="token punctuation">(</span>unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>b<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">uintptr</span><span class="token punctuation">(</span><span class="token function">len</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> <span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">(</span>unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">该函数的“秘诀”就在于不为 string 新开辟一块内存，而是直接使用 slice 的底层存储。当然使用这个函数的前提是：<strong>在原 slice 被修改后，这个 string 不能再被使用了</strong>。因此这样的优化是针对特定场景的，包括：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">string(b)用在 map 类型的 key 中</li>
+</ul>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go">b <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">&#123;</span><span class="token string">'k'</span><span class="token punctuation">,</span> <span class="token string">'e'</span><span class="token punctuation">,</span> <span class="token string">'y'</span><span class="token punctuation">&#125;</span>
+m <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">)</span>
+m<span class="token punctuation">[</span><span class="token function">string</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"value"</span>
+m<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">&#123;</span><span class="token function">string</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"key1"</span><span class="token punctuation">,</span> <span class="token string">"key2"</span><span class="token punctuation">&#125;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"value1"</span>
+</code></pre>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">string(b)用在字符串连接语句中</li>
+</ul>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go">b <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">&#123;</span><span class="token string">'t'</span><span class="token punctuation">,</span> <span class="token string">'o'</span><span class="token punctuation">,</span> <span class="token string">'n'</span><span class="token punctuation">,</span> <span class="token string">'y'</span><span class="token punctuation">&#125;</span>
+s <span class="token operator">:=</span> <span class="token string">"hello "</span> <span class="token operator">+</span> <span class="token function">string</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"!"</span>
+</code></pre>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">string(b)用于字符串比较中</li>
+</ul>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go">s <span class="token operator">:=</span> <span class="token string">"tom"</span>
+b <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">&#123;</span><span class="token string">'t'</span><span class="token punctuation">,</span> <span class="token string">'o'</span><span class="token punctuation">,</span> <span class="token string">'n'</span><span class="token punctuation">,</span> <span class="token string">'y'</span><span class="token punctuation">&#125;</span>
+
+<span class="token keyword">if</span> s <span class="token operator">&lt;</span> <span class="token function">string</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token operator">...</span> <span class="token operator">...</span>
+<span class="token punctuation">&#125;</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 编译器对用在 for-range 循环中的 string 到[]byte 的转换也有优化处理，Go 编译器不会为[]byte 做额外的内存分配，而是直接使用 string 的底层数据。我们看下面例子：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// sources/string_for_range_covert_optimize.go</span>
+
+<span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span> 
+        <span class="token string">"fmt"</span>
+        <span class="token string">"testing"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">convert</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> 
+        s <span class="token operator">:=</span> <span class="token string">"中国欢迎您，北京欢迎您"</span>
+        sl <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+        <span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> v <span class="token operator">:=</span> <span class="token keyword">range</span> sl <span class="token punctuation">&#123;</span> 
+                <span class="token boolean">_</span> <span class="token operator">=</span> v 
+        <span class="token punctuation">&#125;</span> 
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">func</span> <span class="token function">convertWithOptimize</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> 
+        s <span class="token operator">:=</span> <span class="token string">"中国欢迎您，北京欢迎您"</span>
+        <span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> v <span class="token operator">:=</span> <span class="token keyword">range</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> 
+                <span class="token boolean">_</span> <span class="token operator">=</span> v 
+        <span class="token punctuation">&#125;</span> 
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> 
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>testing<span class="token punctuation">.</span><span class="token function">AllocsPerRun</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> convert<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>testing<span class="token punctuation">.</span><span class="token function">AllocsPerRun</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> convertWithOptimize<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span> 
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">运行这个例子程序：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">$go run string_for_range_covert_optimize.go
+1
+0
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">从结果我们看到，convertWithOptimize 函数将 string 到[]byte 的转换放在 for-range 循环中，Go 编译器对其进行了优化，节省了一次内存分配操作。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在如今的强大的硬件算力面前，少数的几次 string 和 slice 的转换代价可能微不足道。但能充分理解 Go 编译器对 string 和 slice 互转在特定场景下的优化依然是大有裨益的。在性能敏感的领域，这些优化也许能起到大作用。</p>
+</div><div class="cl-preview-section"><h2 style="font-size: 30px;"><span id="5-小结">5. 小结</span></h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在本小节中，我们了解到 Go 语言内置了 string 类型，统一了对字符串的抽象，并且为 string 类型提供了强大的内置操作支持，包括：基于 +/+= 的字符串连接操作、基于 =、!=、&gt;、&lt; 等的比较操作、O(1) 复杂度的长度获取操作、对非 ASCII 字符提供原生支持、对 string 类型与 slice 类型的相互转换提供优化等。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">与此同时，Go 语言还在标准库中提供了 <a target="_blank" rel="noopener" href="https://tip.golang.org/pkg/strings/">strings</a> 和 <a target="_blank" rel="noopener" href="https://tip.golang.org/pkg/strconv/">strconv</a> 包，可以辅助 Gopher 们对 string 类型数据进行更多高级操作。鉴于篇幅有限，这里就不赘述了，大家可以自行查阅以上两个包的使用说明文档。</p>
+</div>}
+                        </div>
+                    </div>
+                                            <!-- 买过的阅读 -->
+                        <div class="art-next-prev clearfix">
+                                                                                                <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/87/article/2383">
+                                                                    <div class="prev l clearfix">
+                                        <div class="icon l">
+                                            <i class="imv2-arrow3_l"></i>
+                                        </div>
+                                        <p>
+                                            14 深入理解和高效运用切片(slice)
+                                        </p>
+                                    </div>
+                                </a>
+                                                                                                                            <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/87/article/2387">
+                                                                    <div class="next r clearfix">
+                                        <p>
+                                            16 理解包导入路径的含义
+                                        </p>
+                                        <div class="icon r">
+                                            <i class="imv2-arrow3_r"></i>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                                    </div>
+                                    </div>
+                <div class="comments-con js-comments-con" id="coments_con">
+                </div>
+
+                
+            </div>
+            
+            
+            
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-jiaQun-new hide" id="modal-jiaQun">
+    <div class="inner" style>
+        <div class="modal-close js-close-jiaQun">
+            <i class="imv2-close"></i>
+        </div>
+        <div class="content">
+            <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img4.sycdn.imooc.com/5f51ecec0001392b05330597.jpg">
+            <div class="right-info">
+                <div class="title">
+                    扫码加入慕课前沿技术核心用户群
+                </div>
+                <div class="desc">
+                                            <p class="mb6">验证信息：<span id="joincode">2010312025386365</span><span class="copy js-copy-joincode">复制</span></p>
+                                        <p class="mb6">QQ讨论群号：729941811</p>
+                                            <p>QQ群URL：<a href="https://jq.qq.com/?_wv=1027&amp;k=5WJLMxV" target="_blank">点击访问</a></p>
+                                    </div>
+            </div>
+            <p class="tip">若遇到搜索不到QQ群或加群失败，请联系客服邮箱:kf@imooc.com</p>
+        </div>
+    </div>
+</div>
+ 
+<!-- 专栏介绍页专栏评价 -->
+
+<!-- 专栏介绍页底部三条评价 -->
+
+<!-- 专栏阅读页弹层目录和介绍页页面目录 -->
+
+<!-- 专栏阅读页发布回复 -->
+
+<!-- 专栏阅读页发布评论 -->
+
+<!-- 专栏阅读页底部评论 -->
+
+<!-- 专栏阅读 单个 评论 -->
+
+<!-- 新增回复和展开三条以外回复 -->
+
+<!-- 立即订阅的弹窗 -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div></body></html></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://s2-cdn.oneitfarm.com/e12ece12233b4059860acf48637d830a.jpg" onerror="this.onerror=null;this.src='/blog/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">夏夏天</div><div class="author-info__description">以地事秦 犹抱薪救火 薪不尽 火不灭</div></div><div class="card-info-data site-data is-center"><a href="/blog/archives/"><div class="headline">Articles</div><div class="length-num">74</div></a><a href="/blog/tags/"><div class="headline">Tags</div><div class="length-num">48</div></a><a href="/blog/categories/"><div class="headline">Categories</div><div class="length-num">20</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/blog/atom.xml" target="_blank" title=""><i class="fa fa-rss"></i></a><a class="social-icon" href="https://github.com/smartXia" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:xiapeifu@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://gitee.com/xiapeifu" target="_blank" title="Gitee"><i class="iconfont gitee"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/blog/2024/03/12/PHP/PHP-%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0-destruct/" title="PHP-析构函数-destruct"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/blog/img/php.jpeg" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="PHP-析构函数-destruct"/></a><div class="content"><a class="title" href="/blog/2024/03/12/PHP/PHP-%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0-destruct/" title="PHP-析构函数-destruct">PHP-析构函数-destruct</a><time datetime="2024-03-12T02:43:39.598Z" title="Created 2024-03-12 10:43:39">2024-03-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2024/03/12/GOLANG/GOLANG-%E7%AC%94%E8%AE%B03-nil-slice-map/" title="GOLANG-笔记-ArrayMapSlice"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/blog/img/golang.jpeg" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="GOLANG-笔记-ArrayMapSlice"/></a><div class="content"><a class="title" href="/blog/2024/03/12/GOLANG/GOLANG-%E7%AC%94%E8%AE%B03-nil-slice-map/" title="GOLANG-笔记-ArrayMapSlice">GOLANG-笔记-ArrayMapSlice</a><time datetime="2024-03-12T02:43:39.590Z" title="Created 2024-03-12 10:43:39">2024-03-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2022/03/16/darp-Docs/" title="darp Docs"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/blog/img/404.jpg" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="darp Docs"/></a><div class="content"><a class="title" href="/blog/2022/03/16/darp-Docs/" title="darp Docs">darp Docs</a><time datetime="2022-03-16T06:59:18.000Z" title="Created 2022-03-16 14:59:18">2022-03-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2021/12/09/GOLANG/GOLANG-grpc-2/" title="GOLANG-grpc-2"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/blog/img/404.jpg" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="GOLANG-grpc-2"/></a><div class="content"><a class="title" href="/blog/2021/12/09/GOLANG/GOLANG-grpc-2/" title="GOLANG-grpc-2">GOLANG-grpc-2</a><time datetime="2021-12-09T07:05:54.000Z" title="Created 2021-12-09 15:05:54">2021-12-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2021/12/02/%E5%BB%BA%E7%AB%99/x86%E5%92%8Carm%E6%9E%B6%E6%9E%84%E5%8C%BA%E5%88%AB/" title="x86和arm架构区别"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/blog/img/404.jpg" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="x86和arm架构区别"/></a><div class="content"><a class="title" href="/blog/2021/12/02/%E5%BB%BA%E7%AB%99/x86%E5%92%8Carm%E6%9E%B6%E6%9E%84%E5%8C%BA%E5%88%AB/" title="x86和arm架构区别">x86和arm架构区别</a><time datetime="2021-12-02T08:22:44.000Z" title="Created 2021-12-02 16:22:44">2021-12-02</time></div></div></div></div><div class="card-widget" id="card-newest-comments"><div class="item-headline"><i class="fas fa-comment-dots"></i><span>Latest Comments</span></div><div class="aside-list"><span>loading...</span></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
+            <a class="card-more-btn" href="/blog/categories/" title="View More">
+    <i class="fas fa-angle-right"></i></a>
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/DOCKER/"><span class="card-category-list-name">DOCKER</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/Diary/"><span class="card-category-list-name">Diary</span><span class="card-category-list-count">2</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/Diary/Games/"><span class="card-category-list-name">Games</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/Diary/PlayStation/"><span class="card-category-list-name">PlayStation</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/GOLANG/"><span class="card-category-list-name">GOLANG</span><span class="card-category-list-count">14</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/HTTP/"><span class="card-category-list-name">HTTP</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/Life/"><span class="card-category-list-name">Life</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/MYSQL/"><span class="card-category-list-name">MYSQL</span><span class="card-category-list-count">3</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/blog/tags/pubsub/" style="font-size: 1.1em; color: #999">pubsub</a> <a href="/blog/tags/cgi/" style="font-size: 1.1em; color: #999">cgi</a> <a href="/blog/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 1.1em; color: #999">数据结构</a> <a href="/blog/tags/%E6%97%A5%E5%BF%97/" style="font-size: 1.1em; color: #999">日志</a> <a href="/blog/tags/Iterator-%E7%AD%89%E5%BE%85%E6%9B%B4%E6%96%B0/" style="font-size: 1.1em; color: #999">Iterator - 等待更新</a> <a href="/blog/tags/ssr/" style="font-size: 1.1em; color: #999">ssr</a> <a href="/blog/tags/%E4%B8%BB%E9%A2%98/" style="font-size: 1.1em; color: #999">主题</a> <a href="/blog/tags/docekr-images/" style="font-size: 1.1em; color: #999">docekr images</a> <a href="/blog/tags/Slice/" style="font-size: 1.23em; color: #999ea6">Slice</a> <a href="/blog/tags/redis/" style="font-size: 1.37em; color: #99a4b2">redis</a> <a href="/blog/tags/Generator/" style="font-size: 1.1em; color: #999">Generator</a> <a href="/blog/tags/fastcgi/" style="font-size: 1.1em; color: #999">fastcgi</a> <a href="/blog/tags/gox/" style="font-size: 1.1em; color: #999">gox</a> <a href="/blog/tags/%E6%8E%A8%E8%8D%90/" style="font-size: 1.1em; color: #999">推荐</a> <a href="/blog/tags/strlen/" style="font-size: 1.1em; color: #999">strlen</a> <a href="/blog/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 1.1em; color: #999">设计模式</a> <a href="/blog/tags/wiki/" style="font-size: 1.37em; color: #99a4b2">wiki</a> <a href="/blog/tags/php/" style="font-size: 1.1em; color: #999">php</a> <a href="/blog/tags/gin/" style="font-size: 1.1em; color: #999">gin</a> <a href="/blog/tags/rpc/" style="font-size: 1.23em; color: #999ea6">rpc()</a> <a href="/blog/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 1.1em; color: #999">工具</a> <a href="/blog/tags/HEXO/" style="font-size: 1.1em; color: #999">HEXO</a> <a href="/blog/tags/farmworker/" style="font-size: 1.1em; color: #999">farmworker</a> <a href="/blog/tags/golang/" style="font-size: 1.5em; color: #99a9bf">golang</a> <a href="/blog/tags/cli/" style="font-size: 1.1em; color: #999">cli</a> <a href="/blog/tags/Closure/" style="font-size: 1.1em; color: #999">Closure</a> <a href="/blog/tags/%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0/" style="font-size: 1.1em; color: #999">匿名函数</a> <a href="/blog/tags/xhprof-docker-push/" style="font-size: 1.1em; color: #999">xhprof docker push</a> <a href="/blog/tags/%E6%95%99%E7%A8%8B/" style="font-size: 1.1em; color: #999">教程</a> <a href="/blog/tags/photo/" style="font-size: 1.1em; color: #999">photo</a> <a href="/blog/tags/zap/" style="font-size: 1.1em; color: #999">zap</a> <a href="/blog/tags/PHP/" style="font-size: 1.37em; color: #99a4b2">PHP</a> <a href="/blog/tags/MSYQL/" style="font-size: 1.1em; color: #999">MSYQL</a> <a href="/blog/tags/%E4%B9%A6%E7%B1%8D/" style="font-size: 1.1em; color: #999">书籍</a> <a href="/blog/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 1.1em; color: #999">排序</a> <a href="/blog/tags/module/" style="font-size: 1.1em; color: #999">module</a> <a href="/blog/tags/%E7%BC%96%E7%A0%81/" style="font-size: 1.1em; color: #999">编码</a> <a href="/blog/tags/%E7%BD%91%E6%98%93%E4%BA%91-server%E9%85%B1-py-%E4%BA%91%E5%87%BD%E6%95%B0-%E5%BE%85%E6%9B%B4%E6%96%B0/" style="font-size: 1.1em; color: #999">网易云 server酱 py 云函数  待更新</a> <a href="/blog/tags/USE/" style="font-size: 1.1em; color: #999">USE</a> <a href="/blog/tags/%E5%BE%85%E6%9B%B4%E6%96%B0/" style="font-size: 1.23em; color: #999ea6">待更新</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span><a class="card-more-btn" href="/blog/archives/" title="View More">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2024/03/"><span class="card-archive-list-date">March 2024</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2022/03/"><span class="card-archive-list-date">March 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2021/12/"><span class="card-archive-list-date">December 2021</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2021/11/"><span class="card-archive-list-date">November 2021</span><span class="card-archive-list-count">7</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2021/10/"><span class="card-archive-list-date">October 2021</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2021/09/"><span class="card-archive-list-date">September 2021</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2021/08/"><span class="card-archive-list-date">August 2021</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2021/06/"><span class="card-archive-list-date">June 2021</span><span class="card-archive-list-count">4</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">74</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-03-12T03:45:18.980Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 夏夏天</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">简</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="chat-btn" type="button" title="Chat"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/blog/js/utils.js?v=4.13.0"></script><script src="/blog/js/main.js?v=4.13.0"></script><script src="/blog/js/tw_cn.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.8.8/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const initValine = () => {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'b5KjzAk69Lg3yBaVPeEiuljv-gzGzoHsz',
+      appKey: 'Yb0PJ1jscpDdBIvDLO6MEYUy',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  const loadValine = async () => {
+    if (typeof Valine === 'function') initValine()
+    else {
+      await getScript('https://cdn.jsdelivr.net/npm/valine@1.5.1/dist/Valine.min.js')
+      initValine()
+    }
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script></div><script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.19.0/js/md5.min.js"></script><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[image]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[link]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[code]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getIcon = (icon, mail) => {
+    if (icon) return icon
+    let defaultIcon = '?d=monsterid'
+    let iconUrl = `https://gravatar.loli.net/avatar/${md5(mail.toLowerCase()) + defaultIcon}`
+    return iconUrl
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += 'No comments'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const getComment = () => {
+    const serverURL = 'https://b5KjzAk6.api.lncldglobal.com'
+
+    var settings = {
+      "method": "GET",
+      "headers": {
+        "X-LC-Id": 'b5KjzAk69Lg3yBaVPeEiuljv-gzGzoHsz',
+        "X-LC-Key": 'Yb0PJ1jscpDdBIvDLO6MEYUy',
+        "Content-Type": "application/json"
+      },
+    }
+
+    fetch(`${serverURL}/1.1/classes/Comment?limit=6&order=-createdAt`,settings)
+      .then(response => response.json())
+      .then(data => {
+        const valineArray = data.results.map(function (e) {
+          return {
+            'avatar': getIcon(e.QQAvatar, e.mail),
+            'content': changeContent(e.comment),
+            'nick': e.nick,
+            'url': e.url + '#' + e.objectId,
+            'date': e.updatedAt,
+          }
+        })
+        saveToLocal.set('valine-newest-comments', JSON.stringify(valineArray), 10/(60*24))
+        generateHtml(valineArray)
+      }).catch(e => {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "Unable to retrieve comments, please check the configuration"
+      }) 
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('valine-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/blog/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>
