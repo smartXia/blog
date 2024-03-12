@@ -99,7 +99,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: Butterfly
+theme: butterfly
 ## 开启音乐播放插件
 aplayer:
   meting: true
@@ -123,7 +123,7 @@ deploy:
   type: git
   repository: https://github.com/smartXia/blog.git
   branch: master
-  message: "增加dpar相关"
+  message: "提交"
   jsonContent:
     meta: false
     pages: false

@@ -59,7 +59,7 @@ algolia_search:
 local_search:
   enable: true
 
-# Math (數學)
+# Math (数学)
 # --------------------------------------
 # About the per_page
 # if you set it to true, it will load mathjax/katex script in each page (true 表示每一頁都加載js)
