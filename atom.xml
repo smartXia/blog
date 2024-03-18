@@ -6,7 +6,7 @@
   <link href="https://smartxia.github.io/blog/atom.xml" rel="self"/>
   
   <link href="https://smartxia.github.io/blog/"/>
-  <updated>2024-03-18T03:25:48.888Z</updated>
+  <updated>2024-03-18T03:32:10.643Z</updated>
   <id>https://smartxia.github.io/blog/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>k8s-kubeadmin安装</title>
+    <link href="https://smartxia.github.io/blog/2024/03/18/K8s/k8s-kubeadmin%E5%AE%89%E8%A3%85/"/>
+    <id>https://smartxia.github.io/blog/2024/03/18/K8s/k8s-kubeadmin%E5%AE%89%E8%A3%85/</id>
+    <published>2024-03-18T03:30:15.000Z</published>
+    <updated>2024-03-18T03:32:10.643Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;blog&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;blog&#92;assets&#92;js&#92;APlayer.m</summary>
+      
+    
+    
+    
+    <category term="K8S" scheme="https://smartxia.github.io/blog/categories/K8S/"/>
+    
+    
+    <category term="K8S" scheme="https://smartxia.github.io/blog/tags/K8S/"/>
+    
+  </entry>
   
   <entry>
     <title>K8s-IPVS概念原理以及应用</title>
@@ -449,28 +473,6 @@
     
     
     <category term="regex" scheme="https://smartxia.github.io/blog/tags/regex/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>网络协议</title>
-    <link href="https://smartxia.github.io/blog/2021/06/07/HTTP/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"/>
-    <id>https://smartxia.github.io/blog/2021/06/07/HTTP/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/</id>
-    <published>2021-06-07T01:49:48.000Z</published>
-    <updated>2024-03-12T03:55:12.825Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\blog\assets\css\APlayer.min.css"><script src="\blog\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\blog\assets\js\Meting.min.js"></script><!-- toc --><ul><li><a href="#10-%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AEtcp-trancemission-control-protocol">1.0 网络协议（TCP Trancemission Control Protocol）</a></li><li><a href="#11-%E8%AF%B7%E6%B1%82%E5%A4%B4">1.1 请求头</a></li><li><a href="#12-%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B">1.2 三次握手四次挥手</a></li><li><a href="#13-%E6%8A%A5%E6%96%87%E6%8A%93%E5%8F%96%E5%B7%A5%E5%85%B7">1.3 报文抓取工具</a></li></ul><ul><li><a href="#20-http-hypertext-transfer-protocol">2.0 HTTP (HyperText Transfer protocol)</a><ul><li><a href="#21-%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87">2.1 请求报文</a></li><li><a href="#22-%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87">2.2 响应报文</a></li><li><a href="#23-http-%E6%8A%93%E5%8F%96%E5%B7%A5%E5%85%B7">2.3 HTTP 抓取工具</a></li><li><a href="#24-session-cookie">2.4 Session Cookie</a></li></ul></li><li><a href="#30-%E6%80%BB%E7%BB%93">3.0 总结</a></li></ul><!-- tocstop --><h4><span id="10-网络协议tcp-trancemission-control-protocol">1.0 网络协议（TCP Trancemission Control Protocol）</span></h4><ul><li><p>TCP 七层网络模型<br>主机层：<br>媒介层：</p><p><img src="http://s2-cdn.oneitfarm.com/767fb54c00ef41d1b15f28a8c33f3d16.png"></p></li></ul><h4><span id="11-请求头">1.1 请求头</span></h4><h4><span id="12-三次握手四次挥手">1.2 三次握手四次挥手</span></h4><h4><span id="13-报文抓取工具">1.3 报文抓取工具</span></h4><h3><span id="20-http-hypertext-transfer-protocol">2.0 HTTP (HyperText Transfer protocol)</span></h3><p><img src="//s2-cdn.oneitfarm.com/205566ffbffc4786af2443e348192532.png"></p><h4><span id="21-请求报文">2.1 请求报文</span></h4><h4><span id="22-响应报文">2.2 响应报文</span></h4><h4><span id="23-http-抓取工具">2.3 HTTP 抓取工具</span></h4><h4><span id="24-session-cookie">2.4 Session Cookie</span></h4><h3><span id="30-总结">3.0 总结</span></h3>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;blog&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;blog&#92;assets&#92;js&#92;APlayer.m</summary>
-      
-    
-    
-    
-    <category term="HTTP" scheme="https://smartxia.github.io/blog/categories/HTTP/"/>
-    
     
   </entry>
   
