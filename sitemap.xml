@@ -29,7 +29,7 @@
   </url>
   
   <url>
-    <loc>https://smartxia.github.io/blog/tags/index.html</loc>
+    <loc>https://smartxia.github.io/blog/sitemap/index.html</loc>
     
     <lastmod>2024-03-12</lastmod>
     
@@ -38,7 +38,7 @@
   </url>
   
   <url>
-    <loc>https://smartxia.github.io/blog/sitemap/index.html</loc>
+    <loc>https://smartxia.github.io/blog/tags/index.html</loc>
     
     <lastmod>2024-03-12</lastmod>
     
@@ -101,6 +101,15 @@
   </url>
   
   <url>
+    <loc>https://smartxia.github.io/blog/book/20Go%E6%96%B9%E6%B3%95%E7%9A%84%E6%9C%AC%E8%B4%A8%E6%85%95%E8%AF%BE%E4%B8%93%E6%A0%8F.html</loc>
+    
+    <lastmod>2024-03-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://smartxia.github.io/blog/book/19defer%E8%AE%A9%E4%BD%A0%E7%9A%84%E4%BB%A3%E7%A0%81%E6%9B%B4%E6%B8%85%E6%99%B0%E6%85%95%E8%AF%BE%E4%B8%93%E6%A0%8F.html</loc>
     
     <lastmod>2024-03-12</lastmod>
@@ -111,15 +120,6 @@
   
   <url>
     <loc>https://smartxia.github.io/blog/book/21%E6%96%B9%E6%B3%95%E9%9B%86%E5%90%88%E5%86%B3%E5%AE%9A%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E6%85%95%E8%AF%BE%E4%B8%93%E6%A0%8F.html</loc>
-    
-    <lastmod>2024-03-12</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://smartxia.github.io/blog/book/20Go%E6%96%B9%E6%B3%95%E7%9A%84%E6%9C%AC%E8%B4%A8%E6%85%95%E8%AF%BE%E4%B8%93%E6%A0%8F.html</loc>
     
     <lastmod>2024-03-12</lastmod>
     
@@ -146,7 +146,7 @@
   </url>
   
   <url>
-    <loc>https://smartxia.github.io/blog/book/15%E6%B3%A8%E6%84%8FGo%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%98%AF%E5%8E%9F%E7%94%9F%E7%B1%BB%E5%9E%8B%E6%85%95%E8%AF%BE%E4%B8%93%E6%A0%8F.html</loc>
+    <loc>https://smartxia.github.io/blog/book/16%E7%90%86%E8%A7%A3%E5%8C%85%E5%AF%BC%E5%85%A5%E8%B7%AF%E5%BE%84%E7%9A%84%E5%90%AB%E4%B9%89%E6%85%95%E8%AF%BE%E4%B8%93%E6%A0%8F.html</loc>
     
     <lastmod>2024-03-12</lastmod>
     
@@ -155,7 +155,7 @@
   </url>
   
   <url>
-    <loc>https://smartxia.github.io/blog/book/16%E7%90%86%E8%A7%A3%E5%8C%85%E5%AF%BC%E5%85%A5%E8%B7%AF%E5%BE%84%E7%9A%84%E5%90%AB%E4%B9%89%E6%85%95%E8%AF%BE%E4%B8%93%E6%A0%8F.html</loc>
+    <loc>https://smartxia.github.io/blog/book/15%E6%B3%A8%E6%84%8FGo%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%98%AF%E5%8E%9F%E7%94%9F%E7%B1%BB%E5%9E%8B%E6%85%95%E8%AF%BE%E4%B8%93%E6%A0%8F.html</loc>
     
     <lastmod>2024-03-12</lastmod>
     
@@ -218,7 +218,7 @@
   </url>
   
   <url>
-    <loc>https://smartxia.github.io/blog/book/07gofmtGo%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC%E7%9A%84%E5%94%AF%E4%B8%80%E6%A0%87%E5%87%86%E6%85%95%E8%AF%BE%E4%B8%93%E6%A0%8F.html</loc>
+    <loc>https://smartxia.github.io/blog/book/08Go%E6%A0%87%E8%AF%86%E7%AC%A6%E7%9A%84%E5%91%BD%E5%90%8D%E6%83%AF%E4%BE%8B%E6%85%95%E8%AF%BE%E4%B8%93%E6%A0%8F.html</loc>
     
     <lastmod>2024-03-12</lastmod>
     
@@ -227,7 +227,7 @@
   </url>
   
   <url>
-    <loc>https://smartxia.github.io/blog/book/08Go%E6%A0%87%E8%AF%86%E7%AC%A6%E7%9A%84%E5%91%BD%E5%90%8D%E6%83%AF%E4%BE%8B%E6%85%95%E8%AF%BE%E4%B8%93%E6%A0%8F.html</loc>
+    <loc>https://smartxia.github.io/blog/book/07gofmtGo%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC%E7%9A%84%E5%94%AF%E4%B8%80%E6%A0%87%E5%87%86%E6%85%95%E8%AF%BE%E4%B8%93%E6%A0%8F.html</loc>
     
     <lastmod>2024-03-12</lastmod>
     
@@ -308,15 +308,6 @@
   </url>
   
   <url>
-    <loc>https://smartxia.github.io/blog/2021/05/18/%E7%BB%8F%E5%85%B8%E8%AF%BB%E7%89%A9/%E7%BB%8F%E5%85%B8%E8%AF%BB%E7%89%A9/</loc>
-    
-    <lastmod>2024-03-12</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://smartxia.github.io/blog/2020/06/19/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</loc>
     
     <lastmod>2024-03-12</lastmod>
@@ -326,7 +317,7 @@
   </url>
   
   <url>
-    <loc>https://smartxia.github.io/blog/2021/05/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E6%A6%82%E8%BF%B0%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
+    <loc>https://smartxia.github.io/blog/2021/05/18/%E7%BB%8F%E5%85%B8%E8%AF%BB%E7%89%A9/%E7%BB%8F%E5%85%B8%E8%AF%BB%E7%89%A9/</loc>
     
     <lastmod>2024-03-12</lastmod>
     
@@ -335,7 +326,7 @@
   </url>
   
   <url>
-    <loc>https://smartxia.github.io/blog/2021/04/29/%E6%88%91%E7%9A%84%E6%97%A5%E8%AE%B0/%E6%9C%80%E8%BF%91%E5%A4%AA%E6%87%92%E4%BA%86/</loc>
+    <loc>https://smartxia.github.io/blog/2021/05/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E6%A6%82%E8%BF%B0%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
     
     <lastmod>2024-03-12</lastmod>
     
@@ -362,6 +353,15 @@
   </url>
   
   <url>
+    <loc>https://smartxia.github.io/blog/2021/04/29/%E6%88%91%E7%9A%84%E6%97%A5%E8%AE%B0/%E6%9C%80%E8%BF%91%E5%A4%AA%E6%87%92%E4%BA%86/</loc>
+    
+    <lastmod>2024-03-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://smartxia.github.io/blog/2021/05/20/%E6%88%91%E7%9A%84%E6%97%A5%E8%AE%B0/%E5%A4%A9%E6%B0%94%E6%99%B4-2021-5-20/</loc>
     
     <lastmod>2024-03-12</lastmod>
@@ -380,7 +380,7 @@
   </url>
   
   <url>
-    <loc>https://smartxia.github.io/blog/2020/08/31/%E6%88%91%E7%9A%84%E6%97%A5%E8%AE%B0/%E5%85%B3%E4%BA%8Eblog%E6%9B%B4%E6%96%B0%E5%91%A8%E6%9C%9F/</loc>
+    <loc>https://smartxia.github.io/blog/2019/12/16/%E5%BB%BA%E7%AB%99/%E5%BB%BA%E7%AB%99-%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5/</loc>
     
     <lastmod>2024-03-12</lastmod>
     
@@ -389,7 +389,7 @@
   </url>
   
   <url>
-    <loc>https://smartxia.github.io/blog/2019/12/16/%E5%BB%BA%E7%AB%99/%E5%BB%BA%E7%AB%99-%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5/</loc>
+    <loc>https://smartxia.github.io/blog/2020/08/31/%E6%88%91%E7%9A%84%E6%97%A5%E8%AE%B0/%E5%85%B3%E4%BA%8Eblog%E6%9B%B4%E6%96%B0%E5%91%A8%E6%9C%9F/</loc>
     
     <lastmod>2024-03-12</lastmod>
     
@@ -416,7 +416,7 @@
   </url>
   
   <url>
-    <loc>https://smartxia.github.io/blog/2019/12/18/%E5%BB%BA%E7%AB%99/%E5%BB%BA%E7%AB%99-HEXO-butteryly/</loc>
+    <loc>https://smartxia.github.io/blog/2021/12/02/%E5%BB%BA%E7%AB%99/x86%E5%92%8Carm%E6%9E%B6%E6%9E%84%E5%8C%BA%E5%88%AB/</loc>
     
     <lastmod>2024-03-12</lastmod>
     
@@ -425,7 +425,7 @@
   </url>
   
   <url>
-    <loc>https://smartxia.github.io/blog/2021/12/02/%E5%BB%BA%E7%AB%99/x86%E5%92%8Carm%E6%9E%B6%E6%9E%84%E5%8C%BA%E5%88%AB/</loc>
+    <loc>https://smartxia.github.io/blog/2019/12/18/%E5%BB%BA%E7%AB%99/%E5%BB%BA%E7%AB%99-HEXO-butteryly/</loc>
     
     <lastmod>2024-03-12</lastmod>
     
@@ -569,15 +569,6 @@
   </url>
   
   <url>
-    <loc>https://smartxia.github.io/blog/2019/12/27/REDIS/REDIS-redis%E7%9F%A5%E8%AF%86%E7%82%B9/</loc>
-    
-    <lastmod>2024-03-12</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://smartxia.github.io/blog/2019/12/27/REDIS/REDIS-TIPS/</loc>
     
     <lastmod>2024-03-12</lastmod>
@@ -588,6 +579,15 @@
   
   <url>
     <loc>https://smartxia.github.io/blog/2019/12/27/REDIS/REDIS-redis%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</loc>
+    
+    <lastmod>2024-03-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://smartxia.github.io/blog/2019/12/27/REDIS/REDIS-redis%E7%9F%A5%E8%AF%86%E7%82%B9/</loc>
     
     <lastmod>2024-03-12</lastmod>
     
@@ -614,6 +614,15 @@
   </url>
   
   <url>
+    <loc>https://smartxia.github.io/blog/2020/08/28/PHP/PHP-%E7%90%86%E8%A7%A3php%E7%9A%84Generator,yield,Iterator%E6%8E%A5%E5%8F%A3/</loc>
+    
+    <lastmod>2024-03-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://smartxia.github.io/blog/2020/09/02/PHP/PHP-%E8%A7%A3%E5%86%B3%E5%BE%AA%E7%8E%AF%E5%86%85%E5%AD%98%E5%8D%A0%E7%94%A8%E6%BA%A2%E5%87%BA-%E7%BC%93%E5%86%B2%E6%9F%A5%E8%AF%A2/</loc>
     
     <lastmod>2024-03-12</lastmod>
@@ -624,15 +633,6 @@
   
   <url>
     <loc>https://smartxia.github.io/blog/2020/08/28/PHP/PHP-%E8%BE%85%E5%8A%A9%E5%87%BD%E6%95%B0/</loc>
-    
-    <lastmod>2024-03-12</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://smartxia.github.io/blog/2020/08/28/PHP/PHP-%E7%90%86%E8%A7%A3php%E7%9A%84Generator,yield,Iterator%E6%8E%A5%E5%8F%A3/</loc>
     
     <lastmod>2024-03-12</lastmod>
     
@@ -722,6 +722,15 @@
   </url>
   
   <url>
+    <loc>https://smartxia.github.io/blog/2021/05/10/PHP/PHP-Phpfmp-%E5%A6%82%E4%BD%95%E5%88%86%E9%85%8D%E4%BB%BB%E5%8A%A1%E5%88%B0%E5%AD%90%E8%BF%9B%E7%A8%8B%E7%9A%84/</loc>
+    
+    <lastmod>2024-03-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://smartxia.github.io/blog/2019/12/27/MSYQL/MYSQL-%E6%97%A5%E5%BF%97/</loc>
     
     <lastmod>2024-03-12</lastmod>
@@ -740,7 +749,7 @@
   </url>
   
   <url>
-    <loc>https://smartxia.github.io/blog/2021/05/10/PHP/PHP-Phpfmp-%E5%A6%82%E4%BD%95%E5%88%86%E9%85%8D%E4%BB%BB%E5%8A%A1%E5%88%B0%E5%AD%90%E8%BF%9B%E7%A8%8B%E7%9A%84/</loc>
+    <loc>https://smartxia.github.io/blog/2020/06/19/HTTP/%E5%BE%AE%E6%9C%8D%E5%8A%A1-http%E4%B8%8Erpc%E5%8C%BA%E5%88%AB%EF%BC%8C%E4%BB%A5%E5%8F%8A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8rpc/</loc>
     
     <lastmod>2024-03-12</lastmod>
     
@@ -750,15 +759,6 @@
   
   <url>
     <loc>https://smartxia.github.io/blog/2021/06/07/HTTP/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/</loc>
-    
-    <lastmod>2024-03-12</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://smartxia.github.io/blog/2020/06/19/HTTP/%E5%BE%AE%E6%9C%8D%E5%8A%A1-http%E4%B8%8Erpc%E5%8C%BA%E5%88%AB%EF%BC%8C%E4%BB%A5%E5%8F%8A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8rpc/</loc>
     
     <lastmod>2024-03-12</lastmod>
     
@@ -848,7 +848,7 @@
   </url>
   
   <url>
-    <loc>https://smartxia.github.io/blog/2021/04/29/GOLANG/GOLANG-%E7%AC%94%E8%AE%B04-%E9%AB%98%E6%80%A7%E8%83%BD%E5%BA%93zap/</loc>
+    <loc>https://smartxia.github.io/blog/2024/03/12/GOLANG/GOLANG-%E7%AC%94%E8%AE%B03-nil-slice-map/</loc>
     
     <lastmod>2024-03-12</lastmod>
     
@@ -857,7 +857,7 @@
   </url>
   
   <url>
-    <loc>https://smartxia.github.io/blog/2024/03/12/GOLANG/GOLANG-%E7%AC%94%E8%AE%B03-nil-slice-map/</loc>
+    <loc>https://smartxia.github.io/blog/2021/04/29/GOLANG/GOLANG-%E7%AC%94%E8%AE%B04-%E9%AB%98%E6%80%A7%E8%83%BD%E5%BA%93zap/</loc>
     
     <lastmod>2024-03-12</lastmod>
     
@@ -911,7 +911,7 @@
   </url>
   
   <url>
-    <loc>https://smartxia.github.io/blog/2021/11/15/GOLANG/GOLANG-Context%E4%B8%8A%E4%B8%8B%E6%96%87/</loc>
+    <loc>https://smartxia.github.io/blog/2021/11/18/GOLANG/GOLANG-GPM%E7%9A%84%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3/</loc>
     
     <lastmod>2024-03-12</lastmod>
     
@@ -920,7 +920,7 @@
   </url>
   
   <url>
-    <loc>https://smartxia.github.io/blog/2021/11/18/GOLANG/GOLANG-GPM%E7%9A%84%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3/</loc>
+    <loc>https://smartxia.github.io/blog/2021/11/15/GOLANG/GOLANG-Context%E4%B8%8A%E4%B8%8B%E6%96%87/</loc>
     
     <lastmod>2024-03-12</lastmod>
     
@@ -1036,41 +1036,6 @@
   
   <url>
     <loc>https://smartxia.github.io/blog/tags/rpc/</loc>
-    <lastmod>2024-03-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://smartxia.github.io/blog/tags/MSYQL/</loc>
-    <lastmod>2024-03-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://smartxia.github.io/blog/tags/%E6%8E%92%E5%BA%8F/</loc>
-    <lastmod>2024-03-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://smartxia.github.io/blog/tags/%E6%97%A5%E5%BF%97/</loc>
-    <lastmod>2024-03-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://smartxia.github.io/blog/tags/%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2024-03-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://smartxia.github.io/blog/tags/%E7%B4%A2%E5%BC%95/</loc>
     <lastmod>2024-03-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1196,14 +1161,35 @@
   </url>
   
   <url>
-    <loc>https://smartxia.github.io/blog/tags/redis/</loc>
+    <loc>https://smartxia.github.io/blog/tags/MSYQL/</loc>
     <lastmod>2024-03-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://smartxia.github.io/blog/tags/pubsub/</loc>
+    <loc>https://smartxia.github.io/blog/tags/%E6%8E%92%E5%BA%8F/</loc>
+    <lastmod>2024-03-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://smartxia.github.io/blog/tags/%E6%97%A5%E5%BF%97/</loc>
+    <lastmod>2024-03-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://smartxia.github.io/blog/tags/%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2024-03-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://smartxia.github.io/blog/tags/%E7%B4%A2%E5%BC%95/</loc>
     <lastmod>2024-03-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1238,7 +1224,21 @@
   </url>
   
   <url>
+    <loc>https://smartxia.github.io/blog/tags/redis/</loc>
+    <lastmod>2024-03-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://smartxia.github.io/blog/tags/%E7%BC%96%E7%A0%81/</loc>
+    <lastmod>2024-03-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://smartxia.github.io/blog/tags/pubsub/</loc>
     <lastmod>2024-03-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1317,13 +1317,6 @@
   </url>
   
   <url>
-    <loc>https://smartxia.github.io/blog/categories/git/</loc>
-    <lastmod>2024-03-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://smartxia.github.io/blog/categories/DOCKER/</loc>
     <lastmod>2024-03-18</lastmod>
     <changefreq>weekly</changefreq>
@@ -1345,14 +1338,7 @@
   </url>
   
   <url>
-    <loc>https://smartxia.github.io/blog/categories/MYSQL/</loc>
-    <lastmod>2024-03-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://smartxia.github.io/blog/categories/PHP/</loc>
+    <loc>https://smartxia.github.io/blog/categories/git/</loc>
     <lastmod>2024-03-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1366,14 +1352,14 @@
   </url>
   
   <url>
-    <loc>https://smartxia.github.io/blog/categories/redis/</loc>
+    <loc>https://smartxia.github.io/blog/categories/PHP/</loc>
     <lastmod>2024-03-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://smartxia.github.io/blog/categories/reids/</loc>
+    <loc>https://smartxia.github.io/blog/categories/MYSQL/</loc>
     <lastmod>2024-03-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1394,7 +1380,21 @@
   </url>
   
   <url>
+    <loc>https://smartxia.github.io/blog/categories/redis/</loc>
+    <lastmod>2024-03-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://smartxia.github.io/blog/categories/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86/</loc>
+    <lastmod>2024-03-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://smartxia.github.io/blog/categories/reids/</loc>
     <lastmod>2024-03-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1408,14 +1408,14 @@
   </url>
   
   <url>
-    <loc>https://smartxia.github.io/blog/categories/diary/</loc>
+    <loc>https://smartxia.github.io/blog/categories/Diary/</loc>
     <lastmod>2024-03-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://smartxia.github.io/blog/categories/Diary/</loc>
+    <loc>https://smartxia.github.io/blog/categories/diary/</loc>
     <lastmod>2024-03-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
