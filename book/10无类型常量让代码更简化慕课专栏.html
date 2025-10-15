@@ -1,0 +1,609 @@
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>夏夏天的技术博客 | 夏夏天的技术博客</title><meta name="author" content="夏夏天,xiapeifu@gmail.com"><meta name="copyright" content="夏夏天"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="10 无类型常量让代码更简化-慕课专栏"><link rel="shortcut icon" href="/blog/img/favicon.png"><link rel="canonical" href="https://smartxia.github.io/blog/book/10%E6%97%A0%E7%B1%BB%E5%9E%8B%E5%B8%B8%E9%87%8F%E8%AE%A9%E4%BB%A3%E7%A0%81%E6%9B%B4%E7%AE%80%E5%8C%96%E6%85%95%E8%AF%BE%E4%B8%93%E6%A0%8F.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/blog/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/blog/',
+  algolia: undefined,
+  localSearch: {"path":"/blog/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: 夏夏天","link":"Link: ","source":"Source: 夏夏天的技术博客","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '夏夏天的技术博客',
+  isPost: false,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-03-12 11:55:12'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="alternate" href="/blog/atom.xml" title="夏夏天的技术博客" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://s2-cdn.oneitfarm.com/e12ece12233b4059860acf48637d830a.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/blog/archives/"><div class="headline">Articles</div><div class="length-num">92</div></a><a href="/blog/tags/"><div class="headline">Tags</div><div class="length-num">57</div></a><a href="/blog/categories/"><div class="headline">Categories</div><div class="length-num">26</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/blog/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/blog/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="//tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/blog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/blog/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/blog/movies/"><i class="fa-fw fas fa-film"></i><span> Movie</span></a></li><li><a class="site-page child" href="/blog/photos/"><i class="fa-fw fas fa-picture"></i><span> Photo</span></a></li><li><a class="site-page child" href="/blog/games/"><i class="fa-fw fas fa-gamepad"></i><span> Game</span></a></li><li><a class="site-page child" href="/blog/books/"><i class="fa-fw fas fa-book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/blog/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/blog/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/blog/messageboard/"><i class="fa-fw fas fa-coffee"></i><span> Messageboard</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header" style="background-image: url('http://s2-cdn.oneitfarm.com/cac574f332b3413f89164d966759be51.jpg')"><nav id="nav"><span id="blog-info"><a href="/blog/" title="夏夏天的技术博客"><span class="site-name">夏夏天的技术博客</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/blog/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/blog/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="//tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/blog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/blog/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/blog/movies/"><i class="fa-fw fas fa-film"></i><span> Movie</span></a></li><li><a class="site-page child" href="/blog/photos/"><i class="fa-fw fas fa-picture"></i><span> Photo</span></a></li><li><a class="site-page child" href="/blog/games/"><i class="fa-fw fas fa-gamepad"></i><span> Game</span></a></li><li><a class="site-page child" href="/blog/books/"><i class="fa-fw fas fa-book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/blog/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/blog/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/blog/messageboard/"><i class="fa-fw fas fa-coffee"></i><span> Messageboard</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="page-site-info"><h1 id="site-title">夏夏天的技术博客</h1></div></header><main class="layout" id="content-inner"><div id="page"><div id="article-container"><html><head><meta charset="utf-8"><title>10 无类型常量让代码更简化-慕课专栏</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+			<meta name="renderer" content="webkit">
+			<meta property="qc:admins" content="77103107776157736375">
+			<meta property="wb:webmaster" content="c4f857219bfae3cb">
+			<meta http-equiv="Access-Control-Allow-Origin" content="*">
+			<meta http-equiv="Cache-Control" content="no-transform ">
+			<meta http-equiv="Cache-Control" content="no-siteapp">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://www.imooc.com/static/img/common/touch-icon-ipad.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://www.imooc.com/static/img/common/touch-icon-iphone-retina.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://www.imooc.com/static/img/common/touch-icon-ipad-retina.png">
+			<link href="https://moco.imooc.com/captcha/style/captcha.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201907021539" type="text/css">
+			<link rel="stylesheet" href="https://www.imooc.com/static/lib/swiper/swiper-3.4.2.min.css?t=201907021539">
+			<link rel="stylesheet" href="https://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,column/zhuanlanChapter-less.css?t=2.5,course/inc/course_tipoff-less.css?t=2.5?v=201907051055" type="text/css">
+			<link charset="utf-8" rel="stylesheet" href="https://www.imooc.com/static/lib/ueditor/themes/imooc/css/ueditor.css?v=201907021539"><link rel="stylesheet" href="https://www.imooc.com/static/lib/baiduShare/api/css/share_style0_16.css?v=6aba13f0.css"></head>
+			<body><div id="main">
+
+
+<div class="main-con hide-menu">
+    <!-- 左侧菜单 & 索引 -->
+    
+    <div class="right-content" style="padding-left: 0px;">
+        <div class="container clearfix" id="top" style="width: 1134px; display: block;">
+            
+            
+            <div class="center_con js-center_con l" style="width: 1134px;">
+                <div class="article-con">
+                                            <!-- 买过的阅读 -->
+                        
+
+                    
+                    <div class="art-title" style="margin-top: 0px;">
+                        10 无类型常量让代码更简化
+                    </div>
+                    <div class="art-info clearfix">
+                        
+                        <span class="l">
+                            更新时间：2020-09-29 09:36:05
+                        </span>
+                    </div>
+                    <div class="art-top">
+                                                <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img4.sycdn.imooc.com/5f683d5000012cbc06400426.jpg" alt>
+                                                                        <div class="famous-word-box">
+                            <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://www.imooc.com/static/img/column/bg-l.png" alt class="bg1 bg">
+                            <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://www.imooc.com/static/img/column/bg-r.png" alt class="bg2 bg">
+                            <div class="famous-word">我们活着不能与草木同腐，不能醉生梦死，枉度人生，要有所作为。——方志敏<p></p></div>
+                        </div>
+                                            </div>
+                    <div class="art-content js-lookimg">
+                        <div id="article_content">
+                            <div class="cl-preview-section"><h2 style="font-size: 30px;"><span id="1-go-常量溯源">1. Go 常量溯源</span></h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们先来回顾一下 C 语言。在 C 语言中，字面值（literal）担负着常量的角色（针对整型值，我们还可以使用枚举常量），我们可以使用整型、浮点型、字符串型、字符型字面值来应对不同场合对常量的需求：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">0x12345678
+10086
+3.1415926
+"Hello, Gopher"
+'a'
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">为了不让这些魔数(magic number)充斥于源码各处，早期 C 语言的常用实践是使用宏(macro)来定义记号来指代这些字面值：</p>
+</div><div class="cl-preview-section"><pre><code>#define MAX_LEN 0x12345678
+#define CMCC_SERVICE_PHONE_NUMBER 10086
+#define PI 3.1415926
+#define WELCOME_TO_GO "Hello, Gopher"
+#define A_CHAR 'a'
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">这种定义有名字面值的实践也被称为宏定义常量。虽然后续的 C 标准中提供了 const 关键字来定义在程序运行过程中不可改变的变量（又称只读变量），但使用宏定义常量的习惯依然被沿袭下来，并且依旧是 C 编码中的主流风格。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">宏定义的常量有着诸多不足，比如：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">仅是预编译阶段进行替换的字面值，继承了宏替换的复杂性和易错性；</li>
+<li style="font-size: 20px; line-height: 38px;">类型不安全；</li>
+<li style="font-size: 20px; line-height: 38px;">无法在调试时通过宏名字输出常量的值。</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">而 C 语言中的 const 修饰的标识符本质上依旧是变量，和其他变量一样，编译器不能像真正的常量那样对其进行代码优化，也无法做为数组初始长度。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 语言是站在 C 语言等编程语言的肩膀之上诞生的，它原生提供常量定义的关键字 const。Go 语言中的 const 整合了 C 语言中宏定义常量、const 只读变量和枚举常量三种形式，并消除了每种形式的不足，使得 Go 常量是类型安全且对编译器优化友好的。Go 中所有与常量有关的声明都通过 const 来进行，例如：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// $GOROOT/src/os/file.go</span>
+<span class="token keyword">const</span> <span class="token punctuation">(</span>
+    <span class="token comment">// Exactly one of O_RDONLY, O_WRONLY, or O_RDWR must be specified.</span>
+    O_RDONLY <span class="token builtin">int</span> <span class="token operator">=</span> syscall<span class="token punctuation">.</span>O_RDONLY <span class="token comment">// open the file read-only.</span>
+    O_WRONLY <span class="token builtin">int</span> <span class="token operator">=</span> syscall<span class="token punctuation">.</span>O_WRONLY <span class="token comment">// open the file write-only.</span>
+    O_RDWR   <span class="token builtin">int</span> <span class="token operator">=</span> syscall<span class="token punctuation">.</span>O_RDWR   <span class="token comment">// open the file read-write.</span>
+    <span class="token comment">// The remaining values may be or'ed in to control behavior.</span>
+    O_APPEND <span class="token builtin">int</span> <span class="token operator">=</span> syscall<span class="token punctuation">.</span>O_APPEND <span class="token comment">// append data to the file when writing.</span>
+    O_CREATE <span class="token builtin">int</span> <span class="token operator">=</span> syscall<span class="token punctuation">.</span>O_CREAT  <span class="token comment">// create a new file if none exists.</span>
+    O_EXCL   <span class="token builtin">int</span> <span class="token operator">=</span> syscall<span class="token punctuation">.</span>O_EXCL   <span class="token comment">// used with O_CREATE, file must not exist.</span>
+    O_SYNC   <span class="token builtin">int</span> <span class="token operator">=</span> syscall<span class="token punctuation">.</span>O_SYNC   <span class="token comment">// open for synchronous I/O.</span>
+    O_TRUNC  <span class="token builtin">int</span> <span class="token operator">=</span> syscall<span class="token punctuation">.</span>O_TRUNC  <span class="token comment">// truncate regular writable file when opened.</span>
+<span class="token punctuation">)</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">上面这段标准库中的代码通过 const 声明了一组常量，如果非要进一步细分，可以将这组常量视为枚举的整型常量。然而你可能没想到，上面对常量的声明方式<strong>仅仅是 Go 标准库中的少数个例</strong>，绝大多数情况下，Go 常量在声明时并不显式指定类型，也就是说使用的是<strong>无类型常量（untyped constants）</strong>。比如：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token comment">// $GOROOT/src/io/io.go</span>
+<span class="token comment">// Seek whence values.</span>
+<span class="token keyword">const</span> <span class="token punctuation">(</span>
+    SeekStart   <span class="token operator">=</span> <span class="token number">0</span> <span class="token comment">// seek relative to the origin of the file</span>
+    SeekCurrent <span class="token operator">=</span> <span class="token number">1</span> <span class="token comment">// seek relative to the current offset</span>
+    SeekEnd     <span class="token operator">=</span> <span class="token number">2</span> <span class="token comment">// seek relative to the end</span>
+<span class="token punctuation">)</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">无类型常量是 Go 语言在语法设计方面的一个“微创新”，也是“追求简单”设计哲学的又一次体现，它可以让你的 Go 代码更加简化，接下来我们就来看看无类型常量是如何简化 Go 代码编写的。</p>
+</div><div class="cl-preview-section"><h2 style="font-size: 30px;"><span id="2-有类型常量带来的烦恼">2. 有类型常量带来的“烦恼”</span></h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 语言是对类型安全要求十分严格的语言。Go 要求即便两个类型拥有着相同的底层类型（underlying type），但是它们仍然是不同的数据类型，因此它们不可以被相互比较或混在一个表达式中进行运算：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token keyword">type</span> myInt <span class="token builtin">int</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">var</span> a <span class="token builtin">int</span> <span class="token operator">=</span> <span class="token number">5</span>
+    <span class="token keyword">var</span> b myInt <span class="token operator">=</span> <span class="token number">6</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>a <span class="token operator">+</span> b<span class="token punctuation">)</span> <span class="token comment">// invalid operation: a + b (mismatched types int and myInt)</span>
+<span class="token punctuation">&#125;</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到 Go 在处理不同类型的变量间运算时不支持隐式类型转换，Go 设计者认为隐式转换带来的便利性不足以抵消其带来的诸多问题<sup class="footnote-ref"><a href="#fn1" id="fnref1">1</a></sup>，因此要解决上面的编译错误，我们必须进行显式地转型：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token keyword">type</span> myInt <span class="token builtin">int</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">var</span> a <span class="token builtin">int</span> <span class="token operator">=</span> <span class="token number">5</span>
+    <span class="token keyword">var</span> b myInt <span class="token operator">=</span> <span class="token number">6</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>a <span class="token operator">+</span> <span class="token function">int</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// 输出：11</span>
+<span class="token punctuation">&#125;</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">而有类型常量与变量混合在一起进行运算求值时也要遵循这一要求，即如果有类型常量与变量的类型不同，那么混合运算的求值操作会报错：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token keyword">type</span> myInt <span class="token builtin">int</span>
+<span class="token keyword">const</span> n myInt <span class="token operator">=</span> <span class="token number">13</span>
+<span class="token keyword">const</span> m <span class="token builtin">int</span> <span class="token operator">=</span> n <span class="token operator">+</span> <span class="token number">5</span> <span class="token comment">// cannot use n + 5 (type myInt) as type int in const initializer</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">var</span> a <span class="token builtin">int</span> <span class="token operator">=</span> <span class="token number">5</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>a <span class="token operator">+</span> n<span class="token punctuation">)</span> <span class="token comment">// invalid operation: a + n (mismatched types int and myInt)</span>
+<span class="token punctuation">&#125;</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">唯有通过显式转型才能让上面代码正常工作：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token keyword">type</span> myInt <span class="token builtin">int</span>
+<span class="token keyword">const</span> n myInt <span class="token operator">=</span> <span class="token number">13</span>
+<span class="token keyword">const</span> m <span class="token builtin">int</span> <span class="token operator">=</span> <span class="token function">int</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">5</span> 
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">var</span> a <span class="token builtin">int</span> <span class="token operator">=</span> <span class="token number">5</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>a <span class="token operator">+</span> <span class="token function">int</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment">// 输出：18</span>
+<span class="token punctuation">&#125;</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">有类型常量给代码简化带来了麻烦，但这也是 Go 语言对类型安全严格要求的结果。</p>
+</div><div class="cl-preview-section"><h3><span id="3-无类型常量消除烦恼简化代码">3. 无类型常量消除烦恼，简化代码</span></h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们现在有下面这些字面值：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">5
+3.1415926
+"Hello, Gopher"
+'a'
+false
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们挑选三个字面值以魔数的形式直接参与到变量赋值运算中：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token keyword">type</span> myInt <span class="token builtin">int</span>
+<span class="token keyword">type</span> myFloat <span class="token builtin">float32</span>
+<span class="token keyword">type</span> myString <span class="token builtin">string</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">var</span> j myInt <span class="token operator">=</span> <span class="token number">5</span>
+    <span class="token keyword">var</span> f myFloat <span class="token operator">=</span> <span class="token number">3.1415926</span>
+    <span class="token keyword">var</span> str myString <span class="token operator">=</span> <span class="token string">"Hello, Gopher"</span>
+
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>j<span class="token punctuation">)</span>    <span class="token comment">// 输出：5</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span>    <span class="token comment">// 输出：3.1415926</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span>  <span class="token comment">// 输出：Hello, Gopher</span>
+<span class="token punctuation">&#125;</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到这三个字面值无需显式转型就可以直接赋值给对应的三个自定义类型的变量，这等价于下面代码：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token keyword">var</span> j myInt <span class="token operator">=</span> <span class="token function">myInt</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> f myFloat <span class="token operator">=</span> <span class="token function">myFloat</span><span class="token punctuation">(</span><span class="token number">3.1415926</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> str myString <span class="token operator">=</span> <span class="token function">myString</span><span class="token punctuation">(</span><span class="token string">"Hello, Gopher"</span><span class="token punctuation">)</span>
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">但显然之前的无需显式转型的代码更为简单。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 的无类型常量恰恰就拥有像字面值这样的特性，该特性使得无类型常量在参与变量赋值和计算过程无需显式转型，从而达到简化代码的目的：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token keyword">const</span> <span class="token punctuation">(</span>
+    a  <span class="token operator">=</span> <span class="token number">5</span>
+    pi <span class="token operator">=</span> <span class="token number">3.1415926</span>
+    s  <span class="token operator">=</span> <span class="token string">"Hello, Gopher"</span>
+    c  <span class="token operator">=</span> <span class="token string">'a'</span>
+    b  <span class="token operator">=</span> <span class="token boolean">false</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">type</span> myInt <span class="token builtin">int</span>
+<span class="token keyword">type</span> myFloat <span class="token builtin">float32</span>
+<span class="token keyword">type</span> myString <span class="token builtin">string</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">var</span> j myInt <span class="token operator">=</span> a
+    <span class="token keyword">var</span> f myFloat <span class="token operator">=</span> pi
+    <span class="token keyword">var</span> str myString <span class="token operator">=</span> s
+
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>j<span class="token punctuation">)</span>    <span class="token comment">// 输出：5</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span>    <span class="token comment">// 输出：3.1415926</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span>  <span class="token comment">// 输出：Hello, Gopher</span>
+<span class="token punctuation">&#125;</span>
+
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到无类型常量使得在 Go 这样的具有强类型系统的语言中处理表达式混合数据类型运算时具有较大的灵活性，代码编写也有简化，我们无需在求值表达式中做任何显式转型了。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">除此之外，无类型常量也拥有自己的默认类型：无类型的布尔型常量、无类型的整数常量、无类型的字符常量、无类型的浮点数常量、无类型的复数常量、无类型的字符串常量分别对应的默认类型为 bool、int、int32(rune)、float64、complex128 和 string。当常量被赋值给无类型变量、接口变量时，常量默认类型对于确定无类型变量的类型以及接口对应动态类型是至关重要的：</p>
+</div><div class="cl-preview-section"><pre class="  language-go"><code class="prism  language-go"><span class="token keyword">const</span> <span class="token punctuation">(</span>
+    a <span class="token operator">=</span> <span class="token number">5</span>
+    s <span class="token operator">=</span> <span class="token string">"Hello, Gopher"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    n <span class="token operator">:=</span> a
+    <span class="token keyword">var</span> i <span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token operator">=</span> a
+
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%T\n"</span><span class="token punctuation">,</span> n<span class="token punctuation">)</span> <span class="token comment">// 输出：int</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%T\n"</span><span class="token punctuation">,</span> i<span class="token punctuation">)</span> <span class="token comment">// 输出：int</span>
+    i <span class="token operator">=</span> s
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%T\n"</span><span class="token punctuation">,</span> i<span class="token punctuation">)</span> <span class="token comment">// 输出：string</span>
+<span class="token punctuation">&#125;</span>
+
+</code></pre>
+</div><div class="cl-preview-section"><h3><span id="4-小结">4. 小结</span></h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">所有常量表达式的求值计算都可以在编译期完成的，而不是在运行期，这样可以减少运行时的工作，也方便编译器进行编译优化。当操作数是常量时，一些运行时的错误也可以在编译时被发现，例如整数除零、字符串索引越界等。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">无类型常量是 Go 语言推荐的实践，它拥有和字面值一样的灵活特性，可以直接用于更多的表达式而不需要显式的类型转换，简化了代码编写。同时按照 Go 官方语言规范<sup class="footnote-ref"><a href="#fn2" id="fnref2">2</a></sup>描述，数值型无类型常量还可以提供比基础类型更高精度的算术运算，你可以认为至少有 256bit 的运算精度。</p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item" style="font-size: 20px; line-height: 38px;"><p style="font-size: 20px; line-height: 38px;"><a target="_blank" rel="noopener" href="https://golang.org/doc/faq#conversions">https://golang.org/doc/faq#conversions</a> <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item" style="font-size: 20px; line-height: 38px;"><p style="font-size: 20px; line-height: 38px;"><a target="_blank" rel="noopener" href="https://golang.org/ref/spec#Constants">https://golang.org/ref/spec#Constants</a> <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+</div>}
+                        </div>
+                    </div>
+                                            <!-- 买过的阅读 -->
+                        <div class="art-next-prev clearfix">
+                                                                                                <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/87/article/2378">
+                                                                    <div class="prev l clearfix">
+                                        <div class="icon l">
+                                            <i class="imv2-arrow3_l"></i>
+                                        </div>
+                                        <p>
+                                            09 变量声明形式尽量保持一致
+                                        </p>
+                                    </div>
+                                </a>
+                                                                                                                            <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/87/article/2380">
+                                                                    <div class="next r clearfix">
+                                        <p>
+                                            11 Go“枚举常量”的惯用实现方法
+                                        </p>
+                                        <div class="icon r">
+                                            <i class="imv2-arrow3_r"></i>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                                    </div>
+                                    </div>
+                <div class="comments-con js-comments-con" id="coments_con">
+                </div>
+
+                
+            </div>
+            
+            
+            
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-jiaQun-new hide" id="modal-jiaQun">
+    <div class="inner" style>
+        <div class="modal-close js-close-jiaQun">
+            <i class="imv2-close"></i>
+        </div>
+        <div class="content">
+            <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img1.sycdn.imooc.com/5f51ecec0001392b05330597.jpg">
+            <div class="right-info">
+                <div class="title">
+                    扫码加入慕课前沿技术核心用户群
+                </div>
+                <div class="desc">
+                                            <p class="mb6">验证信息：<span id="joincode">2010312025386365</span><span class="copy js-copy-joincode">复制</span></p>
+                                        <p class="mb6">QQ讨论群号：729941811</p>
+                                            <p>QQ群URL：<a href="https://jq.qq.com/?_wv=1027&amp;k=5WJLMxV" target="_blank">点击访问</a></p>
+                                    </div>
+            </div>
+            <p class="tip">若遇到搜索不到QQ群或加群失败，请联系客服邮箱:kf@imooc.com</p>
+        </div>
+    </div>
+</div>
+ 
+<!-- 专栏介绍页专栏评价 -->
+
+<!-- 专栏介绍页底部三条评价 -->
+
+<!-- 专栏阅读页弹层目录和介绍页页面目录 -->
+
+<!-- 专栏阅读页发布回复 -->
+
+<!-- 专栏阅读页发布评论 -->
+
+<!-- 专栏阅读页底部评论 -->
+
+<!-- 专栏阅读 单个 评论 -->
+
+<!-- 新增回复和展开三条以外回复 -->
+
+<!-- 立即订阅的弹窗 -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div></body></html></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://s2-cdn.oneitfarm.com/e12ece12233b4059860acf48637d830a.jpg" onerror="this.onerror=null;this.src='/blog/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">夏夏天</div><div class="author-info__description">专注于Go语言、PHP、WebRTC、实时通信等技术分享的个人博客</div></div><div class="card-info-data site-data is-center"><a href="/blog/archives/"><div class="headline">Articles</div><div class="length-num">92</div></a><a href="/blog/tags/"><div class="headline">Tags</div><div class="length-num">57</div></a><a href="/blog/categories/"><div class="headline">Categories</div><div class="length-num">26</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/blog/atom.xml" target="_blank" title=""><i class="fa fa-rss"></i></a><a class="social-icon" href="https://github.com/smartXia" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:xiapeifu@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://gitee.com/xiapeifu" target="_blank" title="Gitee"><i class="iconfont gitee"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/blog/2025/10/15/%E8%A7%86%E9%A2%91%E6%B5%81/WebRTC-WHIP-%E5%8C%BA%E5%88%AB/" title="WebRTC/WHIP 区别详解"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=2070&amp;q=80" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="WebRTC/WHIP 区别详解"/></a><div class="content"><a class="title" href="/blog/2025/10/15/%E8%A7%86%E9%A2%91%E6%B5%81/WebRTC-WHIP-%E5%8C%BA%E5%88%AB/" title="WebRTC/WHIP 区别详解">WebRTC/WHIP 区别详解</a><time datetime="2025-10-15T09:19:46.000Z" title="Created 2025-10-15 17:19:46">2025-10-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2024/07/17/tech/devops/k8s/k8s-6-%E4%B8%AD%E5%A6%82%E4%BD%95%E5%81%9A%E5%88%B0%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D%E7%BD%91%E7%BB%9C%E5%9F%9F%E5%90%8D/" title="k8s中如何做到动态分配网络域名"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/blog/img/k8s.jpg" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="k8s中如何做到动态分配网络域名"/></a><div class="content"><a class="title" href="/blog/2024/07/17/tech/devops/k8s/k8s-6-%E4%B8%AD%E5%A6%82%E4%BD%95%E5%81%9A%E5%88%B0%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D%E7%BD%91%E7%BB%9C%E5%9F%9F%E5%90%8D/" title="k8s中如何做到动态分配网络域名">k8s中如何做到动态分配网络域名</a><time datetime="2024-07-17T03:00:56.000Z" title="Created 2024-07-17 11:00:56">2024-07-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2024/07/17/tech/devops/k8s/k8s-5-%E4%B8%AD%E5%85%B3%E4%BA%8E%E6%9C%8D%E5%8A%A1%E7%BD%91%E7%BB%9C%E7%9A%84%E4%BD%BF%E7%94%A8/" title="k8s中关于服务网络的使用"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/blog/img/k8s.jpg" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="k8s中关于服务网络的使用"/></a><div class="content"><a class="title" href="/blog/2024/07/17/tech/devops/k8s/k8s-5-%E4%B8%AD%E5%85%B3%E4%BA%8E%E6%9C%8D%E5%8A%A1%E7%BD%91%E7%BB%9C%E7%9A%84%E4%BD%BF%E7%94%A8/" title="k8s中关于服务网络的使用">k8s中关于服务网络的使用</a><time datetime="2024-07-17T02:59:54.000Z" title="Created 2024-07-17 10:59:54">2024-07-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2024/07/15/tech/backend/golang/GOLANG-%E7%AC%94%E8%AE%B08-Context%E4%B8%8A%E4%B8%8B%E6%96%87/" title="golang Context上下文"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/blog/img/golang.jpeg" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="golang Context上下文"/></a><div class="content"><a class="title" href="/blog/2024/07/15/tech/backend/golang/GOLANG-%E7%AC%94%E8%AE%B08-Context%E4%B8%8A%E4%B8%8B%E6%96%87/" title="golang Context上下文">golang Context上下文</a><time datetime="2024-07-15T10:56:27.000Z" title="Created 2024-07-15 18:56:27">2024-07-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2024/04/12/tech/devops/k8s/k8s-3-%E6%9C%89%E7%8A%B6%E6%80%81%E6%9C%8D%E5%8A%A1%E6%97%A0%E7%8A%B6%E6%80%81%E6%9C%8D%E5%8A%A1%E5%92%8C%E5%AF%B9%E5%A4%96%E8%AE%BF%E9%97%AE%E6%9C%8D%E5%8A%A1/" title="k8s-有状态服务无状态服务和对外访问服务"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/blog/img/k8s.jpg" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="k8s-有状态服务无状态服务和对外访问服务"/></a><div class="content"><a class="title" href="/blog/2024/04/12/tech/devops/k8s/k8s-3-%E6%9C%89%E7%8A%B6%E6%80%81%E6%9C%8D%E5%8A%A1%E6%97%A0%E7%8A%B6%E6%80%81%E6%9C%8D%E5%8A%A1%E5%92%8C%E5%AF%B9%E5%A4%96%E8%AE%BF%E9%97%AE%E6%9C%8D%E5%8A%A1/" title="k8s-有状态服务无状态服务和对外访问服务">k8s-有状态服务无状态服务和对外访问服务</a><time datetime="2024-04-12T08:43:25.000Z" title="Created 2024-04-12 16:43:25">2024-04-12</time></div></div></div></div><div class="card-widget" id="card-newest-comments"><div class="item-headline"><i class="fas fa-comment-dots"></i><span>Latest Comments</span></div><div class="aside-list"><span>loading...</span></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
+            <a class="card-more-btn" href="/blog/categories/" title="View More">
+    <i class="fas fa-angle-right"></i></a>
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/DOCKER/"><span class="card-category-list-name">DOCKER</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/Diary/"><span class="card-category-list-name">Diary</span><span class="card-category-list-count">2</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/Diary/Games/"><span class="card-category-list-name">Games</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/Diary/PlayStation/"><span class="card-category-list-name">PlayStation</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/GOLANG/"><span class="card-category-list-name">GOLANG</span><span class="card-category-list-count">15</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/HTTP/"><span class="card-category-list-name">HTTP</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/Life/"><span class="card-category-list-name">Life</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/MYSQL/"><span class="card-category-list-name">MYSQL</span><span class="card-category-list-count">3</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/blog/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 1.1em; color: #999">数据结构</a> <a href="/blog/tags/WebRTC/" style="font-size: 1.1em; color: #999">WebRTC</a> <a href="/blog/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 1.1em; color: #999">排序</a> <a href="/blog/tags/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" style="font-size: 1.1em; color: #999">工厂模式</a> <a href="/blog/tags/%E7%9B%B4%E6%92%AD%E6%8A%80%E6%9C%AF/" style="font-size: 1.1em; color: #999">直播技术</a> <a href="/blog/tags/MSYQL/" style="font-size: 1.1em; color: #999">MSYQL</a> <a href="/blog/tags/pubsub/" style="font-size: 1.1em; color: #999">pubsub</a> <a href="/blog/tags/Slice/" style="font-size: 1.18em; color: #999ca1">Slice</a> <a href="/blog/tags/golang/" style="font-size: 1.5em; color: #99a9bf">golang</a> <a href="/blog/tags/%E5%BE%85%E6%9B%B4%E6%96%B0/" style="font-size: 1.18em; color: #999ca1">待更新</a> <a href="/blog/tags/%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/" style="font-size: 1.18em; color: #999ca1">创建型模式</a> <a href="/blog/tags/rpc/" style="font-size: 1.18em; color: #999ca1">rpc()</a> <a href="/blog/tags/%E5%BC%82%E5%B8%B8/" style="font-size: 1.1em; color: #999">异常</a> <a href="/blog/tags/php/" style="font-size: 1.1em; color: #999">php</a> <a href="/blog/tags/%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6/" style="font-size: 1.1em; color: #999">转义字符</a> <a href="/blog/tags/photo/" style="font-size: 1.1em; color: #999">photo</a> <a href="/blog/tags/%E7%BD%91%E6%98%93%E4%BA%91-server%E9%85%B1-py-%E4%BA%91%E5%87%BD%E6%95%B0-%E5%BE%85%E6%9B%B4%E6%96%B0/" style="font-size: 1.1em; color: #999">网易云 server酱 py 云函数  待更新</a> <a href="/blog/tags/HEXO/" style="font-size: 1.18em; color: #999ca1">HEXO</a> <a href="/blog/tags/wiki/" style="font-size: 1.26em; color: #999fa8">wiki</a> <a href="/blog/tags/ssr/" style="font-size: 1.1em; color: #999">ssr</a> <a href="/blog/tags/gox/" style="font-size: 1.1em; color: #999">gox</a> <a href="/blog/tags/module/" style="font-size: 1.1em; color: #999">module</a> <a href="/blog/tags/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" style="font-size: 1.1em; color: #999">抽象工厂模式</a> <a href="/blog/tags/Generator/" style="font-size: 1.1em; color: #999">Generator</a> <a href="/blog/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 1.1em; color: #999">工具</a> <a href="/blog/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 1.34em; color: #99a3b0">设计模式</a> <a href="/blog/tags/cgi/" style="font-size: 1.1em; color: #999">cgi</a> <a href="/blog/tags/%E6%95%99%E7%A8%8B/" style="font-size: 1.18em; color: #999ca1">教程</a> <a href="/blog/tags/%E4%B9%A6%E7%B1%8D/" style="font-size: 1.1em; color: #999">书籍</a> <a href="/blog/tags/k8s/" style="font-size: 1.42em; color: #99a6b7">k8s</a> <a href="/blog/tags/%E6%8E%A8%E8%8D%90/" style="font-size: 1.1em; color: #999">推荐</a> <a href="/blog/tags/%E4%B8%BB%E9%A2%98/" style="font-size: 1.18em; color: #999ca1">主题</a> <a href="/blog/tags/%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0/" style="font-size: 1.1em; color: #999">匿名函数</a> <a href="/blog/tags/farmworker/" style="font-size: 1.1em; color: #999">farmworker</a> <a href="/blog/tags/gin/" style="font-size: 1.1em; color: #999">gin</a> <a href="/blog/tags/%E5%8C%BF%E5%90%8D%E7%B1%BB/" style="font-size: 1.1em; color: #999">匿名类</a> <a href="/blog/tags/WHIP/" style="font-size: 1.1em; color: #999">WHIP</a> <a href="/blog/tags/redis/" style="font-size: 1.26em; color: #999fa8">redis</a> <a href="/blog/tags/yield/" style="font-size: 1.1em; color: #999">yield</a> <a href="/blog/tags/regex/" style="font-size: 1.18em; color: #999ca1">regex</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span><a class="card-more-btn" href="/blog/archives/" title="View More">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2025/10/"><span class="card-archive-list-date">October 2025</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2024/07/"><span class="card-archive-list-date">July 2024</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2024/04/"><span class="card-archive-list-date">April 2024</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2024/03/"><span class="card-archive-list-date">March 2024</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2022/03/"><span class="card-archive-list-date">March 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2021/12/"><span class="card-archive-list-date">December 2021</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2021/11/"><span class="card-archive-list-date">November 2021</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2021/10/"><span class="card-archive-list-date">October 2021</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">92</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-10-15T09:42:48.762Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By 夏夏天</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">简</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="chat-btn" type="button" title="Chat"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/blog/js/utils.js?v=4.13.0"></script><script src="/blog/js/main.js?v=4.13.0"></script><script src="/blog/js/tw_cn.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.8.8/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const initValine = () => {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'b5KjzAk69Lg3yBaVPeEiuljv-gzGzoHsz',
+      appKey: 'Yb0PJ1jscpDdBIvDLO6MEYUy',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  const loadValine = async () => {
+    if (typeof Valine === 'function') initValine()
+    else {
+      await getScript('https://cdn.jsdelivr.net/npm/valine@1.5.1/dist/Valine.min.js')
+      initValine()
+    }
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script></div><script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.19.0/js/md5.min.js"></script><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[image]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[link]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[code]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getIcon = (icon, mail) => {
+    if (icon) return icon
+    let defaultIcon = '?d=monsterid'
+    let iconUrl = `https://gravatar.loli.net/avatar/${md5(mail.toLowerCase()) + defaultIcon}`
+    return iconUrl
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += 'No comments'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const getComment = () => {
+    const serverURL = 'https://b5KjzAk6.api.lncldglobal.com'
+
+    var settings = {
+      "method": "GET",
+      "headers": {
+        "X-LC-Id": 'b5KjzAk69Lg3yBaVPeEiuljv-gzGzoHsz',
+        "X-LC-Key": 'Yb0PJ1jscpDdBIvDLO6MEYUy',
+        "Content-Type": "application/json"
+      },
+    }
+
+    fetch(`${serverURL}/1.1/classes/Comment?limit=6&order=-createdAt`,settings)
+      .then(response => response.json())
+      .then(data => {
+        const valineArray = data.results.map(function (e) {
+          return {
+            'avatar': getIcon(e.QQAvatar, e.mail),
+            'content': changeContent(e.comment),
+            'nick': e.nick,
+            'url': e.url + '#' + e.objectId,
+            'date': e.updatedAt,
+          }
+        })
+        saveToLocal.set('valine-newest-comments', JSON.stringify(valineArray), 10/(60*24))
+        generateHtml(valineArray)
+      }).catch(e => {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "Unable to retrieve comments, please check the configuration"
+      }) 
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('valine-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/blog/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>

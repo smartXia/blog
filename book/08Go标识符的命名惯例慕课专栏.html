@@ -1,0 +1,727 @@
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>夏夏天的技术博客 | 夏夏天的技术博客</title><meta name="author" content="夏夏天,xiapeifu@gmail.com"><meta name="copyright" content="夏夏天"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="08 Go 标识符的命名惯例-慕课专栏"><link rel="shortcut icon" href="/blog/img/favicon.png"><link rel="canonical" href="https://smartxia.github.io/blog/book/08Go%E6%A0%87%E8%AF%86%E7%AC%A6%E7%9A%84%E5%91%BD%E5%90%8D%E6%83%AF%E4%BE%8B%E6%85%95%E8%AF%BE%E4%B8%93%E6%A0%8F.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/blog/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/blog/',
+  algolia: undefined,
+  localSearch: {"path":"/blog/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: 夏夏天","link":"Link: ","source":"Source: 夏夏天的技术博客","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '夏夏天的技术博客',
+  isPost: false,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-03-12 11:55:12'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="alternate" href="/blog/atom.xml" title="夏夏天的技术博客" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://s2-cdn.oneitfarm.com/e12ece12233b4059860acf48637d830a.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/blog/archives/"><div class="headline">Articles</div><div class="length-num">92</div></a><a href="/blog/tags/"><div class="headline">Tags</div><div class="length-num">57</div></a><a href="/blog/categories/"><div class="headline">Categories</div><div class="length-num">26</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/blog/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/blog/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="//tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/blog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/blog/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/blog/movies/"><i class="fa-fw fas fa-film"></i><span> Movie</span></a></li><li><a class="site-page child" href="/blog/photos/"><i class="fa-fw fas fa-picture"></i><span> Photo</span></a></li><li><a class="site-page child" href="/blog/games/"><i class="fa-fw fas fa-gamepad"></i><span> Game</span></a></li><li><a class="site-page child" href="/blog/books/"><i class="fa-fw fas fa-book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/blog/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/blog/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/blog/messageboard/"><i class="fa-fw fas fa-coffee"></i><span> Messageboard</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header" style="background-image: url('http://s2-cdn.oneitfarm.com/cac574f332b3413f89164d966759be51.jpg')"><nav id="nav"><span id="blog-info"><a href="/blog/" title="夏夏天的技术博客"><span class="site-name">夏夏天的技术博客</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/blog/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/blog/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="//tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/blog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/blog/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/blog/movies/"><i class="fa-fw fas fa-film"></i><span> Movie</span></a></li><li><a class="site-page child" href="/blog/photos/"><i class="fa-fw fas fa-picture"></i><span> Photo</span></a></li><li><a class="site-page child" href="/blog/games/"><i class="fa-fw fas fa-gamepad"></i><span> Game</span></a></li><li><a class="site-page child" href="/blog/books/"><i class="fa-fw fas fa-book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/blog/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/blog/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/blog/messageboard/"><i class="fa-fw fas fa-coffee"></i><span> Messageboard</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="page-site-info"><h1 id="site-title">夏夏天的技术博客</h1></div></header><main class="layout" id="content-inner"><div id="page"><div id="article-container"><html><head><meta charset="utf-8"><title>08 Go 标识符的命名惯例-慕课专栏</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+			<meta name="renderer" content="webkit">
+			<meta property="qc:admins" content="77103107776157736375">
+			<meta property="wb:webmaster" content="c4f857219bfae3cb">
+			<meta http-equiv="Access-Control-Allow-Origin" content="*">
+			<meta http-equiv="Cache-Control" content="no-transform ">
+			<meta http-equiv="Cache-Control" content="no-siteapp">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://www.imooc.com/static/img/common/touch-icon-ipad.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://www.imooc.com/static/img/common/touch-icon-iphone-retina.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://www.imooc.com/static/img/common/touch-icon-ipad-retina.png">
+			<link href="https://moco.imooc.com/captcha/style/captcha.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201907021539" type="text/css">
+			<link rel="stylesheet" href="https://www.imooc.com/static/lib/swiper/swiper-3.4.2.min.css?t=201907021539">
+			<link rel="stylesheet" href="https://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,column/zhuanlanChapter-less.css?t=2.5,course/inc/course_tipoff-less.css?t=2.5?v=201907051055" type="text/css">
+			<link charset="utf-8" rel="stylesheet" href="https://www.imooc.com/static/lib/ueditor/themes/imooc/css/ueditor.css?v=201907021539"><link rel="stylesheet" href="https://www.imooc.com/static/lib/baiduShare/api/css/share_style0_16.css?v=6aba13f0.css"></head>
+			<body><div id="main">
+
+
+<div class="main-con hide-menu">
+    <!-- 左侧菜单 & 索引 -->
+    
+    <div class="right-content" style="padding-left: 0px;">
+        <div class="container clearfix" id="top" style="width: 1134px; display: block;">
+            
+            
+            <div class="center_con js-center_con l" style="width: 1134px;">
+                <div class="article-con">
+                                            <!-- 买过的阅读 -->
+                        
+
+                    
+                    <div class="art-title" style="margin-top: 0px;">
+                        08 Go 标识符的命名惯例
+                    </div>
+                    <div class="art-info clearfix">
+                        
+                        <span class="l">
+                            更新时间：2020-09-24 09:31:52
+                        </span>
+                    </div>
+                    <div class="art-top">
+                                                <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img1.sycdn.imooc.com/5f6825c50001399f49283264.jpg" alt>
+                                                                        <div class="famous-word-box">
+                            <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://www.imooc.com/static/img/column/bg-l.png" alt class="bg1 bg">
+                            <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://www.imooc.com/static/img/column/bg-r.png" alt class="bg2 bg">
+                            <div class="famous-word">成功＝艰苦的劳动＋正确的方法＋少谈空话。——爱因斯坦<p></p></div>
+                        </div>
+                                            </div>
+                    <div class="art-content js-lookimg">
+                        <div id="article_content">
+                            <div class="cl-preview-section"><blockquote>
+<p style="font-size: 20px; line-height: 38px;">计算机科学中只有两件难事：缓存失效和命名。 - <a target="_blank" rel="noopener" href="https://www.karlton.org/karlton/">菲尔·卡尔顿</a>，Netscape 架构师</p>
+</blockquote>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">从计算编程语言诞生那天起，给标识符命名这件事就一直伴随着程序员。命名这件事看似简单，但在如今大规模软件工程需要程序员个体间紧密协作的背景下，就像上面菲尔·卡尔顿所阐述的那样，做出好的命名并非易事。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命名是编程语言的要求，但是好的命名的目的却是为了提高程序的可读性和可维护性。好的命名是什么样子呢？Go 语言的贡献者和布道师 Dave Cheney 给出了一个隐喻：<strong>“好的命名就像一个好笑话。如果你必须解释它，那就不好笑了”</strong>。无论哪门编程语言，良好的命名应该遵循一些通用的原则，但就像之前在第一章节中提到的“语言影响思维”的假说那样，不同编程语言在命名上还会有一些个性化的命名惯例。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在 gofmt 的帮助下，Go 语言统一了代码风格标准，Gopher 们再也无需为括号摆放位置、使用制表符还是空格、是否对齐赋值操作等而争论了。在这样的情况下，命名成了广大 gopher 们为数不多可以“自由发挥”的空间了。不过关于命名，Go 语言依然有着自己的期望大家共同遵循的原则。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 的设计哲学之一就是追求简单，因此在命名上一样秉承着简单的总体原则。但简单并不意味着一味地为标识符选择短小的名字，而是要选择那种可以在标识符所在上下文中保持其用途清晰明确的名字。Go 自身以及标准库的实现是 Go 命名惯例形成的最初源头，因此如果要寻找良好命名的示范，Go 标准库是一个不错的地方。本节中我们的示例也多来自于 Go 标准库代码，一些结论也是来自于对标准库代码的分析。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">要想做好 Go 标识符命名（包括 package 命名)，至少要遵循两个原则：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">简单且一致</li>
+<li style="font-size: 20px; line-height: 38px;">利用上下文辅助命名</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">下面我们将详细阐述一下这两个原则以及原则下的一些命名惯例。</p>
+</div><div class="cl-preview-section"><h2 style="font-size: 30px;"><span id="1-简单且一致">1. 简单且一致</span></h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">对于简单，我们最直观地理解就是“短小”，但这里的简单还包含着清晰明确的前提。短小意味着能用一个单词命名的，就不要使用单词组合；能用单个字母（在特定上下文）表达标识符用途的，就不用完整单词。 甚至在某种情况下，Go 命名惯例选择了简洁命名+注释辅助解释的方式，而不是一个长长的名字。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">下面是 Go 语言一些常见类别标识符命名惯例。</p>
+</div><div class="cl-preview-section"><h3><span id="1-包">1) 包</span></h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 中的包（package）一般建议<strong>以小写形式的单个单词命名</strong>，Go 标准库在这方面给我们做出了很好的示范：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img1.sycdn.imooc.com/5f6825fd0001c4a808000475.png" data-original="//img1.sycdn.imooc.com/5f6825fd0001c4a808000475.png" alt="图片描述"></p>
+</div><div class="cl-preview-section"><center> 图2-8-1 Go标准库包列表（部分）</center>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们在给包命名时不要有是否与其他包重名的顾虑，因为在 Go 中，包名是可以不唯一的，比如 foo 项目有名为 log 的包，bar 项目也可以有自己的名为 log 的包。但是每个包的导入路径是唯一的，对于包名冲突的情况，可以通过包别名(package alias)语法来解决:</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">import "github.com/bigwhite/foo/log"
+import barlog "github.com/bigwhite/bar/log" // package import alias
+
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 语言建议：<strong>包名应尽量与包导入路径(import path)的最后一个路径分段保持一致</strong>。比如：包导入路径 <a target="_blank" rel="noopener" href="http://golang.org/x/text/encoding">golang.org/x/text/encoding</a> 的最后路径分段是 encoding，该路径下包名就应该为 encoding。但在实际情况中，包名与导入路径最后分段不同的也有很多，比如：实时分布式消息队列 nsq 的官方客户端包的导入路径为：<a target="_blank" rel="noopener" href="http://github.com/nsqio/go-nsq">github.com/nsqio/go-nsq</a> ，但是该路径下面的包名却是 nsq。个人分析出现这种情况的原因主要是为了在仓库名称上强调该实现是针对 Go 语言的，比如 go-nsq 的意义是这是一份 Go 语言实现的 nsq 客户端 API 库，为的是和 nsq-java、pynsq、rust-nsq 等其他语言的客户端 API 做出显式区分。这种情况在我个人的<a target="_blank" rel="noopener" href="https://github.com/bigwhite/gocmpp">gocmpp 项目</a>中也存在，gocmpp 项目的导入路径是 <a target="_blank" rel="noopener" href="http://github.com/bigwhite/gocmpp%EF%BC%8Cgocmpp">github.com/bigwhite/gocmpp，gocmpp</a> 这个仓库名强调的是这是一份<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/CMPP%E5%8D%8F%E8%AE%AE/555466">cmpp 协议</a>的 Go 实现，但该路径下包的名字却是 cmpp。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">那如果将 nsq 的 Go 客户端 API 放入 <a target="_blank" rel="noopener" href="http://github.com/nsqio/go-nsq/nsq">github.com/nsqio/go-nsq/nsq</a> 下面是否更理想呢？显然在导入路径中出现两次"nsq"字样的这种“口吃”现象也不是被 Go 官方推荐的。今天看来如果能将所有 Go 实现放入 github 账号顶层路径下面的 golang 或 go 路径下应该是更好的方案，比如：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">"github.com/nsqio/go/nsq"或"github.com/nsqio/golang/nsq"
+"github.com/bigwhite/go/cmpp"或"github.com/bigwhite/golang/cmpp"
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">同时，我们在给包命名的时候，<strong>不仅要考虑包自身的名字，还要同时考虑兼顾到该包导出的标识符(如变量、常量、类型、函数等)的命名</strong>。由于对这些这些包导出标识符的引用是必须以包名作为前缀的，因此对包导出标识符命名时，在名字中不要再包含包名，比如：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">strings.Reader              [good]
+strings.StringReader        [bad]
+strings.NewReader           [good]
+strings.NewStringReader     [bad]
+
+bytes.Buffer                [good]
+bytes.ByteBuffer            [bad]
+bytes.NewByteBuffer         [bad]
+
+</code></pre>
+</div><div class="cl-preview-section"><h3><span id="2-变量-类型-函数和方法">2) 变量、类型、函数和方法</span></h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">一个 Go 工程中包的数量还是有限的，变量、类型、函数和方法的命名占据了命名工作的较大比重。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在 Go 中变量分为包级别的变量和局部变量（函数或方法内的变量）。函数或方法的参数、返回值一定程度上都可以视为局部变量。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 语言官方要求标识符命名采用驼峰命名法（CamelCase），以变量名为例，如果变量名由一个以上的词组合构成，那么这些词之间紧密相连，不使用任何连接符（比如：下划线）。驼峰命名法有两种形式，一种是第一个词的首字母小写，后面每个词的首字母大写，叫做“小骆峰拼写法”（lowerCamelCase），这也是在 Go 中最常见的标识符命名法；而第一个词的首字母以及后面每个词的首字母都大写，叫做“大驼峰拼写法”（UpperCamelCase），又称“帕斯卡拼写法”（PascalCase）。由于首母大写的标识符在 Go 语言中被视作包导出标识符，因此只有在涉及包导出的情况下，才会用到大驼峰拼写法。不过首字母缩略词要保持全部大写，比如 HTTP(Hypertext Transfer Protocol)、CBC(Cipher Block Chaining) 等。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">给变量、类型、函数和方法命名依然要以简单短小为首要考虑的原则，我们对 Go 标准库（Go 1.12 版本）中标识符名称进行统计<sup class="footnote-ref"><a href="#fn1" id="fnref1">1</a></sup>的结果如下（去除 Go 关键字和 builtin 函数）：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">在$GOROOT/src下面：
+
+$cat $(find . -name '*.go') | indents | sort | uniq -c | sort -nr | sed 30q
+105896 v
+71894 err
+54512 Args
+49472 t
+44090 _
+43881 x
+43322 b
+36019 i
+34432 p
+32011 s
+28435 AddArg
+26185 c
+25518 n
+25242 e1
+23881 r
+21681 AuxInt
+20700 y
+... ...
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到了大量单字母的标识符命名，这是 Go 在命名上的一个惯例。 Go 标识符一般来说仍以单个单词作为命名首选。从 Go 标准库代码的不完全统计结果来看，不同类别标识符的命名呈现出下面一些特征：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">循环和条件变量多采用单个字母命名(具体见上面的统计数据)；</li>
+<li style="font-size: 20px; line-height: 38px;">函数/方法的参数和返回值变量一般以单个单词或单个字母为主<sup class="footnote-ref"><a href="#fn2" id="fnref2">2</a></sup>；</li>
+<li style="font-size: 20px; line-height: 38px;">方法名由于在调用时会绑定类型信息，因此命名多以单个单词为主<sup class="footnote-ref"><a href="#fn3" id="fnref3">3</a></sup>；</li>
+<li style="font-size: 20px; line-height: 38px;">函数名则多以多单词的复合词进行命名<sup class="footnote-ref"><a href="#fn4" id="fnref4">4</a></sup>；</li>
+<li style="font-size: 20px; line-height: 38px;">类型名也多以多单词的复合词进行命名<sup class="footnote-ref"><a href="#fn5" id="fnref5">5</a></sup>。</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">除了上述特征，还有一些惯例是在命名时常用的。</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">变量名字中不要带有类型信息</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">比如：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain"> userSlice []*User         [bad]
+ users     []*User         [good]
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">带有类型信息的命名除了让变量看起来更长之外，没有给开发者阅读代码带来任何其他好处。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">不过有些开发者依然会质疑：userSlice 中的类型信息可以告诉我们变量所代表的底层存储是一个切片，这样便可以在 userSlice 上应用切片的各种操作了。提出这样质疑的开发者显然忘记了一条编程语言命名的通用惯例：<strong>保持变量声明与使用之间的距离越近越好或者说将变量声明在第一次使用该变量之前</strong>。这个惯例与 Go 核心团队的安德鲁·杰拉德曾提到的一种说法：“一个名字的声明和使用之间的距离越大，这个名字的长度就越长”异曲同工。如果在一屏之内能看到 users 的声明，那-Slice 这个类型信息显然是不必放在变量的名称中了。</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">保持简短命名变量含义上的一致性</li>
+</ul>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">从上面的统计我们看到，Go 语言中有大量的单字母或单个词或缩写命名的简短命名变量，有人可能会质疑简短命名变量会带来可读性上的下降。Go 语言建议通过保持一致性来维持可读性。一致意味着代码中相同或相似的命名所传达的含义是相同或相似的，这样便于代码阅读者或维护者猜测出变量的用途。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">这里大致分析了一下 Go 标准库中常见短变量名字所代表的含义，并且这些含义在整个标准库范畴内一致性保持的很好。</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">变量v, k, i的常用含义：
+
+	// 循环语句中的变量
+	for i, v := range s &#123; ... &#125; // i: 下标变量； v：元素值
+	for k, v := range m &#123; ... &#125; // k: key变量；v: 元素值
+	for v := range r &#123; // channel ... &#125; // v: 元素值
+
+	// if、switch/case分支语句中的变量
+	if v := mimeTypes[ext]; v != "" &#123; &#125; // v: 元素值
+	switch v := ptr.Elem(); v.Kind() &#123;  
+		... ...
+	&#125;
+
+	case v := &lt;-c: // v: 元素值
+
+	// 反射的结果值
+	v := reflect.ValueOf(x)
+
+变量t的常用含义：
+
+	t := time.Now() // 时间
+	t := &amp;Timer&#123;&#125;// 定时器
+	if t := md.typemap[off]; t != nil &#123; &#125;// 类型
+
+变量b的常用含义：
+
+	b := make([]byte, n) // byte切片
+	b := new(bytes.Buffer) // byte缓存
+</code></pre>
+</div><div class="cl-preview-section"><h3><span id="3-常量">3) 常量</span></h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在 C 语言家族中，常量通常用全大写的单词名字命名，比如下面的 C 语言和 Java 定义的常量：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">C语言：
+
+#define MAX_VALUE 1000
+#define DEFAULT_START_DATA  "2019-07-08"
+
+Java语言：
+
+public static final int MAX_VALUE = 1000;
+public static final String DEFAULT_START_DATA = "2019-07-08";
+
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">但在 Go 语言中，常量在命名方式上与变量并无较大差别，并不要求全部大写。只是考虑其含义的准确传递，常量多使用多单词组合的命名。下面是标准库中的例子：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">// $GOROOT/src/net/http/request.go
+
+const (
+        defaultMaxMemory = 32 &lt;&lt; 20 // 32 MB
+)
+
+const (
+        deleteHostHeader = true
+        keepHostHeader   = false
+)
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">当然，你也可以为本身就有着大写名称的特定常量使用全大写的名字，比如数学计算中的 PI，又或是为了和系统错误码、系统信号名称保持一致而用全大写：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">
+// $GOROOT/src/math/sin.go 
+const (
+	PI4A = 7.85398125648498535156E-1  // 0x3fe921fb40000000, Pi/4 split into three parts
+	PI4B = 3.77489470793079817668E-8  // 0x3e64442d00000000,
+	PI4C = 2.69515142907905952645E-15 // 0x3ce8469898cc5170,
+)
+
+// $GOROOT/src/syscall/zerrors_linux_amd64.go 
+
+// Errors
+const (
+    E2BIG           = Errno(0x7)
+    EACCES          = Errno(0xd)
+    EADDRINUSE      = Errno(0x62)
+    EADDRNOTAVAIL   = Errno(0x63)
+    EADV            = Errno(0x44)
+    EAFNOSUPPORT    = Errno(0x61)
+    EAGAIN          = Errno(0xb)
+    EALREADY        = Errno(0x72)
+    EBADE           = Errno(0x34)
+    EBADF           = Errno(0x9)
+    EBADFD          = Errno(0x4d)
+    EBADMSG         = Errno(0x4a)
+    EBADR           = Errno(0x35)
+    EBADRQC         = Errno(0x38)
+    ... ...
+)
+
+// Signals
+const (
+    SIGABRT   = Signal(0x6)
+    SIGALRM   = Signal(0xe)
+    SIGBUS    = Signal(0x7)
+    SIGCHLD   = Signal(0x11)
+    SIGCLD    = Signal(0x11)
+    SIGCONT   = Signal(0x12)
+    SIGFPE    = Signal(0x8)
+    SIGHUP    = Signal(0x1)
+    SIGILL    = Signal(0x4)
+    SIGINT    = Signal(0x2)
+    SIGIO     = Signal(0x1d)
+    ... ...
+)
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在 Go 中数值型常量无需显式赋予类型，常量会在使用时根据左值类型和其他运算操作数的类型做自动的转换，因此常量的名字也不要包含类型信息。</p>
+</div><div class="cl-preview-section"><h3><span id="4-接口">4) 接口</span></h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 语言中的 interface 是 Go 在编程语言层面上的一个创新，它为 Go 代码提供了强大的“解耦合”能力，因此良好的接口类型设计和接口组合是 Go 程序设计的静态骨架和基础。良好的接口设计自然也离不开良好的接口命名。在 Go 语言中 interface 名字仍然以单个词为优先。对于拥有唯一方法(method)或通过多个拥有唯一方法的接口组合而成的接口，Go 语言的惯例是一般用"方法名+er"的方式为 interface 命名。比如：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">// $GOROOT/src/io/io.go
+
+
+type Writer interface &#123;
+    Write(p []byte) (n int, err error)
+&#125;
+
+type Reader interface &#123;
+    Read(p []byte) (n int, err error)
+&#125;
+
+type Closer interface &#123;
+    Close() error
+&#125;
+
+type ReadWriteCloser interface &#123;
+    Reader
+    Writer
+    Closer
+&#125;
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 语言推荐尽量定义小接口，并通过接口组合的方式构建程序，在后面的接口章节我们会详细描述。</p>
+</div><div class="cl-preview-section"><h2 style="font-size: 30px;"><span id="2-利用上下文环境用最短的名字携带足够的信息">2. 利用上下文环境，用最短的名字携带足够的信息</span></h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Go 在给标识符命名时还有着考虑上下文环境的惯例，即在不影响可读性前提下，结合一致性的原则，尽可能地用长度短小的名字命名标识符。这与其他一些主流语言在命名上的建议有不同，比如 Java 建议遵循“见名知义”的命名原则。我们可以对比一下 Java 和 Go 在循环变量起名上的差异：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">   java   vs. go
+
+  "index" vs. "i"
+  "value" vs. "v"
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们在 Go 代码来中分别运用这两个命名方案(index、value）和 (i、 v)，并做比对：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">
+for index := 0; index &lt; len(s); index++ &#123;
+	value := s[index]
+	... ...
+&#125;
+
+vs.
+
+for i := 0; i &lt; len(s); i++ &#123;
+	v := s[i]
+	... ...
+&#125;
+
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到：至少在 forLoop 这个上下文中，index、value 并没有比 i、v 携带更多额外信息。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">这里我引用一下安德鲁·杰拉德在 2014 年的<a target="_blank" rel="noopener" href="https://talks.golang.org/2014/names.slide#1">一次关于 Go 命名演讲</a>中的代码，我们再来对比感受一下 Go 命名惯例所带来的效果：</p>
+</div><div class="cl-preview-section"><pre class="  language-plain"><code class="prism  language-plain">[bad]
+func RuneCount(buffer []byte) int &#123;
+    runeCount := 0
+    for index := 0; index &lt; len(buffer); &#123;
+        if buffer[index] &lt; RuneSelf &#123;
+            index++
+        &#125; else &#123;
+            _, size := DecodeRune(buffer[index:])
+            index += size
+        &#125;
+        runeCount++
+    &#125;
+    return runeCount
+&#125;
+
+
+[good]
+func RuneCount(b []byte) int &#123;
+    count := 0
+    for i := 0; i &lt; len(b); &#123;
+        if b[i] &lt; RuneSelf &#123;
+            i++
+        &#125; else &#123;
+            _, n := DecodeRune(b[i:])
+            i += n
+        &#125;
+        count++
+    &#125;
+    return count
+&#125;
+</code></pre>
+</div><div class="cl-preview-section"><h2 style="font-size: 30px;"><span id="3-小结">3. 小结</span></h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们看到 Go 语言命名惯例深受 C 语言的影响，这和 Go 语言之父有着深厚的 C 语言背景不无关系。Go 语言追求简单一致且利用上下文辅助名字信息传达的命名惯例可能让一些从其他语言转向 Go 的程序员初期有些不适应。但这就是 Go 语言文化的一部分，也许随着编写 Go 代码量的增多，你就能理解这种命名惯例的好处了。</p>
+</div><div class="cl-preview-section"><hr>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item" style="font-size: 20px; line-height: 38px;"><p style="font-size: 20px; line-height: 38px;">indents命令：<a target="_blank" rel="noopener" href="https://github.com/bigwhite/go/tree/master/cmd/indents">https://github.com/bigwhite/go/tree/master/cmd/indents</a> <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item" style="font-size: 20px; line-height: 38px;"><p style="font-size: 20px; line-height: 38px;">参数与返回值查询方法：<code>cd $GOROOT/src; cat $(find . -name '*.go') |grep 'func'|grep -v Test|more</code> <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn3" class="footnote-item" style="font-size: 20px; line-height: 38px;"><p style="font-size: 20px; line-height: 38px;">方法名查询方法：<code>cd $GOROOT/src; cat $(find . -name '*.go') |grep 'func ('|grep -v Test)|more</code> <a href="#fnref3" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn4" class="footnote-item" style="font-size: 20px; line-height: 38px;"><p style="font-size: 20px; line-height: 38px;">函数名查询方法：<code>cd $GOROOT/src; cat $(find . -name '*.go') |grep func|grep -v Test |grep -v 'func (')|more</code> <a href="#fnref4" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn5" class="footnote-item" style="font-size: 20px; line-height: 38px;"><p style="font-size: 20px; line-height: 38px;">类型名查询方法：<code>cd $GOROOT/src; cat $(find . -name '*.go') |grep type | more</code> <a href="#fnref5" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+</div>}
+                        </div>
+                    </div>
+                                            <!-- 买过的阅读 -->
+                        <div class="art-next-prev clearfix">
+                                                                                                <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/87/article/2376">
+                                                                    <div class="prev l clearfix">
+                                        <div class="icon l">
+                                            <i class="imv2-arrow3_l"></i>
+                                        </div>
+                                        <p>
+                                            07 gofmt：Go代码风格的唯一标准
+                                        </p>
+                                    </div>
+                                </a>
+                                                                                                                            <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/87/article/2378">
+                                                                    <div class="next r clearfix">
+                                        <p>
+                                            09 变量声明形式尽量保持一致
+                                        </p>
+                                        <div class="icon r">
+                                            <i class="imv2-arrow3_r"></i>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                                    </div>
+                                    </div>
+                <div class="comments-con js-comments-con" id="coments_con">
+                </div>
+
+                
+            </div>
+            
+            
+            
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-jiaQun-new hide" id="modal-jiaQun">
+    <div class="inner" style>
+        <div class="modal-close js-close-jiaQun">
+            <i class="imv2-close"></i>
+        </div>
+        <div class="content">
+            <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img1.sycdn.imooc.com/5f51ecec0001392b05330597.jpg">
+            <div class="right-info">
+                <div class="title">
+                    扫码加入慕课前沿技术核心用户群
+                </div>
+                <div class="desc">
+                                            <p class="mb6">验证信息：<span id="joincode">2010312025386365</span><span class="copy js-copy-joincode">复制</span></p>
+                                        <p class="mb6">QQ讨论群号：729941811</p>
+                                            <p>QQ群URL：<a href="https://jq.qq.com/?_wv=1027&amp;k=5WJLMxV" target="_blank">点击访问</a></p>
+                                    </div>
+            </div>
+            <p class="tip">若遇到搜索不到QQ群或加群失败，请联系客服邮箱:kf@imooc.com</p>
+        </div>
+    </div>
+</div>
+ 
+<!-- 专栏介绍页专栏评价 -->
+
+<!-- 专栏介绍页底部三条评价 -->
+
+<!-- 专栏阅读页弹层目录和介绍页页面目录 -->
+
+<!-- 专栏阅读页发布回复 -->
+
+<!-- 专栏阅读页发布评论 -->
+
+<!-- 专栏阅读页底部评论 -->
+
+<!-- 专栏阅读 单个 评论 -->
+
+<!-- 新增回复和展开三条以外回复 -->
+
+<!-- 立即订阅的弹窗 -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div></body></html></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://s2-cdn.oneitfarm.com/e12ece12233b4059860acf48637d830a.jpg" onerror="this.onerror=null;this.src='/blog/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">夏夏天</div><div class="author-info__description">专注于Go语言、PHP、WebRTC、实时通信等技术分享的个人博客</div></div><div class="card-info-data site-data is-center"><a href="/blog/archives/"><div class="headline">Articles</div><div class="length-num">92</div></a><a href="/blog/tags/"><div class="headline">Tags</div><div class="length-num">57</div></a><a href="/blog/categories/"><div class="headline">Categories</div><div class="length-num">26</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/blog/atom.xml" target="_blank" title=""><i class="fa fa-rss"></i></a><a class="social-icon" href="https://github.com/smartXia" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:xiapeifu@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://gitee.com/xiapeifu" target="_blank" title="Gitee"><i class="iconfont gitee"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/blog/2025/10/15/%E8%A7%86%E9%A2%91%E6%B5%81/WebRTC-WHIP-%E5%8C%BA%E5%88%AB/" title="WebRTC/WHIP 区别详解"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=2070&amp;q=80" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="WebRTC/WHIP 区别详解"/></a><div class="content"><a class="title" href="/blog/2025/10/15/%E8%A7%86%E9%A2%91%E6%B5%81/WebRTC-WHIP-%E5%8C%BA%E5%88%AB/" title="WebRTC/WHIP 区别详解">WebRTC/WHIP 区别详解</a><time datetime="2025-10-15T09:19:46.000Z" title="Created 2025-10-15 17:19:46">2025-10-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2024/07/17/tech/devops/k8s/k8s-6-%E4%B8%AD%E5%A6%82%E4%BD%95%E5%81%9A%E5%88%B0%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D%E7%BD%91%E7%BB%9C%E5%9F%9F%E5%90%8D/" title="k8s中如何做到动态分配网络域名"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/blog/img/k8s.jpg" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="k8s中如何做到动态分配网络域名"/></a><div class="content"><a class="title" href="/blog/2024/07/17/tech/devops/k8s/k8s-6-%E4%B8%AD%E5%A6%82%E4%BD%95%E5%81%9A%E5%88%B0%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D%E7%BD%91%E7%BB%9C%E5%9F%9F%E5%90%8D/" title="k8s中如何做到动态分配网络域名">k8s中如何做到动态分配网络域名</a><time datetime="2024-07-17T03:00:56.000Z" title="Created 2024-07-17 11:00:56">2024-07-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2024/07/17/tech/devops/k8s/k8s-5-%E4%B8%AD%E5%85%B3%E4%BA%8E%E6%9C%8D%E5%8A%A1%E7%BD%91%E7%BB%9C%E7%9A%84%E4%BD%BF%E7%94%A8/" title="k8s中关于服务网络的使用"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/blog/img/k8s.jpg" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="k8s中关于服务网络的使用"/></a><div class="content"><a class="title" href="/blog/2024/07/17/tech/devops/k8s/k8s-5-%E4%B8%AD%E5%85%B3%E4%BA%8E%E6%9C%8D%E5%8A%A1%E7%BD%91%E7%BB%9C%E7%9A%84%E4%BD%BF%E7%94%A8/" title="k8s中关于服务网络的使用">k8s中关于服务网络的使用</a><time datetime="2024-07-17T02:59:54.000Z" title="Created 2024-07-17 10:59:54">2024-07-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2024/07/15/tech/backend/golang/GOLANG-%E7%AC%94%E8%AE%B08-Context%E4%B8%8A%E4%B8%8B%E6%96%87/" title="golang Context上下文"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/blog/img/golang.jpeg" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="golang Context上下文"/></a><div class="content"><a class="title" href="/blog/2024/07/15/tech/backend/golang/GOLANG-%E7%AC%94%E8%AE%B08-Context%E4%B8%8A%E4%B8%8B%E6%96%87/" title="golang Context上下文">golang Context上下文</a><time datetime="2024-07-15T10:56:27.000Z" title="Created 2024-07-15 18:56:27">2024-07-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2024/04/12/tech/devops/k8s/k8s-3-%E6%9C%89%E7%8A%B6%E6%80%81%E6%9C%8D%E5%8A%A1%E6%97%A0%E7%8A%B6%E6%80%81%E6%9C%8D%E5%8A%A1%E5%92%8C%E5%AF%B9%E5%A4%96%E8%AE%BF%E9%97%AE%E6%9C%8D%E5%8A%A1/" title="k8s-有状态服务无状态服务和对外访问服务"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/blog/img/k8s.jpg" onerror="this.onerror=null;this.src='/blog/img/404.jpg'" alt="k8s-有状态服务无状态服务和对外访问服务"/></a><div class="content"><a class="title" href="/blog/2024/04/12/tech/devops/k8s/k8s-3-%E6%9C%89%E7%8A%B6%E6%80%81%E6%9C%8D%E5%8A%A1%E6%97%A0%E7%8A%B6%E6%80%81%E6%9C%8D%E5%8A%A1%E5%92%8C%E5%AF%B9%E5%A4%96%E8%AE%BF%E9%97%AE%E6%9C%8D%E5%8A%A1/" title="k8s-有状态服务无状态服务和对外访问服务">k8s-有状态服务无状态服务和对外访问服务</a><time datetime="2024-04-12T08:43:25.000Z" title="Created 2024-04-12 16:43:25">2024-04-12</time></div></div></div></div><div class="card-widget" id="card-newest-comments"><div class="item-headline"><i class="fas fa-comment-dots"></i><span>Latest Comments</span></div><div class="aside-list"><span>loading...</span></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
+            <a class="card-more-btn" href="/blog/categories/" title="View More">
+    <i class="fas fa-angle-right"></i></a>
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/DOCKER/"><span class="card-category-list-name">DOCKER</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/Diary/"><span class="card-category-list-name">Diary</span><span class="card-category-list-count">2</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/Diary/Games/"><span class="card-category-list-name">Games</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/Diary/PlayStation/"><span class="card-category-list-name">PlayStation</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/GOLANG/"><span class="card-category-list-name">GOLANG</span><span class="card-category-list-count">15</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/HTTP/"><span class="card-category-list-name">HTTP</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/Life/"><span class="card-category-list-name">Life</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/MYSQL/"><span class="card-category-list-name">MYSQL</span><span class="card-category-list-count">3</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/blog/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 1.1em; color: #999">数据结构</a> <a href="/blog/tags/WebRTC/" style="font-size: 1.1em; color: #999">WebRTC</a> <a href="/blog/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 1.1em; color: #999">排序</a> <a href="/blog/tags/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" style="font-size: 1.1em; color: #999">工厂模式</a> <a href="/blog/tags/%E7%9B%B4%E6%92%AD%E6%8A%80%E6%9C%AF/" style="font-size: 1.1em; color: #999">直播技术</a> <a href="/blog/tags/MSYQL/" style="font-size: 1.1em; color: #999">MSYQL</a> <a href="/blog/tags/pubsub/" style="font-size: 1.1em; color: #999">pubsub</a> <a href="/blog/tags/Slice/" style="font-size: 1.18em; color: #999ca1">Slice</a> <a href="/blog/tags/golang/" style="font-size: 1.5em; color: #99a9bf">golang</a> <a href="/blog/tags/%E5%BE%85%E6%9B%B4%E6%96%B0/" style="font-size: 1.18em; color: #999ca1">待更新</a> <a href="/blog/tags/%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/" style="font-size: 1.18em; color: #999ca1">创建型模式</a> <a href="/blog/tags/rpc/" style="font-size: 1.18em; color: #999ca1">rpc()</a> <a href="/blog/tags/%E5%BC%82%E5%B8%B8/" style="font-size: 1.1em; color: #999">异常</a> <a href="/blog/tags/php/" style="font-size: 1.1em; color: #999">php</a> <a href="/blog/tags/%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6/" style="font-size: 1.1em; color: #999">转义字符</a> <a href="/blog/tags/photo/" style="font-size: 1.1em; color: #999">photo</a> <a href="/blog/tags/%E7%BD%91%E6%98%93%E4%BA%91-server%E9%85%B1-py-%E4%BA%91%E5%87%BD%E6%95%B0-%E5%BE%85%E6%9B%B4%E6%96%B0/" style="font-size: 1.1em; color: #999">网易云 server酱 py 云函数  待更新</a> <a href="/blog/tags/HEXO/" style="font-size: 1.18em; color: #999ca1">HEXO</a> <a href="/blog/tags/wiki/" style="font-size: 1.26em; color: #999fa8">wiki</a> <a href="/blog/tags/ssr/" style="font-size: 1.1em; color: #999">ssr</a> <a href="/blog/tags/gox/" style="font-size: 1.1em; color: #999">gox</a> <a href="/blog/tags/module/" style="font-size: 1.1em; color: #999">module</a> <a href="/blog/tags/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" style="font-size: 1.1em; color: #999">抽象工厂模式</a> <a href="/blog/tags/Generator/" style="font-size: 1.1em; color: #999">Generator</a> <a href="/blog/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 1.1em; color: #999">工具</a> <a href="/blog/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 1.34em; color: #99a3b0">设计模式</a> <a href="/blog/tags/cgi/" style="font-size: 1.1em; color: #999">cgi</a> <a href="/blog/tags/%E6%95%99%E7%A8%8B/" style="font-size: 1.18em; color: #999ca1">教程</a> <a href="/blog/tags/%E4%B9%A6%E7%B1%8D/" style="font-size: 1.1em; color: #999">书籍</a> <a href="/blog/tags/k8s/" style="font-size: 1.42em; color: #99a6b7">k8s</a> <a href="/blog/tags/%E6%8E%A8%E8%8D%90/" style="font-size: 1.1em; color: #999">推荐</a> <a href="/blog/tags/%E4%B8%BB%E9%A2%98/" style="font-size: 1.18em; color: #999ca1">主题</a> <a href="/blog/tags/%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0/" style="font-size: 1.1em; color: #999">匿名函数</a> <a href="/blog/tags/farmworker/" style="font-size: 1.1em; color: #999">farmworker</a> <a href="/blog/tags/gin/" style="font-size: 1.1em; color: #999">gin</a> <a href="/blog/tags/%E5%8C%BF%E5%90%8D%E7%B1%BB/" style="font-size: 1.1em; color: #999">匿名类</a> <a href="/blog/tags/WHIP/" style="font-size: 1.1em; color: #999">WHIP</a> <a href="/blog/tags/redis/" style="font-size: 1.26em; color: #999fa8">redis</a> <a href="/blog/tags/yield/" style="font-size: 1.1em; color: #999">yield</a> <a href="/blog/tags/regex/" style="font-size: 1.18em; color: #999ca1">regex</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span><a class="card-more-btn" href="/blog/archives/" title="View More">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2025/10/"><span class="card-archive-list-date">October 2025</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2024/07/"><span class="card-archive-list-date">July 2024</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2024/04/"><span class="card-archive-list-date">April 2024</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2024/03/"><span class="card-archive-list-date">March 2024</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2022/03/"><span class="card-archive-list-date">March 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2021/12/"><span class="card-archive-list-date">December 2021</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2021/11/"><span class="card-archive-list-date">November 2021</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2021/10/"><span class="card-archive-list-date">October 2021</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">92</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-10-15T09:42:48.762Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By 夏夏天</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">简</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="chat-btn" type="button" title="Chat"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/blog/js/utils.js?v=4.13.0"></script><script src="/blog/js/main.js?v=4.13.0"></script><script src="/blog/js/tw_cn.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.8.8/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const initValine = () => {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'b5KjzAk69Lg3yBaVPeEiuljv-gzGzoHsz',
+      appKey: 'Yb0PJ1jscpDdBIvDLO6MEYUy',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  const loadValine = async () => {
+    if (typeof Valine === 'function') initValine()
+    else {
+      await getScript('https://cdn.jsdelivr.net/npm/valine@1.5.1/dist/Valine.min.js')
+      initValine()
+    }
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script></div><script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.19.0/js/md5.min.js"></script><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[image]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[link]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[code]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getIcon = (icon, mail) => {
+    if (icon) return icon
+    let defaultIcon = '?d=monsterid'
+    let iconUrl = `https://gravatar.loli.net/avatar/${md5(mail.toLowerCase()) + defaultIcon}`
+    return iconUrl
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += 'No comments'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const getComment = () => {
+    const serverURL = 'https://b5KjzAk6.api.lncldglobal.com'
+
+    var settings = {
+      "method": "GET",
+      "headers": {
+        "X-LC-Id": 'b5KjzAk69Lg3yBaVPeEiuljv-gzGzoHsz',
+        "X-LC-Key": 'Yb0PJ1jscpDdBIvDLO6MEYUy',
+        "Content-Type": "application/json"
+      },
+    }
+
+    fetch(`${serverURL}/1.1/classes/Comment?limit=6&order=-createdAt`,settings)
+      .then(response => response.json())
+      .then(data => {
+        const valineArray = data.results.map(function (e) {
+          return {
+            'avatar': getIcon(e.QQAvatar, e.mail),
+            'content': changeContent(e.comment),
+            'nick': e.nick,
+            'url': e.url + '#' + e.objectId,
+            'date': e.updatedAt,
+          }
+        })
+        saveToLocal.set('valine-newest-comments', JSON.stringify(valineArray), 10/(60*24))
+        generateHtml(valineArray)
+      }).catch(e => {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "Unable to retrieve comments, please check the configuration"
+      }) 
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('valine-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/blog/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>
