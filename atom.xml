@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Some</title>
+  <title>夏夏天的技术博客</title>
   <icon>https://www.gravatar.com/avatar/df6fc96953fb3fc0fe9399149caa86b8</icon>
-  <subtitle>https://smartxia.github.io/blog</subtitle>
+  <subtitle>以地事秦 犹抱薪救火 薪不尽 火不灭</subtitle>
   <link href="https://smartxia.github.io/blog/atom.xml" rel="self"/>
   
   <link href="https://smartxia.github.io/blog/"/>
